@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hage, uterom & håndverk — Sandvika/Bærum</title>
+<meta name="description" content="Hage, uterom og håndverksarbeid i Sandvika/Bærum, basert på faktisk erfaring — beskjæring, gressklipping, bygg og vedlikehold.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/profile-photo.webp">
+<style>
+  :root {
+    --bg: #0c0d0e; --bg-raised: #15171a; --ink: #e9e9e7; --ink-dim: #9b9d9f;
+    --line: #2d3033; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0;
+    --focus: #d9ab6e;
+    --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --space-6: 3rem; --space-8: 4rem;
+    --container: 1200px;
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
+  }
+  :root[data-theme="dark"]  { --bg: #0c0d0e; --bg-raised: #15171a; --ink: #e9e9e7; --ink-dim: #9b9d9f; --line: #2d3033; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0; }
+  :root[data-theme="light"] { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; margin: 0; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; }
+
+  .shell { max-width: var(--container); margin: 0 auto; padding-inline: clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1; }
+
+  /* ---- nav ---- */
+  .site-nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .site-nav .row { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-2); }
+  .wordmark { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); text-decoration: none; }
+  .nav-links { display: none; gap: var(--space-4); list-style: none; margin: 0; padding: 0; }
+  .nav-links a { color: var(--ink-dim); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease; }
+  .nav-links a:hover { color: var(--accent); }
+  @media (min-width: 1024px) { .nav-links { display: flex; } .nav-toggle { display: none; } }
+
+  .nav-toggle { background: none; border: 1px solid var(--line); border-radius: 8px; width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+  .nav-toggle:hover { border-color: var(--accent); }
+  .nav-toggle svg { width: 18px; height: 18px; }
+
+  .off-canvas { position: fixed; inset: 0; z-index: 30; visibility: hidden; }
+  .off-canvas .scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.25s ease; }
+  .off-canvas .drawer {
+    position: absolute; top: 0; right: 0; height: 100%; width: min(78vw, 320px);
+    background: var(--bg-raised); border-left: 1px solid var(--line);
+    padding: var(--space-4) var(--space-3); transform: translateX(100%); transition: transform 0.3s ease;
+    display: flex; flex-direction: column; gap: var(--space-2);
+  }
+  .off-canvas.open { visibility: visible; }
+  .off-canvas.open .scrim { opacity: 1; }
+  .off-canvas.open .drawer { transform: translateX(0); }
+  .off-canvas a { color: var(--ink); text-decoration: none; font-size: 1.05rem; padding-block: var(--space-1); border-bottom: 1px solid var(--line); }
+  .off-canvas .close-btn { align-self: flex-end; background: none; border: none; color: var(--ink-dim); font-size: 1rem; cursor: pointer; padding: var(--space-1); }
+
+  /* ---- hero ---- */
+  .hero { padding-block: var(--space-8) var(--space-6); }
+  .eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-bottom: var(--space-2); }
+  .profile-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap; }
+  .profile-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex: none; }
+  .profile-row .name { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+  .profile-row .role { font-size: 0.88rem; color: var(--ink-dim); }
+  .hero h1 { font-size: clamp(1.9rem, 4vw + 1rem, 3.2rem); font-weight: 600; line-height: 1.15; margin-bottom: var(--space-3); max-width: 20ch; text-wrap: balance; }
+  .hero .lede { font-family: var(--font-body); color: var(--ink-dim); font-size: 1.05rem; max-width: 62ch; margin: 0; }
+
+  /* ---- sections ---- */
+  section { padding-block: var(--space-6); border-top: 1px solid var(--line); }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-4); gap: var(--space-2); flex-wrap: wrap; }
+  .section-head h2 { font-family: var(--font-body); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  @media (max-width: 1023px) { .services { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 767px)  { .services { grid-template-columns: 1fr; } }
+
+  .service {
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 10px;
+    padding: var(--space-3); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .service:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -14px rgba(0,0,0,0.4); border-color: var(--accent-dim); }
+  .service h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; color: var(--ink); }
+  .service p { font-size: 0.9rem; color: var(--ink-dim); margin: 0; line-height: 1.55; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: 0.9rem; color: var(--ink-dim); }
+  .facts .fact { display: flex; align-items: baseline; gap: 0.4rem; }
+  .facts .fact strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 425px) { .facts { flex-direction: column; gap: var(--space-1); } }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); }
+  .photo-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; transition: transform 0.4s ease; }
+  .photo-grid a:hover img { transform: scale(1.03); }
+  .photo-grid a { border-radius: 10px; overflow: hidden; display: block; }
+
+  .cta-band { background: var(--accent-dim); color: var(--accent-ink); border-radius: 16px; padding: var(--space-6) var(--space-4); text-align: center; margin-block: var(--space-6); }
+  .cta-band p { margin: 0 0 var(--space-1); }
+  .cta-band .big { font-size: 1.3rem; font-weight: 600; }
+  .cta-band a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+  footer.site-footer { padding-block: var(--space-4) var(--space-8); font-size: 0.8rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
+
+  /* ---- decorative critter layer (unchanged behaviour, retargeted to .shell) ---- */
+  .decor { position: absolute; pointer-events: none; z-index: 0; stroke: rgba(255,255,255,0.4); fill: none; stroke-width: 1.1; }
+  .sunrise {
+    position: fixed; top: -20%; left: -30%; width: 60vw; height: 60vw; max-width: 700px; max-height: 700px;
+    border-radius: 50%; z-index: 0; pointer-events: none;
+    background: radial-gradient(circle, rgba(184,147,92,0.10) 0%, rgba(184,147,92,0.04) 45%, transparent 70%);
+    animation: sunrise-sweep 90s linear infinite;
+  }
+  @keyframes sunrise-sweep { 0% { transform: translate(0, 10vh); } 50% { transform: translate(140vw, -10vh); } 100% { transform: translate(0, 10vh); } }
+  @media (max-width: 780px) { .decor, .critter, .hose-scene, .sunflower, .sunrise { display: none !important; } }
+
+  .critter { position: absolute; stroke: rgba(255,255,255,0.55); fill: none; stroke-width: 1.3; width: 34px; height: 34px; }
+  .hose-scene { position: absolute; width: 100%; z-index: 0; pointer-events: none; }
+  .hose-path { stroke: rgba(255,255,255,0.4); fill: none; stroke-width: 1.4; stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw-hose 4s ease-out forwards; }
+  @keyframes draw-hose { to { stroke-dashoffset: 0; } }
+  .drop { fill: rgba(255,255,255,0.5); offset-path: path("M 20,40 C 60,80 40,160 90,200 S 160,260 200,300"); animation: flow 2.6s linear infinite; opacity: 0; }
+  @keyframes flow { 0% { offset-distance: 0%; opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { offset-distance: 100%; opacity: 0; } }
+  .sunflower { position: absolute; transform: scale(0); opacity: 0; animation: grow 0.9s ease-out forwards; }
+  @keyframes grow { to { transform: scale(1); opacity: 1; } }
+  .bush, .dog, .pee { opacity: 0; transition: opacity 0.5s ease, top 0.4s ease, left 0.4s ease; }
+  .bush.show, .dog.show, .pee.show { opacity: 0.9; }
+  .cat.hidden { opacity: 0; transition: opacity 0.4s ease; }
+  .cat.walking { transition: top 1.6s ease-in-out, left 1.6s ease-in-out, opacity 0.4s ease; }
+  .dog.dashing { transition: top 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.4s ease; }
+  .pee-arc { stroke-dasharray: 40; stroke-dashoffset: 40; }
+  .pee.show .pee-arc { animation: draw-pee 0.6s ease-out forwards; }
+  @keyframes draw-pee { to { stroke-dashoffset: 0; } }
+</style>
+</head>
+<body>
+
+<div class="sunrise"></div>
+<div class="scene" id="scene" style="position:absolute; top:0; left:0; width:100%; z-index:0; pointer-events:none;">
+<svg class="decor flower-1" viewBox="0 0 60 60" style="top:6%; left:3%; width:44px;" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="4"/><ellipse cx="30" cy="16" rx="6" ry="10"/><ellipse cx="30" cy="44" rx="6" ry="10"/><ellipse cx="16" cy="30" rx="10" ry="6"/><ellipse cx="44" cy="30" rx="10" ry="6"/><line x1="30" y1="34" x2="30" y2="58"/></svg>
+<svg class="decor tools" viewBox="0 0 60 100" style="top:34%; right:2%; width:40px;" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="5" x2="15" y2="70"/><path d="M8,10 L15,3 L22,10"/><line x1="9" y1="8" x2="9" y2="20"/><line x1="21" y1="8" x2="21" y2="20"/><line x1="42" y1="10" x2="30" y2="75"/><ellipse cx="42" cy="8" rx="7" ry="4"/></svg>
+<svg class="decor pot" viewBox="0 0 90 70" style="bottom:5%; left:5%; width:50px;" xmlns="http://www.w3.org/2000/svg"><path d="M20,40 L70,40 L62,62 L28,62 Z" transform="rotate(-18 45 50)"/><ellipse cx="45" cy="40" rx="25" ry="6" transform="rotate(-18 45 40)"/><circle cx="15" cy="55" r="3"/><circle cx="10" cy="60" r="2.2"/><circle cx="20" cy="63" r="2.6"/></svg>
+
+<svg class="critter mower" id="mower" viewBox="0 0 40 40" style="top:100px; left:0px;" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="18" width="24" height="12" rx="2"/><circle cx="12" cy="32" r="4"/><circle cx="28" cy="32" r="4"/><line x1="20" y1="18" x2="30" y2="2"/><line x1="24" y1="18" x2="34" y2="2"/><line x1="30" y1="2" x2="34" y2="2"/></svg>
+<svg class="critter cat" id="cat" viewBox="0 0 40 30" style="top:0px; left:0px;" xmlns="http://www.w3.org/2000/svg"><ellipse cx="18" cy="20" rx="14" ry="7"/><circle cx="32" cy="14" r="6"/><path d="M28,9 L26,3 L31,7 Z"/><path d="M35,8 L37,2 L32,6 Z"/><path d="M5,20 C-2,15 -2,5 5,2"/><line x1="10" y1="26" x2="10" y2="30"/><line x1="24" y1="26" x2="24" y2="30"/></svg>
+<svg class="critter bush" id="bush" viewBox="0 0 50 34" style="top:0px; left:0px; width:50px; height:34px;" xmlns="http://www.w3.org/2000/svg"><path d="M4,30 C-2,20 4,8 14,10 C16,2 30,2 32,10 C42,6 50,16 44,26 C46,32 38,34 34,30 C28,34 16,34 10,30 C6,34 2,32 4,30 Z"/></svg>
+<svg class="critter dog" id="dog" viewBox="0 0 46 30" style="top:-40px; left:0px; width:46px; height:30px;" xmlns="http://www.w3.org/2000/svg"><ellipse cx="18" cy="18" rx="15" ry="7"/><rect x="30" y="8" width="10" height="10" rx="3"/><path d="M34,8 L31,1 L37,5 Z"/><path d="M39,9 L44,4 L42,11 Z"/><path d="M3,16 C-4,10 -6,20 -1,24"/><line x1="10" y1="24" x2="10" y2="29"/><line x1="24" y1="24" x2="24" y2="29"/></svg>
+<svg class="pee" id="pee" viewBox="0 0 20 24" style="top:-40px; left:0px; width:16px; height:20px;" xmlns="http://www.w3.org/2000/svg"><path class="pee-arc" d="M2,2 C10,4 14,10 8,22" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/></svg>
+<svg class="sunflower" viewBox="0 0 20 34" style="top:180px; left:20px; animation-delay:2s; width:20px; height:34px;" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="2.2" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/><line x1="10" y1="13" x2="10" y2="32" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/></svg>
+</div>
+
+<nav class="site-nav">
+  <div class="shell row">
+    <a class="wordmark" href="#top">Mantas Pagalys</a>
+    <ul class="nav-links">
+      <li><a href="#tjenester">Tjenester</a></li>
+      <li><a href="#galleri">Galleri</a></li>
+      <li><a href="#fjell">FJELL</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="offCanvas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="off-canvas" id="offCanvas">
+  <div class="scrim" data-close></div>
+  <div class="drawer" role="dialog" aria-modal="true" aria-label="Meny">
+    <button class="close-btn" data-close aria-label="Lukk meny">Lukk ✕</button>
+    <a href="#tjenester" data-close>Tjenester</a>
+    <a href="#galleri" data-close>Galleri</a>
+    <a href="#fjell" data-close>FJELL</a>
+    <a href="#kontakt" data-close>Kontakt</a>
+  </div>
+</div>
+
+<main id="top">
+  <section class="hero shell">
+    <p class="eyebrow">Sandvika / Bærum</p>
+    <div class="profile-row">
+      <img class="profile-photo" src="assets/profile-photo.webp" width="88" height="88" alt="Mantas Pagalys">
+      <div class="who">
+        <div class="name">Mantas Pagalys</div>
+        <div class="role">Hage, uterom og smått håndverksarbeid</div>
+      </div>
+    </div>
+    <h1>Hage, uterom og håndverksarbeid, basert på faktisk erfaring</h1>
+    <p class="lede">En hage har sin egen orden — hva som må vokse før det kan beskjæres,
+    hva et veksthus trenger før spirene møter verden utenfor, hvilken sesong en hekk faktisk
+    tåler å bli rørt i. År brukt innenfor den ordenen: eiendommer i Hampstead Heath, noen
+    århundrer gamle, balkonghager over byen, golfbanene i St Andrews. Egne oppdrag, og arbeid
+    gjennom større anleggsgartnerfirmaer — alltid den samme respekten for det som faktisk
+    lever, ikke bare det som ser ferdig ut. Den samme respekten kommer til din hage.</p>
+  </section>
+
+  <section id="tjenester" class="shell">
+    <div class="section-head"><h2>Hage &amp; uterom</h2></div>
+    <div class="services">
+      <div class="service"><h3>Beskjæring</h3><p>Busker og hekk, riktig tidspunkt for arten — feil sesong kan skade planten mer enn det hjelper.</p></div>
+      <div class="service"><h3>Gressklipping, resåing og luking</h3><p>Klipping, reetablering av slitte/tynne plener, luking — riktig frøblanding og timing for norsk klima.</p></div>
+      <div class="service"><h3>Planting og sesongrydding</h3><p>Vår- og høstrydding, planting, generell rådgivning om hagen.</p></div>
+      <div class="service"><h3>Gjerder og terrasser</h3><p>Reparasjon og vedlikehold av gjerder og terrassebord.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2>Bygg &amp; innendørs</h2></div>
+    <div class="services">
+      <div class="service"><h3>Dør og vindu</h3><p>Montering og reparasjon.</p></div>
+      <div class="service"><h3>Fasade og betongarbeid</h3><p>Mindre fasadearbeid og betongjobber.</p></div>
+      <div class="service"><h3>Parkett, listverk og gips</h3><p>Legging/reparasjon av parkett, listverk (trim), gipsplater og lettvegger/partisjonering.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2>Vedlikehold</h2></div>
+    <div class="services">
+      <div class="service"><h3>Høytrykksspyling</h3><p>Fasade, terrasse, gårdsplass.</p></div>
+      <div class="service"><h3>Rensing av takrenner</h3><p>Bruker gjerne din stige.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2>Båt</h2></div>
+    <div class="services">
+      <div class="service"><h3>Reparasjon</h3><p>Dekk, tremverk (teak), mindre struktur- og epoksyarbeid.</p></div>
+      <div class="service"><h3>Rengjøring, forbehandling og maling</h3><p>Skikkelig forbehandling før maling — dette er ofte det som avgjør om jobben faktisk holder.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2>Praktisk</h2></div>
+    <div class="facts">
+      <span class="fact"><strong>Område:</strong> Sandvika, Bærum, sykkelavstand</span>
+      <span class="fact"><strong>Verktøy:</strong> egne håndverktøy for de fleste jobber</span>
+      <span class="fact"><strong>Gressklipping:</strong> bruker gjerne din maskin</span>
+      <span class="fact"><strong>Transport:</strong> sykkel — ingen bil</span>
+    </div>
+  </section>
+
+  <section id="galleri" class="shell">
+    <div class="section-head"><h2>Naturen jeg jobber i</h2></div>
+    <div class="photo-grid">
+      <a href="assets/finishedterrace.webp" target="_blank" rel="noopener"><img src="assets/finishedterrace.webp" loading="lazy" decoding="async" width="800" height="220" alt="Ferdigstilt terrasse"></a>
+      <a href="assets/gardenloot.webp" target="_blank" rel="noopener"><img src="assets/gardenloot.webp" loading="lazy" decoding="async" width="800" height="220" alt="Hagearbeid"></a>
+      <a href="assets/pond.webp" target="_blank" rel="noopener"><img src="assets/pond.webp" loading="lazy" decoding="async" width="800" height="220" alt="Dam i hagen"></a>
+      <a href="assets/sacred.tree.webp" target="_blank" rel="noopener"><img src="assets/sacred.tree.webp" loading="lazy" decoding="async" width="800" height="220" alt="Gammelt tre"></a>
+    </div>
+  </section>
+
+  <section id="fjell" class="shell">
+    <div class="section-head"><h2>FJELL — modulær 12m² hytte</h2></div>
+    <div class="services">
+      <div class="service">
+        <h3>Egen hyttedesign, tegnet og solgt digitalt</h3>
+        <p>Fullstendige byggetegninger (DXF/STL) for en modulær 12m² hytte — bygget liten med
+        hensikt. Samme håndverksbakgrunn som resten av arbeidet på denne siden ligger bak design.</p>
+      </div>
+    </div>
+    <p style="font-size:0.9rem; margin-top:1rem;">
+      <a href="https://6253743215519.gumroad.com/" target="_blank" rel="noopener">Se FJELL →</a>
+    </p>
+  </section>
+
+  <div class="shell">
+    <div class="cta-band" id="kontakt">
+      <p>Ta kontakt for pris — avhenger av jobbens omfang</p>
+      <p class="big"><a href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">Priser avtales per jobb ut fra omfang og tidsbruk.</div>
+</footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var offCanvas = document.getElementById('offCanvas');
+  if (toggle && offCanvas) {
+    function open() { offCanvas.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); }
+    function close() { offCanvas.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+    toggle.addEventListener('click', open);
+    offCanvas.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  }
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  var mower = document.getElementById('mower');
+  var cat = document.getElementById('cat');
+  var shell = document.querySelector('.hero.shell');
+  if (!mower || !shell) return;
+
+  function docHeight() { return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); }
+
+  function mowerZones() {
+    var rect = shell.getBoundingClientRect();
+    var pageW = window.innerWidth;
+    var margin = 18;
+    var zones = [];
+    if (rect.left - margin > 46) zones.push({ from: 6, to: rect.left - margin });
+    if (pageW - rect.right - margin > 46) zones.push({ from: rect.right + margin, to: pageW - 6 });
+    return zones;
+  }
+
+  var mowerState = { zoneIdx: 0, col: 0, dir: 1 };
+  function mowNext() {
+    var zones = mowerZones();
+    if (zones.length === 0) { mower.style.opacity = '0'; setTimeout(mowNext, 3000); return; }
+    mower.style.opacity = '0.9';
+    var zone = zones[mowerState.zoneIdx % zones.length];
+    var stripeWidth = 30;
+    var numStripes = Math.max(1, Math.floor((zone.to - zone.from) / stripeWidth));
+    var stripe = mowerState.col % numStripes;
+    var x = zone.from + stripe * stripeWidth + stripeWidth / 2;
+    var h = docHeight();
+    var goingDown = mowerState.dir === 1;
+    var y = goingDown ? h - 60 : 90;
+    var duration = 6 + Math.random() * 3;
+    mower.style.transition = 'top ' + duration.toFixed(1) + 's linear, left 1s ease';
+    mower.style.left = x.toFixed(0) + 'px';
+    mower.style.top = y.toFixed(0) + 'px';
+    mower.style.transform = goingDown ? 'rotate(90deg)' : 'rotate(-90deg)';
+    mowerState.col++;
+    if (mowerState.col % numStripes === 0) { mowerState.dir *= -1; if (Math.random() < 0.4) mowerState.zoneIdx++; }
+    setTimeout(mowNext, duration * 1000 + 900);
+  }
+  setTimeout(mowNext, 800);
+
+  var bush = document.getElementById('bush'), dog = document.getElementById('dog'), pee = document.getElementById('pee');
+  if (cat && bush && dog && pee) {
+    function diagonalWaypoint() {
+      var rect = shell.getBoundingClientRect();
+      var scrollY = window.scrollY || window.pageYOffset;
+      var pad = 26;
+      var corners = [
+        { top: rect.top + scrollY - pad, left: rect.left - pad - 30 },
+        { top: rect.top + scrollY - pad, left: rect.right + pad },
+        { top: rect.bottom + scrollY + pad, left: rect.left - pad - 30 },
+        { top: rect.bottom + scrollY + pad, left: rect.right + pad },
+        { top: (rect.top + rect.bottom) / 2 + scrollY, left: rect.left - pad - 30 },
+        { top: (rect.top + rect.bottom) / 2 + scrollY, left: rect.right + pad }
+      ];
+      return corners[Math.floor(Math.random() * corners.length)];
+    }
+    function sequence() {
+      var spot = diagonalWaypoint();
+      cat.classList.add('walking');
+      cat.style.transition = 'top 3.2s ease-in-out, left 3.2s ease-in-out, opacity 0.4s ease';
+      cat.classList.remove('hidden');
+      cat.style.top = spot.top + 'px'; cat.style.left = spot.left + 'px';
+      setTimeout(function () {
+        bush.style.top = (spot.top - 5) + 'px'; bush.style.left = (spot.left - 8) + 'px';
+        bush.classList.add('show');
+        setTimeout(function () {
+          cat.classList.add('hidden'); bush.classList.remove('show');
+          setTimeout(function () {
+            var w = window.innerWidth;
+            var startX = Math.random() * w;
+            dog.style.top = '-40px'; dog.style.left = startX + 'px'; dog.classList.add('show');
+            var zigzags = 5, i = 0;
+            function zigzag() {
+              if (i >= zigzags) {
+                dog.classList.add('dashing');
+                dog.style.top = (spot.top + 10) + 'px'; dog.style.left = spot.left + 'px';
+                setTimeout(function () {
+                  pee.style.top = (spot.top + 30) + 'px'; pee.style.left = (spot.left + 14) + 'px';
+                  pee.classList.add('show');
+                  setTimeout(function () {
+                    pee.classList.remove('show');
+                    var h = docHeight();
+                    dog.style.top = (Math.random() * h * 0.6 + 40) + 'px'; dog.style.left = (Math.random() * w) + 'px';
+                    setTimeout(function () {
+                      dog.classList.remove('show'); dog.classList.remove('dashing');
+                      setTimeout(sequence, 2000 + Math.random() * 2000);
+                    }, 600);
+                  }, 900);
+                }, 500);
+                return;
+              }
+              var frac = i / zigzags;
+              dog.style.top = (frac * (spot.top - 20) + 20) + 'px';
+              dog.style.left = (startX + (spot.left - startX) * frac + (i % 2 === 0 ? 40 : -40)) + 'px';
+              i++; setTimeout(zigzag, 750);
+            }
+            zigzag();
+          }, 400);
+        }, 1000);
+      }, 900);
+    }
+    setTimeout(sequence, 1500);
+  }
+})();
+</script>
+</body>
+</html>
