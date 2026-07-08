@@ -73,7 +73,11 @@
   .off-canvas .close-btn { align-self: flex-end; background: none; border: none; color: var(--ink-dim); font-size: 1rem; cursor: pointer; padding: var(--space-1); }
 
   /* ---- hero ---- */
-  .hero { padding-block: var(--space-8) var(--space-6); }
+  .hero { padding-block: var(--space-8) var(--space-6); position: relative; overflow: hidden; }
+  .grass-field { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; overflow: hidden; z-index: -1; pointer-events: none; }
+  .blade { position: absolute; bottom: -6px; width: 3px; border-radius: 3px 3px 0 0; transform-origin: bottom center; animation: blade-sway var(--dur, 4s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
+  @keyframes blade-sway { 0%, 100% { transform: rotate(var(--tilt, -5deg)); } 50% { transform: rotate(var(--tilt2, 6deg)); } }
+  @media (max-width: 780px) { .grass-field { height: 100px; } }
   .lang-switch { display: flex; gap: 0.5rem; margin: 0 0 var(--space-2); }
   .lang-btn { background: var(--bg-raised); border: 1px solid var(--line); color: var(--ink-dim); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.78rem; font-family: var(--font-body); cursor: pointer; }
   .lang-btn:hover { color: var(--ink); border-color: var(--accent-dim); }
@@ -196,6 +200,7 @@
 
 <main id="top">
   <section class="hero shell">
+    <div class="grass-field" id="grassField" aria-hidden="true"></div>
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="lang-btn active" data-lang="no" type="button" aria-pressed="true" lang="no">Norsk</button>
       <button class="lang-btn" data-lang="en" type="button" aria-pressed="false" lang="en">English</button>
@@ -301,6 +306,35 @@
 
 <script>
 (function () {
+  var field = document.getElementById('grassField');
+  if (field) {
+    var layers = [
+      { color: ['#7a5e1e', '#c9a53e'], minH: 40, maxH: 62 },
+      { color: ['#a3821f', '#e3bd4c'], minH: 58, maxH: 88 },
+      { color: ['#c9a23c', '#f8de70'], minH: 78, maxH: 118 }
+    ];
+    var count = 150;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < count; i++) {
+      var layer = layers[Math.floor(Math.random() * layers.length)];
+      var idx = layers.indexOf(layer);
+      var blade = document.createElement('div');
+      blade.className = 'blade';
+      var h = layer.minH + Math.random() * (layer.maxH - layer.minH);
+      blade.style.left = (Math.random() * 100).toFixed(2) + '%';
+      blade.style.height = h.toFixed(0) + 'px';
+      blade.style.background = 'linear-gradient(to top, ' + layer.color[0] + ', ' + layer.color[1] + ')';
+      blade.style.zIndex = String(idx);
+      blade.style.opacity = (0.5 + idx * 0.2).toFixed(2);
+      blade.style.setProperty('--dur', (2.4 + Math.random() * 2.4).toFixed(2) + 's');
+      blade.style.setProperty('--delay', (Math.random() * 3).toFixed(2) + 's');
+      blade.style.setProperty('--tilt', (-4 - Math.random() * 6).toFixed(1) + 'deg');
+      blade.style.setProperty('--tilt2', (4 + Math.random() * 8).toFixed(1) + 'deg');
+      frag.appendChild(blade);
+    }
+    field.appendChild(frag);
+  }
+
   var toggle = document.getElementById('navToggle');
   var offCanvas = document.getElementById('offCanvas');
   if (toggle && offCanvas) {
