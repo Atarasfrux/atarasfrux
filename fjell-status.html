@@ -40,6 +40,14 @@ h1{ font-size:2rem; margin:0 0 0.3rem; letter-spacing:-0.01em; text-wrap:balance
   padding:0.5rem 0.8rem; font-size:0.85rem; margin-bottom:2rem;
 }
 .status-badge::before{ content:"●"; color:var(--accent); }
+.lang-switch{ display:flex; gap:0.5rem; margin:0 0 1.2rem; }
+.lang-btn{
+  background:var(--bg-raised); border:1px solid var(--line); color:var(--ink-soft);
+  border-radius:3px; padding:0.3rem 0.65rem; font-size:0.78rem; cursor:pointer;
+}
+.lang-btn:hover{ color:var(--ink); border-color:var(--accent-soft); }
+.lang-btn.active{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:600; }
+.lang-btn:focus-visible{ outline:2px solid var(--accent-soft); outline-offset:2px; }
 h2{ font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-soft); margin:2.4rem 0 1rem; }
 p{ margin:0 0 1rem; max-width:64ch; }
 .spec-grid{
@@ -70,47 +78,131 @@ footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line); f
 </style>
 
 <div class="wrap">
-  <h1>FJELL — Norwegian Micro-Cabin</h1>
-  <p class="tag">A modular 12–15m² cabin system, engineered down to real cutting files — not yet built.</p>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button class="lang-btn active" data-lang="en" type="button" aria-pressed="true" lang="en">English</button>
+    <button class="lang-btn" data-lang="no" type="button" aria-pressed="false" lang="no">Norsk</button>
+    <button class="lang-btn" data-lang="lt" type="button" aria-pressed="false" lang="lt">Lietuvių</button>
+  </div>
+  <h1 data-i18n="h1">FJELL — Norwegian Micro-Cabin</h1>
+  <p class="tag" data-i18n="tag">A modular 12–15m² cabin system, engineered down to real cutting files — not yet built.</p>
 
-  <div class="status-badge">Concept stage: full engineering drafted, no physical prototype built yet</div>
+  <div class="status-badge" data-i18n="badge">Concept stage: full engineering drafted, no physical prototype built yet</div>
 
-  <h2>What it is</h2>
-  <p>A flat-pack modular cabin, roughly 4.9m × 2.5–3.0m, designed for fast assembly and Norwegian climate.
+  <h2 data-i18n="h_what_is">What it is</h2>
+  <p data-i18n="p_what_is">A flat-pack modular cabin, roughly 4.9m × 2.5–3.0m, designed for fast assembly and Norwegian climate.
   Standard and a road-legal (trailer-width) variant are both drafted. The engineering work is real and
   detailed — the physical build is the part that hasn't happened yet.</p>
 
   <div class="spec-grid">
-    <div class="spec"><div class="val">4.9 × 3.0m</div><div class="lbl">Exterior, Standard</div></div>
-    <div class="spec"><div class="val">2.7m</div><div class="lbl">Wall height</div></div>
-    <div class="spec"><div class="val">8 DXF + 9 STL</div><div class="lbl">Cutting/print files drafted</div></div>
-    <div class="spec"><div class="val">0</div><div class="lbl">Units physically built</div></div>
+    <div class="spec"><div class="val">4.9 × 3.0m</div><div class="lbl" data-i18n="lbl_ext">Exterior, Standard</div></div>
+    <div class="spec"><div class="val">2.7m</div><div class="lbl" data-i18n="lbl_wall">Wall height</div></div>
+    <div class="spec"><div class="val">8 DXF + 9 STL</div><div class="lbl" data-i18n="lbl_files">Cutting/print files drafted</div></div>
+    <div class="spec"><div class="val">0</div><div class="lbl" data-i18n="lbl_units">Units physically built</div></div>
   </div>
 
-  <h2>Actually done so far</h2>
+  <h2 data-i18n="h_done">Actually done so far</h2>
   <ul class="done-list">
-    <li><span class="n">1</span><span>Full dimensioned CAD set — wall panels, floor, roof, connectors — independently checked against the real files, not just the spec sheet</span></li>
-    <li><span class="n">2</span><span>Two build variants drafted: Standard (max space) and Road Legal (trailer-transportable, no permit)</span></li>
-    <li><span class="n">3</span><span>Interior layout: raised sleeping platform, fold-down desk, built-in storage, wood-stove heating zone</span></li>
-    <li><span class="n">4</span><span>Waterproofing and structural detailing worked through in real depth (roof membrane options, drainage, insulation values)</span></li>
+    <li><span class="n">1</span><span data-i18n="done1">Full dimensioned CAD set — wall panels, floor, roof, connectors — independently checked against the real files, not just the spec sheet</span></li>
+    <li><span class="n">2</span><span data-i18n="done2">Two build variants drafted: Standard (max space) and Road Legal (trailer-transportable, no permit)</span></li>
+    <li><span class="n">3</span><span data-i18n="done3">Interior layout: raised sleeping platform, fold-down desk, built-in storage, wood-stove heating zone</span></li>
+    <li><span class="n">4</span><span data-i18n="done4">Waterproofing and structural detailing worked through in real depth (roof membrane options, drainage, insulation values)</span></li>
   </ul>
 
   <div class="not-yet">
-    <strong>Not yet true, on purpose stated plainly:</strong> no unit has been physically built, no assembly
+    <strong data-i18n="notyet_strong">Not yet true, on purpose stated plainly:</strong> <span data-i18n="notyet_p">no unit has been physically built, no assembly
     time has been timed, no pricing has been confirmed against real supplier quotes. Anything you've seen
     elsewhere with a specific build time or price is a draft estimate, not a tested fact — treat it as such
-    until it says otherwise here.
+    until it says otherwise here.</span>
   </div>
 
-  <h2>What's actually needed next</h2>
-  <p>A first physical build — even one panel, one corner joint, cut from the real DXF files — is what turns
+  <h2 data-i18n="h_next">What's actually needed next</h2>
+  <p data-i18n="p_next">A first physical build — even one panel, one corner joint, cut from the real DXF files — is what turns
   this from "thoroughly planned" into "proven." That's the honest next step, not a sales page.</p>
 
-  <a class="cta" href="mailto:pagalysm@gmail.com?subject=FJELL — interested">Get in touch about it</a>
+  <a class="cta" href="mailto:pagalysm@gmail.com?subject=FJELL — interested" data-i18n="cta">Get in touch about it</a>
 
   <footer>
     Mantas Pagalys · pagalysm@gmail.com · Nesodden, Norway
   </footer>
 </div>
+<script>
+(function(){
+  var translations = {
+    no: {
+      h1: "FJELL — Norsk mikrohytte",
+      tag: "Et modulært 12–15m² hyttesystem, konstruert helt ned til reelle kappefiler — ennå ikke bygget.",
+      badge: "Konseptstadiet: full konstruksjon ferdig tegnet, ingen fysisk prototype bygget ennå",
+      h_what_is: "Hva det er",
+      p_what_is: "En flatpakket, modulær hytte, ca. 4,9m × 2,5–3,0m, designet for rask montering og norsk klima. Både standardvarianten og en vegtransportabel (tilhengerbredde) variant er tegnet ut. Ingeniørarbeidet er reelt og detaljert — det fysiske bygget er det som ennå ikke har skjedd.",
+      lbl_ext: "Utvendig, standard",
+      lbl_wall: "Vegghøyde",
+      lbl_files: "Kappe-/printfiler tegnet",
+      lbl_units: "Enheter fysisk bygget",
+      h_done: "Faktisk gjort så langt",
+      done1: "Fullt dimensjonert CAD-sett — veggpaneler, gulv, tak, koblinger — uavhengig kontrollert mot de faktiske filene, ikke bare spesifikasjonsarket",
+      done2: "To byggevarianter tegnet: Standard (maks plass) og Veitransportabel (tilhengerklar, uten løyve)",
+      done3: "Interiørplan: hevet soveplattform, nedfellbart skrivebord, innebygd oppbevaring, sone for vedovn-oppvarming",
+      done4: "Vanntetting og konstruksjonsdetaljer bearbeidet i reell dybde (takmembranalternativer, drenering, isolasjonsverdier)",
+      notyet_strong: "Ikke sant ennå, sagt rett ut med vilje:",
+      notyet_p: "Ingen enhet er fysisk bygget, ingen monteringstid er tatt tid på, ingen prising er bekreftet mot reelle leverandørtilbud. Alt du har sett andre steder med en spesifikk byggetid eller pris, er et anslag i utkast, ikke et testet faktum — behandl det slik inntil det står noe annet her.",
+      h_next: "Hva som faktisk trengs videre",
+      p_next: "Et første fysisk bygg — selv ett panel, én hjørneskjøt, kappet fra de reelle DXF-filene — er det som gjør dette fra «grundig planlagt» til «bevist». Det er det ærlige neste steget, ikke en salgsside.",
+      cta: "Ta kontakt om det"
+    },
+    lt: {
+      h1: "FJELL — Norvegiška mikro-trobelė",
+      tag: "Modulinė 12–15m² trobelės sistema, sukonstruota iki tikrų pjovimo failų — dar nepastatyta.",
+      badge: "Koncepcijos stadija: visas inžinerinis projektas paruoštas, fizinis prototipas dar nepastatytas",
+      h_what_is: "Kas tai yra",
+      p_what_is: "Surenkama modulinė trobelė, apie 4,9m × 2,5–3,0m, sukurta greitam surinkimui ir Norvegijos klimatui. Paruošti abu variantai — standartinis ir kelyje vežamas (priekabos pločio). Inžinerinis darbas yra realus ir detalus — fizinis statymas yra tai, kas dar neįvyko.",
+      lbl_ext: "Išorė, standartinė",
+      lbl_wall: "Sienos aukštis",
+      lbl_files: "Paruošti pjovimo/spausdinimo failai",
+      lbl_units: "Fiziškai pastatyti vienetai",
+      h_done: "Kas jau iš tikrųjų padaryta",
+      done1: "Pilnas matmenimis apibrėžtas CAD komplektas — sienų panelės, grindys, stogas, jungtys — nepriklausomai patikrintas pagal tikrus failus, ne tik pagal specifikacijų lapą",
+      done2: "Paruošti du statybos variantai: standartinis (maksimali erdvė) ir kelyje vežamas (priekabos formato, be leidimo)",
+      done3: "Vidaus išplanavimas: pakelta miegojimo platforma, nuleidžiamas rašomasis stalas, įmontuota saugykla, malkinės krosnelės šildymo zona",
+      done4: "Hidroizoliacija ir konstrukciniai sprendimai išdirbti tikra gilumą (stogo membranos variantai, drenažas, izoliacijos vertės)",
+      notyet_strong: "Kol kas dar netiesa, sąmoningai pasakyta atvirai:",
+      notyet_p: "Nei vienas vienetas dar nepastatytas fiziškai, surinkimo laikas nebuvo matuotas, kainos nepatvirtintos pagal realius tiekėjų pasiūlymus. Viskas, ką matėte kitur su konkrečiu statybos laiku ar kaina, yra projektinis įvertinimas, o ne patikrintas faktas — laikykite tai taip, kol čia neparašyta kitaip.",
+      h_next: "Ko iš tikrųjų reikia toliau",
+      p_next: "Pirmoji fizinė statyba — net vienas skydas, vienas kampo sujungimas, iškirptas iš tikrų DXF failų — yra tai, kas paverčia šitai iš „kruopščiai suplanuota“ į „įrodyta“. Tai sąžiningas kitas žingsnis, ne pardavimo puslapis.",
+      cta: "Susisiekti dėl to"
+    }
+  };
+
+  var buttons = document.querySelectorAll('.lang-btn');
+  var targets = document.querySelectorAll('[data-i18n]');
+  var originals = {};
+  targets.forEach(function(el){
+    originals[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+
+  function setLang(lang){
+    targets.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var dict = translations[lang];
+      el.innerHTML = (dict && dict[key]) ? dict[key] : originals[key];
+    });
+    buttons.forEach(function(btn){
+      var active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    try { localStorage.setItem('site-lang', lang); } catch(e){}
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  var saved;
+  try { saved = localStorage.getItem('site-lang'); } catch(e){}
+  if (saved && saved !== 'en') setLang(saved);
+})();
+</script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
