@@ -73,11 +73,17 @@
   .off-canvas .close-btn { align-self: flex-end; background: none; border: none; color: var(--ink-dim); font-size: 1rem; cursor: pointer; padding: var(--space-1); }
 
   /* ---- hero ---- */
-  .hero { padding-block: var(--space-8) var(--space-6); position: relative; overflow: hidden; }
-  .grass-field { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; overflow: hidden; z-index: -1; pointer-events: none; }
-  .blade { position: absolute; bottom: -6px; width: 3px; border-radius: 3px 3px 0 0; transform-origin: bottom center; animation: blade-sway var(--dur, 4s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
-  @keyframes blade-sway { 0%, 100% { transform: rotate(var(--tilt, -5deg)); } 50% { transform: rotate(var(--tilt2, 6deg)); } }
-  @media (max-width: 780px) { .grass-field { height: 100px; } }
+  .hero { padding-block: var(--space-8) var(--space-6); }
+  .grass-field {
+    position: relative; width: 100%; height: 180px; overflow: hidden;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent-dim) 20%, var(--bg)) 55%, color-mix(in srgb, var(--accent-dim) 32%, var(--bg)));
+  }
+  .grass-field svg.blade { position: absolute; bottom: -10px; transform-origin: 50% 100%; animation: blade-sway var(--dur, 2.6s) ease-in-out infinite; animation-delay: var(--delay, 0s); will-change: transform; }
+  @keyframes blade-sway {
+    0%, 100% { transform: rotate(var(--tilt, -5deg)) skewX(-1deg); }
+    50%      { transform: rotate(var(--tilt2, 7deg)) skewX(2deg); }
+  }
+  @media (max-width: 780px) { .grass-field { height: 130px; } }
   .lang-switch { display: flex; gap: 0.5rem; margin: 0 0 var(--space-2); }
   .lang-btn { background: var(--bg-raised); border: 1px solid var(--line); color: var(--ink-dim); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.78rem; font-family: var(--font-body); cursor: pointer; }
   .lang-btn:hover { color: var(--ink); border-color: var(--accent-dim); }
@@ -200,7 +206,6 @@
 
 <main id="top">
   <section class="hero shell">
-    <div class="grass-field" id="grassField" aria-hidden="true"></div>
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="lang-btn active" data-lang="no" type="button" aria-pressed="true" lang="no">Norsk</button>
       <button class="lang-btn" data-lang="en" type="button" aria-pressed="false" lang="en">English</button>
@@ -304,33 +309,68 @@
   <div class="shell" data-i18n="footer_line">Priser avtales per jobb ut fra omfang og tidsbruk.</div>
 </footer>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bladeGradBack" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6e5418"/>
+      <stop offset="100%" stop-color="#c7a13a"/>
+    </linearGradient>
+    <linearGradient id="bladeGradMid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8f6f1e"/>
+      <stop offset="100%" stop-color="#e8c246"/>
+    </linearGradient>
+    <linearGradient id="bladeGradFront" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#b08c26"/>
+      <stop offset="100%" stop-color="#fce78a"/>
+    </linearGradient>
+  </defs>
+</svg>
+<div class="grass-field" id="grassField" aria-hidden="true"></div>
+
 <script>
 (function () {
   var field = document.getElementById('grassField');
   if (field) {
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var bladeD = 'M4,100 C1,72 3,50 2,25 C1.7,12 3,3 5,0 C7,3 8.3,12 8,25 C7,50 9,72 6,100 Z';
     var layers = [
-      { color: ['#7a5e1e', '#c9a53e'], minH: 40, maxH: 62 },
-      { color: ['#a3821f', '#e3bd4c'], minH: 58, maxH: 88 },
-      { color: ['#c9a23c', '#f8de70'], minH: 78, maxH: 118 }
+      { grad: 'bladeGradBack',  minH: 60,  maxH: 100 },
+      { grad: 'bladeGradMid',   minH: 90,  maxH: 140 },
+      { grad: 'bladeGradFront', minH: 120, maxH: 175 }
     ];
-    var count = 150;
+    var count = Math.max(180, Math.ceil(window.innerWidth / 5));
     var frag = document.createDocumentFragment();
     for (var i = 0; i < count; i++) {
-      var layer = layers[Math.floor(Math.random() * layers.length)];
-      var idx = layers.indexOf(layer);
-      var blade = document.createElement('div');
-      blade.className = 'blade';
+      var idx = Math.floor(Math.random() * layers.length);
+      var layer = layers[idx];
       var h = layer.minH + Math.random() * (layer.maxH - layer.minH);
-      blade.style.left = (Math.random() * 100).toFixed(2) + '%';
-      blade.style.height = h.toFixed(0) + 'px';
-      blade.style.background = 'linear-gradient(to top, ' + layer.color[0] + ', ' + layer.color[1] + ')';
-      blade.style.zIndex = String(idx);
-      blade.style.opacity = (0.5 + idx * 0.2).toFixed(2);
-      blade.style.setProperty('--dur', (2.4 + Math.random() * 2.4).toFixed(2) + 's');
-      blade.style.setProperty('--delay', (Math.random() * 3).toFixed(2) + 's');
-      blade.style.setProperty('--tilt', (-4 - Math.random() * 6).toFixed(1) + 'deg');
-      blade.style.setProperty('--tilt2', (4 + Math.random() * 8).toFixed(1) + 'deg');
-      frag.appendChild(blade);
+      var w = h * 0.11;
+      var leftPct = Math.random() * 100;
+
+      var svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('class', 'blade');
+      svg.setAttribute('viewBox', '0 0 10 100');
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.setAttribute('width', w.toFixed(1));
+      svg.setAttribute('height', h.toFixed(1));
+      svg.style.left = 'calc(' + leftPct.toFixed(2) + '% - ' + (w / 2).toFixed(1) + 'px)';
+      svg.style.zIndex = String(idx);
+      svg.style.opacity = (0.55 + idx * 0.16).toFixed(2);
+
+      var path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', bladeD);
+      path.setAttribute('fill', 'url(#' + layer.grad + ')');
+      svg.appendChild(path);
+
+      // wind travels left-to-right across the field: delay tracks horizontal position, not pure random
+      var delay = (leftPct / 100) * 1.7 + Math.random() * 0.5;
+      var dur = 2.2 + Math.random() * 1.3;
+      svg.style.setProperty('--dur', dur.toFixed(2) + 's');
+      svg.style.setProperty('--delay', delay.toFixed(2) + 's');
+      svg.style.setProperty('--tilt', (-4 - Math.random() * 5).toFixed(1) + 'deg');
+      svg.style.setProperty('--tilt2', (5 + Math.random() * 7).toFixed(1) + 'deg');
+
+      frag.appendChild(svg);
     }
     field.appendChild(frag);
   }
