@@ -754,30 +754,30 @@ table.items td.cost{
     ctx.clearRect(0,0,w,h);
     var horizon = h * 0.58;
 
-    // sky: near-black, higher contrast, a thin dawn-gold band right at the horizon
+    // sky: near-black, deep blue undertone for contrast against the gold below
     var sky = ctx.createLinearGradient(0,0,0,horizon);
-    sky.addColorStop(0, '#020304');
-    sky.addColorStop(0.5, '#050a0d');
-    sky.addColorStop(0.88, '#132025');
-    sky.addColorStop(1, '#1f2a26');
+    sky.addColorStop(0, '#010204');
+    sky.addColorStop(0.5, '#040a12');
+    sky.addColorStop(0.88, '#0d2230');
+    sky.addColorStop(1, '#173328');
     ctx.fillStyle = sky;
     ctx.fillRect(0,0,w,horizon);
 
-    // one break of light, low and off-centre — dark-dawn gold, not a soft sunset
+    // one break of light, low and off-centre — saturated dark-dawn gold, pushed brighter/more yellow
     var glowX = w*0.32, glowY = horizon*0.985;
     var glow = ctx.createRadialGradient(glowX,glowY,0, glowX,glowY, w*0.36);
-    glow.addColorStop(0,    'rgba(255,196,90,0.45)');
-    glow.addColorStop(0.18, 'rgba(230,160,70,0.28)');
-    glow.addColorStop(0.45, 'rgba(150,110,70,0.12)');
-    glow.addColorStop(1,    'rgba(150,110,70,0)');
+    glow.addColorStop(0,    'rgba(255,208,50,0.62)');
+    glow.addColorStop(0.18, 'rgba(250,182,40,0.40)');
+    glow.addColorStop(0.45, 'rgba(200,140,35,0.18)');
+    glow.addColorStop(1,    'rgba(200,140,35,0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0,0,w,horizon);
 
     // thin, brighter core line right at the waterline under the glow
     var core = ctx.createLinearGradient(glowX-w*0.14,0,glowX+w*0.14,0);
-    core.addColorStop(0,'rgba(255,210,120,0)');
-    core.addColorStop(0.5,'rgba(255,224,150,0.5)');
-    core.addColorStop(1,'rgba(255,210,120,0)');
+    core.addColorStop(0,'rgba(255,220,90,0)');
+    core.addColorStop(0.5,'rgba(255,236,110,0.75)');
+    core.addColorStop(1,'rgba(255,220,90,0)');
     ctx.fillStyle = core;
     ctx.fillRect(glowX-w*0.14, horizon-2, w*0.28, 3);
 
@@ -794,20 +794,20 @@ table.items td.cost{
     ctx.closePath();
     ctx.fill();
 
-    // sea below the horizon — a real blue-black, not neutral grey
+    // sea below the horizon — deeper, more saturated blue for contrast against the gold glow
     var sea = ctx.createLinearGradient(0,horizon,0,h);
-    sea.addColorStop(0, '#111e28');
-    sea.addColorStop(0.5, '#0a1620');
-    sea.addColorStop(1, '#02050a');
+    sea.addColorStop(0, '#0c2740');
+    sea.addColorStop(0.5, '#071a2c');
+    sea.addColorStop(1, '#01050d');
     ctx.fillStyle = sea;
     ctx.fillRect(0,horizon,w,h-horizon);
 
-    // layered swell bands, each a soft wave-shaped fill, darkening toward the foreground
+    // layered swell bands, each a soft wave-shaped fill, darkening toward the foreground, blue-teal tint
     var bands = [
-      {y:0.62, amp:0.010, alpha:0.30, tone:'70,88,90'},
-      {y:0.72, amp:0.016, alpha:0.32, tone:'40,56,58'},
-      {y:0.84, amp:0.022, alpha:0.40, tone:'18,28,30'},
-      {y:0.97, amp:0.026, alpha:0.55, tone:'6,10,11'}
+      {y:0.62, amp:0.010, alpha:0.34, tone:'60,105,120'},
+      {y:0.72, amp:0.016, alpha:0.36, tone:'32,72,88'},
+      {y:0.84, amp:0.022, alpha:0.44, tone:'14,38,48'},
+      {y:0.97, amp:0.026, alpha:0.58, tone:'4,12,16'}
     ];
     bands.forEach(function(b, idx){
       var baseY = h*b.y;
@@ -846,15 +846,17 @@ table.items td.cost{
       drawFractalWave(x0, mid, baseY - amp*0.7, amp*0.42, depth-1, alpha*0.75, hue, phase);
       drawFractalWave(mid, x1, baseY - amp*0.7, amp*0.42, depth-1, alpha*0.75, hue, phase);
     }
-    for (var fw=0; fw<3; fw++){
-      var fy = horizon + (h-horizon) * (0.30 + fw*0.16);
-      drawFractalWave(0, w, fy, h*0.014, 3, 0.16, '150,175,175', wavePhase + fw*0.6);
+    for (var fw=0; fw<4; fw++){
+      var fy = horizon + (h-horizon) * (0.24 + fw*0.16);
+      var fHue = fw === 0 ? '255,214,110' : '110,170,190';
+      var fAlpha = fw === 0 ? 0.38 : 0.30;
+      drawFractalWave(0, w, fy, h*0.018, 4, fAlpha, fHue, wavePhase + fw*0.6);
     }
 
     // reflection of the glow on the water, leading the eye toward the sail
     var reflect = ctx.createLinearGradient(0, horizon, 0, h);
-    reflect.addColorStop(0, 'rgba(200,178,132,0.16)');
-    reflect.addColorStop(1, 'rgba(200,178,132,0)');
+    reflect.addColorStop(0, 'rgba(230,190,90,0.24)');
+    reflect.addColorStop(1, 'rgba(230,190,90,0)');
     ctx.save();
     ctx.translate(glowX, 0);
     ctx.scale(1, 1);
