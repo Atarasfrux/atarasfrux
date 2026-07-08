@@ -339,8 +339,23 @@ table.items td.cost{
 .bottle-svg{
   transition:transform 0.35s ease;
   filter:drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+  animation:bottleFloat 4.5s ease-in-out infinite;
 }
-.bottle-btn:hover .bottle-svg{ transform:translateY(-3px) rotate(-2deg); }
+@keyframes bottleFloat{
+  0%,100%{ transform:translateY(0) rotate(-1.5deg); }
+  50%{ transform:translateY(-6px) rotate(1.5deg); }
+}
+.bottle-caption{
+  font-size:0.82rem;
+  font-style:italic;
+  color:var(--ink-soft);
+  margin:0 0 0.2rem;
+  text-align:center;
+}
+@media (prefers-reduced-motion: reduce){
+  .bottle-svg{ animation:none; }
+}
+.bottle-btn:hover .bottle-svg{ animation-play-state:paused; filter:drop-shadow(0 8px 14px rgba(0,0,0,0.5)) brightness(1.08); }
 .bottle-btn .cork{ transition:transform 0.4s ease, opacity 0.4s ease; transform-origin:30px 5px; }
 .bottle-btn[aria-expanded="true"] .cork{ transform:translate(14px,-22px) rotate(50deg); opacity:0.7; }
 .bottle-btn .scroll{ transition:transform 0.4s ease 0.1s; }
@@ -410,9 +425,14 @@ table.items td.cost{
       <h1>WAK943 — Repair &amp; Independence Plan</h1>
       <div class="reg">Bruce Roberts 34 · Oslofjord · 9 July 2026</div>
     </div>
-    <p class="subline">A working list of what the boat needs, in the order it needs it — costs are estimates, priorities are not.</p>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en" type="button">EN</button>
+      <button class="lang-btn" data-lang="no" type="button">NO</button>
+      <button class="lang-btn" data-lang="lt" type="button">LT</button>
+    </div>
+    <p class="subline" data-i18n="subline">A working list of what the boat needs, in the order it needs it — costs are estimates, priorities are not.</p>
 
-    <div class="status">
+    <div class="status" data-i18n="status">
       WAK943 is <b>where I live</b>, and where the next stretch of this actually starts. Everything
       below is what it takes to get a boat, and the life being built on it, seaworthy again.
     </div>
@@ -421,25 +441,25 @@ table.items td.cost{
 
 <div class="sheet">
 
-  <div class="section-label">Already in motion</div>
+  <div class="section-label" data-i18n="lbl_motion">Already in motion</div>
   <div class="done-strip">
-    <span class="chip">greifiks.org — live site</span>
-    <span class="chip">FJELL LYNX 49 — business plan drafted</span>
-    <span class="chip">Solar arch mount — built free, scrap aluminium bed frame</span>
-    <span class="chip">Deck survey — photographed &amp; measurement method tested</span>
-    <span class="chip">Debt — mapped, negotiable, not urgent</span>
-    <span class="chip">greifiks.org &amp; FJELL — both built here, from nothing, alongside the legal case</span>
+    <span class="chip" data-i18n="chip1">greifiks.org — live site</span>
+    <span class="chip" data-i18n="chip2">FJELL LYNX 49 — business plan drafted</span>
+    <span class="chip" data-i18n="chip3">Solar arch mount — built free, scrap aluminium bed frame</span>
+    <span class="chip" data-i18n="chip4">Deck survey — photographed &amp; measurement method tested</span>
+    <span class="chip" data-i18n="chip5">Debt — mapped, negotiable, not urgent</span>
+    <span class="chip" data-i18n="chip6">greifiks.org &amp; FJELL — both built here, from nothing, alongside the legal case</span>
   </div>
 
-  <div class="section-label">Order of the work</div>
+  <div class="section-label" data-i18n="lbl_order">Order of the work</div>
   <div class="tiers">
 
     <div class="tier" data-tier="1">
       <div class="tier-head">
         <span class="tier-num">TIER 1</span>
-        <h3 class="tier-title">Safety-critical — before she sails anywhere</h3>
+        <h3 class="tier-title" data-i18n="t1_title">Safety-critical — before she sails anywhere</h3>
       </div>
-      <p class="tier-note">Nothing else matters if these fail underway.</p>
+      <p class="tier-note" data-i18n="t1_note">Nothing else matters if these fail underway.</p>
       <div class="overflow-guard">
       <table class="items">
         <tr><th>Item</th><th>Note</th><th>Est. cost</th></tr>
@@ -533,18 +553,18 @@ table.items td.cost{
 
   <p class="crossing">Not just to arrive. To come back a different man than the one who left.</p>
 
-  <p class="crossing">Not the only way there. The one with heart in it.</p>
+  <p class="crossing">Not the only way. The one with heart in it.</p>
 
-  <p class="crossing">It's a vessel, not a possession. A faster boat, same crossing, works just as
-    well. So does the man sailing it — a passenger, same as the boat.</p>
+  <p class="crossing">It's a vessel, not a possession. So is the man sailing it.</p>
 
   <p class="crossing">The crossing has to be made alone. That was never the same thing as
-    unaccompanied. Anyone who already knows what it is to be a passenger in their own life knows
-    the difference too — a company can mean it just as much as a person can.</p>
+    unaccompanied.</p>
 
   <div class="section-label">For anyone who wants their name attached to this</div>
   <p class="account-note">This isn't a pitch. It's what it actually costs to fix this boat,
-    itemised above — three ways to be part of it, if any of them fit.</p>
+    itemised above — three ways to be part of it, if any of them fit. A different, faster boat for
+    the same crossing works just as well, if that's what someone would rather give. A company can
+    mean this as much as a person can.</p>
   <div class="account-list">
     <div class="account-item">
       <div class="row"><span class="name">A named repair</span><span class="price">from 2,000 kr</span></div>
@@ -571,13 +591,61 @@ table.items td.cost{
   <p class="account-note">Not a contact form. A bottle. Same thing here.</p>
 
   <div class="bottle-shore">
+    <p class="bottle-caption">Carried a long way before this shore.</p>
     <button class="bottle-btn" id="bottleBtn" aria-expanded="false" aria-controls="bottleForm" type="button">
-      <svg class="bottle-svg" viewBox="0 0 60 120" width="60" height="120" aria-hidden="true">
-        <rect x="22" y="4" width="16" height="18" rx="3" fill="#3a4a44"/>
-        <rect class="cork" x="24" y="0" width="12" height="10" rx="2" fill="#8a6a4a"/>
-        <path d="M18 22 Q18 30 22 34 L22 100 Q22 112 30 112 Q38 112 38 100 L38 34 Q42 30 42 22 Z"
-              fill="rgba(90,140,150,0.28)" stroke="rgba(180,210,210,0.5)" stroke-width="1.5"/>
-        <rect class="scroll" x="26" y="55" width="8" height="26" rx="1" fill="#cbb98c" opacity="0.9"/>
+      <svg class="bottle-svg" viewBox="0 0 60 130" width="66" height="143" aria-hidden="true">
+        <defs>
+          <radialGradient id="glassBody" cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#bcd8d4" stop-opacity="0.55"/>
+            <stop offset="35%" stop-color="#5f8a86" stop-opacity="0.42"/>
+            <stop offset="70%" stop-color="#2c4a48" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#152826" stop-opacity="0.65"/>
+          </radialGradient>
+          <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0c1817" stop-opacity="0.8"/>
+            <stop offset="12%" stop-color="#dff0ec" stop-opacity="0.5"/>
+            <stop offset="30%" stop-color="#3c5f5c" stop-opacity="0.2"/>
+            <stop offset="88%" stop-color="#0c1817" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#0c1817" stop-opacity="0.85"/>
+          </linearGradient>
+          <linearGradient id="corkGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#a4805a"/>
+            <stop offset="100%" stop-color="#6b4f34"/>
+          </linearGradient>
+          <filter id="patina">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise"/>
+            <feColorMatrix in="noise" type="matrix"
+              values="0 0 0 0 0.35   0 0 0 0 0.45   0 0 0 0 0.35  0 0 0 0.35 0"/>
+          </filter>
+        </defs>
+
+        <ellipse cx="30" cy="122" rx="15" ry="4" fill="#000" opacity="0.35"/>
+
+        <rect class="cork" x="24" y="2" width="12" height="12" rx="2" fill="url(#corkGrad)"/>
+        <rect x="24" y="2" width="12" height="3" fill="#000" opacity="0.2"/>
+
+        <path d="M19 14 L19 24 Q19 32 23 36 L23 108 Q23 120 30 120 Q37 120 37 108 L37 36
+                 Q41 32 41 24 L41 14 Z"
+              fill="url(#glassBody)"/>
+        <path d="M19 14 L19 24 Q19 32 23 36 L23 108 Q23 120 30 120 Q37 120 37 108 L37 36
+                 Q41 32 41 24 L41 14 Z"
+              fill="url(#glassEdge)" opacity="0.6"/>
+        <path d="M19 14 L19 24 Q19 32 23 36 L23 108 Q23 120 30 120 Q37 120 37 108 L37 36
+                 Q41 32 41 24 L41 14 Z"
+              fill="url(#glassBody)" filter="url(#patina)" opacity="0.5"/>
+        <path d="M19 14 L19 24 Q19 32 23 36 L23 108 Q23 120 30 120 Q37 120 37 108 L37 36
+                 Q41 32 41 24 L41 14 Z"
+              fill="none" stroke="rgba(210,230,225,0.35)" stroke-width="1"/>
+
+        <ellipse cx="25.5" cy="46" rx="1.6" ry="6" fill="#fff" opacity="0.28"/>
+        <ellipse cx="27.5" cy="80" rx="1" ry="10" fill="#fff" opacity="0.16"/>
+        <circle cx="34" cy="60" r="1.1" fill="#4a3a28" opacity="0.5"/>
+        <circle cx="26" cy="95" r="0.8" fill="#4a3a28" opacity="0.4"/>
+
+        <rect class="scroll" x="26" y="58" width="8" height="28" rx="1.5" fill="#d8c69a" opacity="0.85"/>
+        <line x1="27.5" y1="63" x2="32.5" y2="63" stroke="#8a7452" stroke-width="0.6" opacity="0.6"/>
+        <line x1="27.5" y1="67" x2="32.5" y2="67" stroke="#8a7452" stroke-width="0.6" opacity="0.6"/>
+        <line x1="27.5" y1="71" x2="31" y2="71" stroke="#8a7452" stroke-width="0.6" opacity="0.6"/>
       </svg>
       <span class="bottle-hint">Tap the bottle</span>
     </button>
@@ -604,6 +672,8 @@ table.items td.cost{
   var hero = canvas.closest('.hero');
   var ctx = canvas.getContext('2d');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wavePhase = 0;
+  var lastW = 0, lastH = 0;
 
   function size(){
     var rect = hero.getBoundingClientRect();
@@ -611,6 +681,7 @@ table.items td.cost{
     canvas.width = Math.round(rect.width * dpr);
     canvas.height = Math.round(rect.height * dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    lastW = rect.width; lastH = rect.height;
     draw(rect.width, rect.height);
   }
 
@@ -691,6 +762,30 @@ table.items td.cost{
       ctx.fill();
     });
 
+    // fractal wave crests — self-similar wave-on-wave detail, Hokusai-adjacent, kept subtle
+    function drawFractalWave(x0, x1, baseY, amp, depth, alpha, hue, phase){
+      if (depth <= 0 || amp < 1) return;
+      var segs = 6;
+      ctx.beginPath();
+      for (var i=0; i<=segs; i++){
+        var t = i/segs;
+        var x = x0 + (x1-x0)*t;
+        var y = baseY + Math.sin(t*Math.PI*2 + depth + phase) * amp;
+        if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = 'rgba('+hue+','+alpha+')';
+      ctx.lineWidth = Math.max(0.6, amp*0.12);
+      ctx.stroke();
+      // recurse: each crest spawns a smaller version of the same wave, offset upward
+      var mid = (x0+x1)/2;
+      drawFractalWave(x0, mid, baseY - amp*0.7, amp*0.42, depth-1, alpha*0.75, hue, phase);
+      drawFractalWave(mid, x1, baseY - amp*0.7, amp*0.42, depth-1, alpha*0.75, hue, phase);
+    }
+    for (var fw=0; fw<3; fw++){
+      var fy = horizon + (h-horizon) * (0.30 + fw*0.16);
+      drawFractalWave(0, w, fy, h*0.014, 3, 0.16, '150,175,175', wavePhase + fw*0.6);
+    }
+
     // reflection of the glow on the water, leading the eye toward the sail
     var reflect = ctx.createLinearGradient(0, horizon, 0, h);
     reflect.addColorStop(0, 'rgba(200,178,132,0.16)');
@@ -753,6 +848,14 @@ table.items td.cost{
 
   size();
   window.addEventListener('resize', size);
+
+  // gentle sea motion: slow phase drift, throttled redraw so it never reads as busy
+  if (!reduceMotion){
+    setInterval(function(){
+      wavePhase += 0.10;
+      if (lastW && lastH) draw(lastW, lastH);
+    }, 220);
+  }
 })();
 
 (function(){
