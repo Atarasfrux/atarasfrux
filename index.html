@@ -74,6 +74,11 @@
 
   /* ---- hero ---- */
   .hero { padding-block: var(--space-8) var(--space-6); }
+  .lang-switch { display: flex; gap: 0.5rem; margin: 0 0 var(--space-2); }
+  .lang-btn { background: var(--bg-raised); border: 1px solid var(--line); color: var(--ink-dim); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.78rem; font-family: var(--font-body); cursor: pointer; }
+  .lang-btn:hover { color: var(--ink); border-color: var(--accent-dim); }
+  .lang-btn.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .lang-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-bottom: var(--space-2); }
   .profile-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap; }
   .profile-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex: none; }
@@ -165,11 +170,11 @@
   <div class="shell row">
     <a class="wordmark" href="#top">Mantas Pagalys</a>
     <ul class="nav-links">
-      <li><a href="#tjenester">Tjenester</a></li>
-      <li><a href="#galleri">Galleri</a></li>
+      <li><a href="#tjenester" data-i18n="nav_services">Tjenester</a></li>
+      <li><a href="#galleri" data-i18n="nav_gallery">Galleri</a></li>
       <li><a href="#fjell">FJELL</a></li>
       <li><a href="/wak943.html">WAK943</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="offCanvas">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -180,27 +185,32 @@
 <div class="off-canvas" id="offCanvas">
   <div class="scrim" data-close></div>
   <div class="drawer" role="dialog" aria-modal="true" aria-label="Meny">
-    <button class="close-btn" data-close aria-label="Lukk meny">Lukk ✕</button>
-    <a href="#tjenester" data-close>Tjenester</a>
-    <a href="#galleri" data-close>Galleri</a>
+    <button class="close-btn" data-close aria-label="Lukk meny" data-i18n="nav_close">Lukk ✕</button>
+    <a href="#tjenester" data-close data-i18n="nav_services">Tjenester</a>
+    <a href="#galleri" data-close data-i18n="nav_gallery">Galleri</a>
     <a href="#fjell" data-close>FJELL</a>
     <a href="/wak943.html" data-close>WAK943</a>
-    <a href="#kontakt" data-close>Kontakt</a>
+    <a href="#kontakt" data-close data-i18n="nav_contact">Kontakt</a>
   </div>
 </div>
 
 <main id="top">
   <section class="hero shell">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="no" type="button" aria-pressed="true" lang="no">Norsk</button>
+      <button class="lang-btn" data-lang="en" type="button" aria-pressed="false" lang="en">English</button>
+      <button class="lang-btn" data-lang="lt" type="button" aria-pressed="false" lang="lt">Lietuvių</button>
+    </div>
     <p class="eyebrow">Sandvika / Bærum</p>
     <div class="profile-row">
       <img class="profile-photo" src="assets/profile-photo.webp" width="88" height="88" alt="Mantas Pagalys" fetchpriority="high" decoding="sync">
       <div class="who">
         <div class="name">Mantas Pagalys</div>
-        <div class="role">Hage, uterom og smått håndverksarbeid</div>
+        <div class="role" data-i18n="hero_role">Hage, uterom og smått håndverksarbeid</div>
       </div>
     </div>
-    <h1>Hage, uterom og håndverksarbeid, basert på faktisk erfaring</h1>
-    <p class="lede">En hage har sin egen orden — hva som må vokse før det kan beskjæres,
+    <h1 data-i18n="hero_h1">Hage, uterom og håndverksarbeid, basert på faktisk erfaring</h1>
+    <p class="lede" data-i18n="hero_lede">En hage har sin egen orden — hva som må vokse før det kan beskjæres,
     hva et veksthus trenger før spirene møter verden utenfor, hvilken sesong en hekk faktisk
     tåler å bli rørt i. År brukt innenfor den ordenen: eiendommer i Hampstead Heath, noen
     århundrer gamle, balkonghager over byen, golfbanene i St Andrews. Egne oppdrag, og arbeid
@@ -209,52 +219,52 @@
   </section>
 
   <section id="tjenester" class="shell">
-    <div class="section-head"><h2>Hage &amp; uterom</h2></div>
+    <div class="section-head"><h2 data-i18n="h_garden">Hage &amp; uterom</h2></div>
     <div class="services">
-      <div class="service"><h3>Beskjæring</h3><p>Busker og hekk, riktig tidspunkt for arten — feil sesong kan skade planten mer enn det hjelper.</p></div>
-      <div class="service"><h3>Gressklipping, resåing og luking</h3><p>Klipping, reetablering av slitte/tynne plener, luking — riktig frøblanding og timing for norsk klima.</p></div>
-      <div class="service"><h3>Planting og sesongrydding</h3><p>Vår- og høstrydding, planting, generell rådgivning om hagen.</p></div>
-      <div class="service"><h3>Gjerder og terrasser</h3><p>Reparasjon og vedlikehold av gjerder og terrassebord.</p></div>
+      <div class="service"><h3 data-i18n="sv1_t">Beskjæring</h3><p data-i18n="sv1_p">Busker og hekk, riktig tidspunkt for arten — feil sesong kan skade planten mer enn det hjelper.</p></div>
+      <div class="service"><h3 data-i18n="sv2_t">Gressklipping, resåing og luking</h3><p data-i18n="sv2_p">Klipping, reetablering av slitte/tynne plener, luking — riktig frøblanding og timing for norsk klima.</p></div>
+      <div class="service"><h3 data-i18n="sv3_t">Planting og sesongrydding</h3><p data-i18n="sv3_p">Vår- og høstrydding, planting, generell rådgivning om hagen.</p></div>
+      <div class="service"><h3 data-i18n="sv4_t">Gjerder og terrasser</h3><p data-i18n="sv4_p">Reparasjon og vedlikehold av gjerder og terrassebord.</p></div>
     </div>
   </section>
 
   <section class="shell">
-    <div class="section-head"><h2>Bygg &amp; innendørs</h2></div>
+    <div class="section-head"><h2 data-i18n="h_build">Bygg &amp; innendørs</h2></div>
     <div class="services">
-      <div class="service"><h3>Dør og vindu</h3><p>Montering og reparasjon.</p></div>
-      <div class="service"><h3>Fasade og betongarbeid</h3><p>Mindre fasadearbeid og betongjobber.</p></div>
-      <div class="service"><h3>Parkett, listverk og gips</h3><p>Legging/reparasjon av parkett, listverk (trim), gipsplater og lettvegger/partisjonering.</p></div>
+      <div class="service"><h3 data-i18n="sv5_t">Dør og vindu</h3><p data-i18n="sv5_p">Montering og reparasjon.</p></div>
+      <div class="service"><h3 data-i18n="sv6_t">Fasade og betongarbeid</h3><p data-i18n="sv6_p">Mindre fasadearbeid og betongjobber.</p></div>
+      <div class="service"><h3 data-i18n="sv7_t">Parkett, listverk og gips</h3><p data-i18n="sv7_p">Legging/reparasjon av parkett, listverk (trim), gipsplater og lettvegger/partisjonering.</p></div>
     </div>
   </section>
 
   <section class="shell">
-    <div class="section-head"><h2>Vedlikehold</h2></div>
+    <div class="section-head"><h2 data-i18n="h_maint">Vedlikehold</h2></div>
     <div class="services">
-      <div class="service"><h3>Høytrykksspyling</h3><p>Fasade, terrasse, gårdsplass.</p></div>
-      <div class="service"><h3>Rensing av takrenner</h3><p>Bruker gjerne din stige.</p></div>
+      <div class="service"><h3 data-i18n="sv8_t">Høytrykksspyling</h3><p data-i18n="sv8_p">Fasade, terrasse, gårdsplass.</p></div>
+      <div class="service"><h3 data-i18n="sv9_t">Rensing av takrenner</h3><p data-i18n="sv9_p">Bruker gjerne din stige.</p></div>
     </div>
   </section>
 
   <section class="shell">
-    <div class="section-head"><h2>Båt</h2></div>
+    <div class="section-head"><h2 data-i18n="h_boat">Båt</h2></div>
     <div class="services">
-      <div class="service"><h3>Reparasjon</h3><p>Dekk, tremverk (teak), mindre struktur- og epoksyarbeid.</p></div>
-      <div class="service"><h3>Rengjøring, forbehandling og maling</h3><p>Skikkelig forbehandling før maling — dette er ofte det som avgjør om jobben faktisk holder.</p></div>
+      <div class="service"><h3 data-i18n="sv10_t">Reparasjon</h3><p data-i18n="sv10_p">Dekk, tremverk (teak), mindre struktur- og epoksyarbeid.</p></div>
+      <div class="service"><h3 data-i18n="sv11_t">Rengjøring, forbehandling og maling</h3><p data-i18n="sv11_p">Skikkelig forbehandling før maling — dette er ofte det som avgjør om jobben faktisk holder.</p></div>
     </div>
   </section>
 
   <section class="shell">
-    <div class="section-head"><h2>Praktisk</h2></div>
+    <div class="section-head"><h2 data-i18n="h_practical">Praktisk</h2></div>
     <div class="facts">
-      <span class="fact"><strong>Område:</strong> Sandvika, Bærum, sykkelavstand</span>
-      <span class="fact"><strong>Verktøy:</strong> egne håndverktøy for de fleste jobber</span>
-      <span class="fact"><strong>Gressklipping:</strong> bruker gjerne din maskin</span>
-      <span class="fact"><strong>Transport:</strong> sykkel — ingen bil</span>
+      <span class="fact" data-i18n="fact1"><strong>Område:</strong> Sandvika, Bærum, sykkelavstand</span>
+      <span class="fact" data-i18n="fact2"><strong>Verktøy:</strong> egne håndverktøy for de fleste jobber</span>
+      <span class="fact" data-i18n="fact3"><strong>Gressklipping:</strong> bruker gjerne din maskin</span>
+      <span class="fact" data-i18n="fact4"><strong>Transport:</strong> sykkel — ingen bil</span>
     </div>
   </section>
 
   <section id="galleri" class="shell">
-    <div class="section-head"><h2>Naturen jeg jobber i</h2></div>
+    <div class="section-head"><h2 data-i18n="h_gallery">Naturen jeg jobber i</h2></div>
     <div class="photo-grid">
       <a href="assets/finishedterrace.webp" target="_blank" rel="noopener"><img src="assets/finishedterrace.webp" loading="lazy" decoding="async" width="800" height="220" alt="Ferdigstilt terrasse"></a>
       <a href="assets/gardenloot.webp" target="_blank" rel="noopener"><img src="assets/gardenloot.webp" loading="lazy" decoding="async" width="800" height="220" alt="Hagearbeid"></a>
@@ -264,29 +274,29 @@
   </section>
 
   <section id="fjell" class="shell">
-    <div class="section-head"><h2>FJELL — modulær 12m² hytte</h2></div>
+    <div class="section-head"><h2 data-i18n="h_fjell">FJELL — modulær 12m² hytte</h2></div>
     <div class="services">
       <div class="service">
-        <h3>Egen hyttedesign — full ingeniørplanlegging, ikke fysisk bygget ennå</h3>
-        <p>Komplette byggetegninger (DXF/STL) for en modulær 12–15m² hytte er ferdig tegnet. Det som
+        <h3 data-i18n="fjell_t">Egen hyttedesign — full ingeniørplanlegging, ikke fysisk bygget ennå</h3>
+        <p data-i18n="fjell_p">Komplette byggetegninger (DXF/STL) for en modulær 12–15m² hytte er ferdig tegnet. Det som
         gjenstår er det faktiske byggetrinnet — ærlig sagt, ikke en ferdig vare ennå.</p>
       </div>
     </div>
     <p style="font-size:0.9rem; margin-top:1rem;">
-      <a href="/fjell-status.html">Se status og planer →</a>
+      <a href="/fjell-status.html" data-i18n="fjell_link">Se status og planer →</a>
     </p>
   </section>
 
   <div class="shell">
     <div class="cta-band" id="kontakt">
-      <p>Ta kontakt for pris — avhenger av jobbens omfang</p>
+      <p data-i18n="cta_line">Ta kontakt for pris — avhenger av jobbens omfang</p>
       <p class="big"><a href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a></p>
     </div>
   </div>
 </main>
 
 <footer class="site-footer">
-  <div class="shell">Priser avtales per jobb ut fra omfang og tidsbruk.</div>
+  <div class="shell" data-i18n="footer_line">Priser avtales per jobb ut fra omfang og tidsbruk.</div>
 </footer>
 
 <script>
@@ -408,6 +418,137 @@
     }
     setTimeout(sequence, 1500);
   }
+})();
+</script>
+<script>
+(function(){
+  var translations = {
+    en: {
+      nav_services: "Services",
+      nav_gallery: "Gallery",
+      nav_contact: "Contact",
+      nav_close: "Close ✕",
+      hero_role: "Garden, outdoor space and small-scale craftsmanship",
+      hero_h1: "Garden, outdoor space and craftsmanship, built on real experience",
+      hero_lede: "A garden has its own order — what has to grow before it can be pruned, what a greenhouse needs before the seedlings meet the outside world, which season a hedge can actually take being touched in. Years spent inside that order: properties on Hampstead Heath, some centuries old, rooftop gardens over the city, the golf courses at St Andrews. Own jobs, and work through larger landscaping firms — always the same respect for what's actually alive, not just what looks finished. That same respect comes to your garden.",
+      h_garden: "Garden &amp; outdoor space",
+      sv1_t: "Pruning",
+      sv1_p: "Shrubs and hedges, the right time for the species — the wrong season can harm the plant more than it helps.",
+      sv2_t: "Mowing, lawn repair and weeding",
+      sv2_p: "Cutting, re-establishing worn/thin lawns, weeding — the right seed mix and timing for Norwegian climate.",
+      sv3_t: "Planting and seasonal clearing",
+      sv3_p: "Spring and autumn clearing, planting, general garden advice.",
+      sv4_t: "Fences and decking",
+      sv4_p: "Repair and maintenance of fences and deck boards.",
+      h_build: "Building &amp; indoor",
+      sv5_t: "Doors and windows",
+      sv5_p: "Installation and repair.",
+      sv6_t: "Facade and concrete work",
+      sv6_p: "Smaller facade work and concrete jobs.",
+      sv7_t: "Flooring, trim and drywall",
+      sv7_p: "Laying/repairing flooring, trim, drywall panels and light partition walls.",
+      h_maint: "Maintenance",
+      sv8_t: "Pressure washing",
+      sv8_p: "Facade, terrace, driveway.",
+      sv9_t: "Gutter cleaning",
+      sv9_p: "Happy to use your ladder.",
+      h_boat: "Boat",
+      sv10_t: "Repair",
+      sv10_p: "Deck, teak woodwork, minor structural and epoxy work.",
+      sv11_t: "Cleaning, prep and painting",
+      sv11_p: "Proper preparation before painting — this is often what decides whether the job actually holds.",
+      h_practical: "Practical",
+      fact1: "<strong>Area:</strong> Sandvika, Bærum, biking distance",
+      fact2: "<strong>Tools:</strong> own hand tools for most jobs",
+      fact3: "<strong>Mowing:</strong> happy to use your machine",
+      fact4: "<strong>Transport:</strong> bicycle — no car",
+      h_gallery: "The nature I work in",
+      h_fjell: "FJELL — modular 12m² cabin",
+      fjell_t: "My own cabin design — full engineering planning, not physically built yet",
+      fjell_p: "Complete build drawings (DXF/STL) for a modular 12–15m² cabin are fully drafted. What remains is the actual build step — honestly, not a finished product yet.",
+      fjell_link: "See status and plans →",
+      cta_line: "Get in touch for a price — depends on the scope of the job",
+      footer_line: "Prices agreed per job based on scope and time."
+    },
+    lt: {
+      nav_services: "Paslaugos",
+      nav_gallery: "Galerija",
+      nav_contact: "Kontaktai",
+      nav_close: "Uždaryti ✕",
+      hero_role: "Sodas, lauko erdvė ir smulkūs statybos darbai",
+      hero_h1: "Sodo, lauko erdvės ir amatų darbai, paremti realia patirtimi",
+      hero_lede: "Sodas turi savo tvarką — kas turi užaugti, kol galima genėti, ko reikia šiltnamiui, kol daigai sutinka išorinį pasaulį, kokiu metų laiku gyvatvorę iš tikrųjų galima liesti. Metai, praleisti tos tvarkos viduje: Hampstead Heath dvarai, kai kurie kelių šimtmečių senumo, sodai ant miesto stogų, golfo aikštynai St Andrews. Savi užsakymai ir darbas per didesnes kraštovaizdžio įmones — visada ta pati pagarba tam, kas iš tikrųjų gyva, o ne tik tam, kas atrodo baigta. Ta pati pagarba ateis ir į jūsų sodą.",
+      h_garden: "Sodas ir lauko erdvė",
+      sv1_t: "Genėjimas",
+      sv1_p: "Krūmai ir gyvatvorės, tinkamas laikas pagal rūšį — netinkamas sezonas gali pakenkti augalui labiau, nei padėti.",
+      sv2_t: "Vejos pjovimas, atkūrimas ir ravėjimas",
+      sv2_p: "Pjovimas, nusidėvėjusių/plikų vejų atkūrimas, ravėjimas — tinkamas sėklų mišinys ir laikas Norvegijos klimatui.",
+      sv3_t: "Sodinimas ir sezoninis tvarkymas",
+      sv3_p: "Pavasario ir rudens tvarkymas, sodinimas, bendri patarimai apie sodą.",
+      sv4_t: "Tvoros ir terasos",
+      sv4_p: "Tvorų ir terasos lentų remontas bei priežiūra.",
+      h_build: "Statyba ir vidaus darbai",
+      sv5_t: "Durys ir langai",
+      sv5_p: "Montavimas ir remontas.",
+      sv6_t: "Fasado ir betono darbai",
+      sv6_p: "Smulkesni fasado ir betono darbai.",
+      sv7_t: "Grindys, apvadai ir gipskartonis",
+      sv7_p: "Grindų klojimas/remontas, apvadai, gipskartonio plokštės ir lengvos pertvaros.",
+      h_maint: "Priežiūra",
+      sv8_t: "Plovimas aukšto slėgio įranga",
+      sv8_p: "Fasadas, terasa, kiemas.",
+      sv9_t: "Latakų valymas",
+      sv9_p: "Mielai naudoju jūsų kopėčias.",
+      h_boat: "Laivas",
+      sv10_t: "Remontas",
+      sv10_p: "Denis, tikmedžio medienos darbai, smulkūs konstrukciniai ir epoksidiniai darbai.",
+      sv11_t: "Valymas, paruošimas ir dažymas",
+      sv11_p: "Tinkamas paruošimas prieš dažant — dažnai būtent tai nulemia, ar darbas iš tikrųjų išsilaikys.",
+      h_practical: "Praktinė informacija",
+      fact1: "<strong>Rajonas:</strong> Sandvika, Bærum, dviračiu pasiekiamas atstumas",
+      fact2: "<strong>Įrankiai:</strong> nuosavi rankiniai įrankiai daugumai darbų",
+      fact3: "<strong>Vejos pjovimas:</strong> mielai naudoju jūsų techniką",
+      fact4: "<strong>Transportas:</strong> dviratis — automobilio nėra",
+      h_gallery: "Gamta, kurioje dirbu",
+      h_fjell: "FJELL — modulinė 12m² trobelė",
+      fjell_t: "Nuosavas trobelės dizainas — pilnas inžinerinis projektavimas, dar fiziškai nepastatyta",
+      fjell_p: "Pilni statybos brėžiniai (DXF/STL) modulinei 12–15m² trobelei jau paruošti. Kas liko — tai faktinis statybos etapas — sąžiningai, dar ne baigtas produktas.",
+      fjell_link: "Žiūrėti būklę ir planus →",
+      cta_line: "Susisiekite dėl kainos — priklauso nuo darbo apimties",
+      footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką."
+    }
+  };
+
+  var buttons = document.querySelectorAll('.lang-btn');
+  var targets = document.querySelectorAll('[data-i18n]');
+  var originals = {};
+  targets.forEach(function(el){
+    originals[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+
+  function setLang(lang){
+    targets.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var dict = translations[lang];
+      el.innerHTML = (dict && dict[key]) ? dict[key] : originals[key];
+    });
+    buttons.forEach(function(btn){
+      var active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    try { localStorage.setItem('site-lang', lang); } catch(e){}
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  var saved;
+  try { saved = localStorage.getItem('site-lang'); } catch(e){}
+  if (saved && saved !== 'no') setLang(saved);
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
