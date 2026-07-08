@@ -314,6 +314,89 @@ table.items td.cost{
   margin:0.3rem 0 0;
 }
 
+.bottle-shore{
+  position:relative;
+  margin:0.5rem 0 2.4rem;
+  padding:2.2rem 1rem 1.4rem;
+  border-radius:6px;
+  background:linear-gradient(180deg, rgba(90,110,110,0.06), rgba(60,50,40,0.10));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+}
+.bottle-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.6rem;
+  padding:0.5rem;
+  color:var(--ink-soft);
+}
+.bottle-svg{
+  transition:transform 0.35s ease;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+}
+.bottle-btn:hover .bottle-svg{ transform:translateY(-3px) rotate(-2deg); }
+.bottle-btn .cork{ transition:transform 0.4s ease, opacity 0.4s ease; transform-origin:30px 5px; }
+.bottle-btn[aria-expanded="true"] .cork{ transform:translate(14px,-22px) rotate(50deg); opacity:0.7; }
+.bottle-btn .scroll{ transition:transform 0.4s ease 0.1s; }
+.bottle-btn[aria-expanded="true"] .scroll{ transform:translateY(-14px); }
+.bottle-hint{
+  font-family:ui-monospace,monospace;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  opacity:0.75;
+}
+.message-form{
+  width:100%;
+  max-width:400px;
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+  animation:unfurl 0.4s ease;
+}
+@keyframes unfurl{
+  from{ opacity:0; transform:translateY(-10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.message-form label{
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+  font-size:0.85rem;
+  color:var(--ink-soft);
+}
+.message-form input, .message-form textarea{
+  background:var(--bg-raised);
+  border:1px solid var(--line);
+  border-radius:3px;
+  color:var(--ink);
+  padding:0.55rem 0.7rem;
+  font-family:inherit;
+  font-size:0.95rem;
+}
+.message-form button{
+  background:var(--verdigris);
+  color:#0a0d0c;
+  border:none;
+  border-radius:3px;
+  padding:0.65rem 1rem;
+  font-weight:600;
+  cursor:pointer;
+  font-size:0.9rem;
+}
+.form-note{
+  font-size:0.78rem;
+  color:var(--accent-soft);
+  font-style:italic;
+  margin:0 0 0.2rem;
+}
+
 @media (max-width:520px){
   .masthead{flex-direction:column;align-items:flex-start;}
   table.items{font-size:0.85rem;}
@@ -484,6 +567,30 @@ table.items td.cost{
     either way. The deck reseal starts in the next couple of weeks — first thing that gets
     recorded. Reply, ask first, or don't. What's given here is mine to carry, not yours to weigh.</p>
 
+  <div class="section-label">Send a message</div>
+  <p class="account-note">Not a contact form. A bottle. Same thing here.</p>
+
+  <div class="bottle-shore">
+    <button class="bottle-btn" id="bottleBtn" aria-expanded="false" aria-controls="bottleForm" type="button">
+      <svg class="bottle-svg" viewBox="0 0 60 120" width="60" height="120" aria-hidden="true">
+        <rect x="22" y="4" width="16" height="18" rx="3" fill="#3a4a44"/>
+        <rect class="cork" x="24" y="0" width="12" height="10" rx="2" fill="#8a6a4a"/>
+        <path d="M18 22 Q18 30 22 34 L22 100 Q22 112 30 112 Q38 112 38 100 L38 34 Q42 30 42 22 Z"
+              fill="rgba(90,140,150,0.28)" stroke="rgba(180,210,210,0.5)" stroke-width="1.5"/>
+        <rect class="scroll" x="26" y="55" width="8" height="26" rx="1" fill="#cbb98c" opacity="0.9"/>
+      </svg>
+      <span class="bottle-hint">Tap the bottle</span>
+    </button>
+
+    <form class="message-form" id="bottleForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" hidden>
+      <p class="form-note">This part needs a Formspree ID dropped into the form action before it actually sends anywhere — placeholder for now.</p>
+      <label>Name<input type="text" name="name" required></label>
+      <label>Email<input type="email" name="email" required></label>
+      <label>Message<textarea name="message" rows="4" required></textarea></label>
+      <button type="submit">Send it out</button>
+    </form>
+  </div>
+
   <div class="sign">
     <span class="name">Mantas Pagalys</span>
     <span>WAK943 · Bruce Roberts 34</span>
@@ -511,22 +618,32 @@ table.items td.cost{
     ctx.clearRect(0,0,w,h);
     var horizon = h * 0.58;
 
-    // sky: near-black to a cold, storm-grey band at the horizon
+    // sky: near-black, higher contrast, a thin dawn-gold band right at the horizon
     var sky = ctx.createLinearGradient(0,0,0,horizon);
-    sky.addColorStop(0, '#050708');
-    sky.addColorStop(0.55, '#0a1013');
-    sky.addColorStop(1, '#1c262b');
+    sky.addColorStop(0, '#020304');
+    sky.addColorStop(0.5, '#050a0d');
+    sky.addColorStop(0.88, '#132025');
+    sky.addColorStop(1, '#1f2a26');
     ctx.fillStyle = sky;
     ctx.fillRect(0,0,w,horizon);
 
-    // one break of light, low and off-centre — not a sunset, a single distant glow
+    // one break of light, low and off-centre — dark-dawn gold, not a soft sunset
     var glowX = w*0.32, glowY = horizon*0.985;
-    var glow = ctx.createRadialGradient(glowX,glowY,0, glowX,glowY, w*0.32);
-    glow.addColorStop(0, 'rgba(214,190,140,0.22)');
-    glow.addColorStop(0.35, 'rgba(150,130,95,0.10)');
-    glow.addColorStop(1, 'rgba(150,130,95,0)');
+    var glow = ctx.createRadialGradient(glowX,glowY,0, glowX,glowY, w*0.36);
+    glow.addColorStop(0,    'rgba(255,196,90,0.45)');
+    glow.addColorStop(0.18, 'rgba(230,160,70,0.28)');
+    glow.addColorStop(0.45, 'rgba(150,110,70,0.12)');
+    glow.addColorStop(1,    'rgba(150,110,70,0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0,0,w,horizon);
+
+    // thin, brighter core line right at the waterline under the glow
+    var core = ctx.createLinearGradient(glowX-w*0.14,0,glowX+w*0.14,0);
+    core.addColorStop(0,'rgba(255,210,120,0)');
+    core.addColorStop(0.5,'rgba(255,224,150,0.5)');
+    core.addColorStop(1,'rgba(255,210,120,0)');
+    ctx.fillStyle = core;
+    ctx.fillRect(glowX-w*0.14, horizon-2, w*0.28, 3);
 
     // distant, low shoreline silhouette, just above the horizon
     ctx.fillStyle = 'rgba(10,14,16,0.9)';
@@ -541,10 +658,11 @@ table.items td.cost{
     ctx.closePath();
     ctx.fill();
 
-    // sea below the horizon
+    // sea below the horizon — a real blue-black, not neutral grey
     var sea = ctx.createLinearGradient(0,horizon,0,h);
-    sea.addColorStop(0, '#141c1f');
-    sea.addColorStop(1, '#030505');
+    sea.addColorStop(0, '#111e28');
+    sea.addColorStop(0.5, '#0a1620');
+    sea.addColorStop(1, '#02050a');
     ctx.fillStyle = sea;
     ctx.fillRect(0,horizon,w,h-horizon);
 
@@ -635,5 +753,43 @@ table.items td.cost{
 
   size();
   window.addEventListener('resize', size);
+})();
+
+(function(){
+  var btn = document.getElementById('bottleBtn');
+  var form = document.getElementById('bottleForm');
+  var hint = btn.querySelector('.bottle-hint');
+  btn.addEventListener('click', function(){
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    if (open) {
+      form.hidden = true;
+      hint.textContent = 'Tap the bottle';
+    } else {
+      form.hidden = false;
+      hint.textContent = 'Cork’s out';
+      form.querySelector('input').focus();
+    }
+  });
+})();
+
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = document.querySelectorAll('.crossing, .tier, .totals, .account-item, .bottle-shore');
+  targets.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(function(el){ io.observe(el); });
 })();
 </script>
