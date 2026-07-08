@@ -1,0 +1,114 @@
+<title>FJELL — Norwegian Micro-Cabin, Engineering Concept</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#f4f3ef;
+  --bg-raised:#ebe9e3;
+  --ink:#20241f;
+  --ink-soft:#5c6158;
+  --line:rgba(32,36,31,0.14);
+  --accent:#3d5c45;
+  --accent-soft:#5b7a63;
+  --chip-bg:#e2e2da;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14170f;
+    --bg-raised:#1c2016;
+    --ink:#e7e6de;
+    --ink-soft:#a3a99c;
+    --line:rgba(231,230,222,0.14);
+    --accent:#8fb89b;
+    --accent-soft:#a9cbb2;
+    --chip-bg:#1f2418;
+  }
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  line-height:1.55;
+}
+.wrap{ max-width:760px; margin:0 auto; padding:3rem 1.5rem 4rem; }
+h1{ font-size:2rem; margin:0 0 0.3rem; letter-spacing:-0.01em; text-wrap:balance; }
+.tag{ font-size:1rem; color:var(--ink-soft); margin:0 0 2rem; }
+.status-badge{
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background:var(--chip-bg); border:1px solid var(--line); border-radius:4px;
+  padding:0.5rem 0.8rem; font-size:0.85rem; margin-bottom:2rem;
+}
+.status-badge::before{ content:"●"; color:var(--accent); }
+h2{ font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-soft); margin:2.4rem 0 1rem; }
+p{ margin:0 0 1rem; max-width:64ch; }
+.spec-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:0.8rem; margin-bottom:1rem;
+}
+.spec{
+  background:var(--bg-raised); border-radius:5px; padding:0.9rem 1rem;
+}
+.spec .val{ font-size:1.3rem; font-weight:600; }
+.spec .lbl{ font-size:0.78rem; color:var(--ink-soft); }
+.done-list{ list-style:none; margin:0; padding:0; }
+.done-list li{
+  display:flex; gap:0.7rem; padding:0.6rem 0; border-top:1px solid var(--line);
+}
+.done-list li:first-child{ border-top:none; }
+.done-list .n{ font-weight:600; color:var(--accent); min-width:1.6rem; }
+.not-yet{
+  background:var(--bg-raised); border-left:3px solid var(--accent);
+  padding:1rem 1.2rem; border-radius:3px; margin:1rem 0 2rem;
+}
+.cta{
+  background:var(--accent); color:var(--bg); border:none; border-radius:5px;
+  padding:0.8rem 1.4rem; font-size:0.95rem; font-weight:600; cursor:pointer;
+  text-decoration:none; display:inline-block;
+}
+footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line); font-size:0.85rem; color:var(--ink-soft); }
+</style>
+
+<div class="wrap">
+  <h1>FJELL — Norwegian Micro-Cabin</h1>
+  <p class="tag">A modular 12–15m² cabin system, engineered down to real cutting files — not yet built.</p>
+
+  <div class="status-badge">Concept stage: full engineering drafted, no physical prototype built yet</div>
+
+  <h2>What it is</h2>
+  <p>A flat-pack modular cabin, roughly 4.9m × 2.5–3.0m, designed for fast assembly and Norwegian climate.
+  Standard and a road-legal (trailer-width) variant are both drafted. The engineering work is real and
+  detailed — the physical build is the part that hasn't happened yet.</p>
+
+  <div class="spec-grid">
+    <div class="spec"><div class="val">4.9 × 3.0m</div><div class="lbl">Exterior, Standard</div></div>
+    <div class="spec"><div class="val">2.7m</div><div class="lbl">Wall height</div></div>
+    <div class="spec"><div class="val">8 DXF + 9 STL</div><div class="lbl">Cutting/print files drafted</div></div>
+    <div class="spec"><div class="val">0</div><div class="lbl">Units physically built</div></div>
+  </div>
+
+  <h2>Actually done so far</h2>
+  <ul class="done-list">
+    <li><span class="n">1</span><span>Full dimensioned CAD set — wall panels, floor, roof, connectors — independently checked against the real files, not just the spec sheet</span></li>
+    <li><span class="n">2</span><span>Two build variants drafted: Standard (max space) and Road Legal (trailer-transportable, no permit)</span></li>
+    <li><span class="n">3</span><span>Interior layout: raised sleeping platform, fold-down desk, built-in storage, wood-stove heating zone</span></li>
+    <li><span class="n">4</span><span>Waterproofing and structural detailing worked through in real depth (roof membrane options, drainage, insulation values)</span></li>
+  </ul>
+
+  <div class="not-yet">
+    <strong>Not yet true, on purpose stated plainly:</strong> no unit has been physically built, no assembly
+    time has been timed, no pricing has been confirmed against real supplier quotes. Anything you've seen
+    elsewhere with a specific build time or price is a draft estimate, not a tested fact — treat it as such
+    until it says otherwise here.
+  </div>
+
+  <h2>What's actually needed next</h2>
+  <p>A first physical build — even one panel, one corner joint, cut from the real DXF files — is what turns
+  this from "thoroughly planned" into "proven." That's the honest next step, not a sales page.</p>
+
+  <a class="cta" href="mailto:pagalysm@gmail.com?subject=FJELL — interested">Get in touch about it</a>
+
+  <footer>
+    Mantas Pagalys · pagalysm@gmail.com · Nesodden, Norway
+  </footer>
+</div>
