@@ -1,6 +1,15 @@
 <title>WAK943 — Repair &amp; Independence Plan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+@view-transition { navigation: auto; }
+.scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 50;
+  transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(to right, var(--verdigris), var(--accent-soft));
+  animation: grow-scroll-progress auto linear;
+  animation-timeline: scroll(root);
+}
+@keyframes grow-scroll-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 :root{
   --bg:#0a0d10;
   --bg-raised:#12171b;
@@ -472,6 +481,7 @@ table.items td.cost{
 }
 </style>
 
+<div class="scroll-progress" aria-hidden="true"></div>
 <div class="hero">
   <canvas id="seascape" role="img" aria-label="A dark sea at dusk with one distant light on the horizon and a small sail crossing toward it"></canvas>
   <div class="hero-content">
