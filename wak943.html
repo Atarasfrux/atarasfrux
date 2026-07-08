@@ -299,9 +299,35 @@ table.items td.cost{
   color:var(--ink-soft);
   font-style:italic;
   max-width:56ch;
-  margin:0 0 1.6rem;
+  margin:0;
   padding-left:1.1rem;
   border-left:3px solid var(--verdigris);
+}
+.stations{
+  scroll-snap-type:y proximity;
+  margin-bottom:1.2rem;
+}
+.station{
+  scroll-snap-align:center;
+  display:flex;
+  align-items:center;
+  gap:1.3rem;
+  min-height:38vh;
+  padding:1.2rem 0.5rem;
+  border-top:1px solid var(--line);
+}
+.station:first-child{ border-top:none; }
+.station-num{
+  font-family:ui-monospace,monospace;
+  font-size:0.85rem;
+  color:var(--verdigris-soft);
+  flex:0 0 auto;
+  writing-mode:vertical-rl;
+  letter-spacing:0.1em;
+  opacity:0.7;
+}
+@media (max-width:600px){
+  .station{ min-height:auto; padding:1.6rem 0; }
 }
 .crossing b{color:var(--ink);font-weight:600;font-style:normal;}
 
@@ -572,19 +598,32 @@ table.items td.cost{
     markup included.</div>
   </div>
 
-  <p class="crossing">Either the boat becomes seaworthy, or it doesn't. Either the distance
-    closes, or it doesn't.</p>
-
-  <p class="crossing">The boat leaks. The deck is rotting underfoot. The mast stands on wood gone
-    soft. A father is on one side of the world. A daughter is on the other. Fix the boat. Go.
-    Come back. Same harbour, both times.</p>
-
-  <p class="crossing">Not just to arrive. To come back a different man than the one who left.</p>
-
-  <p class="crossing">A vessel, not a possession. So is the man sailing it.</p>
-
-  <p class="crossing">The crossing has to be made alone. That was never the same thing as
-    unaccompanied.</p>
+  <div class="stations">
+    <section class="station">
+      <span class="station-num">I</span>
+      <p class="crossing">Either the boat becomes seaworthy, or it doesn't. Either the distance
+        closes, or it doesn't.</p>
+    </section>
+    <section class="station">
+      <span class="station-num">II</span>
+      <p class="crossing">The boat leaks. The deck is rotting underfoot. The mast stands on wood
+        gone soft. A father is on one side of the world. A daughter is on the other. Fix the boat.
+        Go. Come back. Same harbour, both times.</p>
+    </section>
+    <section class="station">
+      <span class="station-num">III</span>
+      <p class="crossing">Not just to arrive. To come back a different man than the one who left.</p>
+    </section>
+    <section class="station">
+      <span class="station-num">IV</span>
+      <p class="crossing">A vessel, not a possession. So is the man sailing it.</p>
+    </section>
+    <section class="station">
+      <span class="station-num">V</span>
+      <p class="crossing">The crossing has to be made alone. That was never the same thing as
+        unaccompanied.</p>
+    </section>
+  </div>
 
   <div class="section-label">For anyone who wants their name attached to this</div>
   <p class="account-note">This isn't a pitch. It's what it actually costs to fix this boat,
