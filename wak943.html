@@ -1,0 +1,639 @@
+<title>WAK943 — Repair &amp; Independence Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#0a0d10;
+  --bg-raised:#12171b;
+  --ink:#d6dbdd;
+  --ink-soft:#7c8790;
+  --line:rgba(214,219,221,0.13);
+  --accent:#8a6a4a;
+  --accent-soft:#a6825d;
+  --verdigris:#4a6a62;
+  --verdigris-soft:#5f857a;
+  --chip-bg:#151b1f;
+  --tier1:#8a6a4a;
+  --tier2:#7a7255;
+  --tier3:#4a6a62;
+}
+/* Deliberately single-theme: a dark, somber palette is the point, not a default. */
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Charter,"Iowan Old Style","Georgia",serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 1.5rem 4rem;
+}
+
+.hero{
+  position:relative;
+  margin:0 calc(50% - 50vw) 2.4rem;
+  overflow:hidden;
+  min-height:min(56vh, 460px);
+  display:flex;
+  align-items:flex-end;
+}
+.hero canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:760px;
+  margin:0 auto;
+  width:100%;
+  padding:2.6rem 1.5rem 2.2rem;
+  box-sizing:border-box;
+}
+
+.masthead{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:0.5rem 1.5rem;
+  border-bottom:2px solid rgba(214,219,221,0.4);
+  padding-bottom:0.9rem;
+  margin-bottom:0.3rem;
+}
+.masthead h1{
+  font-size:1.9rem;
+  margin:0;
+  font-weight:700;
+  letter-spacing:0.01em;
+  text-wrap:balance;
+  color:#e8ebec;
+  text-shadow:0 2px 18px rgba(0,0,0,0.55);
+}
+.masthead .reg{
+  font-family:ui-monospace,"SF Mono","Cascadia Mono",monospace;
+  font-size:0.8rem;
+  letter-spacing:0.08em;
+  color:rgba(214,219,221,0.75);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.subline{
+  font-size:0.95rem;
+  color:rgba(214,219,221,0.8);
+  margin:0.6rem 0 1.9rem;
+  font-style:italic;
+  text-shadow:0 1px 10px rgba(0,0,0,0.5);
+}
+
+.status{
+  font-size:0.98rem;
+  color:#dfe3e4;
+  background:rgba(6,9,11,0.55);
+  backdrop-filter:blur(2px);
+  border-left:3px solid var(--verdigris-soft);
+  padding:0.85rem 1.1rem;
+  border-radius:2px;
+  margin-bottom:0;
+  text-shadow:0 1px 8px rgba(0,0,0,0.4);
+}
+.status b{color:var(--verdigris-soft);font-weight:600;}
+
+.section-label{
+  font-family:ui-monospace,"SF Mono","Cascadia Mono",monospace;
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:0 0 0.7rem;
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+}
+.section-label::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--line);
+}
+
+.done-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.55rem;
+  margin-bottom:2.3rem;
+}
+.chip{
+  font-family:ui-monospace,"SF Mono","Cascadia Mono",monospace;
+  font-size:0.78rem;
+  background:var(--chip-bg);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:0.4rem 0.65rem;
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  line-height:1.3;
+}
+.chip::before{content:"✓";color:var(--verdigris);font-weight:700;}
+
+.tiers{
+  display:flex;
+  flex-direction:column;
+  gap:1.7rem;
+  margin-bottom:2.2rem;
+}
+.tier{
+  position:relative;
+  padding-left:1.1rem;
+  border-left:3px solid var(--tier-color);
+}
+.tier[data-tier="1"]{--tier-color:var(--tier1);}
+.tier[data-tier="2"]{--tier-color:var(--tier2);}
+.tier[data-tier="3"]{--tier-color:var(--tier3);}
+
+.tier-head{
+  display:flex;
+  align-items:baseline;
+  gap:0.7rem;
+  margin-bottom:0.15rem;
+}
+.tier-num{
+  font-family:ui-monospace,monospace;
+  font-size:0.78rem;
+  font-weight:700;
+  color:var(--tier-color);
+  letter-spacing:0.05em;
+}
+.tier-title{
+  font-size:1.15rem;
+  font-weight:700;
+  margin:0;
+}
+.tier-note{
+  font-size:0.86rem;
+  color:var(--ink-soft);
+  margin:0 0 0.75rem;
+  font-style:italic;
+}
+
+table.items{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.92rem;
+}
+table.items th{
+  text-align:left;
+  font-family:ui-monospace,monospace;
+  font-size:0.68rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:600;
+  padding:0 0.5rem 0.4rem 0;
+  border-bottom:1px solid var(--line);
+}
+table.items td{
+  padding:0.5rem 0.5rem 0.5rem 0;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+table.items tr:last-child td{border-bottom:none;}
+table.items td.item{font-weight:600;}
+table.items td.note{color:var(--ink-soft);font-size:0.86rem;}
+table.items td.cost{
+  font-family:ui-monospace,"SF Mono","Cascadia Mono",monospace;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  text-align:right;
+  font-weight:600;
+}
+.overflow-guard{overflow-x:auto;}
+
+.totals{
+  background:var(--bg-raised);
+  border-radius:4px;
+  padding:1.1rem 1.3rem;
+  margin:1.6rem 0 2.3rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.55rem;
+}
+.totals .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+}
+.totals .row.grand{
+  border-top:1px solid var(--line);
+  padding-top:0.6rem;
+  margin-top:0.15rem;
+}
+.totals .label{font-size:0.88rem;color:var(--ink-soft);}
+.totals .grand .label{font-size:0.98rem;color:var(--ink);font-weight:600;}
+.totals .val{
+  font-family:ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+  font-weight:700;
+  white-space:nowrap;
+}
+.totals .grand .val{font-size:1.25rem;color:var(--accent);}
+.wildcard{
+  font-size:0.85rem;
+  color:var(--verdigris);
+  font-style:italic;
+}
+
+.sign{
+  border-top:1px solid var(--line);
+  padding-top:1rem;
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+.sign .name{color:var(--ink);font-weight:600;font-family:Charter,Georgia,serif;}
+
+.crossing{
+  font-size:1.02rem;
+  line-height:1.75;
+  color:var(--ink-soft);
+  font-style:italic;
+  max-width:56ch;
+  margin:0 0 1.6rem;
+  padding-left:1.1rem;
+  border-left:3px solid var(--verdigris);
+}
+.crossing b{color:var(--ink);font-weight:600;font-style:normal;}
+
+.account-note{
+  font-size:0.88rem;
+  color:var(--ink-soft);
+  margin:0 0 1.3rem;
+}
+.account-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin:0 0 0.5rem;
+}
+.account-item{
+  padding:1rem 0;
+  border-top:1px solid var(--line);
+}
+.account-item:last-child{border-bottom:1px solid var(--line);}
+.account-item .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.account-item .name{font-weight:700;font-size:1rem;}
+.account-item .price{
+  font-family:ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+  font-size:0.88rem;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.account-item .desc{
+  font-size:0.9rem;
+  color:var(--ink-soft);
+  margin:0.3rem 0 0;
+}
+
+@media (max-width:520px){
+  .masthead{flex-direction:column;align-items:flex-start;}
+  table.items{font-size:0.85rem;}
+}
+</style>
+
+<div class="hero">
+  <canvas id="seascape"></canvas>
+  <div class="hero-content">
+    <div class="masthead">
+      <h1>WAK943 — Repair &amp; Independence Plan</h1>
+      <div class="reg">Bruce Roberts 34 · Oslofjord · 9 July 2026</div>
+    </div>
+    <p class="subline">A working list of what the boat needs, in the order it needs it — costs are estimates, priorities are not.</p>
+
+    <div class="status">
+      WAK943 is <b>where I live</b>, and where the next stretch of this actually starts. Everything
+      below is what it takes to get a boat, and the life being built on it, seaworthy again.
+    </div>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <div class="section-label">Already in motion</div>
+  <div class="done-strip">
+    <span class="chip">greifiks.org — live site</span>
+    <span class="chip">FJELL LYNX 49 — business plan drafted</span>
+    <span class="chip">Solar arch mount — built free, scrap aluminium bed frame</span>
+    <span class="chip">Deck survey — photographed &amp; measurement method tested</span>
+    <span class="chip">Debt — mapped, negotiable, not urgent</span>
+    <span class="chip">greifiks.org &amp; FJELL — both built here, from nothing, alongside the legal case</span>
+  </div>
+
+  <div class="section-label">Order of the work</div>
+  <div class="tiers">
+
+    <div class="tier" data-tier="1">
+      <div class="tier-head">
+        <span class="tier-num">TIER 1</span>
+        <h3 class="tier-title">Safety-critical — before she sails anywhere</h3>
+      </div>
+      <p class="tier-note">Nothing else matters if these fail underway.</p>
+      <div class="overflow-guard">
+      <table class="items">
+        <tr><th>Item</th><th>Note</th><th>Est. cost</th></tr>
+        <tr>
+          <td class="item">Mast-step / compression post check</td>
+          <td class="note">Inspection only, unless rot is found — then folds into deck cost below</td>
+          <td class="cost">0 kr</td>
+        </tr>
+        <tr>
+          <td class="item">Deck reseal (Biltema route)</td>
+          <td class="note">Scrape, refill, recaulk, oil — materials only, own labour</td>
+          <td class="cost">≈2,500 kr</td>
+        </tr>
+        <tr>
+          <td class="item">Driveshaft alignment</td>
+          <td class="note">No confirmed NO quote yet — mechanic labour estimate</td>
+          <td class="cost">≈3,000–7,000 kr</td>
+        </tr>
+        <tr>
+          <td class="item">Engine restart / recommissioning</td>
+          <td class="note">Fossmech base rate for 2–4cyl diesel service, before parts</td>
+          <td class="cost">≈4,000–6,000 kr</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier" data-tier="2">
+      <div class="tier-head">
+        <span class="tier-num">TIER 2</span>
+        <h3 class="tier-title">Before next winter</h3>
+      </div>
+      <p class="tier-note">Living aboard through a Norwegian winter without this isn't realistic.</p>
+      <div class="overflow-guard">
+      <table class="items">
+        <tr><th>Item</th><th>Note</th><th>Est. cost</th></tr>
+        <tr>
+          <td class="item">Refleks diesel stove</td>
+          <td class="note">Used unit currently listed in Denmark — new Norway retail runs ≈16,000 kr</td>
+          <td class="cost">≈2,500 kr</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier" data-tier="3">
+      <div class="tier-head">
+        <span class="tier-num">TIER 3</span>
+        <h3 class="tier-title">Independence — power to actually leave the dock</h3>
+      </div>
+      <p class="tier-note">What turns "liveaboard at anchor" into "capable of the voyage."</p>
+      <div class="overflow-guard">
+      <table class="items">
+        <tr><th>Item</th><th>Note</th><th>Est. cost</th></tr>
+        <tr>
+          <td class="item">600W wind turbine</td>
+          <td class="note">New-price range shown — used units turn up regularly, likely cheaper, not priced yet</td>
+          <td class="cost">≈10,000–40,000 kr</td>
+        </tr>
+        <tr>
+          <td class="item">Battery bank expansion</td>
+          <td class="note">LiFePO4 — bought new by choice, not habit; cell safety isn't the place to buy used</td>
+          <td class="cost">≈3,800–9,000 kr</td>
+        </tr>
+        <tr>
+          <td class="item">Solar panel(s)</td>
+          <td class="note">100–200W, mount already built free — used panels are fine here, not priced yet</td>
+          <td class="cost">≈1,200–5,200 kr</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="totals">
+    <div class="row"><span class="label">Tier 1 — safety-critical</span><span class="val">≈9,500–15,500 kr</span></div>
+    <div class="row"><span class="label">Tier 2 — winter</span><span class="val">≈2,500 kr</span></div>
+    <div class="row"><span class="label">Tier 3 — independence</span><span class="val">≈15,000–54,200 kr</span></div>
+    <div class="row grand"><span class="label">Total estimate</span><span class="val">≈27,000–72,200 kr</span></div>
+    <div class="wildcard">Materials only. Labour is mine — likely all of it. No professional
+    markup included.</div>
+  </div>
+
+  <p class="crossing">The boat either becomes seaworthy or it doesn't. The distance either
+    closes or it doesn't.</p>
+
+  <p class="crossing">The boat leaks. The deck is rotting underfoot. The mast stands on wood
+    already going soft. A father is on one side of the world. A daughter is on the other. Fix the
+    boat. Go. Come back. Same harbour, both times.</p>
+
+  <p class="crossing">Not just to arrive. To come back a different man than the one who left.</p>
+
+  <p class="crossing">Not the only way there. The one with heart in it.</p>
+
+  <p class="crossing">It's a vessel, not a possession. A faster boat, same crossing, works just as
+    well. So does the man sailing it — a passenger, same as the boat.</p>
+
+  <p class="crossing">The crossing has to be made alone. That was never the same thing as
+    unaccompanied. Anyone who already knows what it is to be a passenger in their own life knows
+    the difference too — a company can mean it just as much as a person can.</p>
+
+  <div class="section-label">For anyone who wants their name attached to this</div>
+  <p class="account-note">This isn't a pitch. It's what it actually costs to fix this boat,
+    itemised above — three ways to be part of it, if any of them fit.</p>
+  <div class="account-list">
+    <div class="account-item">
+      <div class="row"><span class="name">A named repair</span><span class="price">from 2,000 kr</span></div>
+      <p class="desc">Attached to one specific item above — the deck seal, the driveshaft, the stove.</p>
+    </div>
+    <div class="account-item">
+      <div class="row"><span class="name">A mark on the hull</span><span class="price">from 8,000 kr</span></div>
+      <p class="desc">Present in every photograph made of the boat, for as long as the crossing takes.</p>
+    </div>
+    <div class="account-item">
+      <div class="row"><span class="name">Named in the account of the crossing</span><span class="price">from 20,000 kr</span></div>
+      <p class="desc">Recorded in whatever gets written or photographed when it's over.</p>
+    </div>
+  </div>
+
+  <p class="crossing" style="margin:0.4rem 0 1.6rem;">Right now this sounds like a bad bet. If it
+    works, whoever backed it early gets to have been right.</p>
+
+  <p class="account-note" style="margin-top:-0.6rem;">A clear no costs nothing. The work happens
+    either way. The deck reseal starts in the next couple of weeks — first thing that gets
+    recorded. Reply, ask first, or don't. What's given here is mine to carry, not yours to weigh.</p>
+
+  <div class="sign">
+    <span class="name">Mantas Pagalys</span>
+    <span>WAK943 · Bruce Roberts 34</span>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('seascape');
+  var hero = canvas.closest('.hero');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function size(){
+    var rect = hero.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    draw(rect.width, rect.height);
+  }
+
+  function draw(w, h){
+    ctx.clearRect(0,0,w,h);
+    var horizon = h * 0.58;
+
+    // sky: near-black to a cold, storm-grey band at the horizon
+    var sky = ctx.createLinearGradient(0,0,0,horizon);
+    sky.addColorStop(0, '#050708');
+    sky.addColorStop(0.55, '#0a1013');
+    sky.addColorStop(1, '#1c262b');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0,0,w,horizon);
+
+    // one break of light, low and off-centre — not a sunset, a single distant glow
+    var glowX = w*0.32, glowY = horizon*0.985;
+    var glow = ctx.createRadialGradient(glowX,glowY,0, glowX,glowY, w*0.32);
+    glow.addColorStop(0, 'rgba(214,190,140,0.22)');
+    glow.addColorStop(0.35, 'rgba(150,130,95,0.10)');
+    glow.addColorStop(1, 'rgba(150,130,95,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0,0,w,horizon);
+
+    // distant, low shoreline silhouette, just above the horizon
+    ctx.fillStyle = 'rgba(10,14,16,0.9)';
+    ctx.beginPath();
+    ctx.moveTo(0, horizon);
+    var pts = [[0,0.985],[0.12,0.965],[0.22,0.978],[0.34,0.955],[0.48,0.975],
+               [0.62,0.96],[0.74,0.98],[0.86,0.965],[1,0.978]];
+    for (var i=0;i<pts.length;i++){
+      ctx.lineTo(w*pts[i][0], horizon*pts[i][1]);
+    }
+    ctx.lineTo(w, horizon);
+    ctx.closePath();
+    ctx.fill();
+
+    // sea below the horizon
+    var sea = ctx.createLinearGradient(0,horizon,0,h);
+    sea.addColorStop(0, '#141c1f');
+    sea.addColorStop(1, '#030505');
+    ctx.fillStyle = sea;
+    ctx.fillRect(0,horizon,w,h-horizon);
+
+    // layered swell bands, each a soft wave-shaped fill, darkening toward the foreground
+    var bands = [
+      {y:0.62, amp:0.010, alpha:0.30, tone:'70,88,90'},
+      {y:0.72, amp:0.016, alpha:0.32, tone:'40,56,58'},
+      {y:0.84, amp:0.022, alpha:0.40, tone:'18,28,30'},
+      {y:0.97, amp:0.026, alpha:0.55, tone:'6,10,11'}
+    ];
+    bands.forEach(function(b, idx){
+      var baseY = h*b.y;
+      ctx.beginPath();
+      ctx.moveTo(0, baseY);
+      var steps = 7;
+      for (var s=0; s<=steps; s++){
+        var x = w * (s/steps);
+        var phase = idx*1.3 + s*0.9;
+        var y = baseY + Math.sin(phase) * h*b.amp;
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(w,h);
+      ctx.lineTo(0,h);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba('+b.tone+','+b.alpha+')';
+      ctx.fill();
+    });
+
+    // reflection of the glow on the water, leading the eye toward the sail
+    var reflect = ctx.createLinearGradient(0, horizon, 0, h);
+    reflect.addColorStop(0, 'rgba(200,178,132,0.16)');
+    reflect.addColorStop(1, 'rgba(200,178,132,0)');
+    ctx.save();
+    ctx.translate(glowX, 0);
+    ctx.scale(1, 1);
+    ctx.fillStyle = reflect;
+    ctx.beginPath();
+    ctx.moveTo(-w*0.05, horizon);
+    ctx.lineTo(w*0.05, horizon);
+    ctx.lineTo(w*0.16, h);
+    ctx.lineTo(-w*0.16, h);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // a small, distant sail, angled between the glow and the dark — cutting toward it
+    var sx = w*0.44, sy = horizon - 2;
+    ctx.strokeStyle = 'rgba(120,130,132,0.8)';
+    ctx.lineWidth = Math.max(1, w*0.0011);
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(sx, sy - h*0.085);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(sx, sy - h*0.08);
+    ctx.lineTo(sx + w*0.018, sy - h*0.012);
+    ctx.lineTo(sx, sy - h*0.01);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(150,158,158,0.55)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(sx, sy - h*0.075);
+    ctx.lineTo(sx - w*0.013, sy - h*0.015);
+    ctx.lineTo(sx, sy - h*0.01);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(120,128,128,0.4)';
+    ctx.fill();
+
+    // faint wind streaks, low opacity, upper-left to lower-right
+    ctx.strokeStyle = 'rgba(180,190,190,0.05)';
+    ctx.lineWidth = 1;
+    for (var wi=0; wi<5; wi++){
+      var wy = h*0.08 + wi*h*0.055;
+      ctx.beginPath();
+      ctx.moveTo(w*0.05 + wi*22, wy);
+      ctx.lineTo(w*0.05 + wi*22 + w*0.14, wy + h*0.03);
+      ctx.stroke();
+    }
+
+    // vignette so the content in front stays readable
+    var vg = ctx.createLinearGradient(0,0,0,h);
+    vg.addColorStop(0,'rgba(0,0,0,0.35)');
+    vg.addColorStop(0.45,'rgba(0,0,0,0.08)');
+    vg.addColorStop(1,'rgba(0,0,0,0.5)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0,0,w,h);
+  }
+
+  size();
+  window.addEventListener('resize', size);
+})();
+</script>
