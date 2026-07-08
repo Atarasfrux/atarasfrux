@@ -85,6 +85,34 @@ body{
   text-transform:uppercase;
   white-space:nowrap;
 }
+.lang-switch{
+  display:flex;
+  gap:0.5rem;
+  margin:0.7rem 0 0.3rem;
+}
+.lang-btn{
+  background:rgba(6,9,11,0.5);
+  border:1px solid rgba(214,219,221,0.25);
+  color:rgba(214,219,221,0.75);
+  border-radius:3px;
+  padding:0.3rem 0.65rem;
+  font-size:0.78rem;
+  font-family:ui-monospace,monospace;
+  cursor:pointer;
+}
+.lang-btn:hover{ color:#e8ebec; border-color:rgba(214,219,221,0.5); }
+.lang-btn.active{
+  background:var(--verdigris);
+  color:#0a0d0c;
+  border-color:var(--verdigris);
+  font-weight:600;
+}
+.lang-btn:focus-visible, .bottle-btn:focus-visible, .account-item a:focus-visible,
+.message-form input:focus-visible, .message-form textarea:focus-visible, .message-form button:focus-visible{
+  outline:2px solid var(--verdigris-soft);
+  outline-offset:2px;
+}
+
 .subline{
   font-size:0.95rem;
   color:rgba(214,219,221,0.8);
@@ -419,16 +447,16 @@ table.items td.cost{
 </style>
 
 <div class="hero">
-  <canvas id="seascape"></canvas>
+  <canvas id="seascape" role="img" aria-label="A dark sea at dusk with one distant light on the horizon and a small sail crossing toward it"></canvas>
   <div class="hero-content">
     <div class="masthead">
       <h1>WAK943 — Repair &amp; Independence Plan</h1>
       <div class="reg">Bruce Roberts 34 · Oslofjord · 9 July 2026</div>
     </div>
     <div class="lang-switch" role="group" aria-label="Language">
-      <button class="lang-btn active" data-lang="en" type="button">EN</button>
-      <button class="lang-btn" data-lang="no" type="button">NO</button>
-      <button class="lang-btn" data-lang="lt" type="button">LT</button>
+      <button class="lang-btn active" data-lang="en" type="button" aria-pressed="true" lang="en">English</button>
+      <button class="lang-btn" data-lang="no" type="button" aria-pressed="false" lang="no">Norsk</button>
+      <button class="lang-btn" data-lang="lt" type="button" aria-pressed="false" lang="lt">Lietuvių</button>
     </div>
     <p class="subline" data-i18n="subline">A working list of what the boat needs, in the order it needs it — costs are estimates, priorities are not.</p>
 
