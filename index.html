@@ -48,8 +48,8 @@
   @font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/playfair-600.woff2') format('woff2'); }
 
   :root {
-    --bg: #0c0d0e; --bg-raised: #15171a; --ink: #e9e9e7; --ink-dim: #9b9d9f;
-    --line: #2d3033; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0;
+    --bg: #0d100d; --bg-raised: #283420; --ink: #e8ebe4; --ink-dim: #9aa392;
+    --line: #34432a; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0;
     --focus: #d9ab6e;
     --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --space-6: 3rem; --space-8: 4rem;
     --container: 1200px;
@@ -59,7 +59,7 @@
   @media (prefers-color-scheme: light) {
     :root { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
   }
-  :root[data-theme="dark"]  { --bg: #0c0d0e; --bg-raised: #15171a; --ink: #e9e9e7; --ink-dim: #9b9d9f; --line: #2d3033; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0; }
+  :root[data-theme="dark"]  { --bg: #0d100d; --bg-raised: #283420; --ink: #e8ebe4; --ink-dim: #9aa392; --line: #34432a; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0; }
   :root[data-theme="light"] { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
 
   * { box-sizing: border-box; }
@@ -68,7 +68,7 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   }
-  body { margin: 0; background: #0c0d0e; color: #e9e9e7; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
+  body { margin: 0; background: #0d100d; color: #e8ebe4; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; margin: 0; }
   a { color: var(--accent); }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
@@ -163,14 +163,26 @@
 
   .workshop {
     margin-top: var(--space-3); border-radius: 10px; border: 1px solid var(--line);
-    padding: var(--space-3) var(--space-2) 0;
+    padding: var(--space-4) var(--space-3);
     background-color: var(--bg-raised);
-    background-image: radial-gradient(circle, var(--line) 1px, transparent 1.4px);
-    background-size: 22px 22px;
   }
   .workshop-board { width: 100%; height: auto; display: block; }
-  .workshop .hook { stroke: var(--ink-dim); stroke-width: 1.1; fill: none; opacity: 0.7; }
-  .workshop .tool-static { stroke: var(--ink-dim); stroke-width: 1.3; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
+  .workshop .peg-hole { fill: var(--bg); opacity: 0.5; }
+  .workshop .hook { stroke: var(--ink-dim); stroke-width: 1.4; fill: none; opacity: 0.8; }
+  .workshop .tool { cursor: pointer; }
+  .workshop .tool-shape { transition: filter 0.2s ease, transform 0.2s ease; transform-box: fill-box; transform-origin: 50% 0%; }
+  .workshop .tool:hover .tool-shape { filter: brightness(1.15); }
+  .workshop .tool.selected .tool-shape { filter: brightness(1.3); transform: rotate(-4deg); }
+  .workshop .tool-label {
+    font-family: var(--font-body); font-size: 13px; fill: var(--ink-dim);
+    text-anchor: middle; opacity: 0; transition: opacity 0.2s ease;
+  }
+  .workshop .tool.selected .tool-label, .workshop .tool:hover .tool-label { opacity: 1; fill: var(--accent); }
+  .workshop-caption {
+    margin-top: var(--space-2); font-size: 0.88rem; color: var(--ink-dim);
+    min-height: 1.4em;
+  }
+  .workshop-caption strong { color: var(--accent); }
 
   .cta-band { background: var(--accent-dim); color: var(--accent-ink); border-radius: 16px; padding: var(--space-6) var(--space-4); text-align: center; margin-block: var(--space-6); }
   .cta-band p { margin: 0 0 var(--space-1); }
@@ -271,39 +283,67 @@
     </div>
 
     <div class="workshop">
-      <svg class="workshop-board" viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tidy pegboard of hand tools">
-        <g class="hook"><path d="M22,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(22,20)">
-          <line x1="6" y1="0" x2="6" y2="34"/>
-          <path d="M-2,34 h16 l-3,8 h-10 z"/>
+      <svg class="workshop-board" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pegboard of hand tools — select one">
+        <defs>
+          <linearGradient id="toolGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--focus)"/>
+            <stop offset="100%" stop-color="var(--accent-dim)"/>
+          </linearGradient>
+        </defs>
+        <g class="peg-holes"></g>
+
+        <g class="tool" data-name="Hammer" tabindex="0" role="button">
+          <g class="hook"><path d="M84,50 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(70,60)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="34" height="26" rx="4"/>
+            <polygon points="30,2 56,-16 48,8 32,12"/>
+            <polygon points="30,24 56,42 48,18 32,14"/>
+            <rect x="12" y="24" width="12" height="76" rx="5"/>
+          </g>
+          <text class="tool-label" x="105" y="196">Hammer</text>
         </g>
 
-        <g class="hook"><path d="M76,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(76,20)">
-          <circle cx="6" cy="10" r="7"/>
-          <circle cx="6" cy="10" r="2.4"/>
-          <line x1="6" y1="17" x2="6" y2="40"/>
+        <g class="tool" data-name="Wrench" tabindex="0" role="button">
+          <g class="hook"><path d="M244,40 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(236,40)" fill="url(#toolGrad)">
+            <path fill-rule="evenodd" d="M14,0 A14,14 0 1 1 13.9,0 Z M14,7 A7,7 0 1 0 14.1,7 Z"/>
+            <rect x="9" y="12" width="10" height="70"/>
+            <path fill-rule="evenodd" d="M14,82 A14,14 0 1 1 13.9,82 Z M14,89 A7,7 0 1 0 14.1,89 Z"/>
+          </g>
+          <text class="tool-label" x="250" y="196">Wrench</text>
         </g>
 
-        <g class="hook"><path d="M130,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(130,20)">
-          <line x1="6" y1="0" x2="6" y2="30"/>
-          <rect x="-6" y="-8" width="24" height="9" rx="2"/>
+        <g class="tool" data-name="Screwdriver" tabindex="0" role="button">
+          <g class="hook"><path d="M424,40 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(418,40)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="24" height="34" rx="6"/>
+            <rect x="8" y="32" width="8" height="60"/>
+          </g>
+          <text class="tool-label" x="430" y="196">Screwdriver</text>
         </g>
 
-        <g class="hook"><path d="M186,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(186,20)">
-          <line x1="6" y1="0" x2="6" y2="26"/>
-          <path d="M6,26 L34,44 L28,50 L6,32 Z"/>
+        <g class="tool" data-name="Saw" tabindex="0" role="button">
+          <g class="hook"><path d="M574,52 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(548,60)" fill="url(#toolGrad)">
+            <path d="M0,50 Q0,10 60,0 L150,20 L145,32 L58,16 Q20,22 14,52 Q12,60 4,60 Q0,58 0,50 Z"/>
+            <path d="M20,50 L28,58 L36,50 L44,58 L52,50 L60,58 L68,50 L76,58 L84,50 L92,58 L100,50 L108,58 L116,50 L124,58 L132,50 L140,52 L138,60 L20,60 Z"/>
+          </g>
+          <text class="tool-label" x="625" y="196">Saw</text>
         </g>
 
-        <g class="hook"><path d="M232,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(232,20)">
-          <rect x="-4" y="0" width="20" height="20" rx="3"/>
-          <path d="M6,20 v14"/>
-          <rect x="2" y="30" width="8" height="5"/>
+        <g class="tool" data-name="Level" tabindex="0" role="button">
+          <g class="hook"><path d="M804,84 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(755,90)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="110" height="20" rx="4"/>
+            <circle cx="30" cy="10" r="7" fill="var(--bg-raised)"/>
+            <circle cx="30" cy="10" r="4" fill="none" stroke="url(#toolGrad)" stroke-width="1.5"/>
+            <circle cx="80" cy="10" r="7" fill="var(--bg-raised)"/>
+            <circle cx="80" cy="10" r="4" fill="none" stroke="url(#toolGrad)" stroke-width="1.5"/>
+          </g>
+          <text class="tool-label" x="810" y="196">Spirit level</text>
         </g>
       </svg>
+      <p class="workshop-caption" id="workshopCaption">Select a tool.</p>
     </div>
   </section>
 
@@ -497,6 +537,44 @@
     });
   }
 
+  var pegHoles = document.querySelector('.workshop .peg-holes');
+  if (pegHoles) {
+    var rows = [16, 50, 84, 118, 152, 186];
+    for (var col = 20; col < 900; col += 28) {
+      rows.forEach(function (row) {
+        var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('class', 'peg-hole');
+        c.setAttribute('cx', col);
+        c.setAttribute('cy', row);
+        c.setAttribute('r', 1.4);
+        pegHoles.appendChild(c);
+      });
+    }
+  }
+
+  var toolCaptions = {
+    Hammer: 'For framing, decking, and the fixes that need a solid hit.',
+    Wrench: 'Plumbing fittings, hardware, anything that needs turning.',
+    Screwdriver: 'Doors, windows, cabinet hardware — the most-used tool in the bag.',
+    Saw: 'Trim, flooring, deck boards cut to size.',
+    'Spirit level': 'Nothing gets hung or built without checking this first.'
+  };
+  var caption = document.getElementById('workshopCaption');
+  var tools = document.querySelectorAll('.workshop .tool');
+  if (caption && tools.length) {
+    tools.forEach(function (tool) {
+      function select() {
+        tools.forEach(function (t) { t.classList.remove('selected'); });
+        tool.classList.add('selected');
+        var name = tool.getAttribute('data-name');
+        caption.innerHTML = '<strong>' + name + '.</strong> ' + toolCaptions[name];
+      }
+      tool.addEventListener('click', select);
+      tool.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+      });
+    });
+  }
 })();
 </script>
 <script>
