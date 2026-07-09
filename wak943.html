@@ -75,6 +75,9 @@ body{
   box-sizing:border-box;
 }
 
+.site-back{ display:inline-block; font-size:0.8rem; color:var(--ink-soft); text-decoration:none; margin-bottom:1rem; }
+.site-back:hover{ color:var(--accent-soft); }
+.site-back::before{ content:"← "; }
 .masthead{
   display:flex;
   justify-content:space-between;
@@ -507,6 +510,7 @@ table.items td.cost{
 <div class="hero">
   <canvas id="seascape" role="img" aria-label="A dark sea at dusk with one distant light on the horizon and a small sail crossing toward it"></canvas>
   <div class="hero-content">
+    <a class="site-back" href="/">greifiks.org</a>
     <div class="masthead">
       <h1>WAK943 — The Cost of Getting There</h1>
       <div class="reg">Bruce Roberts 34 · Oslofjord · 9 July 2026</div>
@@ -771,6 +775,8 @@ table.items td.cost{
   <div class="sign">
     <span class="name">Mantas Pagalys</span>
     <span>WAK943 · Bruce Roberts 34</span>
+    <span><a href="/" style="color:var(--verdigris-soft);">greifiks.org</a></span>
+    <span><a href="/fjell-status.html" style="color:var(--verdigris-soft);">FJELL</a></span>
     <span><a href="/log.html" style="color:var(--verdigris-soft);">Log →</a></span>
   </div>
 
