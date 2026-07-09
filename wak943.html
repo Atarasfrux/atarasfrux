@@ -38,7 +38,7 @@
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
 body{
-  background:linear-gradient(to bottom, #0d1a24 0%, #081420 18%, #050d16 42%, #02060a 68%, #000000 100%);
+  background:linear-gradient(to bottom, #0d1a24 0, #0a1620 40vh, #02060c 58vh, #01040a 110vh, #000509 200vh, #000000 340vh);
   color:var(--ink);
   font-family:Charter,"Iowan Old Style","Georgia",serif;
   line-height:1.5;
@@ -403,70 +403,74 @@ table.items td.cost{
   position:absolute;
   left:0; right:0; bottom:0;
   width:100%; height:auto;
-  opacity:0.5;
+  opacity:0.85;
   pointer-events:none;
   z-index:0;
 }
-.island-scene .sand{ fill:var(--accent-soft); opacity:0.28; }
-.island-scene .palm{ stroke:var(--verdigris-soft); stroke-width:1.4; fill:none; opacity:0.6; }
-.island-scene .figure{
-  fill:var(--ink-soft);
-  opacity:0.6;
-  transform-origin:6px 46px;
-  animation:castaway-idle 7s ease-in-out infinite;
+.island-scene .sand{ fill:var(--accent-soft); opacity:0.4; }
+.island-scene .palm{ stroke:var(--verdigris-soft); stroke-width:1.6; fill:none; opacity:0.75; }
+.island-scene .figure-rest,
+.island-scene .figure-alert{
+  fill:#c3cbd1;
+  transition:opacity 1.1s ease, transform 1.1s ease;
 }
-.island-scene .figure .arm-scratch{
-  transform-origin:12px -4px;
-  animation:castaway-scratch 7s ease-in-out infinite;
+.island-scene .figure-rest{
+  transform:translate(148px,24px) scale(0.48) translateY(0);
+  opacity:1;
 }
-@keyframes castaway-idle{
-  0%, 45%, 100% { transform:translate(148px,37px) scale(0.35) rotate(0deg); }
-  55%           { transform:translate(148px,37px) scale(0.35) rotate(-2.5deg); }
-  70%           { transform:translate(148px,37px) scale(0.35) rotate(-1deg); }
-  85%           { transform:translate(148px,37px) scale(0.35) rotate(0deg); }
+.island-scene .figure-alert{
+  transform:translate(148px,24px) scale(0.48) translateY(6px);
+  opacity:0;
 }
-@keyframes castaway-scratch{
-  0%, 45%, 100% { transform:rotate(-70deg); }
-  55%           { transform:rotate(-56deg); }
-  65%           { transform:rotate(-72deg); }
-  75%           { transform:rotate(-58deg); }
-  85%           { transform:rotate(-70deg); }
+.island-scene.reacting .figure-rest{
+  opacity:0;
+  transform:translate(148px,24px) scale(0.48) translateY(6px);
+}
+.island-scene.reacting .figure-alert{
+  opacity:1;
+  transform:translate(148px,24px) scale(0.48) translateY(0);
 }
 @media (prefers-reduced-motion: reduce){
-  .island-scene .figure{ animation:none; transform:translate(148px,37px) scale(0.35); }
-  .island-scene .figure .arm-scratch{ animation:none; transform:rotate(-70deg); }
+  .island-scene .figure-rest,
+  .island-scene .figure-alert{ transition:none; }
 }
 .island-scene .sos{ font-family:ui-monospace,monospace; font-size:5px; letter-spacing:1.5px; fill:var(--ink-soft); opacity:0.4; }
 
 .whale-deep{
   position:relative;
-  margin:2.8rem calc(50% - 50vw) 3.2rem;
-  height:26vh;
-  min-height:170px;
-  max-height:260px;
+  margin:2.6rem calc(50% - 50vw) 2.8rem;
+  height:30vh;
+  min-height:190px;
+  max-height:300px;
   overflow:hidden;
   pointer-events:none;
 }
-.whale-deep svg{
+.whale-track{
   position:absolute;
   top:50%;
   left:0;
-  width:340px;
-  height:auto;
-  opacity:0.5;
-  transform:translateY(-50%) translateX(-100%);
-  animation:whale-drift 70s ease-in-out infinite;
+  width:640px;
+  filter:blur(3px);
+  animation:whale-swim 58s ease-in-out infinite;
 }
-.whale-deep path{ fill:#000; opacity:0.5; }
-@keyframes whale-drift{
-  0%   { transform:translateY(-50%) translateX(-120%) scaleX(1); }
-  48%  { transform:translateY(-50%) translateX(115vw) scaleX(1); }
-  50%  { transform:translateY(-50%) translateX(115vw) scaleX(-1); }
-  98%  { transform:translateY(-50%) translateX(-120%) scaleX(-1); }
-  100% { transform:translateY(-50%) translateX(-120%) scaleX(1); }
+.whale-body{
+  display:block;
+  width:100%;
+  height:auto;
+  opacity:0.4;
+  transform:scaleX(-1); /* source path's head sits at low-x; mirror once so it leads the rightward swim */
+}
+.whale-body path{ fill:#000; }
+@keyframes whale-swim{
+  0%   { transform:translateY(-30%) translateX(-130%); opacity:0; }
+  10%  { transform:translateY(-50%) translateX(-15%);  opacity:1; }
+  50%  { transform:translateY(-52%) translateX(70vw);  opacity:1; }
+  88%  { transform:translateY(-50%) translateX(128vw); opacity:1; }
+  100% { transform:translateY(-32%) translateX(146vw); opacity:0; }
 }
 @media (prefers-reduced-motion: reduce){
-  .whale-deep svg{ animation:none; left:30%; transform:translateY(-50%); }
+  .whale-track{ animation:none; left:30%; top:50%; transform:translateY(-50%); }
+  .whale-body{ opacity:0.4; }
 }
 .bottle-shore > *:not(.island-scene){ position:relative; z-index:1; }
 .bottle-btn{
@@ -707,20 +711,22 @@ table.items td.cost{
     </section>
 
     <div class="whale-deep" aria-hidden="true">
-      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-        <path d="
-          M20,100
-          C40,70 90,55 150,58
-          C220,62 280,75 340,80
-          C380,83 410,78 430,65
-          C440,80 435,95 420,100
-          C440,102 452,110 448,120
-          C430,118 415,112 408,102
-          C370,110 320,112 270,108
-          C200,102 120,108 60,120
-          C40,124 22,116 20,100 Z"/>
-        <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z"/>
-      </svg>
+      <div class="whale-track">
+        <svg class="whale-body" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="
+            M20,100
+            C40,70 90,55 150,58
+            C220,62 280,75 340,80
+            C380,83 410,78 430,65
+            C440,80 435,95 420,100
+            C440,102 452,110 448,120
+            C430,118 415,112 408,102
+            C370,110 320,112 270,108
+            C200,102 120,108 60,120
+            C40,124 22,116 20,100 Z"/>
+          <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z"/>
+        </svg>
+      </div>
     </div>
 
     <section class="station">
@@ -764,7 +770,7 @@ table.items td.cost{
   <p class="account-note" data-i18n="bottle_intro">A bottle.</p>
 
   <div class="bottle-shore">
-    <svg class="island-scene" viewBox="0 0 300 90" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <svg class="island-scene" id="islandScene" viewBox="0 0 300 90" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <path class="sand" d="M0,90 L0,68 Q60,52 140,60 Q210,66 300,50 L300,90 Z"/>
       <g class="palm">
         <path d="M78,62 C76,48 80,34 84,22"/>
@@ -773,13 +779,23 @@ table.items td.cost{
         <path d="M84,22 C90,12 98,10 108,12"/>
         <path d="M84,22 C92,16 100,16 108,20"/>
       </g>
-      <g class="figure">
-        <ellipse cx="6" cy="42" rx="15" ry="9" transform="rotate(-25 6 42)"/>
-        <ellipse cx="16" cy="54" rx="7" ry="15" transform="rotate(15 16 54)"/>
-        <ellipse cx="-2" cy="18" rx="14" ry="20"/>
-        <circle cx="-2" cy="-10" r="10"/>
-        <ellipse cx="10" cy="10" rx="6" ry="14" transform="rotate(45 10 10)"/>
-        <ellipse class="arm-scratch" cx="12" cy="-4" rx="5" ry="12"/>
+      <g class="figure-rest">
+        <ellipse cx="6" cy="44" rx="13" ry="8" transform="rotate(-25 6 44)"/>
+        <ellipse cx="17" cy="58" rx="6" ry="17" transform="rotate(15 17 58)"/>
+        <ellipse cx="-2" cy="15" rx="10" ry="24"/>
+        <circle cx="-2" cy="-14" r="9"/>
+        <path d="M-10,-19 L-14,-30 L-7,-23 L-9,-36 L-2,-24 L1,-38 L5,-23 L10,-33 L8,-20 L13,-25 L10,-15 Q-1,-24 -10,-19 Z"/>
+        <ellipse cx="9" cy="8" rx="4" ry="13" transform="rotate(45 9 8)"/>
+        <ellipse cx="11" cy="-6" rx="3.3" ry="11" transform="rotate(-70 11 -6)"/>
+      </g>
+      <g class="figure-alert">
+        <ellipse cx="1" cy="50" rx="8" ry="27"/>
+        <ellipse cx="0" cy="5" rx="9" ry="22"/>
+        <circle cx="0" cy="-24" r="9"/>
+        <path d="M-8,-29 L-12,-40 L-5,-33 L-7,-46 L0,-34 L3,-48 L7,-33 L12,-43 L10,-30 L15,-35 L12,-25 Q1,-34 -8,-29 Z"/>
+        <ellipse cx="-9" cy="10" rx="3.5" ry="14" transform="rotate(10 -9 10)"/>
+        <ellipse cx="10" cy="-6" rx="4" ry="12" transform="rotate(70 10 -6)"/>
+        <ellipse cx="6" cy="-20" rx="3.3" ry="10" transform="rotate(-160 6 -20)"/>
       </g>
       <text class="sos" x="164" y="72">S O S</text>
     </svg>
@@ -855,7 +871,7 @@ table.items td.cost{
     <span>WAK943 · Bruce Roberts 34</span>
     <span><a href="/" style="color:var(--verdigris-soft);">greifiks.org</a></span>
     <span><a href="/fjell-status.html" style="color:var(--verdigris-soft);">FJELL</a></span>
-    <span><a href="/log.html" style="color:var(--verdigris-soft);">Log →</a></span>
+    <span><a href="/log.html" style="color:var(--verdigris-soft);">The Sea Keeps Giving →</a></span>
   </div>
 
 </div>
@@ -999,27 +1015,27 @@ table.items td.cost{
     ctx.fill();
     ctx.restore();
 
-    // a small, distant sail, angled between the glow and the dark — cutting toward it
+    // a distant sail, angled between the glow and the dark — cutting toward it
     var sx = w*0.44, sy = horizon - 2;
-    ctx.strokeStyle = 'rgba(120,130,132,0.8)';
-    ctx.lineWidth = Math.max(1, w*0.0011);
+    ctx.strokeStyle = 'rgba(130,140,142,0.9)';
+    ctx.lineWidth = Math.max(1.2, w*0.0015);
     ctx.beginPath();
     ctx.moveTo(sx, sy);
-    ctx.lineTo(sx, sy - h*0.085);
+    ctx.lineTo(sx, sy - h*0.135);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(sx, sy - h*0.08);
-    ctx.lineTo(sx + w*0.018, sy - h*0.012);
-    ctx.lineTo(sx, sy - h*0.01);
+    ctx.moveTo(sx, sy - h*0.128);
+    ctx.lineTo(sx + w*0.032, sy - h*0.02);
+    ctx.lineTo(sx, sy - h*0.018);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(150,158,158,0.55)';
+    ctx.fillStyle = 'rgba(160,168,168,0.68)';
     ctx.fill();
     ctx.beginPath();
-    ctx.moveTo(sx, sy - h*0.075);
-    ctx.lineTo(sx - w*0.013, sy - h*0.015);
-    ctx.lineTo(sx, sy - h*0.01);
+    ctx.moveTo(sx, sy - h*0.118);
+    ctx.lineTo(sx - w*0.022, sy - h*0.022);
+    ctx.lineTo(sx, sy - h*0.018);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(120,128,128,0.4)';
+    ctx.fillStyle = 'rgba(128,136,136,0.52)';
     ctx.fill();
 
     // faint wind streaks, low opacity, upper-left to lower-right
@@ -1058,6 +1074,8 @@ table.items td.cost{
   var btn = document.getElementById('bottleBtn');
   var form = document.getElementById('bottleForm');
   var hint = btn.querySelector('.bottle-hint');
+  var island = document.getElementById('islandScene');
+  var reactTimer = null;
   btn.addEventListener('click', function(){
     var open = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!open));
@@ -1068,6 +1086,11 @@ table.items td.cost{
       form.hidden = false;
       hint.textContent = 'Cork’s out';
       form.querySelector('input').focus();
+      if (island) {
+        clearTimeout(reactTimer);
+        island.classList.add('reacting');
+        reactTimer = setTimeout(function(){ island.classList.remove('reacting'); }, 2600);
+      }
     }
   });
 
