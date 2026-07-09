@@ -1,0 +1,141 @@
+<title>Log — WAK943</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Selected fragments, kept close to the source.">
+<style>
+@view-transition { navigation: auto; }
+.scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 50;
+  transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(to right, var(--verdigris), var(--accent-soft));
+  animation: grow-scroll-progress auto linear;
+  animation-timeline: scroll(root);
+}
+@keyframes grow-scroll-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+:root{
+  --bg:#0a0d10;
+  --bg-raised:#12171b;
+  --ink:#d6dbdd;
+  --ink-soft:#7c8790;
+  --ink-faint:#525b61;
+  --line:rgba(214,219,221,0.13);
+  --accent:#8a6a4a;
+  --accent-soft:#a6825d;
+  --verdigris:#4a6a62;
+  --verdigris-soft:#5f857a;
+}
+/* Deliberately single-theme, matching WAK943 — a dark, somber palette is the point. */
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Charter,"Iowan Old Style","Georgia",serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+}
+::selection{ background:var(--verdigris); color:#0a0d10; }
+:focus-visible{ outline:2px solid var(--verdigris-soft); outline-offset:3px; }
+
+.sheet{ max-width:640px; margin:0 auto; padding:4.5rem 1.5rem 6rem; }
+
+.back{
+  display:inline-block; font-size:0.82rem; color:var(--ink-soft); text-decoration:none;
+  margin-bottom:2.5rem; letter-spacing:0.01em;
+}
+.back:hover{ color:var(--accent-soft); }
+.back::before{ content:"← "; }
+
+.masthead h1{
+  font-family:Charter,"Iowan Old Style","Georgia",serif; font-weight:400; font-style:italic;
+  font-size:1.9rem; margin:0 0 0.6rem; color:var(--ink); letter-spacing:0.01em;
+}
+.masthead .note{
+  font-size:0.92rem; color:var(--ink-soft); max-width:46ch; margin:0 0 3.5rem; line-height:1.65;
+}
+.masthead .note em{ color:var(--accent-soft); font-style:normal; }
+
+.piece{
+  padding-block:2.6rem;
+  border-top:1px solid var(--line);
+}
+.piece:first-of-type{ border-top:1px solid var(--line); }
+
+.piece .original{
+  font-style:italic; color:var(--ink-faint); font-size:0.95rem; line-height:1.7;
+  margin:0 0 1.1rem; max-width:52ch;
+}
+.piece .original::before{ content:"“"; }
+.piece .original::after{ content:"”"; }
+
+.piece .rendered{
+  font-size:1.18rem; line-height:1.65; color:var(--ink); margin:0; max-width:52ch;
+  font-weight:400;
+}
+
+.colophon{
+  margin-top:4rem; padding-top:2rem; border-top:1px solid var(--line);
+  font-size:0.82rem; color:var(--ink-faint); line-height:1.7; max-width:50ch;
+}
+.colophon a{ color:var(--accent-soft); }
+</style>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<div class="sheet">
+  <a class="back" href="/wak943.html">WAK943</a>
+
+  <div class="masthead">
+    <h1>Log</h1>
+    <p class="note">Lithuanian, mostly. Cut down from a much longer private record — <em>each piece exactly as far as the edit needed to go, no further.</em> Original beside the rendering, not instead of it.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">Laukimas. Vaikas už aštuonių tūkstančių km. [...] dabar esu lėktuve virš atlanto vandenyno [...] jautiesi pavargęs [...] skaudantys keliai.</p>
+    <p class="rendered">Waiting. Eight thousand kilometres to my daughter. Somewhere over the Atlantic, it's not the heart that gives out first. It's the knees.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">dukra manęs klausia kur tu buvai visus tuos metus, kai tavęs nebuvo?</p>
+    <p class="rendered">My daughter asks me: where were you, all those years?</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">jis svajojo apie Magelaną, ir vandenynus, kur toli piratų sala, zorba švenčia gyvenimą.</p>
+    <p class="rendered">He dreamed of Magellan. And oceans. Some pirate island, far off, where Zorba still celebrates being alive.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">Trejetą dienų laive. Palaimingai bangų plakimas į bortus, vandenų lopšio saugumas kaip koks klajoklių princas viduryje skitų platybių. Tas privatumo nebuvimas įsigyvenantis į kaulus maudulys, kur jau nebežinai, kas tavo patyrimas.</p>
+    <p class="rendered">Three days on the boat. The waves beating against the hull, a cradle — safe as a nomad prince alone on the steppe. No privacy, a bone-deep ache that stops being an ache.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">tas atsitikimas, kur valtimi močiutė per dideles, tuo metu, atrodė, bangas lėtai bet artėjo prie kranto, iš kitos pusės, kur be jos sodybos, kitų nebuvo, kaip iš už anapus Letos Upės.</p>
+    <p class="rendered">My grandmother rowed through waves enormous at the time. She closed the distance to a shore where nothing else stood. She arrived from beyond the River Lethe.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">Paskui laivais į už Atlanto. Išdrąskė gyvenimus, tie, kas liko, pražuvo, tie kas išvažiavo, pamiršo.</p>
+    <p class="rendered">Then by ship, across the Atlantic. It tears lives apart the same way every time: the ones who stayed die of it. The ones who left forget.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">Kuo viskas baigiasi, jeigu ne tuo, kad išsilaipini krante kur apsnigtas tavo laivas. Grįžti į tą kitą pasaulį, kuriame viskas neaišku ir atsitiktinumas, nėra tavo šeimos, nėra tavo genties.</p>
+    <p class="rendered">How it ends: you step onto a shore, your boat under snow. Back in the other world — no certainty, no family, no tribe.</p>
+  </div>
+
+  <div class="piece">
+    <p class="original">Svarbu nepasiduoti ir suvokti, jog tai esu ne aš, jog tai yra mano protas, jog tai yra mano ego, kuris nenori pasiduoti, kuris priešinasi, kuris priešinasi.</p>
+    <p class="rendered">This is not me. This is my mind. This is my ego, resisting. Still resisting.</p>
+  </div>
+
+  <div class="colophon">
+    Mantas Pagalys · WAK943 · <a href="/wak943.html">back to the repair account</a>
+  </div>
+</div>
+<script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
