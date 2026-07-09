@@ -157,27 +157,6 @@
   .workshop-board { width: 100%; height: auto; display: block; }
   .workshop .hook { stroke: var(--ink-dim); stroke-width: 1.1; fill: none; opacity: 0.7; }
   .workshop .tool-static { stroke: var(--ink-dim); stroke-width: 1.3; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
-  .workshop .hammer-group { cursor: pointer; }
-  .workshop .hammer-group > g { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; transform-box: fill-box; transform-origin: 50% 0%; }
-  .workshop .hammer-group.fallen > g { animation: hammer-fall 0.5s ease-out forwards; }
-  .workshop .hammer-group.fixed > g { animation: hammer-fix 0.4s ease forwards; }
-  @keyframes hammer-fall {
-    0%   { transform: translate(0,0) rotate(0deg); }
-    100% { transform: translate(-3px,18px) rotate(-32deg); }
-  }
-  @keyframes hammer-fix {
-    0%   { transform: translate(-3px,18px) rotate(-32deg); }
-    100% { transform: translate(0,0) rotate(0deg); }
-  }
-  .workshop .bubble { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; transform: translateY(4px); }
-  .workshop .bubble.show { opacity: 1; transform: translateY(0); transition: opacity 0.3s ease, transform 0.3s ease; }
-  .workshop .bubble rect { fill: var(--bg); stroke: var(--accent); stroke-width: 1; }
-  .workshop .bubble .bubble-tail { fill: var(--bg); stroke: var(--accent); stroke-width: 1; }
-  .workshop .bubble text { font-family: var(--font-body); font-size: 7px; fill: var(--ink); }
-  .workshop .bubble .msg-fixed { display: none; }
-  .workshop .bubble.is-fixed .msg-broken { display: none; }
-  .workshop .bubble.is-fixed .msg-fixed { display: block; }
-  @media (max-width: 480px) { .workshop .bubble text { font-size: 8px; } }
 
   .cta-band { background: var(--accent-dim); color: var(--accent-ink); border-radius: 16px; padding: var(--space-6) var(--space-4); text-align: center; margin-block: var(--space-6); }
   .cta-band p { margin: 0 0 var(--space-1); }
@@ -186,8 +165,6 @@
 
   footer.site-footer { padding-block: var(--space-4) var(--space-8); font-size: 0.8rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
 
-  /* ---- decorative critter layer (unchanged behaviour, retargeted to .shell) ---- */
-  .decor { position: absolute; pointer-events: none; z-index: 0; stroke: rgba(255,255,255,0.4); fill: none; stroke-width: 1.1; }
   .sunrise {
     position: fixed; top: -20%; left: -30%; width: 60vw; height: 60vw; max-width: 700px; max-height: 700px;
     border-radius: 50%; z-index: 0; pointer-events: none;
@@ -195,42 +172,13 @@
     animation: sunrise-sweep 90s linear infinite;
   }
   @keyframes sunrise-sweep { 0% { transform: translate(0, 10vh); } 50% { transform: translate(140vw, -10vh); } 100% { transform: translate(0, 10vh); } }
-  @media (max-width: 780px) { .decor, .critter, .hose-scene, .sunflower, .sunrise { display: none !important; } }
-
-  .critter { position: absolute; stroke: rgba(255,255,255,0.55); fill: none; stroke-width: 1.3; width: 34px; height: 34px; }
-  .hose-scene { position: absolute; width: 100%; z-index: 0; pointer-events: none; }
-  .hose-path { stroke: rgba(255,255,255,0.4); fill: none; stroke-width: 1.4; stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw-hose 4s ease-out forwards; }
-  @keyframes draw-hose { to { stroke-dashoffset: 0; } }
-  .drop { fill: rgba(255,255,255,0.5); offset-path: path("M 20,40 C 60,80 40,160 90,200 S 160,260 200,300"); animation: flow 2.6s linear infinite; opacity: 0; }
-  @keyframes flow { 0% { offset-distance: 0%; opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { offset-distance: 100%; opacity: 0; } }
-  .sunflower { position: absolute; transform: scale(0); opacity: 0; animation: grow 0.9s ease-out forwards; }
-  @keyframes grow { to { transform: scale(1); opacity: 1; } }
-  .bush, .dog, .pee { opacity: 0; transition: opacity 0.5s ease, top 0.4s ease, left 0.4s ease; }
-  .bush.show, .dog.show, .pee.show { opacity: 0.9; }
-  .cat.hidden { opacity: 0; transition: opacity 0.4s ease; }
-  .cat.walking { transition: top 1.6s ease-in-out, left 1.6s ease-in-out, opacity 0.4s ease; }
-  .dog.dashing { transition: top 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.4s ease; }
-  .pee-arc { stroke-dasharray: 40; stroke-dashoffset: 40; }
-  .pee.show .pee-arc { animation: draw-pee 0.6s ease-out forwards; }
-  @keyframes draw-pee { to { stroke-dashoffset: 0; } }
+  @media (max-width: 780px) { .sunrise { display: none !important; } }
 </style>
 </head>
 <body>
 
 <div class="scroll-progress" aria-hidden="true"></div>
 <div class="sunrise"></div>
-<div class="scene" id="scene" style="position:absolute; top:0; left:0; width:100%; z-index:0; pointer-events:none;">
-<svg class="decor flower-1" viewBox="0 0 60 60" style="top:6%; left:3%; width:44px;" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="4"/><ellipse cx="30" cy="16" rx="6" ry="10"/><ellipse cx="30" cy="44" rx="6" ry="10"/><ellipse cx="16" cy="30" rx="10" ry="6"/><ellipse cx="44" cy="30" rx="10" ry="6"/><line x1="30" y1="34" x2="30" y2="58"/></svg>
-<svg class="decor tools" viewBox="0 0 60 100" style="top:34%; right:2%; width:40px;" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="5" x2="15" y2="70"/><path d="M8,10 L15,3 L22,10"/><line x1="9" y1="8" x2="9" y2="20"/><line x1="21" y1="8" x2="21" y2="20"/><line x1="42" y1="10" x2="30" y2="75"/><ellipse cx="42" cy="8" rx="7" ry="4"/></svg>
-<svg class="decor pot" viewBox="0 0 90 70" style="bottom:5%; left:5%; width:50px;" xmlns="http://www.w3.org/2000/svg"><path d="M20,40 L70,40 L62,62 L28,62 Z" transform="rotate(-18 45 50)"/><ellipse cx="45" cy="40" rx="25" ry="6" transform="rotate(-18 45 40)"/><circle cx="15" cy="55" r="3"/><circle cx="10" cy="60" r="2.2"/><circle cx="20" cy="63" r="2.6"/></svg>
-
-<svg class="critter mower" id="mower" viewBox="0 0 40 40" style="top:100px; left:0px;" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="18" width="24" height="12" rx="2"/><circle cx="12" cy="32" r="4"/><circle cx="28" cy="32" r="4"/><line x1="20" y1="18" x2="30" y2="2"/><line x1="24" y1="18" x2="34" y2="2"/><line x1="30" y1="2" x2="34" y2="2"/></svg>
-<svg class="critter cat" id="cat" viewBox="0 0 40 30" style="top:0px; left:0px;" xmlns="http://www.w3.org/2000/svg"><ellipse cx="18" cy="20" rx="14" ry="7"/><circle cx="32" cy="14" r="6"/><path d="M28,9 L26,3 L31,7 Z"/><path d="M35,8 L37,2 L32,6 Z"/><path d="M5,20 C-2,15 -2,5 5,2"/><line x1="10" y1="26" x2="10" y2="30"/><line x1="24" y1="26" x2="24" y2="30"/></svg>
-<svg class="critter bush" id="bush" viewBox="0 0 50 34" style="top:0px; left:0px; width:50px; height:34px;" xmlns="http://www.w3.org/2000/svg"><path d="M4,30 C-2,20 4,8 14,10 C16,2 30,2 32,10 C42,6 50,16 44,26 C46,32 38,34 34,30 C28,34 16,34 10,30 C6,34 2,32 4,30 Z"/></svg>
-<svg class="critter dog" id="dog" viewBox="0 0 46 30" style="top:-40px; left:0px; width:46px; height:30px;" xmlns="http://www.w3.org/2000/svg"><ellipse cx="18" cy="18" rx="15" ry="7"/><rect x="30" y="8" width="10" height="10" rx="3"/><path d="M34,8 L31,1 L37,5 Z"/><path d="M39,9 L44,4 L42,11 Z"/><path d="M3,16 C-4,10 -6,20 -1,24"/><line x1="10" y1="24" x2="10" y2="29"/><line x1="24" y1="24" x2="24" y2="29"/></svg>
-<svg class="pee" id="pee" viewBox="0 0 20 24" style="top:-40px; left:0px; width:16px; height:20px;" xmlns="http://www.w3.org/2000/svg"><path class="pee-arc" d="M2,2 C10,4 14,10 8,22" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/></svg>
-<svg class="sunflower" viewBox="0 0 20 34" style="top:180px; left:20px; animation-delay:2s; width:20px; height:34px;" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="2.2" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/><line x1="10" y1="13" x2="10" y2="32" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/></svg>
-</div>
 
 <nav class="site-nav">
   <div class="shell row">
@@ -309,33 +257,37 @@
     </div>
 
     <div class="workshop">
-      <svg class="workshop-board" viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pegboard of hand tools">
-        <g class="hook"><path d="M40,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(40,20)">
+      <svg class="workshop-board" viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tidy pegboard of hand tools">
+        <g class="hook"><path d="M22,20 q0,-6 6,-6 q6,0 6,6" /></g>
+        <g class="tool-static" transform="translate(22,20)">
           <line x1="6" y1="0" x2="6" y2="34"/>
           <path d="M-2,34 h16 l-3,8 h-10 z"/>
         </g>
 
-        <g class="hook"><path d="M206,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="tool-static" transform="translate(206,20)">
+        <g class="hook"><path d="M76,20 q0,-6 6,-6 q6,0 6,6" /></g>
+        <g class="tool-static" transform="translate(76,20)">
           <circle cx="6" cy="10" r="7"/>
           <circle cx="6" cy="10" r="2.4"/>
           <line x1="6" y1="17" x2="6" y2="40"/>
         </g>
 
-        <g class="hook"><path d="M124,20 q0,-6 6,-6 q6,0 6,6" /></g>
-        <g class="hammer-group" id="hammerGroup" tabindex="0" role="button" aria-label="Fix the fallen hammer">
-          <g transform="translate(124,20)">
-            <line x1="6" y1="0" x2="6" y2="30"/>
-            <rect x="-6" y="-8" width="24" height="9" rx="2"/>
-          </g>
+        <g class="hook"><path d="M130,20 q0,-6 6,-6 q6,0 6,6" /></g>
+        <g class="tool-static" transform="translate(130,20)">
+          <line x1="6" y1="0" x2="6" y2="30"/>
+          <rect x="-6" y="-8" width="24" height="9" rx="2"/>
         </g>
 
-        <g class="bubble" id="workshopBubble">
-          <rect x="60" y="4" width="140" height="24" rx="5"/>
-          <path d="M118,28 l6,8 l6,-8 z" class="bubble-tail"/>
-          <text class="msg-broken" x="130" y="19" text-anchor="middle" data-i18n="workshop_msg">Den løsnet.</text>
-          <text class="msg-fixed" x="130" y="19" text-anchor="middle" data-i18n="workshop_fixed">Tilbake på plass.</text>
+        <g class="hook"><path d="M186,20 q0,-6 6,-6 q6,0 6,6" /></g>
+        <g class="tool-static" transform="translate(186,20)">
+          <line x1="6" y1="0" x2="6" y2="26"/>
+          <path d="M6,26 L34,44 L28,50 L6,32 Z"/>
+        </g>
+
+        <g class="hook"><path d="M232,20 q0,-6 6,-6 q6,0 6,6" /></g>
+        <g class="tool-static" transform="translate(232,20)">
+          <rect x="-4" y="0" width="20" height="20" rx="3"/>
+          <path d="M6,20 v14"/>
+          <rect x="2" y="30" width="8" height="5"/>
         </g>
       </svg>
     </div>
@@ -525,146 +477,6 @@
     });
   }
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var hammer = document.getElementById('hammerGroup');
-  var bubble = document.getElementById('workshopBubble');
-  if (hammer && bubble) {
-    function showBroken() {
-      hammer.classList.remove('fixed');
-      hammer.classList.add('fallen');
-      bubble.classList.remove('is-fixed');
-      bubble.classList.add('show');
-    }
-    function fix() {
-      if (!hammer.classList.contains('fallen')) return;
-      hammer.classList.remove('fallen');
-      hammer.classList.add('fixed');
-      bubble.classList.add('is-fixed');
-      setTimeout(function () { bubble.classList.remove('show'); }, 1600);
-      setTimeout(function () {
-        hammer.classList.remove('fixed');
-        bubble.classList.remove('is-fixed');
-      }, 2200);
-    }
-    hammer.addEventListener('click', fix);
-    hammer.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fix(); }
-    });
-    if (!reduceMotion) {
-      setInterval(function () {
-        if (!hammer.classList.contains('fallen')) showBroken();
-      }, 14000);
-      setTimeout(showBroken, 6000);
-    }
-  }
-
-  if (reduceMotion) return;
-
-  var mower = document.getElementById('mower');
-  var cat = document.getElementById('cat');
-  var shell = document.querySelector('.hero.shell');
-  if (!mower || !shell) return;
-
-  function docHeight() { return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); }
-
-  function mowerZones() {
-    var rect = shell.getBoundingClientRect();
-    var pageW = window.innerWidth;
-    var margin = 18;
-    var zones = [];
-    if (rect.left - margin > 46) zones.push({ from: 6, to: rect.left - margin });
-    if (pageW - rect.right - margin > 46) zones.push({ from: rect.right + margin, to: pageW - 6 });
-    return zones;
-  }
-
-  var mowerState = { zoneIdx: 0, col: 0, dir: 1 };
-  function mowNext() {
-    var zones = mowerZones();
-    if (zones.length === 0) { mower.style.opacity = '0'; setTimeout(mowNext, 3000); return; }
-    mower.style.opacity = '0.9';
-    var zone = zones[mowerState.zoneIdx % zones.length];
-    var stripeWidth = 30;
-    var numStripes = Math.max(1, Math.floor((zone.to - zone.from) / stripeWidth));
-    var stripe = mowerState.col % numStripes;
-    var x = zone.from + stripe * stripeWidth + stripeWidth / 2;
-    var h = docHeight();
-    var goingDown = mowerState.dir === 1;
-    var y = goingDown ? h - 60 : 90;
-    var duration = 6 + Math.random() * 3;
-    mower.style.transition = 'top ' + duration.toFixed(1) + 's linear, left 1s ease';
-    mower.style.left = x.toFixed(0) + 'px';
-    mower.style.top = y.toFixed(0) + 'px';
-    mower.style.transform = goingDown ? 'rotate(90deg)' : 'rotate(-90deg)';
-    mowerState.col++;
-    if (mowerState.col % numStripes === 0) { mowerState.dir *= -1; if (Math.random() < 0.4) mowerState.zoneIdx++; }
-    setTimeout(mowNext, duration * 1000 + 900);
-  }
-  setTimeout(mowNext, 800);
-
-  var bush = document.getElementById('bush'), dog = document.getElementById('dog'), pee = document.getElementById('pee');
-  if (cat && bush && dog && pee) {
-    function diagonalWaypoint() {
-      var rect = shell.getBoundingClientRect();
-      var scrollY = window.scrollY || window.pageYOffset;
-      var pad = 26;
-      var corners = [
-        { top: rect.top + scrollY - pad, left: rect.left - pad - 30 },
-        { top: rect.top + scrollY - pad, left: rect.right + pad },
-        { top: rect.bottom + scrollY + pad, left: rect.left - pad - 30 },
-        { top: rect.bottom + scrollY + pad, left: rect.right + pad },
-        { top: (rect.top + rect.bottom) / 2 + scrollY, left: rect.left - pad - 30 },
-        { top: (rect.top + rect.bottom) / 2 + scrollY, left: rect.right + pad }
-      ];
-      return corners[Math.floor(Math.random() * corners.length)];
-    }
-    function sequence() {
-      var spot = diagonalWaypoint();
-      cat.classList.add('walking');
-      cat.style.transition = 'top 3.2s ease-in-out, left 3.2s ease-in-out, opacity 0.4s ease';
-      cat.classList.remove('hidden');
-      cat.style.top = spot.top + 'px'; cat.style.left = spot.left + 'px';
-      setTimeout(function () {
-        bush.style.top = (spot.top - 5) + 'px'; bush.style.left = (spot.left - 8) + 'px';
-        bush.classList.add('show');
-        setTimeout(function () {
-          cat.classList.add('hidden'); bush.classList.remove('show');
-          setTimeout(function () {
-            var w = window.innerWidth;
-            var startX = Math.random() * w;
-            dog.style.top = '-40px'; dog.style.left = startX + 'px'; dog.classList.add('show');
-            var zigzags = 5, i = 0;
-            function zigzag() {
-              if (i >= zigzags) {
-                dog.classList.add('dashing');
-                dog.style.top = (spot.top + 10) + 'px'; dog.style.left = spot.left + 'px';
-                setTimeout(function () {
-                  pee.style.top = (spot.top + 30) + 'px'; pee.style.left = (spot.left + 14) + 'px';
-                  pee.classList.add('show');
-                  setTimeout(function () {
-                    pee.classList.remove('show');
-                    var h = docHeight();
-                    dog.style.top = (Math.random() * h * 0.6 + 40) + 'px'; dog.style.left = (Math.random() * w) + 'px';
-                    setTimeout(function () {
-                      dog.classList.remove('show'); dog.classList.remove('dashing');
-                      setTimeout(sequence, 2000 + Math.random() * 2000);
-                    }, 600);
-                  }, 900);
-                }, 500);
-                return;
-              }
-              var frac = i / zigzags;
-              dog.style.top = (frac * (spot.top - 20) + 20) + 'px';
-              dog.style.left = (startX + (spot.left - startX) * frac + (i % 2 === 0 ? 40 : -40)) + 'px';
-              i++; setTimeout(zigzag, 750);
-            }
-            zigzag();
-          }, 400);
-        }, 1000);
-      }, 900);
-    }
-    setTimeout(sequence, 1500);
-  }
 })();
 </script>
 <script>
@@ -715,9 +527,7 @@
       fjell_p: "Complete build drawings (DXF/STL) for a modular 12–15m² cabin are fully drafted. What remains is the actual build step — honestly, not a finished product yet.",
       fjell_link: "See status and plans →",
       cta_line: "Get in touch for a price — depends on the scope of the job",
-      footer_line: "Prices agreed per job based on scope and time.",
-      workshop_msg: "This one slipped.",
-      workshop_fixed: "Back where it belongs."
+      footer_line: "Prices agreed per job based on scope and time."
     },
     lt: {
       nav_services: "Paslaugos",
@@ -764,9 +574,7 @@
       fjell_p: "Pilni statybos brėžiniai (DXF/STL) modulinei 12–15m² trobelei jau paruošti. Kas liko — tai faktinis statybos etapas — sąžiningai, dar ne baigtas produktas.",
       fjell_link: "Žiūrėti būklę ir planus →",
       cta_line: "Susisiekite dėl kainos — priklauso nuo darbo apimties",
-      footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką.",
-      workshop_msg: "Šis atsileido.",
-      workshop_fixed: "Vėl savo vietoje."
+      footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką."
     }
   };
 
