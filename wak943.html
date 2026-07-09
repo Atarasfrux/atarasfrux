@@ -38,7 +38,7 @@
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
 body{
-  background:var(--bg);
+  background:linear-gradient(to bottom, #0d1a24 0%, #081420 18%, #050d16 42%, #02060a 68%, #000000 100%);
   color:var(--ink);
   font-family:Charter,"Iowan Old Style","Georgia",serif;
   line-height:1.5;
@@ -393,7 +393,6 @@ table.items td.cost{
   margin:0.5rem 0 2.4rem;
   padding:2.2rem 1rem 1.4rem;
   border-radius:6px;
-  background:linear-gradient(180deg, rgba(90,110,110,0.06), rgba(60,50,40,0.10));
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -410,8 +409,65 @@ table.items td.cost{
 }
 .island-scene .sand{ fill:var(--accent-soft); opacity:0.28; }
 .island-scene .palm{ stroke:var(--verdigris-soft); stroke-width:1.4; fill:none; opacity:0.6; }
-.island-scene .figure{ stroke:var(--ink-soft); stroke-width:1.3; fill:none; opacity:0.55; }
+.island-scene .figure{
+  fill:var(--ink-soft);
+  opacity:0.6;
+  transform-origin:6px 46px;
+  animation:castaway-idle 7s ease-in-out infinite;
+}
+.island-scene .figure .arm-scratch{
+  transform-origin:12px -4px;
+  animation:castaway-scratch 7s ease-in-out infinite;
+}
+@keyframes castaway-idle{
+  0%, 45%, 100% { transform:translate(148px,37px) scale(0.35) rotate(0deg); }
+  55%           { transform:translate(148px,37px) scale(0.35) rotate(-2.5deg); }
+  70%           { transform:translate(148px,37px) scale(0.35) rotate(-1deg); }
+  85%           { transform:translate(148px,37px) scale(0.35) rotate(0deg); }
+}
+@keyframes castaway-scratch{
+  0%, 45%, 100% { transform:rotate(-70deg); }
+  55%           { transform:rotate(-56deg); }
+  65%           { transform:rotate(-72deg); }
+  75%           { transform:rotate(-58deg); }
+  85%           { transform:rotate(-70deg); }
+}
+@media (prefers-reduced-motion: reduce){
+  .island-scene .figure{ animation:none; transform:translate(148px,37px) scale(0.35); }
+  .island-scene .figure .arm-scratch{ animation:none; transform:rotate(-70deg); }
+}
 .island-scene .sos{ font-family:ui-monospace,monospace; font-size:5px; letter-spacing:1.5px; fill:var(--ink-soft); opacity:0.4; }
+
+.whale-deep{
+  position:relative;
+  margin:2.8rem calc(50% - 50vw) 3.2rem;
+  height:26vh;
+  min-height:170px;
+  max-height:260px;
+  overflow:hidden;
+  pointer-events:none;
+}
+.whale-deep svg{
+  position:absolute;
+  top:50%;
+  left:0;
+  width:340px;
+  height:auto;
+  opacity:0.5;
+  transform:translateY(-50%) translateX(-100%);
+  animation:whale-drift 70s ease-in-out infinite;
+}
+.whale-deep path{ fill:#000; opacity:0.5; }
+@keyframes whale-drift{
+  0%   { transform:translateY(-50%) translateX(-120%) scaleX(1); }
+  48%  { transform:translateY(-50%) translateX(115vw) scaleX(1); }
+  50%  { transform:translateY(-50%) translateX(115vw) scaleX(-1); }
+  98%  { transform:translateY(-50%) translateX(-120%) scaleX(-1); }
+  100% { transform:translateY(-50%) translateX(-120%) scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce){
+  .whale-deep svg{ animation:none; left:30%; transform:translateY(-50%); }
+}
 .bottle-shore > *:not(.island-scene){ position:relative; z-index:1; }
 .bottle-btn{
   background:none;
@@ -649,6 +705,24 @@ table.items td.cost{
       <span class="station-num">III</span>
       <p class="crossing" data-i18n="s3">Not just to arrive. To come back a different man than the one who left.</p>
     </section>
+
+    <div class="whale-deep" aria-hidden="true">
+      <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="
+          M20,100
+          C40,70 90,55 150,58
+          C220,62 280,75 340,80
+          C380,83 410,78 430,65
+          C440,80 435,95 420,100
+          C440,102 452,110 448,120
+          C430,118 415,112 408,102
+          C370,110 320,112 270,108
+          C200,102 120,108 60,120
+          C40,124 22,116 20,100 Z"/>
+        <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z"/>
+      </svg>
+    </div>
+
     <section class="station">
       <span class="station-num">IV</span>
       <p class="crossing" data-i18n="s4">A vessel, not a possession. So is the man sailing it.</p>
@@ -700,8 +774,12 @@ table.items td.cost{
         <path d="M84,22 C92,16 100,16 108,20"/>
       </g>
       <g class="figure">
-        <circle cx="150" cy="52" r="3.2"/>
-        <path d="M150,55.2 L150,64 M150,58 L144,62 M150,58 L156,60 M150,64 L146,70 M150,64 L154,70"/>
+        <ellipse cx="6" cy="42" rx="15" ry="9" transform="rotate(-25 6 42)"/>
+        <ellipse cx="16" cy="54" rx="7" ry="15" transform="rotate(15 16 54)"/>
+        <ellipse cx="-2" cy="18" rx="14" ry="20"/>
+        <circle cx="-2" cy="-10" r="10"/>
+        <ellipse cx="10" cy="10" rx="6" ry="14" transform="rotate(45 10 10)"/>
+        <ellipse class="arm-scratch" cx="12" cy="-4" rx="5" ry="12"/>
       </g>
       <text class="sos" x="164" y="72">S O S</text>
     </svg>
@@ -808,9 +886,9 @@ table.items td.cost{
     // sky: near-black, deep blue undertone for contrast against the gold below
     var sky = ctx.createLinearGradient(0,0,0,horizon);
     sky.addColorStop(0, '#010204');
-    sky.addColorStop(0.5, '#040a12');
-    sky.addColorStop(0.88, '#0d2230');
-    sky.addColorStop(1, '#173328');
+    sky.addColorStop(0.5, '#04101c');
+    sky.addColorStop(0.88, '#0d2c40');
+    sky.addColorStop(1, '#164358');
     ctx.fillStyle = sky;
     ctx.fillRect(0,0,w,horizon);
 
@@ -847,8 +925,8 @@ table.items td.cost{
 
     // sea below the horizon — deeper, more saturated blue for contrast against the gold glow
     var sea = ctx.createLinearGradient(0,horizon,0,h);
-    sea.addColorStop(0, '#0c2740');
-    sea.addColorStop(0.5, '#071a2c');
+    sea.addColorStop(0, '#134268');
+    sea.addColorStop(0.5, '#0a2038');
     sea.addColorStop(1, '#01050d');
     ctx.fillStyle = sea;
     ctx.fillRect(0,horizon,w,h-horizon);
