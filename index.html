@@ -152,6 +152,12 @@
 
   .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); }
   .photo-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; transition: transform 0.4s ease; }
+
+  .fjell-stats { font-family: ui-monospace, monospace; font-size: 0.82rem; color: var(--accent); letter-spacing: 0.02em; margin-top: var(--space-2); }
+  .fjell-drawing { margin: var(--space-3) 0 0; }
+  .fjell-drawing img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .fjell-drawing figcaption { font-size: 0.8rem; color: var(--ink-dim); margin-top: var(--space-1); max-width: 62ch; }
+  .fjell-note { font-size: 0.92rem; color: var(--ink-dim); max-width: 62ch; margin: var(--space-2) 0 0; line-height: 1.6; }
   .photo-grid a:hover img { transform: scale(1.03); }
   .photo-grid a { border-radius: 10px; overflow: hidden; display: block; }
 
@@ -344,8 +350,14 @@
         <h3 data-i18n="fjell_t">Egen hyttedesign — full ingeniørplanlegging, ikke fysisk bygget ennå</h3>
         <p data-i18n="fjell_p">Komplette byggetegninger (DXF/STL) for en modulær 12–15m² hytte er ferdig tegnet. Det som
         gjenstår er det faktiske byggetrinnet — ærlig sagt, ikke en ferdig vare ennå.</p>
+        <div class="fjell-stats" data-i18n="fjell_stats">8 DXF-filer · 9 STL-filer · 0 bygde enheter</div>
       </div>
     </div>
+    <figure class="fjell-drawing">
+      <img src="assets/fjell-technical-drawing.png" alt="Real DXF cutting geometry for the FJELL cabin — floor, walls and roof panels with door cutouts and mounting holes" loading="lazy" width="2000" height="1286">
+      <figcaption data-i18n="fjell_caption">Ekte skjæretegninger — dørhull, festehull og panelmål er reelle produksjonsmål.</figcaption>
+    </figure>
+    <p class="fjell-note" data-i18n="fjell_note">Samme hender som ordner hagen din tegner også fulle byggesett og bygger om en seilbåt for å krysse et hav. Tre forskjellige prosjekter, én håndverker, like ærlig om alle tre.</p>
     <p style="font-size:0.9rem; margin-top:1rem;">
       <a href="/fjell-status.html" data-i18n="fjell_link">Se status og planer →</a>
     </p>
@@ -533,6 +545,9 @@
       h_fjell: "FJELL — modular 12m² cabin",
       fjell_t: "My own cabin design — full engineering planning, not physically built yet",
       fjell_p: "Complete build drawings (DXF/STL) for a modular 12–15m² cabin are fully drafted. What remains is the actual build step — honestly, not a finished product yet.",
+      fjell_stats: "8 DXF files · 9 STL files · 0 units built",
+      fjell_caption: "Real cutting geometry — door cutouts, mounting holes and panel dimensions are actual production measurements.",
+      fjell_note: "The same hands that sort out your garden also draft full build kits and are rebuilding a sailboat to cross an ocean. Three different projects, one craftsman, equally honest about all three.",
       fjell_link: "See status and plans →",
       cta_line: "Get in touch for a price — depends on the scope of the job",
       footer_line: "Prices agreed per job based on scope and time."
@@ -580,6 +595,9 @@
       h_fjell: "FJELL — modulinė 12m² trobelė",
       fjell_t: "Nuosavas trobelės dizainas — pilnas inžinerinis projektavimas, dar fiziškai nepastatyta",
       fjell_p: "Pilni statybos brėžiniai (DXF/STL) modulinei 12–15m² trobelei jau paruošti. Kas liko — tai faktinis statybos etapas — sąžiningai, dar ne baigtas produktas.",
+      fjell_stats: "8 DXF failai · 9 STL failai · 0 pastatytų vienetų",
+      fjell_caption: "Tikra pjovimo geometrija — durų angos, tvirtinimo skylės ir panelių matmenys yra realūs gamybiniai matavimai.",
+      fjell_note: "Tos pačios rankos, kurios sutvarko jūsų sodą, taip pat projektuoja pilnus statybos komplektus ir atstato buriuotą laivą kelionei per vandenyną. Trys skirtingi projektai, vienas meistras, vienodai sąžiningas visuose trijuose.",
       fjell_link: "Žiūrėti būklę ir planus →",
       cta_line: "Susisiekite dėl kainos — priklauso nuo darbo apimties",
       footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką."
