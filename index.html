@@ -184,10 +184,25 @@
   }
   .workshop-caption strong { color: var(--accent); }
 
-  .cta-band { background: var(--accent-dim); color: var(--accent-ink); border-radius: 16px; padding: var(--space-6) var(--space-4); text-align: center; margin-block: var(--space-6); }
-  .cta-band p { margin: 0 0 var(--space-1); }
-  .cta-band .big { font-size: 1.3rem; font-weight: 600; }
-  .cta-band a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .contact-block { display: grid; grid-template-columns: 160px 1fr; gap: var(--space-4); align-items: start; margin-block: var(--space-6); }
+  @media (max-width: 640px) { .contact-block { grid-template-columns: 1fr; } .kiosk-illustration { width: 96px; margin: 0 auto; } }
+  .kiosk-illustration { width: 100%; height: auto; display: block; }
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-2); }
+  .contact-form label { font-size: 0.85rem; color: var(--ink-dim); display: flex; flex-direction: column; gap: 0.3rem; }
+  .contact-form input, .contact-form textarea {
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 8px;
+    padding: 0.6rem 0.8rem; color: var(--ink); font-family: var(--font-body); font-size: 0.95rem;
+  }
+  .contact-form input:focus-visible, .contact-form textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .contact-form textarea { resize: vertical; min-height: 5rem; }
+  .contact-form button {
+    background: var(--accent); color: var(--bg); border: none; border-radius: 8px;
+    padding: 0.7rem 1.2rem; font-weight: 600; font-size: 0.95rem; cursor: pointer; align-self: flex-start;
+  }
+  .contact-form button:hover { background: var(--focus); }
+  .contact-form button:disabled { opacity: 0.6; cursor: default; }
+  .contact-note { font-size: 0.85rem; color: var(--ink-dim); margin: 0; }
+
 
   footer.site-footer { padding-block: var(--space-4) var(--space-8); font-size: 0.8rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
 
@@ -403,10 +418,41 @@
     </p>
   </section>
 
-  <div class="shell">
-    <div class="cta-band" id="kontakt">
-      <p data-i18n="cta_line">Ta kontakt for pris — avhenger av jobbens omfang</p>
-      <p class="big"><a href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a></p>
+  <div class="shell" id="kontakt">
+    <div class="section-head"><h2 data-i18n="h_contact">Ta kontakt</h2></div>
+    <div class="contact-block">
+      <svg class="kiosk-illustration" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An old Norwegian red telephone kiosk">
+        <g transform="translate(40,20)">
+          <rect x="10" y="0" width="100" height="8" fill="#8c3a2e"/>
+          <rect x="18" y="8" width="84" height="8" fill="#a24536"/>
+          <rect x="26" y="16" width="68" height="10" fill="#b8503f"/>
+          <rect x="14" y="26" width="92" height="150" fill="#b8503f"/>
+          <g fill="#283420" stroke="#6e2e24" stroke-width="1.5">
+            <rect x="22" y="36" width="18" height="24"/>
+            <rect x="44" y="36" width="18" height="24"/>
+            <rect x="66" y="36" width="18" height="24"/>
+            <rect x="88" y="36" width="10" height="24"/>
+            <rect x="22" y="64" width="18" height="24"/>
+            <rect x="44" y="64" width="18" height="24"/>
+            <rect x="66" y="64" width="18" height="24"/>
+            <rect x="88" y="64" width="10" height="24"/>
+            <rect x="22" y="92" width="18" height="24"/>
+            <rect x="44" y="92" width="18" height="24"/>
+            <rect x="66" y="92" width="18" height="24"/>
+            <rect x="88" y="92" width="10" height="24"/>
+          </g>
+          <rect x="22" y="122" width="76" height="50" fill="#9c4232"/>
+          <circle cx="88" cy="147" r="2.5" fill="#283420"/>
+          <rect x="10" y="176" width="100" height="8" fill="#6e2e24"/>
+        </g>
+      </svg>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mykqqzjg" method="POST">
+        <p class="contact-note" data-i18n="cta_line">Ta kontakt for pris — avhenger av jobbens omfang</p>
+        <label>Navn<input type="text" name="name" required></label>
+        <label>E-post<input type="email" name="email" required></label>
+        <label>Melding<textarea name="message" rows="4" required></textarea></label>
+        <button type="submit">Send</button>
+      </form>
     </div>
   </div>
 </main>
@@ -627,6 +673,7 @@
       fjell_caption: "Real cutting geometry. Actual production measurements.",
       fjell_note: "Same hands: your garden, a cabin kit, a boat crossing an ocean. One craftsman. Equal honesty.",
       fjell_link: "See status and plans →",
+      h_contact: "Get in touch",
       cta_line: "Get in touch for a price — depends on the scope of the job",
       footer_line: "Prices agreed per job based on scope and time."
     },
@@ -677,6 +724,7 @@
       fjell_caption: "Tikra pjovimo geometrija. Realūs gamybiniai matavimai.",
       fjell_note: "Tos pačios rankos: jūsų sodas, trobelės komplektas, laivas, plaukiantis per vandenyną. Vienas meistras. Vienodas sąžiningumas.",
       fjell_link: "Žiūrėti būklę ir planus →",
+      h_contact: "Susisiekite",
       cta_line: "Susisiekite dėl kainos — priklauso nuo darbo apimties",
       footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką."
     }
@@ -712,6 +760,39 @@
   var saved;
   try { saved = localStorage.getItem('site-lang'); } catch(e){}
   if (saved && saved !== 'no') setLang(saved);
+})();
+
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    }).then(function (res) {
+      if (res.ok) {
+        form.innerHTML = '<p class="contact-note">Sendt. Svarer så snart jeg kan.</p>';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        var old = form.querySelector('.contact-error');
+        if (old) old.remove();
+        form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Sendte ikke — prøv igjen.</p>');
+      }
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      var old = form.querySelector('.contact-error');
+      if (old) old.remove();
+      form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Sendte ikke — prøv igjen.</p>');
+    });
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
