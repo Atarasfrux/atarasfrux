@@ -60,7 +60,7 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
+  body { margin: 0; background: #0c0d0e; color: #e9e9e7; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; margin: 0; }
   a { color: var(--accent); }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
@@ -428,11 +428,37 @@
   var toggle = document.getElementById('navToggle');
   var offCanvas = document.getElementById('offCanvas');
   if (toggle && offCanvas) {
-    function open() { offCanvas.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); }
-    function close() { offCanvas.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+    var drawer = offCanvas.querySelector('.drawer');
+    function focusable() {
+      return Array.prototype.slice.call(
+        drawer.querySelectorAll('a[href], button:not([disabled])')
+      );
+    }
+    function open() {
+      offCanvas.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      var items = focusable();
+      if (items.length) items[0].focus();
+    }
+    function close() {
+      offCanvas.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+    function trapTab(e) {
+      if (e.key !== 'Tab' || !offCanvas.classList.contains('open')) return;
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
     toggle.addEventListener('click', open);
     offCanvas.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', close); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && offCanvas.classList.contains('open')) close();
+      trapTab(e);
+    });
   }
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
