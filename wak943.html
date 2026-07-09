@@ -760,8 +760,7 @@ table.items td.cost{
       <span class="bottle-hint" data-i18n="bottle_hint">Tap the bottle</span>
     </button>
 
-    <form class="message-form" id="bottleForm" action="" method="POST" hidden>
-      <p class="form-note">Form endpoint removed for now — not wired to anything until reconnected.</p>
+    <form class="message-form" id="bottleForm" action="https://formspree.io/f/mykqqzjg" method="POST" hidden>
       <label>Name<input type="text" name="name" required></label>
       <label>Email<input type="email" name="email" required></label>
       <label>Message<textarea name="message" rows="4" required></textarea></label>
@@ -986,6 +985,33 @@ table.items td.cost{
       hint.textContent = 'Cork’s out';
       form.querySelector('input').focus();
     }
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if (res.ok) {
+        form.innerHTML = '<p class="form-note">Sent. I’ll reply when I can.</p>';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        form.querySelector('.form-note') && form.querySelector('.form-note').remove();
+        form.insertAdjacentHTML('afterbegin', '<p class="form-note">Didn’t send — try again, or write directly.</p>');
+      }
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      form.querySelector('.form-note') && form.querySelector('.form-note').remove();
+      form.insertAdjacentHTML('afterbegin', '<p class="form-note">Didn’t send — try again, or write directly.</p>');
+    });
   });
 })();
 
