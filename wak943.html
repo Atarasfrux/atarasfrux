@@ -452,17 +452,23 @@ table.items td.cost{
   top:50%;
   left:0;
   width:640px;
-  filter:blur(3px);
+  filter:blur(2px);
   animation:whale-swim 58s ease-in-out infinite;
 }
 .whale-body{
   display:block;
   width:100%;
   height:auto;
-  opacity:0.4;
+  opacity:0.56;
   transform:scaleX(-1); /* source path's head sits at low-x; mirror once so it leads the rightward swim */
 }
-.whale-body path{ fill:#000; }
+.whale-body path{ fill:url(#whaleGrad); }
+.whale-body .fluke{ fill:url(#whaleGradFluke); }
+.whale-wake{
+  position:absolute; top:50%; left:0; width:640px;
+  filter:blur(5px); opacity:0.22; transform:translateY(-38%) scaleX(-1);
+  animation:whale-swim 58s ease-in-out infinite;
+}
 @keyframes whale-swim{
   0%   { transform:translateY(-30%) translateX(-130%); opacity:0; }
   10%  { transform:translateY(-50%) translateX(-15%);  opacity:1; }
@@ -472,7 +478,8 @@ table.items td.cost{
 }
 @media (prefers-reduced-motion: reduce){
   .whale-track{ animation:none; left:30%; top:50%; transform:translateY(-50%); }
-  .whale-body{ opacity:0.4; }
+  .whale-body{ opacity:0.56; }
+  .whale-wake{ display:none; }
 }
 .bottle-shore > *:not(.island-scene){ position:relative; z-index:1; }
 .bottle-btn{
@@ -713,20 +720,44 @@ table.items td.cost{
     </section>
 
     <div class="whale-deep" aria-hidden="true">
+      <div class="whale-wake">
+        <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="120" cy="112" rx="90" ry="7" fill="var(--verdigris)"/>
+          <ellipse cx="230" cy="116" rx="70" ry="5" fill="var(--verdigris)"/>
+        </svg>
+      </div>
       <div class="whale-track">
         <svg class="whale-body" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="whaleGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#05070a"/>
+              <stop offset="55%" stop-color="#0f1a1c"/>
+              <stop offset="100%" stop-color="#1e3230"/>
+            </linearGradient>
+            <linearGradient id="whaleGradFluke" x1="0" y1="0" x2="1" y2="0.3">
+              <stop offset="0%" stop-color="#0f1a1c"/>
+              <stop offset="100%" stop-color="#050708"/>
+            </linearGradient>
+          </defs>
           <path d="
             M20,100
             C40,70 90,55 150,58
             C220,62 280,75 340,80
-            C380,83 410,78 430,65
-            C440,80 435,95 420,100
-            C440,102 452,110 448,120
-            C430,118 415,112 408,102
-            C370,110 320,112 270,108
-            C200,102 120,108 60,120
-            C40,124 22,116 20,100 Z"/>
-          <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z"/>
+            C365,83 383,84 392,83
+            C388,95 378,104 362,106
+            C372,116 366,122 355,120
+            C348,112 344,105 344,100
+            C300,110 250,112 200,109
+            C140,105 80,110 40,120
+            C24,122 18,112 20,100 Z"/>
+          <path class="fluke" d="
+            M355,92
+            C370,78 400,60 435,46
+            C430,66 415,80 398,90
+            C420,94 445,105 458,126
+            C436,120 415,108 400,96
+            C385,104 365,102 355,92 Z"/>
+          <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z" fill="url(#whaleGrad)"/>
         </svg>
       </div>
     </div>
