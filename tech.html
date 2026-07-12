@@ -105,6 +105,24 @@ a{ color:var(--accent); }
 .btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--line); }
 .btn.ghost:hover{ border-color:var(--accent-dim); color:var(--accent); }
 
+.contact-form{ display:flex; flex-direction:column; gap:var(--space-2); max-width:420px; }
+.contact-form label{ font-size:0.85rem; color:var(--ink-dim); display:flex; flex-direction:column; gap:0.3rem; }
+.contact-form input, .contact-form textarea{
+  font-family:var(--font-body); font-size:0.92rem; color:var(--ink);
+  background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; padding:0.55rem 0.7rem;
+}
+.contact-form input:focus-visible, .contact-form textarea:focus-visible{ outline:2px solid var(--focus); outline-offset:1px; }
+.contact-form textarea{ resize:vertical; min-height:5rem; }
+.contact-form button{
+  font-family:var(--font-body); font-size:0.86rem; font-weight:600;
+  padding:0.7rem 1.3rem; border-radius:4px; border:none; background:var(--accent); color:var(--bg);
+  cursor:pointer; align-self:flex-start; transition:background 0.2s ease;
+}
+.contact-form button:hover{ background:var(--focus); }
+.contact-form button:disabled{ opacity:0.6; cursor:default; }
+.contact-note{ font-size:0.9rem; color:var(--ink-dim); margin:0; }
+.contact-note.contact-error{ color:#c98a55; }
+
 section{ padding:var(--space-8) 0; border-bottom:1px solid var(--line); }
 section:last-of-type{ border-bottom:none; }
 .section-head h2{ font-weight:600; font-size:clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom:var(--space-1); }
@@ -240,10 +258,13 @@ section:last-of-type{ border-bottom:none; }
       <h2>Describe the problem. I'll send a number back same day.</h2>
       <p class="sub">Based in Sandvika/Nesodden — remote work anywhere.</p>
     </div>
-    <div class="ctas">
-      <a class="btn solid" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
-      <a class="btn ghost" href="tel:+4747479934">+47 474 79 934</a>
-    </div>
+    <form class="contact-form" id="techContactForm" action="https://formspree.io/f/mykqqzjg" method="POST">
+      <input type="hidden" name="_subject" value="Systems &amp; Software inquiry (via tech.html)">
+      <label>Name<input type="text" name="name" required></label>
+      <label>Email<input type="email" name="email" required></label>
+      <label>What needs fixing<textarea name="message" rows="4" required></textarea></label>
+      <button type="submit">Send</button>
+    </form>
   </section>
 
   <div class="colophon">
@@ -269,6 +290,40 @@ section:last-of-type{ border-bottom:none; }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   targets.forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var form = document.getElementById('techContactForm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    }).then(function (res) {
+      if (res.ok) {
+        form.innerHTML = '<p class="contact-note">Sent. I\'ll reply as soon as I can.</p>';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        var old = form.querySelector('.contact-error');
+        if (old) old.remove();
+        form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Didn\'t send — try again.</p>');
+      }
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      var old = form.querySelector('.contact-error');
+      if (old) old.remove();
+      form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Didn\'t send — try again.</p>');
+    });
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
