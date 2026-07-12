@@ -137,6 +137,22 @@
     0%, 100% { transform: rotate(var(--tilt, -5deg)) skewX(-1deg); }
     50%      { transform: rotate(var(--tilt2, 7deg)) skewX(2deg); }
   }
+  .grass-field svg.field-mouse {
+    position: absolute; left: var(--start-left, 20%); bottom: 2px; z-index: 2;
+    transform-origin: 50% 100%; will-change: transform, opacity;
+    animation: mouse-scurry var(--run-dur, 15s) ease-in-out infinite;
+    animation-delay: var(--run-delay, 0s);
+  }
+  @keyframes mouse-scurry {
+    0%   { transform: translateX(0) translateY(6px) scaleY(0.3); opacity: 0; }
+    6%   { transform: translateX(6px) translateY(0) scaleY(1); opacity: 1; }
+    22%  { transform: translateX(50px) translateY(0) scaleY(1); opacity: 1; }
+    30%  { transform: translateX(60px) translateY(6px) scaleY(0.3); opacity: 0.15; }
+    38%  { transform: translateX(75px) translateY(0) scaleY(1); opacity: 1; }
+    58%  { transform: translateX(130px) translateY(0) scaleY(1); opacity: 1; }
+    66%, 100% { transform: translateX(142px) translateY(6px) scaleY(0.3); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .grass-field svg.field-mouse { display: none; } }
   @media (max-width: 780px) { .grass-field { height: 130px; } }
   .lang-switch { display: flex; gap: 0.5rem; margin: 0 0 var(--space-2); }
   .lang-btn { background: var(--bg-raised); border: 1px solid var(--line); color: var(--ink-dim); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.78rem; font-family: var(--font-body); cursor: pointer; }
@@ -576,6 +592,27 @@
       frag.appendChild(svg);
     }
     field.appendChild(frag);
+
+    // A couple of mice scurrying along the bottom, ducking in and out of
+    // the grass rather than staying constantly visible.
+    var mouseD = 'M4,14 C2,9 5,4 11,4 C17,4 21,8 20,12 C24,11 26,12 25,14 C23,15 21,14 20,13 C18,16 14,17 9,17 C5,17 3,16 4,14 Z M4,15 C0,16 -5,15 -9,17 C-5,13 -1,13 4,15 Z';
+    var miceCount = 2;
+    for (var m = 0; m < miceCount; m++) {
+      var mouse = document.createElementNS(svgNS, 'svg');
+      mouse.setAttribute('class', 'field-mouse');
+      mouse.setAttribute('viewBox', '-12 -2 40 22');
+      mouse.setAttribute('width', '26');
+      mouse.setAttribute('height', '15');
+      mouse.style.setProperty('--run-delay', (m * 7 + Math.random() * 4).toFixed(2) + 's');
+      mouse.style.setProperty('--run-dur', (13 + Math.random() * 5).toFixed(2) + 's');
+      mouse.style.setProperty('--start-left', (8 + m * 38 + Math.random() * 10).toFixed(1) + '%');
+
+      var mousePath = document.createElementNS(svgNS, 'path');
+      mousePath.setAttribute('d', mouseD);
+      mousePath.setAttribute('fill', 'var(--ink-dim)');
+      mouse.appendChild(mousePath);
+      field.appendChild(mouse);
+    }
   }
 
   var themeToggle = document.getElementById('themeToggle');
