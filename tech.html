@@ -74,9 +74,12 @@ a{ color:var(--accent); }
 .btn{
   font-family:var(--font-body); font-size:0.86rem; font-weight:600;
   padding:0.7rem 1.3rem; border-radius:4px; text-decoration:none; display:inline-block;
+  transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .btn.solid{ background:var(--accent); color:var(--bg); }
+.btn.solid:hover{ transform:translateY(-2px); box-shadow:0 12px 28px -14px rgba(0,0,0,0.5); }
 .btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+.btn.ghost:hover{ border-color:var(--accent-dim); color:var(--accent); }
 
 section{ padding:var(--space-8) 0; border-bottom:1px solid var(--line); }
 section:last-of-type{ border-bottom:none; }
@@ -84,7 +87,11 @@ section:last-of-type{ border-bottom:none; }
 .section-head .sub{ color:var(--ink-dim); font-size:0.95rem; max-width:56ch; margin:0 0 var(--space-4); }
 
 .jobs{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-.job{ background:var(--bg-raised); padding:var(--space-3); display:flex; flex-direction:column; gap:var(--space-2); }
+.job{
+  background:var(--bg-raised); padding:var(--space-3); display:flex; flex-direction:column; gap:var(--space-2);
+  border:1px solid transparent; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.job:hover{ transform:translateY(-2px); box-shadow:0 12px 28px -14px rgba(0,0,0,0.4); border-color:var(--accent-dim); }
 .job .num{ font-size:0.75rem; letter-spacing:0.1em; color:var(--ink-dim); }
 .job h3{ font-size:1.1rem; font-weight:600; }
 .job p{ font-size:0.92rem; color:var(--ink-dim); margin:0; flex:1; }
@@ -197,5 +204,26 @@ section:last-of-type{ border-bottom:none; }
     Mantas Pagalys · <a href="/wak943.html">WAK943</a> · <a href="/fjell-status.html">FJELL</a> · <a href="/log.html">The Sea Keeps Giving</a>
   </div>
 </div>
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = document.querySelectorAll('.job, .log-row');
+  targets.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(function(el){ io.observe(el); });
+})();
+</script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
