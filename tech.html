@@ -1,0 +1,199 @@
+<title>Systems &amp; Software — Mantas Pagalys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Fixed-price work: DNS &amp; security setup, automation, server hardening.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Systems &amp; Software — Mantas Pagalys">
+<meta property="og:description" content="Fixed-price work: DNS &amp; security setup, automation, server hardening.">
+<meta property="og:url" content="https://greifiks.org/tech.html">
+<style>
+@view-transition { navigation: auto; }
+.scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 50;
+  transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(to right, var(--accent-dim), var(--accent));
+  animation: grow-scroll-progress auto linear;
+  animation-timeline: scroll(root);
+}
+@keyframes grow-scroll-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/inter-400.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/inter-500.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/inter-600.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/inter-700.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/playfair-600.woff2') format('woff2'); }
+
+:root{
+  --bg: #0d100d; --bg-raised: #283420; --ink: #e8ebe4; --ink-dim: #9aa392;
+  --line: #34432a; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0;
+  --focus: #d9ab6e;
+  --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --space-6: 3rem; --space-8: 4rem;
+  --container: 1200px;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-body);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{ font-family:var(--font-display); letter-spacing:-0.01em; margin:0; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+}
+::selection{ background:var(--accent); color:var(--bg); }
+:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
+a{ color:var(--accent); }
+
+.shell{ max-width:var(--container); margin:0 auto; padding:0 var(--space-3); }
+
+.back{
+  display:inline-block; font-size:0.82rem; color:var(--ink-dim); text-decoration:none;
+  margin:var(--space-4) 0 var(--space-6); letter-spacing:0.01em;
+}
+.back:hover{ color:var(--accent); }
+.back::before{ content:"← "; }
+
+.masthead{ padding-bottom: var(--space-6); border-bottom:1px solid var(--line); }
+.masthead .eyebrow{
+  font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);
+  margin:0 0 var(--space-2);
+}
+.masthead h1{
+  font-weight:600; font-size:clamp(1.9rem, 4vw, 2.7rem); line-height:1.15;
+  max-width:18ch; margin:0 0 var(--space-3); text-wrap:balance;
+}
+.masthead .lede{
+  font-size:1.08rem; color:var(--ink-dim); max-width:52ch; margin:0 0 var(--space-4); line-height:1.65;
+}
+.masthead .ctas{ display:flex; gap:var(--space-2); flex-wrap:wrap; }
+.btn{
+  font-family:var(--font-body); font-size:0.86rem; font-weight:600;
+  padding:0.7rem 1.3rem; border-radius:4px; text-decoration:none; display:inline-block;
+}
+.btn.solid{ background:var(--accent); color:var(--bg); }
+.btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+
+section{ padding:var(--space-8) 0; border-bottom:1px solid var(--line); }
+section:last-of-type{ border-bottom:none; }
+.section-head h2{ font-weight:600; font-size:clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom:var(--space-1); }
+.section-head .sub{ color:var(--ink-dim); font-size:0.95rem; max-width:56ch; margin:0 0 var(--space-4); }
+
+.jobs{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+.job{ background:var(--bg-raised); padding:var(--space-3); display:flex; flex-direction:column; gap:var(--space-2); }
+.job .num{ font-size:0.75rem; letter-spacing:0.1em; color:var(--ink-dim); }
+.job h3{ font-size:1.1rem; font-weight:600; }
+.job p{ font-size:0.92rem; color:var(--ink-dim); margin:0; flex:1; }
+.job .proof{ font-size:0.85rem; padding-top:var(--space-2); border-top:1px dashed var(--line); }
+.job .proof b{ color:var(--accent); }
+
+.log-list{ border-top:1px solid var(--line); }
+.log-row{ display:grid; grid-template-columns:110px 1fr auto; gap:var(--space-3); padding:var(--space-2) 0; border-bottom:1px solid var(--line); align-items:baseline; }
+.log-row .date{ font-size:0.78rem; color:var(--ink-dim); font-variant-numeric:tabular-nums; }
+.log-row .what b{ font-weight:600; }
+.log-row .what span{ color:var(--ink-dim); font-size:0.92rem; }
+.log-row .tag{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+
+.colophon{
+  margin-top:var(--space-4); padding-top:var(--space-3); border-top:1px solid var(--line);
+  font-size:0.82rem; color:var(--ink-dim); line-height:1.7; max-width:60ch;
+}
+.colophon a{ color:var(--accent); }
+
+@media (max-width: 780px){
+  .jobs{ grid-template-columns:1fr; }
+  .log-row{ grid-template-columns:80px 1fr; }
+  .log-row .tag{ grid-column:2; }
+}
+</style>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<div class="shell">
+  <a class="back" href="/">greifiks.org</a>
+
+  <div class="masthead">
+    <p class="eyebrow">Systems &amp; Software</p>
+    <h1>The same hands that fair a hull also harden a server.</h1>
+    <p class="lede">
+      I fix what's actually broken — a DNS resolver leaking your browsing to three
+      ad networks, a spreadsheet somebody's still updating by hand, a server nobody's
+      backed up in a year. Trade skill and systems skill, same standard: it has to
+      still work after I've left.
+    </p>
+    <div class="ctas">
+      <a class="btn solid" href="#contact">Get a quote</a>
+      <a class="btn ghost" href="#log">See what's shipped</a>
+    </div>
+  </div>
+
+  <section id="jobs">
+    <div class="section-head">
+      <h2>Three jobs I take on</h2>
+      <p class="sub">Fixed price, scoped in one message. If yours doesn't fit exactly, describe it — most systems problems are a variation on one of these.</p>
+    </div>
+    <div class="jobs">
+      <div class="job">
+        <div class="num">01 — NETWORK</div>
+        <h3>Private DNS &amp; security setup</h3>
+        <p>A local resolver that blocks ads and trackers at the DNS level, validates every response cryptographically, and updates its own blocklist without you touching it again.</p>
+        <div class="proof"><b>Shipped:</b> dnsmasq + DNSSEC, verified against a live SERVFAIL test, this week.</div>
+      </div>
+      <div class="job">
+        <div class="num">02 — INTEGRATION</div>
+        <h3>Automate the copy-paste</h3>
+        <p>If someone's manually moving data between a website, a spreadsheet, and an external API — that's a script, not a recurring chore.</p>
+        <div class="proof"><b>Shipped:</b> a live service merging two national legal-data APIs, with automatic failure isolation between sources.</div>
+      </div>
+      <div class="job">
+        <div class="num">03 — INFRASTRUCTURE</div>
+        <h3>Server setup &amp; hardening</h3>
+        <p>A Linux server that's firewalled, backed up on a schedule, SSH-locked, and running under supervision that restarts itself instead of paging you.</p>
+        <div class="proof"><b>Shipped:</b> this week's own machine — firewall reviewed, auto-restart confirmed, weekly maintenance timer installed.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="log">
+    <div class="section-head">
+      <h2>Recent, verifiable work</h2>
+      <p class="sub">A log, not a highlight reel. Dated, and confirmed working before it's listed here.</p>
+    </div>
+    <div class="log-list">
+      <div class="log-row">
+        <div class="date">2026-07-12</div>
+        <div class="what"><b>Legal-data monitoring API</b> <span>— async adapters for two national/EU legal databases</span></div>
+        <div class="tag">Python · FastAPI</div>
+      </div>
+      <div class="log-row">
+        <div class="date">2026-07-12</div>
+        <div class="what"><b>DNS filtering + DNSSEC</b> <span>— 85,000+ domains blocked, cryptographic validation confirmed</span></div>
+        <div class="tag">Linux · systemd</div>
+      </div>
+      <div class="log-row">
+        <div class="date">2026-07-13</div>
+        <div class="what"><b>Mail search infrastructure</b> <span>— indexed search across 22,000+ messages, replacing ad-hoc scans</span></div>
+        <div class="tag">notmuch</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <h2>Describe the problem. I'll send a number back same day.</h2>
+      <p class="sub">Based in Sandvika/Nesodden — remote work anywhere.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn solid" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
+      <a class="btn ghost" href="tel:+4747479934">+47 474 79 934</a>
+    </div>
+  </section>
+
+  <div class="colophon">
+    Mantas Pagalys · <a href="/wak943.html">WAK943</a> · <a href="/fjell-status.html">FJELL</a> · <a href="/log.html">The Sea Keeps Giving</a>
+  </div>
+</div>
+<script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
