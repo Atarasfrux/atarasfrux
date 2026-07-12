@@ -464,22 +464,49 @@ table.items td.cost{
 }
 .whale-body path{ fill:url(#whaleGrad); }
 .whale-body .fluke{ fill:url(#whaleGradFluke); }
+/* Real whales swim by beating a horizontal fluke up/down (unlike a fish's
+   side-to-side tail), which drives a slower undulation through the whole
+   body. Two layered rhythms: the fast-ish fluke stroke, and a softer,
+   phase-offset body ripple it drives. */
+.whale-stroke{
+  animation:whale-undulate 3.1s ease-in-out infinite;
+  transform-box:fill-box;
+  transform-origin:60% 55%;
+}
+.fluke-joint{
+  animation:fluke-flap 3.1s ease-in-out infinite;
+  transform-box:fill-box;
+  transform-origin:0% 55%;
+}
+@keyframes whale-undulate{
+  0%   { transform:translateY(0) rotate(0deg); }
+  30%  { transform:translateY(-3px) rotate(-1.1deg); }
+  65%  { transform:translateY(2.5px) rotate(1.3deg); }
+  100% { transform:translateY(0) rotate(0deg); }
+}
+@keyframes fluke-flap{
+  0%   { transform:rotate(16deg); }
+  30%  { transform:rotate(-20deg); }
+  65%  { transform:rotate(10deg); }
+  100% { transform:rotate(16deg); }
+}
 .whale-wake{
   position:absolute; top:50%; left:0; width:640px;
   filter:blur(5px); opacity:0.22; transform:translateY(-38%) scaleX(-1);
   animation:whale-swim 58s ease-in-out infinite;
 }
 @keyframes whale-swim{
-  0%   { transform:translateY(-30%) translateX(-130%); opacity:0; }
-  10%  { transform:translateY(-50%) translateX(-15%);  opacity:1; }
-  50%  { transform:translateY(-52%) translateX(70vw);  opacity:1; }
-  88%  { transform:translateY(-50%) translateX(128vw); opacity:1; }
-  100% { transform:translateY(-32%) translateX(146vw); opacity:0; }
+  0%   { transform:translateY(-30%) translateX(-130%) rotate(0deg); }
+  10%  { transform:translateY(-50%) translateX(-15%)  rotate(-1deg); }
+  50%  { transform:translateY(-52%) translateX(70vw)  rotate(1deg); }
+  88%  { transform:translateY(-50%) translateX(128vw) rotate(-1deg); }
+  100% { transform:translateY(-32%) translateX(146vw) rotate(0deg); }
 }
 @media (prefers-reduced-motion: reduce){
   .whale-track{ animation:none; left:30%; top:50%; transform:translateY(-50%); }
   .whale-body{ opacity:0.56; }
   .whale-wake{ display:none; }
+  .whale-stroke, .fluke-joint{ animation:none; }
 }
 .bottle-shore > *:not(.island-scene){ position:relative; z-index:1; }
 .bottle-btn{
@@ -739,25 +766,38 @@ table.items td.cost{
               <stop offset="100%" stop-color="#050708"/>
             </linearGradient>
           </defs>
-          <path d="
-            M20,100
-            C40,70 90,55 150,58
-            C220,62 280,75 340,80
-            C365,83 383,84 392,83
-            C388,95 378,104 362,106
-            C372,116 366,122 355,120
-            C348,112 344,105 344,100
-            C300,110 250,112 200,109
-            C140,105 80,110 40,120
-            C24,122 18,112 20,100 Z"/>
-          <path class="fluke" d="
-            M355,92
-            C370,78 400,60 435,46
-            C430,66 415,80 398,90
-            C420,94 445,105 458,126
-            C436,120 415,108 400,96
-            C385,104 365,102 355,92 Z"/>
-          <path d="M150,58 C155,40 165,28 172,30 C176,40 170,52 158,60 Z" fill="url(#whaleGrad)"/>
+          <g class="whale-stroke">
+            <path d="
+              M20,100
+              C40,70 90,55 150,58
+              C220,62 280,75 340,80
+              C365,83 383,84 392,83
+              C388,95 378,104 362,106
+              C372,116 366,122 355,120
+              C348,112 344,105 344,100
+              C300,110 250,112 200,109
+              C140,105 80,110 40,120
+              C24,122 18,112 20,100 Z"/>
+            <!-- pectoral fin: long, tapering, swept back - the other real
+                 whale-identifying feature besides the fluke -->
+            <path d="
+              M96,102
+              C86,118 68,140 48,158
+              C66,150 90,136 108,118
+              C116,110 114,102 108,98
+              C103,98 99,99 96,102 Z" fill="url(#whaleGrad)"/>
+            <!-- low dorsal hump, not a prominent fin - correct for a
+                 humpback/rorqual silhouette rather than an orca-style fin -->
+            <path d="M150,58 C155,46 163,38 170,39 C173,46 169,54 160,60 Z" fill="url(#whaleGrad)"/>
+            <g class="fluke-joint">
+              <path class="fluke" d="
+                M355,90
+                C382,66 418,46 445,35
+                C430,54 410,70 398,86
+                C415,102 438,122 455,142
+                C432,122 388,106 355,90 Z"/>
+            </g>
+          </g>
         </svg>
       </div>
     </div>
