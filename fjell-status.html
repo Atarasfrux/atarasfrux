@@ -74,6 +74,11 @@ body{
 .site-back:hover{ color:var(--accent); }
 h1{ font-size:2rem; margin:0 0 0.3rem; letter-spacing:-0.01em; text-wrap:balance; }
 .tag{ font-size:1rem; color:var(--ink-soft); margin:0 0 2rem; }
+.hero-figure{ margin:0 0 2rem; }
+.hero-figure img{
+  width:100%; height:auto; display:block; border-radius:10px; border:1px solid var(--line);
+}
+.hero-figure figcaption{ font-size:0.8rem; color:var(--ink-soft); margin-top:0.5rem; }
 .status-badge{
   display:inline-flex; align-items:center; gap:0.5rem;
   background:var(--chip-bg); border:1px solid var(--line); border-radius:4px;
@@ -132,6 +137,11 @@ footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line); f
   <h1 data-i18n="h1">FJELL — Norwegian Micro-Cabin</h1>
   <p class="tag" data-i18n="tag">A modular 12–15m² cabin system, engineered down to real cutting files — not yet built.</p>
 
+  <figure class="hero-figure">
+    <img src="/assets/fjell-cabin.webp" width="1400" height="933" alt="Visualization of the FJELL cabin design: dark larch cladding, a lit window, firewood stacked outside, by a lake at dusk">
+    <figcaption data-i18n="hero_caption">Visualization of the design — not a photo of a built unit. See "Not yet true" below.</figcaption>
+  </figure>
+
   <div class="status-badge" data-i18n="badge">Concept stage: full engineering drafted, no physical prototype built yet</div>
 
   <h2 data-i18n="h_what_is">What it is</h2>
@@ -178,6 +188,7 @@ footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line); f
     no: {
       h1: "FJELL — Norsk mikrohytte",
       tag: "Et modulært 12–15m² hyttesystem, konstruert helt ned til reelle kappefiler — ennå ikke bygget.",
+      hero_caption: "Visualisering av designet — ikke et bilde av en ferdig bygget enhet. Se «Ennå ikke sant» under.",
       badge: "Konseptstadiet: full konstruksjon ferdig tegnet, ingen fysisk prototype bygget ennå",
       h_what_is: "Hva det er",
       p_what_is: "En flatpakket, modulær hytte, ca. 4,9m × 2,5–3,0m, designet for rask montering og norsk klima. Både standardvarianten og en vegtransportabel (tilhengerbredde) variant er tegnet ut. Ingeniørarbeidet er reelt og detaljert — det fysiske bygget er det som ennå ikke har skjedd.",
@@ -199,6 +210,7 @@ footer{ margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line); f
     lt: {
       h1: "FJELL — Norvegiška mikro-trobelė",
       tag: "Modulinė 12–15m² trobelės sistema, sukonstruota iki tikrų pjovimo failų — dar nepastatyta.",
+      hero_caption: "Dizaino vizualizacija — ne pastatyto vieneto nuotrauka. Žr. „Kas dar netiesa“ žemiau.",
       badge: "Koncepcijos stadija: visas inžinerinis projektas paruoštas, fizinis prototipas dar nepastatytas",
       h_what_is: "Kas tai yra",
       p_what_is: "Surenkama modulinė trobelė, apie 4,9m × 2,5–3,0m, sukurta greitam surinkimui ir Norvegijos klimatui. Paruošti abu variantai — standartinis ir kelyje vežamas (priekabos pločio). Inžinerinis darbas yra realus ir detalus — fizinis statymas yra tai, kas dar neįvyko.",
