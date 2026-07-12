@@ -58,7 +58,31 @@ a{ color:var(--accent); }
 .back:hover{ color:var(--accent); }
 .back::before{ content:"← "; }
 
-.masthead{ padding-bottom: var(--space-6); border-bottom:1px solid var(--line); }
+.masthead{
+  padding-bottom: var(--space-6); border-bottom:1px solid var(--line);
+  display:grid; grid-template-columns:1.3fr 1fr; gap:var(--space-6); align-items:center;
+}
+.masthead .copy{ grid-column:1; }
+.signal-diagram{ grid-column:2; }
+.signal-diagram svg{ width:100%; height:auto; display:block; }
+.signal-diagram .node-label{
+  font-family:var(--font-body); font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase;
+  fill:var(--ink-dim);
+}
+.signal-diagram .node-ring{ fill:var(--bg-raised); stroke:var(--line); stroke-width:1.5; }
+.signal-diagram .node-ring.mid{ stroke:var(--accent-dim); }
+.signal-diagram .path{
+  fill:none; stroke:var(--line); stroke-width:1.5;
+}
+.signal-diagram .pulse{
+  fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round;
+  stroke-dasharray:6 220; stroke-dashoffset:0;
+  animation:travel 3.4s linear infinite;
+}
+.signal-diagram .pulse.delay{ animation-delay:1.7s; }
+@keyframes travel{ from{ stroke-dashoffset:0; } to{ stroke-dashoffset:-226; } }
+@media (prefers-reduced-motion: reduce){ .signal-diagram .pulse{ animation:none; stroke-dasharray:none; } }
+@media (max-width: 780px){ .masthead{ grid-template-columns:1fr; } .signal-diagram{ grid-column:1; max-width:280px; } }
 .masthead .eyebrow{
   font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);
   margin:0 0 var(--space-2);
@@ -124,17 +148,39 @@ section:last-of-type{ border-bottom:none; }
   <a class="back" href="/">greifiks.org</a>
 
   <div class="masthead">
-    <p class="eyebrow">Systems &amp; Software</p>
-    <h1>The same hands that fair a hull also harden a server.</h1>
-    <p class="lede">
-      I fix what's actually broken — a DNS resolver leaking your browsing to three
-      ad networks, a spreadsheet somebody's still updating by hand, a server nobody's
-      backed up in a year. Trade skill and systems skill, same standard: it has to
-      still work after I've left.
-    </p>
-    <div class="ctas">
-      <a class="btn solid" href="#contact">Get a quote</a>
-      <a class="btn ghost" href="#log">See what's shipped</a>
+    <div class="copy">
+      <p class="eyebrow">Systems &amp; Software</p>
+      <h1>The same hands that fair a hull also harden a server.</h1>
+      <p class="lede">
+        I fix what's actually broken — a DNS resolver leaking your browsing to three
+        ad networks, a spreadsheet somebody's still updating by hand, a server nobody's
+        backed up in a year. Trade skill and systems skill, same standard: it has to
+        still work after I've left.
+      </p>
+      <div class="ctas">
+        <a class="btn solid" href="#contact">Get a quote</a>
+        <a class="btn ghost" href="#log">See what's shipped</a>
+      </div>
+    </div>
+    <div class="signal-diagram" aria-hidden="true">
+      <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+        <path class="path" d="M40 50 C 90 50, 90 100, 130 100 S 170 150, 220 150" />
+        <path class="pulse" d="M40 50 C 90 50, 90 100, 130 100 S 170 150, 220 150" />
+        <path class="path" d="M40 150 C 90 150, 90 100, 130 100 S 170 50, 220 50" />
+        <path class="pulse delay" d="M40 150 C 90 150, 90 100, 130 100 S 170 50, 220 50" />
+
+        <circle class="node-ring" cx="40" cy="50" r="16" />
+        <circle class="node-ring" cx="40" cy="150" r="16" />
+        <circle class="node-ring mid" cx="130" cy="100" r="18" />
+        <circle class="node-ring" cx="220" cy="50" r="16" />
+        <circle class="node-ring" cx="220" cy="150" r="16" />
+
+        <text class="node-label" x="40" y="30" text-anchor="middle">Site</text>
+        <text class="node-label" x="40" y="178" text-anchor="middle">Sheet</text>
+        <text class="node-label" x="130" y="128" text-anchor="middle">Sync</text>
+        <text class="node-label" x="220" y="30" text-anchor="middle">NAV</text>
+        <text class="node-label" x="220" y="178" text-anchor="middle">API</text>
+      </svg>
     </div>
   </div>
 
