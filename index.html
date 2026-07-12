@@ -132,7 +132,7 @@
     position: relative; width: 100%; height: 180px; overflow: hidden;
     background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent-dim) 20%, var(--bg)) 55%, color-mix(in srgb, var(--accent-dim) 32%, var(--bg)));
   }
-  .grass-field svg.blade { position: absolute; bottom: -10px; transform-origin: 50% 100%; animation: blade-sway var(--dur, 2.6s) ease-in-out infinite; animation-delay: var(--delay, 0s); will-change: transform; }
+  .grass-field svg.blade { position: absolute; bottom: -10px; overflow: visible; transform-origin: 50% 100%; animation: blade-sway var(--dur, 2.6s) ease-in-out infinite; animation-delay: var(--delay, 0s); will-change: transform; }
   @keyframes blade-sway {
     0%, 100% { transform: rotate(var(--tilt, -5deg)) skewX(-1deg); }
     50%      { transform: rotate(var(--tilt2, 7deg)) skewX(2deg); }
@@ -511,7 +511,15 @@
   var field = document.getElementById('grassField');
   if (field) {
     var svgNS = 'http://www.w3.org/2000/svg';
-    var bladeD = 'M4,100 C1,72 3,50 2,25 C1.7,12 3,3 5,0 C7,3 8.3,12 8,25 C7,50 9,72 6,100 Z';
+    // Three blade silhouettes instead of one rescaled shape: straight, a soft
+    // lean, and a deeper curve with a slight forked tip — real grass isn't
+    // one shape at different sizes.
+    var bladeShapes = [
+      'M4,100 C1,72 3,50 2,25 C1.7,12 3,3 5,0 C7,3 8.3,12 8,25 C7,50 9,72 6,100 Z',
+      'M4,100 C2,74 4,55 3.2,32 C2.8,18 4.5,6 6.5,0 C7.6,5 8,15 7.2,28 C6.5,52 8.5,74 6,100 Z',
+      'M4,100 C0.6,70 2.5,48 1.6,22 C1.3,10 3.8,2 5.2,0 C6,2.5 7.6,9 7.8,18 C8.3,30 6.2,48 8.6,66 C9.3,78 7.4,90 6,100 Z'
+    ];
+    var seedHeadD = 'M0,-14 C3,-10 3,-4 0,0 C-3,-4 -3,-10 0,-14 Z';
     var layers = [
       { grad: 'bladeGradBack',  minH: 60,  maxH: 100 },
       { grad: 'bladeGradMid',   minH: 90,  maxH: 140 },
@@ -525,6 +533,7 @@
       var h = layer.minH + Math.random() * (layer.maxH - layer.minH);
       var w = h * 0.11;
       var leftPct = Math.random() * 100;
+      var bottomJitter = (Math.random() * 14 - 4).toFixed(1);
 
       var svg = document.createElementNS(svgNS, 'svg');
       svg.setAttribute('class', 'blade');
@@ -533,13 +542,28 @@
       svg.setAttribute('width', w.toFixed(1));
       svg.setAttribute('height', h.toFixed(1));
       svg.style.left = 'calc(' + leftPct.toFixed(2) + '% - ' + (w / 2).toFixed(1) + 'px)';
+      svg.style.bottom = bottomJitter + 'px';
       svg.style.zIndex = String(idx);
+      // per-blade brightness jitter on top of the layer gradient - real grass
+      // isn't one flat tone across an entire depth band
+      var brightness = (0.88 + Math.random() * 0.24).toFixed(2);
+      var hue = (Math.random() * 10 - 5).toFixed(1);
+      svg.style.filter = 'brightness(' + brightness + ') hue-rotate(' + hue + 'deg)';
       svg.style.opacity = (0.55 + idx * 0.16).toFixed(2);
 
       var path = document.createElementNS(svgNS, 'path');
-      path.setAttribute('d', bladeD);
+      path.setAttribute('d', bladeShapes[Math.floor(Math.random() * bladeShapes.length)]);
       path.setAttribute('fill', 'url(#' + layer.grad + ')');
       svg.appendChild(path);
+
+      // sparse seed-heads on the front layer only, sways with its blade
+      if (idx === 2 && Math.random() < 0.05) {
+        var seed = document.createElementNS(svgNS, 'path');
+        seed.setAttribute('d', seedHeadD);
+        seed.setAttribute('transform', 'translate(5,2)');
+        seed.setAttribute('fill', 'url(#bladeGradFront)');
+        svg.appendChild(seed);
+      }
 
       // wind travels left-to-right across the field: delay tracks horizontal position, not pure random
       var delay = (leftPct / 100) * 1.7 + Math.random() * 0.5;
