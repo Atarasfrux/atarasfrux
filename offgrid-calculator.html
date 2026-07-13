@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Off-Grid Power Sizing — Solar &amp; Battery Calculator | Mantas Pagalys</title>
+<meta name="description" content="Free solar and battery bank sizing calculator for boats, cabins, and off-grid living. Add your real appliances, get watts and amp-hours, understand the math.">
+<style>
+@font-face { font-family:'Fraunces'; font-weight:400; font-style:normal; src:url('fonts/offgrid/Fraunces-Regular.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'Fraunces'; font-weight:600; font-style:normal; src:url('fonts/offgrid/Fraunces-SemiBold.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'Fraunces'; font-weight:700; font-style:normal; src:url('fonts/offgrid/Fraunces-Bold.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'JetBrains Mono'; font-weight:400; font-style:normal; src:url('fonts/offgrid/JetBrainsMono-Regular.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'JetBrains Mono'; font-weight:500; font-style:normal; src:url('fonts/offgrid/JetBrainsMono-Medium.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'JetBrains Mono'; font-weight:700; font-style:normal; src:url('fonts/offgrid/JetBrainsMono-Bold.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'Source Sans 3'; font-weight:400; font-style:normal; src:url('fonts/offgrid/SourceSans3-Regular.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'Source Sans 3'; font-weight:600; font-style:normal; src:url('fonts/offgrid/SourceSans3-SemiBold.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:'Source Sans 3'; font-weight:400; font-style:italic; src:url('fonts/offgrid/SourceSans3-Italic.ttf') format('truetype'); font-display:swap; }
+
+:root {
+  --bg: #0f1720;
+  --surface: #17222e;
+  --surface-2: #1e2b39;
+  --ink: #eef1f0;
+  --ink-muted: #93a6b5;
+  --ink-faint: #5d7183;
+  --accent: #c98a3c;
+  --accent-bright: #e2a959;
+  --accent-ink: #2a1a06;
+  --good: #4fa88f;
+  --warn: #c0492f;
+  --line: rgba(255,255,255,0.09);
+  --line-strong: rgba(255,255,255,0.16);
+  --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  --radius: 3px;
+}
+:root[data-theme="light"] {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --surface-2: #e4e9ee;
+  --ink: #16222d;
+  --ink-muted: #4c6070;
+  --ink-faint: #8296a6;
+  --accent: #a3671f;
+  --accent-bright: #8a5417;
+  --accent-ink: #fff6ea;
+  --good: #227a63;
+  --warn: #a83a24;
+  --line: rgba(22,34,45,0.12);
+  --line-strong: rgba(22,34,45,0.22);
+  --shadow: 0 20px 50px -25px rgba(22,34,45,0.35);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef1f4;
+    --surface: #ffffff;
+    --surface-2: #e4e9ee;
+    --ink: #16222d;
+    --ink-muted: #4c6070;
+    --ink-faint: #8296a6;
+    --accent: #a3671f;
+    --accent-bright: #8a5417;
+    --accent-ink: #fff6ea;
+    --good: #227a63;
+    --warn: #a83a24;
+    --line: rgba(22,34,45,0.12);
+    --line-strong: rgba(22,34,45,0.22);
+    --shadow: 0 20px 50px -25px rgba(22,34,45,0.35);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+a { color: var(--accent-bright); }
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 32px) 80px;
+}
+
+/* ---------- Header ---------- */
+header.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: clamp(28px, 5vw, 48px);
+  margin-bottom: clamp(28px, 5vw, 48px);
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+  flex: none;
+}
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 4px 0 0;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.dek {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--ink-muted);
+  max-width: 62ch;
+  margin: 4px 0 0;
+}
+
+/* ---------- Layout: panel grid ---------- */
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .panel-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 2.6vw, 28px);
+}
+.card + .card { margin-top: 20px; }
+
+.card h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin: 0 0 4px;
+  letter-spacing: -0.005em;
+}
+.card .sub {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  margin: 0 0 20px;
+  max-width: 52ch;
+}
+
+/* ---------- Appliance table ---------- */
+.appliance-head, .appliance-row {
+  display: grid;
+  grid-template-columns: 1.6fr 0.85fr 0.85fr 0.6fr 0.9fr 32px;
+  gap: 10px;
+  align-items: center;
+}
+.appliance-head {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0 2px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.appliance-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.appliance-row { padding: 4px 2px; }
+
+input[type="text"], input[type="number"], select {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: 8px 9px;
+  font: inherit;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+input[type="text"] { font-family: 'Source Sans 3', sans-serif; font-size: 14px; }
+input:focus, select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+.wh-readout {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+  font-size: 13.5px;
+  text-align: right;
+  padding-right: 4px;
+}
+.row-remove {
+  width: 28px; height: 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .15s, color .15s;
+}
+.row-remove:hover { border-color: var(--warn); color: var(--warn); }
+.row-remove:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.add-row-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.btn {
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--ink);
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: border-color .15s, background .15s;
+}
+.btn:hover { border-color: var(--accent); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+.btn-accent:hover { background: var(--accent-bright); border-color: var(--accent-bright); }
+
+select.preset-picker { width: auto; min-width: 200px; }
+
+/* ---------- Settings grid ---------- */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 18px;
+}
+@media (max-width: 520px) { .settings-grid { grid-template-columns: 1fr; } }
+.field label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+.field .hint {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* ---------- Readout panel (sticky results) ---------- */
+.readout {
+  position: sticky;
+  top: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 2.6vw, 26px);
+  box-shadow: var(--shadow);
+}
+.readout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.readout-block { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.readout-block:first-of-type { padding-top: 4px; }
+.readout-block:last-of-type { border-bottom: none; padding-bottom: 4px; }
+.readout-value {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  color: var(--accent);
+  line-height: 1.1;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.readout-value .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+.readout-note {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  padding: 3px 9px 3px 7px;
+  border-radius: 20px;
+  margin-top: 8px;
+  border: 1px solid var(--line-strong);
+}
+.status-chip.good { color: var(--good); border-color: color-mix(in srgb, var(--good) 45%, var(--line-strong)); }
+.status-chip.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, var(--line-strong)); }
+.status-chip::before { content:""; width:6px; height:6px; border-radius:50%; background: currentColor; }
+
+.total-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.total-summary strong {
+  color: var(--ink);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Explainer ---------- */
+.explainer {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 800px) { .explainer { grid-template-columns: 1fr; } }
+.explainer h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+.explainer p {
+  color: var(--ink-muted);
+  font-size: 14.5px;
+  margin: 0;
+}
+.explainer code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.9em;
+  color: var(--ink);
+}
+
+.gear-note {
+  margin-top: 28px;
+  padding: 18px 20px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--ink-muted);
+}
+.gear-note strong { color: var(--ink); }
+
+/* ---------- Gear shop ---------- */
+.gear-shop { margin-top: 40px; }
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 8px;
+}
+@media (max-width: 800px) { .gear-grid { grid-template-columns: 1fr; } }
+.gear-item {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.gear-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.gear-spec {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin: 6px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.gear-copy {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin: 0 0 14px;
+  flex: 1;
+}
+.btn-gear {
+  align-self: flex-start;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ---------- Ad slot ---------- */
+.ad-slot {
+  margin-top: 32px;
+  min-height: 90px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-faint);
+}
+.ad-slot-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- FJELL cross-promo ---------- */
+.fjell-promo {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+.fjell-promo-text { max-width: 62ch; }
+.fjell-promo h2 { margin-top: 2px; }
+.fjell-cta {
+  text-decoration: none;
+  white-space: nowrap;
+  flex: none;
+}
+
+footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card, .readout { transition: border-color .2s ease; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Off-Grid Power Sizing</span>
+    <h1>How much <em>solar and battery</em> do you actually need?</h1>
+    <p class="dek">List what you really run — a boat, a cabin, a van — and get a real watt and amp-hour number, with the reasoning shown, not just a figure to trust blindly.</p>
+  </header>
+
+  <div class="panel-grid">
+    <div class="main-col">
+
+      <div class="card">
+        <h2>Your loads</h2>
+        <p class="sub">Add every appliance you actually run, how many, and how many hours a day. Start from a preset or add your own.</p>
+
+        <div class="add-row-controls">
+          <select class="preset-picker" id="presetPicker">
+            <option value="">+ Add from preset…</option>
+          </select>
+          <button class="btn" id="addCustomBtn">+ Add custom item</button>
+        </div>
+
+        <div class="appliance-head">
+          <span>Appliance</span>
+          <span>Watts</span>
+          <span>Hrs / day</span>
+          <span>Qty</span>
+          <span style="text-align:right">Wh / day</span>
+          <span></span>
+        </div>
+        <div class="appliance-rows" id="applianceRows"></div>
+      </div>
+
+      <div class="card">
+        <h2>System settings</h2>
+        <p class="sub">These assumptions drive the sizing math on the right — adjust to your real location and gear.</p>
+        <div class="settings-grid">
+
+          <div class="field">
+            <label for="sunHours">Peak sun hours / day</label>
+            <input type="number" id="sunHours" value="4.5" min="0.5" max="14" step="0.1">
+            <div class="hint">Average usable full-sun-equivalent hours for your location and season — not daylight length. Coastal Norway summer ≈ 4–5, winter ≈ 0.5–1.5; Mediterranean ≈ 5–6; tropics ≈ 5–6 year-round.</div>
+          </div>
+
+          <div class="field">
+            <label for="autonomyDays">Days of autonomy</label>
+            <input type="number" id="autonomyDays" value="2" min="0" max="10" step="0.5">
+            <div class="hint">How many cloudy/no-sun days the battery bank alone must cover before you need to run a generator or plug in.</div>
+          </div>
+
+          <div class="field">
+            <label for="battChem">Battery chemistry</label>
+            <select id="battChem">
+              <option value="0.8" data-name="LiFePO4">LiFePO4 (lithium)</option>
+              <option value="0.5" data-name="AGM">AGM (sealed lead-acid)</option>
+              <option value="0.4" data-name="Flooded">Flooded lead-acid</option>
+            </select>
+            <div class="hint" id="chemHint">Usable depth of discharge assumed for this chemistry — draining further shortens battery life fast.</div>
+          </div>
+
+          <div class="field">
+            <label for="sysVoltage">System voltage</label>
+            <select id="sysVoltage">
+              <option value="12">12V</option>
+              <option value="24">24V</option>
+              <option value="48">48V</option>
+            </select>
+            <div class="hint">Higher voltage means thinner wiring for the same power — worth it past ~2–3kW of loads.</div>
+          </div>
+
+          <div class="field">
+            <label for="systemLoss">System losses</label>
+            <input type="number" id="systemLoss" value="20" min="0" max="50" step="1">
+            <div class="hint">Percent lost to wiring resistance, charge controller, inverter, and battery round-trip inefficiency. 15–20% is typical for a well-built system.</div>
+          </div>
+
+          <div class="field">
+            <label for="solarDerate">Solar derate</label>
+            <input type="number" id="solarDerate" value="25" min="0" max="50" step="1">
+            <div class="hint">Percent knocked off nameplate panel wattage for real-world angle, temperature, dirt, and partial shading — panels rarely hit their rated watts in practice.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-col">
+      <div class="readout">
+        <div class="readout-label">Daily demand</div>
+        <div class="readout-value"><span id="dailyWh">0</span><span class="unit">Wh / day</span></div>
+        <div class="readout-note">Sum of every load, before system losses.</div>
+
+        <div class="readout-block">
+          <div class="readout-label">Solar array needed</div>
+          <div class="readout-value"><span id="solarWatts">0</span><span class="unit">W</span></div>
+          <div class="readout-note" id="solarNote">Sized against your sun hours and derate.</div>
+        </div>
+
+        <div class="readout-block">
+          <div class="readout-label">Battery bank needed</div>
+          <div class="readout-value"><span id="battAh">0</span><span class="unit">Ah</span></div>
+          <div class="readout-note" id="battNote">At system voltage, covering your autonomy days.</div>
+        </div>
+
+        <div class="total-summary">
+          <span>Also expressed as</span>
+          <strong id="battKwh">0 kWh</strong>
+        </div>
+        <span class="status-chip good" id="statusChip">Add your loads to size a system</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="explainer">
+    <div>
+      <h3>Solar sizing</h3>
+      <p><code>array W = (daily Wh ÷ sun hours) ÷ (1 − derate)</code>. Sun hours are the real lever — the same loads need roughly 5× more panel in a Norwegian winter than a Mediterranean summer.</p>
+    </div>
+    <div>
+      <h3>Battery sizing</h3>
+      <p><code>bank Wh = daily Wh × autonomy days ÷ usable DoD</code>, then divided by system voltage for amp-hours. Lithium's higher usable DoD means a noticeably smaller, lighter bank than lead-acid for the same runtime.</p>
+    </div>
+    <div>
+      <h3>Losses compound</h3>
+      <p>Wiring, charge controller, and inverter losses all stack on top of each other — a system with 20% total loss needs a fifth more solar and battery than the raw load numbers suggest.</p>
+    </div>
+  </div>
+
+  <div class="card gear-shop" id="gearShop">
+    <h2>Gear that matches your numbers</h2>
+    <p class="sub">Ranges below update with your calculation above — this is the spec to actually shop against, not a generic "best solar panels" list.</p>
+    <div class="gear-grid">
+      <div class="gear-item">
+        <span class="gear-label">Solar panel(s)</span>
+        <div class="gear-spec"><span id="gearSolarSpec">—</span></div>
+        <p class="gear-copy">Total rated wattage across however many panels fit your roof/deck — one large panel or several smaller ones wired together both work.</p>
+        <!-- AFFILIATE SLOT: solar panel kit link. Replace href with your Amazon Associates / retailer affiliate link. -->
+        <a class="btn btn-gear" href="#" data-affiliate-slot="solar">Shop solar panels →</a>
+      </div>
+      <div class="gear-item">
+        <span class="gear-label">Battery bank</span>
+        <div class="gear-spec"><span id="gearBattSpec">—</span></div>
+        <p class="gear-copy">Match chemistry to what you selected above — a lithium battery rated for less than this Ah figure will undersize your autonomy.</p>
+        <!-- AFFILIATE SLOT: battery link. Replace href with your affiliate link. -->
+        <a class="btn btn-gear" href="#" data-affiliate-slot="battery">Shop batteries →</a>
+      </div>
+      <div class="gear-item">
+        <span class="gear-label">Charge controller</span>
+        <div class="gear-spec"><span id="gearCcSpec">—</span></div>
+        <p class="gear-copy">MPPT controllers recover more of your panels' real output than PWM, especially in cold or overcast conditions — worth it above ~100W.</p>
+        <!-- AFFILIATE SLOT: charge controller link. Replace href with your affiliate link. -->
+        <a class="btn btn-gear" href="#" data-affiliate-slot="controller">Shop controllers →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD SLOT: in-content unit. Paste your AdSense <ins> block here once approved.
+       Kept below the tool and gear section, never inside the calculator itself. -->
+  <div class="ad-slot" id="adSlotInContent" aria-hidden="true">
+    <span class="ad-slot-label">Advertisement</span>
+  </div>
+
+  <div class="card fjell-promo">
+    <div class="fjell-promo-text">
+      <span class="eyebrow" style="margin-bottom:6px;">Built for exactly this</span>
+      <h2>Designing the space these numbers live in?</h2>
+      <p class="sub" style="margin-bottom:0;">FJELL is a modular off-grid studio built around real power budgets like the one you just ran — not retrofitted around one after the fact.</p>
+    </div>
+    <!-- CROSS-PROMO LINK: replace href with your actual FJELL product/landing page URL. -->
+    <a class="btn btn-accent fjell-cta" href="/fjell-status.html" data-crosspromo="fjell">See FJELL →</a>
+  </div>
+
+  <div class="gear-note">
+    Rule-of-thumb sizing for planning — not a substitute for a marine electrician on safety-critical systems.
+  </div>
+
+  <footer>
+    <span>Off-grid power sizing tool.</span>
+    <span id="themeToggleWrap"></span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var PRESETS = [
+    { name: "LED light", watts: 5, hours: 5, qty: 4 },
+    { name: "Laptop", watts: 45, hours: 4, qty: 1 },
+    { name: "Phone charger", watts: 10, hours: 2, qty: 2 },
+    { name: "12V compressor fridge", watts: 45, hours: 8, qty: 1 },
+    { name: "Water pump", watts: 60, hours: 0.5, qty: 1 },
+    { name: "VHF radio (standby/use)", watts: 5, hours: 6, qty: 1 },
+    { name: "Autopilot", watts: 25, hours: 8, qty: 1 },
+    { name: "Starlink / router", watts: 40, hours: 10, qty: 1 },
+    { name: "Inverter standby draw", watts: 15, hours: 24, qty: 1 },
+    { name: "Marine stereo", watts: 10, hours: 3, qty: 1 },
+    { name: "Anchor light", watts: 3, hours: 10, qty: 1 },
+    { name: "CPAP machine", watts: 40, hours: 8, qty: 1 }
+  ];
+
+  var rowsEl = document.getElementById("applianceRows");
+  var presetPicker = document.getElementById("presetPicker");
+  var rowIdCounter = 0;
+
+  PRESETS.forEach(function (p, i) {
+    var opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = p.name;
+    presetPicker.appendChild(opt);
+  });
+
+  function addRow(data) {
+    data = data || { name: "", watts: "", hours: "", qty: 1 };
+    var id = "row-" + (rowIdCounter++);
+    var row = document.createElement("div");
+    row.className = "appliance-row";
+    row.dataset.id = id;
+    row.innerHTML =
+      '<input type="text" class="f-name" placeholder="Appliance name" value="' + escapeAttr(data.name) + '">' +
+      '<input type="number" class="f-watts" placeholder="W" min="0" step="1" value="' + data.watts + '">' +
+      '<input type="number" class="f-hours" placeholder="hrs" min="0" max="24" step="0.1" value="' + data.hours + '">' +
+      '<input type="number" class="f-qty" placeholder="qty" min="1" step="1" value="' + data.qty + '">' +
+      '<span class="wh-readout">0 Wh</span>' +
+      '<button type="button" class="row-remove" aria-label="Remove row" title="Remove">✕</button>';
+    rowsEl.appendChild(row);
+
+    row.querySelectorAll("input").forEach(function (inp) {
+      inp.addEventListener("input", recalc);
+    });
+    row.querySelector(".row-remove").addEventListener("click", function () {
+      row.remove();
+      recalc();
+    });
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  }
+
+  document.getElementById("addCustomBtn").addEventListener("click", function () {
+    addRow();
+    recalc();
+  });
+
+  presetPicker.addEventListener("change", function () {
+    var idx = presetPicker.value;
+    if (idx === "") return;
+    var p = PRESETS[parseInt(idx, 10)];
+    addRow({ name: p.name, watts: p.watts, hours: p.hours, qty: p.qty });
+    presetPicker.value = "";
+    recalc();
+  });
+
+  var chemSelect = document.getElementById("battChem");
+  var chemHint = document.getElementById("chemHint");
+  function updateChemHint() {
+    var opt = chemSelect.options[chemSelect.selectedIndex];
+    var pct = Math.round(parseFloat(opt.value) * 100);
+    chemHint.textContent = opt.dataset.name + ": usable depth of discharge assumed at " + pct + "% — draining further shortens battery life fast.";
+  }
+  chemSelect.addEventListener("change", function () { updateChemHint(); recalc(); });
+
+  var inputsToWatch = ["sunHours", "autonomyDays", "sysVoltage", "systemLoss", "solarDerate"];
+  inputsToWatch.forEach(function (id) {
+    document.getElementById(id).addEventListener("input", recalc);
+  });
+
+  function fmt(n, decimals) {
+    if (!isFinite(n)) return "0";
+    var d = decimals === undefined ? 0 : decimals;
+    return n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  function recalc() {
+    var totalWh = 0;
+    rowsEl.querySelectorAll(".appliance-row").forEach(function (row) {
+      var w = parseFloat(row.querySelector(".f-watts").value) || 0;
+      var h = parseFloat(row.querySelector(".f-hours").value) || 0;
+      var q = parseFloat(row.querySelector(".f-qty").value) || 0;
+      var wh = w * h * q;
+      row.querySelector(".wh-readout").textContent = fmt(wh) + " Wh";
+      totalWh += wh;
+    });
+
+    var sunHours = parseFloat(document.getElementById("sunHours").value) || 0;
+    var autonomyDays = parseFloat(document.getElementById("autonomyDays").value) || 0;
+    var dod = parseFloat(chemSelect.value) || 0.5;
+    var voltage = parseFloat(document.getElementById("sysVoltage").value) || 12;
+    var lossPct = parseFloat(document.getElementById("systemLoss").value) || 0;
+    var derate = parseFloat(document.getElementById("solarDerate").value) || 0;
+
+    var lossFactor = 1 - (lossPct / 100);
+    var adjustedWh = lossFactor > 0 ? totalWh / lossFactor : totalWh;
+
+    var solarWatts = sunHours > 0 && derate < 100
+      ? (adjustedWh / sunHours) / (1 - derate / 100)
+      : 0;
+
+    var battWh = dod > 0 ? (adjustedWh * autonomyDays) / dod : 0;
+    var battAh = voltage > 0 ? battWh / voltage : 0;
+
+    document.getElementById("dailyWh").textContent = fmt(totalWh);
+    document.getElementById("solarWatts").textContent = fmt(solarWatts);
+    document.getElementById("battAh").textContent = fmt(battAh);
+    document.getElementById("battKwh").textContent = fmt(battWh / 1000, 2) + " kWh";
+
+    // Gear-shop specs: round up to a buyable spec, not the raw theoretical number.
+    var solarRounded = Math.ceil(solarWatts / 10) * 10;
+    var battRounded = Math.ceil(battAh / 10) * 10;
+    var ccAmps = voltage > 0 ? Math.ceil((solarRounded * 1.25) / voltage / 5) * 5 : 0;
+    document.getElementById("gearSolarSpec").textContent =
+      totalWh > 0 ? fmt(solarRounded) + "W+" : "—";
+    document.getElementById("gearBattSpec").textContent =
+      totalWh > 0 ? fmt(battRounded) + "Ah @ " + fmt(voltage) + "V" : "—";
+    document.getElementById("gearCcSpec").textContent =
+      totalWh > 0 ? fmt(ccAmps) + "A MPPT" : "—";
+
+    var chip = document.getElementById("statusChip");
+    if (totalWh === 0) {
+      chip.textContent = "Add your loads to size a system";
+      chip.className = "status-chip good";
+    } else if (sunHours < 1.5) {
+      chip.textContent = "Very low sun hours — consider a generator backup";
+      chip.className = "status-chip warn";
+    } else {
+      chip.textContent = "System sized from " + rowsEl.children.length + " load" + (rowsEl.children.length === 1 ? "" : "s");
+      chip.className = "status-chip good";
+    }
+  }
+
+  // Seed with a small realistic starter set so the tool isn't empty on load.
+  [
+    { name: "LED light", watts: 5, hours: 5, qty: 4 },
+    { name: "12V compressor fridge", watts: 45, hours: 8, qty: 1 },
+    { name: "Laptop", watts: 45, hours: 3, qty: 1 },
+    { name: "Water pump", watts: 60, hours: 0.5, qty: 1 }
+  ].forEach(addRow);
+
+  updateChemHint();
+  recalc();
+
+  // Theme toggle (in addition to prefers-color-scheme)
+  var toggleWrap = document.getElementById("themeToggleWrap");
+  var toggleBtn = document.createElement("button");
+  toggleBtn.className = "btn";
+  toggleBtn.style.fontSize = "12px";
+  toggleBtn.style.padding = "5px 10px";
+  toggleBtn.textContent = "Toggle theme";
+  toggleBtn.addEventListener("click", function () {
+    var root = document.documentElement;
+    var current = root.getAttribute("data-theme");
+    var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var effectiveDark = current ? current === "dark" : prefersDark;
+    root.setAttribute("data-theme", effectiveDark ? "light" : "dark");
+  });
+  toggleWrap.appendChild(toggleBtn);
+})();
+</script>
+</body>
+</html>
