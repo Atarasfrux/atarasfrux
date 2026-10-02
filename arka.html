@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Mantas Pagalys">
+<meta name="copyright" content="© 2026 Mantas Pagalys">
+<meta name="robots" content="index, follow, noai, noimageai">
+<meta name="description" content="ARKA: permanent small homes for Norwegian municipalities, financed by Husbanken and covered by rent. Model and analysis by Mantas Pagalys.">
+<link rel="canonical" href="https://greifiks.org/arka.html">
+<link rel="alternate" hreflang="en" href="https://greifiks.org/arka.html">
+<link rel="alternate" hreflang="nb" href="https://greifiks.org/arka_no.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CreativeWork","name":"ARKA: from temporary to permanent",
+ "author":{"@type":"Person","name":"Mantas Pagalys","url":"https://greifiks.org"},
+ "copyrightHolder":{"@type":"Person","name":"Mantas Pagalys"},"copyrightYear":2026,
+ "dateCreated":"2026-09-28","datePublished":"2026-10-02","inLanguage":"en",
+ "license":"https://greifiks.org/arka.html#terms",
+ "identifier":"sha256:dfa304180430744d40be3e2aeea19d19c7eeff99be0afa9275fce66cf2d39551"}
+</script>
+
+<title>ARKA · From temporary to permanent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#fcfcfb; --surface:#ffffff; --line:#e4e3df; --grid:#efeeea;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#7d7c77;
+  --accent:#2a78d6; --accent-ink:#1c5cab; --muted-bar:#b9b8b2; --warn:#e34948;
+  --chip:#eef4fc;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#121211; --surface:#1a1a19; --line:#33332f; --grid:#2a2a27;
+    --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e86;
+    --accent:#3987e5; --accent-ink:#86b6ef; --muted-bar:#5b5a55; --warn:#e66767;
+    --chip:#1d2b3d;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121211; --surface:#1a1a19; --line:#33332f; --grid:#2a2a27;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e86;
+  --accent:#3987e5; --accent-ink:#86b6ef; --muted-bar:#5b5a55; --warn:#e66767;
+  --chip:#1d2b3d;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+body{overflow-x:hidden}
+.deck{max-width:1200px;margin:0 auto;padding:0 16px}
+section.slide{min-height:100vh;padding:72px 0 64px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start}
+html{scroll-snap-type:y proximity}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 16px}
+h1,h2{font-family:"Playfair Display",Georgia,serif;font-weight:700;margin:0 0 24px;line-height:1.15}
+h1{font-size:clamp(40px,6vw,72px)}
+h2{font-size:clamp(28px,4vw,48px);max-width:900px}
+p.lead{font-size:clamp(17px,2vw,22px);color:var(--ink-2);max-width:820px;margin:0 0 24px}
+p{max-width:820px}
+.hero-num{font-family:"Playfair Display",Georgia,serif;font-size:clamp(64px,11vw,140px);font-weight:700;line-height:1;color:var(--accent-ink);margin:8px 0 8px}
+.hero-sub{font-size:20px;color:var(--ink-2);max-width:760px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card .n{font-family:"Playfair Display",Georgia,serif;font-size:40px;font-weight:700;color:var(--accent-ink);line-height:1.1}
+.card .l{color:var(--ink-2);font-size:15px;margin-top:8px}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--accent-ink);margin-left:6px;vertical-align:middle;text-transform:uppercase}
+.tag.h{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.win{color:var(--accent-ink);font-weight:600}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;position:relative}
+.chart h3{margin:0 0 4px;font-size:17px}
+.chart .note{font-size:13px;color:var(--ink-3);margin:0 0 16px}
+svg text{font-family:Inter,system-ui,sans-serif}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;padding:8px 12px;border-radius:8px;opacity:0;transition:opacity .12s;max-width:280px;z-index:10}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:14px}
+.flow .step b{display:block;font-size:15px;margin-bottom:6px}
+.flow .arrow{display:none}
+@media (max-width:860px){.flow{grid-template-columns:1fr}}
+.foot{font-size:12px;color:var(--ink-3);margin-top:24px}
+.nav{position:fixed;right:16px;bottom:16px;display:flex;gap:8px;z-index:5}
+.nav button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+ul.tight{margin:0;padding-left:20px} ul.tight li{margin:6px 0}
+.gallery{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.gallery figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.gallery img{display:block;width:100%;height:auto}
+.gallery figcaption{font-size:13px;color:var(--ink-2);padding:10px 14px}
+.gallery .wide{grid-column:1 / -1}
+@media (max-width:760px){.gallery{grid-template-columns:1fr}}
+.spec td:first-child{color:var(--ink-2)}
+details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:860px} summary{cursor:pointer;color:var(--ink);font-size:16px} details p{color:var(--ink-2);margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="nav"><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Calculator</a><a href="arka_no.html" hreflang="nb" lang="nb" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Norsk</a><button id="theme" aria-label="Toggle theme">Light / dark</button><button onclick="window.print()">Print</button></div>
+<div class="tip" id="tip" role="tooltip"></div>
+<main class="deck">
+
+<!-- 1 -->
+<section class="slide">
+  <p class="kicker">ARKA · From temporary to permanent · October 2026</p>
+  <h1>A permanent home costs a municipality less per month than one night in a hotel</h1>
+  <p class="lead">Norwegian municipalities are paying hotel and guesthouse rates to house people they are legally obliged to help. A small factory-built home on a municipal plot, financed by Husbanken and let at a rent within the housing-benefit limit, costs the municipality at most about 1,300 kr a month after rent, even with every cautious assumption applied.</p>
+  <p class="foot"><b>Why ARKA:</b> arka means arch, the structure that spans a gap and carries the load. ARKA spans the gap between temporary housing and a permanent home, built from parts that already exist.</p>
+  <p class="foot">How to read the figures: <span class="tag">sourced</span> from a named public source · <span class="tag">calc</span> arithmetic on sourced figures · <span class="tag h">assumption</span> an input the pilot will confirm. Every figure is reproducible with the published model (arka_finance.py); the last slide lists sources and how far each has been checked.</p>
+  <p class="foot" style="margin-top:12px">© 2026 Mantas Pagalys, originator of the ARKA model (first version dated 28.09.2026). Municipalities and other public bodies may use this method for their own procurement, with attribution. Commercial reuse, resale or reproduction by suppliers, consultants or investors requires written permission. Contact: pagalysm@gmail.com</p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <p class="kicker">The problem</p>
+  <h2>The temporary solution has become the expensive one</h2>
+  <div class="grid3">
+    <div class="card"><div class="n">7,077</div><div class="l">households in temporary housing in 2024: the highest number ever recorded, up 60 % since 2021 <span class="tag">sourced</span></div></div>
+    <div class="card"><div class="n">≈16,200 kr</div><div class="l">per household per month: Tromsø's net spending on temporary housing in 2025 (13.6 M kr, about 70 households) <span class="tag">calc</span></div></div>
+    <div class="card"><div class="n">2,000 kr</div><div class="l">per night: the upper rate Stavanger pays; over 40 M kr spent on the service last year <span class="tag">sourced</span></div></div>
+  </div>
+  <p class="foot">At the end of 2025, 9,396 municipal homes stood unlet while 14,458 applications for municipal housing were refused (SSB tables 12008 and 12012). The shortage is not homes as such but the right home in the right place. Tromsø has said publicly that long stays in temporary housing put it in breach of the law. The money is already being spent; the question is what it buys.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <p class="kicker">The comparison</p>
+  <div class="hero-num">≈16,200 vs ≤1,300</div>
+  <p class="hero-sub">Kroner per month, per household. On the left, what Tromsø paid on average for temporary housing in 2025. On the right, the most a permanent ARKA home costs the municipality after rent: an ordinary plot, no VAT refund, no donor contribution. <span class="tag">calc</span></p>
+  <div class="chart" style="margin-top:32px">
+    <h3>Net monthly cost to the municipality, per household housed</h3>
+    <p class="note">Home: Husbanken loan at 4.774 % (20-year fixed, October 2026) over 50 years, running costs 1,640 kr/month (maintenance, municipal fees, insurance), rent 7,050 kr at 95 % occupancy, no VAT refund. Temporary housing: Stavanger's upper nightly rate × 365 / 12; Tromsø's 2025 net spend ÷ about 70 households.</p>
+    <div id="c1"></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <p class="kicker">The price</p>
+  <h2>Buy the home, not the contractor</h2>
+  <p class="lead">Same scope in every bar: one small permanent home, groundwork and connections included. The saving comes from how the home is bought, not from building less.</p>
+  <div class="chart">
+    <h3>Capital cost per home, million kroner excl. VAT</h3>
+    <p class="note">Hard-use tender: Ringsaker 2024, one hardbruksbolig, complete delivery incl. site preparation, water and power. Totalentreprise: estimates stated by municipalities in their tender notices, 55–85,000 kr/m² × 30 m². ARKA route: module ≈28,000 kr/m² × 30 m², groundwork 275k on an ordinary plot or 100k on a serviced plot, plus 40k soft costs.</p>
+    <div id="c2"></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <p class="kicker">How it works</p>
+  <h2>Five parts that already exist. The model only connects them.</h2>
+  <div class="flow">
+    <div class="step"><b>1 · Plot</b>A municipal plot with water, sewer and power in place. Best of all, a plot that already has a building: there the home needs no responsible enterprise (SAK10 § 3-1 e). One home per plot spreads homes through ordinary streets, as Housing First practice recommends.</div>
+    <div class="step"><b>2 · Home</b>A finished home of under 30 m² from an established factory, bought on its own through an open tender at ≈28,000 kr per m².</div>
+    <div class="step"><b>3 · Owner</b>The municipality. A VAT refund is possible only for homes that are specially adapted, and practice has been strict since 2013, so every figure here assumes no refund.</div>
+    <div class="step"><b>4 · Loan</b>Husbanken lends a municipality up to 100 % of the value (lending regulation § 7-4), over up to 50 years, with the rate fixed for up to 20. Municipalities cannot go bankrupt.</div>
+    <div class="step"><b>5 · Rent</b>7,050 kr a month excluding heating: the most that housing benefit counts in full for one person. Rent covers most of the cost; the municipality carries the rest, at most about 1,300 kr a month.</div>
+  </div>
+  <p class="foot">For a municipality that prefers not to borrow: a foundation or investor owns the homes on an 85 % Husbanken loan, under a tilvisningsavtale that gives the municipality the right to place tenants. That route needs more than 15 % equity to be bankable. See "One house, three money engines".</p>
+</section>
+
+<!-- design -->
+<section class="slide" id="design">
+  <p class="kicker">The reference unit</p>
+  <h2>ARKA 28: drawn to the rules that make it fast and fundable</h2>
+  <div class="gallery">
+    <figure><img src="arka_img/01_arka_hero_street_dusk.jpg" alt="ARKA 28 on a serviced plot in a residential street at dusk" loading="lazy" width="1600" height="900"><figcaption>On its own plot, in an ordinary residential street.</figcaption></figure>
+    <figure><img src="arka_img/03_arka_interior.jpg" alt="Birch plywood interior with bed, kitchenette and desk" loading="lazy" width="1600" height="900"><figcaption>Birch plywood interior; heat pump, panel heaters, sprinklers.</figcaption></figure>
+    <figure class="wide"><img src="arka_img/04_arka28_floor_plan.jpg" alt="Floor plan of ARKA 28 v2 with bathroom, living area, kitchenette, bed and technical cupboard" loading="lazy" width="1600" height="672"><figcaption>Plan from the entrance: bathroom (WC, shower, basin), living and desk, kitchenette, bed, technical cupboard opened from outside. Second exit at the back.</figcaption></figure>
+    <figure class="wide"><img src="arka_img/02_arka_scattered_plots_aerial.jpg" alt="Several ARKA homes, each on its own plot along an existing street" loading="lazy" width="1600" height="900"><figcaption>Scattered, one per plot, inside an existing neighbourhood.</figcaption></figure>
+  </div>
+  <table class="spec" style="margin-top:24px">
+    <thead><tr><th>Requirement</th><th>Rule</th><th>ARKA 28, measured on the model</th></tr></thead>
+    <tbody>
+      <tr><td>Simpler permit route, SAK10 § 3-1 e (no responsible enterprise only on an already-built plot)</td><td>≤30 m² BRA, one storey, ≤4.5 m high, no flue</td><td class="win">29.1 m² · 1 storey · 3.44 m · no flue</td></tr>
+      <tr><td>Room height, TEK17 § 12-7</td><td>≥2.4 m in rooms for permanent use</td><td class="win">2.66 m clear</td></tr>
+      <tr><td>Transport without escort</td><td>≤3.0 m wide</td><td class="win">2.99 m</td></tr>
+      <tr><td>Housing benefit (bostøtte)</td><td>Own entrance, bathroom and WC, cooking, space to sleep and sit</td><td class="win">All present</td></tr>
+      <tr><td>Heating</td><td>No flue under the simpler route</td><td class="win">Air-to-air heat pump and panel heaters</td></tr>
+      <tr><td>Safety, from six municipal tender specifications</td><td>Sprinkler with alarm, second exit, staff access to technical installations</td><td class="win">Home sprinkler and smoke detectors, rear door, technical cupboard opened from outside with a key safe</td></tr>
+      <tr><td>Hard use</td><td>Surfaces that can be cleaned and replaced</td><td class="win">Floor falling to drains, no shower glass, plywood screwed on visibly over OSB</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Design illustrations of the ARKA 28 reference unit, rendered from the author's parametric model, with every dimension above checked by script against the rule beside it. They are not photographs of a built house. Final dimensions follow the chosen supplier's documentation and the municipality's requirements. A home larger than 30 m² is a separate product that requires a responsible enterprise and independent control.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <p class="kicker">The municipal budget</p>
+  <h2>The real test is net cost, and every case stays far below temporary housing</h2>
+  <div class="chart">
+    <h3>Net monthly cost to the municipality after rent, with no VAT refund</h3>
+    <p class="note">Loan at 4.774 % over 50 years with monthly terms; running costs 1,640 kr/month; rent 7,050 kr at 95 % occupancy; 40k soft costs per home. A serviced plot with a 200k donor contribution runs a surplus of about 535 kr a month.</p>
+    <div id="c3"></div>
+  </div>
+  <p class="foot">Rent alone does not cover the loan in every case, and the model does not pretend it does. With the VAT refund, which is possible only for specially adapted homes, every case improves by about 1,100–1,300 kr a month. Over 20 years, the home pays off for any municipality whose temporary housing costs more than about 9,600–11,000 kr per household per month (317–363 kr a night). Tromsø's 2025 average was about 16,200.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <p class="kicker">Where philanthropy fits</p>
+  <h2>The same 10 M kr: 8 homes bought, or 37 homes made cash-positive</h2>
+  <p class="lead">Husbanken and rent pay for the house. Donor money does what neither will: a contribution of about 270,000 kr per home lifts a serviced-plot home from a small deficit to a surplus with lender-grade cover (1.2×), even with no VAT refund.</p>
+  <div class="chart">
+    <h3>Homes delivered per 10 M kr of donor money</h3>
+    <p class="note">Same basis for both bars: serviced plot, no VAT refund. Bought outright: 1.225 M kr per home incl. VAT, so 8 whole homes. Catalyst: 270k per home on a municipal Husbanken loan.</p>
+    <div id="c4"></div>
+  </div>
+</section>
+
+<!-- engines -->
+<section class="slide">
+  <p class="kicker">Who it serves</p>
+  <h2>One house, three money engines</h2>
+  <p class="lead">The home is the same for everyone. What changes is who owns it and how it is paid for. The order below starts where the numbers are strongest and the buyer is clearest.</p>
+  <table>
+    <thead><tr><th>Engine</th><th>Who lives there</th><th>Who owns and how it is paid for</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Municipal home</b></td><td>People the municipality houses: low-income single adults, refugees, people with disabilities, young adults leaving care, people in recovery</td><td>The municipality, on a Husbanken loan of up to 100 %, rent within the housing-benefit limit</td><td class="win">Pilot</td></tr>
+      <tr><td><b>2 · Mixed rental</b></td><td>At least 40 % placed by the municipality; the rest rented on the open market to students, single workers and people who choose to live small</td><td>A foundation or investor on an 85 % Husbanken loan, with a tilvisningsavtale for at least 20 years. Needs more than 15 % equity</td><td>Next</td></tr>
+      <tr><td><b>3 · ARKA 40+</b></td><td>Young first-time buyers in rural municipalities</td><td>The municipality buys and sells on; a local bank lends (the Heim model). Over 30 m², so a separate product with full permit roles</td><td>After first deliveries</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Mixed tenancies strengthen the model: a home in an ordinary street, among ordinary neighbours, is the setting Housing First aims for.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <p class="kicker">Why no one blocks it</p>
+  <h2>Every party with a veto comes out ahead</h2>
+  <table>
+    <thead><tr><th>Party</th><th>Today</th><th>With ARKA</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr><td>Municipality</td><td>Temporary-housing bills and a legal duty it struggles to meet</td><td>A permanent home at a fraction of the monthly cost</td><td class="win">Better off</td></tr>
+      <tr><td>Husbanken</td><td>93 % of 2025 rental-loan volume went to private companies</td><td>Lends to the safest borrower, on its core mandate</td><td class="win">Better off</td></tr>
+      <tr><td>Home suppliers</td><td>3–5 tenders a year that buy the home on its own</td><td>More of those tenders, spread by an open method</td><td class="win">Better off</td></tr>
+      <tr><td>Procurement officer</td><td>Personal blame if a new method fails</td><td>A template, a state example to point to (DFØ Eksempelbanken), and a coordinator</td><td class="win">Better off</td></tr>
+      <tr><td>Donor</td><td>1 home per ≈1.2 M kr</td><td>1 home made cash-positive per ≈270k kr</td><td class="win">Better off</td></tr>
+      <tr><td>Hotels, totalentreprise contractors</td><td>Paid</td><td>Lose some business</td><td>Worse off · no veto</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <p class="kicker">Objections</p>
+  <h2>What a credit committee will ask, answered</h2>
+  <table>
+    <thead><tr><th>Objection</th><th>Answer</th><th>Remaining risk</th></tr></thead>
+    <tbody>
+      <tr><td>Rent does not cover the loan in every case</td><td>Correct, and the model says so. The municipality's worst-case net cost is about 1,300 kr a month per home, against about 16,200 for temporary housing in Tromsø. A donor contribution of about 270k makes a serviced-plot home cash-positive.</td><td>Low</td></tr>
+      <tr><td>No VAT refund</td><td>Already assumed. Refunds go only to specially adapted homes (Skattedirektoratet 2013); the courts are split and both rulings are under appeal. A refund would improve every case by about 1,100–1,300 kr a month.</td><td>Priced in</td></tr>
+      <tr><td>Interest rates rise</td><td>Fix for up to 20 years at 4.774 % (October 2026). Each percentage point adds about 700–900 kr a month per home, still a fraction of temporary housing.</td><td>Low</td></tr>
+      <tr><td>A rural home may be valued below its cost</td><td>The municipality is the borrower. Municipal loans are unsecured, and municipalities cannot go bankrupt.</td><td>Low</td></tr>
+      <tr><td>Heavy wear</td><td>Hard-use specification from six municipal tenders: cleanable floors with drains, replaceable panels, sprinklers. Running costs budgeted from components, not a guess.</td><td>Medium</td></tr>
+      <tr><td>Module price higher than assumed</td><td>The biggest single lever. A serviced-plot home reaches 1.2× rent cover without a donor contribution at a module price of about 20,800 kr/m², against about 28,000 today. The pilot tender establishes the real price.</td><td>Medium</td></tr>
+      <tr><td>Supplier collapses mid-delivery</td><td>Several small suppliers in this market are thinly capitalised. The tender requires a performance guarantee and staged payment against delivered work, and ARKA never depends on a single supplier.</td><td>Medium</td></tr>
+      <tr><td>Why a module and not a conventional build?</td><td>Speed. Every month a household waits in temporary housing costs about 16,200 kr (Tromsø 2025 average). A finished home placed on a plot with services already in shortens that wait; the pilot measures by how much.</td><td>Low</td></tr>
+      <tr><td>Quality and TEK17 compliance</td><td>Only suppliers with SINTEF Technical Approval or an ETA; a Norwegian engineer reviews before any order.</td><td>Medium</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- faq -->
+<section class="slide" id="faq">
+  <p class="kicker">FAQ</p>
+  <h2>Straight answers</h2>
+  <details open><summary><b>Who is it for?</b></summary><p>People the municipality houses: low-income single adults, refugees, people with disabilities, young adults leaving care, people in recovery. Under engine 2, also students, single workers and people who choose to live small. ARKA 28 is for one adult; couples, wheelchair users and parents with visiting children need a larger home.</p></details>
+  <details><summary><b>Why not just use the empty municipal homes?</b></summary><p>Where they fit, they should be used first. But 9,396 municipal homes stood unlet at the end of 2025 while 14,458 applications were refused, which shows the existing stock is often the wrong size, in the wrong place or not robust enough. ARKA 28 is the type the stock lacks: a single, robust home, spread out, with sprinkler, second exit and staff access.</p></details>
+  <details><summary><b>Is this a cabin or a tiny house?</b></summary><p>No. It is a permanent dwelling, approved and registered for year-round living, never as a mobile home. Housing benefit is not paid for mobile homes.</p></details>
+  <details><summary><b>Why under 30 m²?</b></summary><p>A detached home of up to 30 m² BRA on one storey falls under a simpler permit route (SAK10 § 3-1 e). On a plot that already has a building, no responsible enterprise is needed. On an empty plot, DiBK's guidance requires one; the supplier or a local builder takes that role.</p></details>
+  <details><summary><b>Why one home per plot?</b></summary><p>Two new homes on one plot are assessed together and lose the simpler route. Spreading single homes through ordinary streets is also what Housing First practice recommends.</p></details>
+  <details><summary><b>Why no wood stove?</b></summary><p>A chimney or flue removes the simpler route. Heat comes from an air-to-air heat pump and electric panel heaters.</p></details>
+  <details><summary><b>Does the home qualify for housing benefit?</b></summary><p>Yes: it has its own entrance, its own bathroom and WC, a place to cook, and room to sleep and sit. Whether a tenant receives the benefit depends on their income. Housing benefit counts rent up to 7,050 kr a month for one person when heating is paid separately, or 7,686 kr when it is included.</p></details>
+  <details><summary><b>Who owns the homes?</b></summary><p>Normally the municipality. Alternatively a foundation or investor, with a tilvisningsavtale that gives the municipality placement rights for at least 20 years.</p></details>
+  <details><summary><b>How is it financed?</b></summary><p>A Husbanken loan of up to 100 % to the municipality, over up to 50 years, with the rate fixable for up to 20 (4.774 % in October 2026). Rent covers most of the cost; the municipality's net share is at most about 1,300 kr a month per home.</p></details>
+  <details><summary><b>What about VAT?</b></summary><p>The model assumes the full 25 % with no refund. A refund is possible only for homes that are specially adapted for health or social purposes; ARKA's safety features strengthen such a claim, but nothing depends on it.</p></details>
+  <details><summary><b>What does the municipality have to provide?</b></summary><p>A serviced plot, tenant allocation and follow-up services, which it provides already. Coordination of the pilot can be bought directly (below 500,000 kr no tender is required since 1 July 2026), and can later be part-funded through Husbanken's grant for housing measures (next deadline 15 May 2027).</p></details>
+  <details><summary><b>Who builds it?</b></summary><p>An established factory chosen by open tender, with Norwegian documentation (SINTEF Technical Approval or ETA). ARKA does not manufacture and does not sell homes, and never bids in a tender it helped design.</p></details>
+  <details><summary><b>How does ARKA earn?</b></summary><p>As coordinator for the municipality: running the tender, organising groundwork and checking documentation. The method itself is open to public bodies.</p></details>
+  <details><summary><b>Has any ARKA home been built?</b></summary><p>Not yet. The pilot exists to produce real figures for cost, upkeep and temporary housing avoided, in the municipality's own accounts. Similar homes are already delivered to Norwegian municipalities by others, for example in Sandnes and Heim.</p></details>
+  <details><summary><b>Who is behind it?</b></summary><p>Mantas Pagalys, a carpenter based in Oslo, who developed the model and its financial analysis. Contact: pagalysm@gmail.com</p></details>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <p class="kicker">The proposal</p>
+  <h2>A pilot: 5 homes, one municipality, one year</h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="l" style="margin-top:0"><b style="color:var(--ink)">What the pilot needs</b></div>
+      <ul class="tight">
+        <li>One municipality with plots that have services in place, ideally already built on, and pressure on temporary housing. Strong candidates: Bodø, Skjervøy, Namsskogan, Meløy, Steinkjer, Nesseby</li>
+        <li>About 1.35 M kr from donors: 5 × 270k per home</li>
+        <li>Coordination bought directly by the municipality (under the 500,000 kr threshold), with Husbanken's housing-measures grant as a later co-funder</li>
+        <li>A Norwegian engineer for technical review</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="l" style="margin-top:0"><b style="color:var(--ink)">What it proves</b></div>
+      <ul class="tight">
+        <li>The real module price from an open tender: the biggest lever in the model</li>
+        <li>Real running costs with real tenants</li>
+        <li>Temporary housing avoided, in the municipality's own accounts</li>
+        <li>A published case in DFØ's Eksempelbanken, so the next municipality starts from evidence</li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot">Three facts confirmed before any order: Husbanken's view on single homes on scattered plots; real running costs from a municipality that already owns small homes; the pilot municipality's own monthly cost of temporary housing.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <p class="kicker">Sources and confidence</p>
+  <h2>What is sourced, what is calculated, what is assumed</h2>
+  <table>
+    <thead><tr><th>Figure</th><th>Status</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Husbanken: up to 100 % (municipality) / 85 % (legal entity) of value; 50 years; 20 years fixed; tilvisning ≥40 % for ≥20 years</td><td><span class="tag">sourced</span></td><td>Forskrift om lån fra Husbanken § 7-4 and ch. 3 (Lovdata); Husbanken guide HB.7.B.18</td></tr>
+      <tr><td>Husbanken 20-year fixed 4.774 %, floating 4.025 % (October 2026)</td><td><span class="tag">sourced</span></td><td>husbanken.no, renteutvikling</td></tr>
+      <tr><td>Housing-benefit ceiling 92,234 kr a year, one person; heating add-on 7,631 kr a year</td><td><span class="tag">sourced</span></td><td>Forskrift om bustøtte §§ 2–3 (Lovdata)</td></tr>
+      <tr><td>Housing-benefit requirements for the dwelling</td><td><span class="tag">sourced</span></td><td>husbanken.no, krav til boligen</td></tr>
+      <tr><td>VAT refund only for specially adapted homes</td><td><span class="tag">sourced</span></td><td>Skattedirektoratet, statement 12.03.2013; Gulating 26.03.2026 and Oslo tingrett 16.05.2026, both appealed</td></tr>
+      <tr><td>Tromsø 2025 net spend 13.6 M kr, about 70 households; hotel 4,000–4,500 kr a night</td><td><span class="tag">sourced</span></td><td>Nettavisen / Nordlys, 16.02.2026</td></tr>
+      <tr><td>Stavanger up to 2,000 kr a night; over 40 M kr last year</td><td><span class="tag">sourced</span></td><td>Stavanger Aftenblad, 04.09.2026</td></tr>
+      <tr><td>Municipal water, sewer and waste fees 17,302 kr a year (standard house)</td><td><span class="tag">sourced</span></td><td>SSB table 12842, 2026</td></tr>
+      <tr><td>9,396 municipal homes unlet at 31.12.2025; 14,458 applications refused (2025)</td><td><span class="tag">sourced</span></td><td>SSB tables 12008 and 12012 (API, read 03.10.2026)</td></tr>
+      <tr><td>7,077 households in temporary housing in 2024 (+60 %)</td><td><span class="tag">sourced</span></td><td>KOSTRA, via ARKA research file B</td></tr>
+      <tr><td>Ringsaker hardbruksbolig 3.5 M kr ex VAT (2024)</td><td><span class="tag">sourced</span></td><td>Doffin 2024-103263, via file B</td></tr>
+      <tr><td>Module ≈28,000 kr/m² ex VAT</td><td><span class="tag">sourced</span></td><td>Fleksihus list price, via file A</td></tr>
+      <tr><td>Direct purchase allowed below 500,000 kr excl. VAT (from 01.07.2026)</td><td><span class="tag">sourced</span></td><td>Anskaffelsesforskriften § 1-1, amended by FOR-2026-04-14-617 (Lovdata)</td></tr>
+      <tr><td>Housing-measures grant: deadline 15 May; organisation number required; results published openly</td><td><span class="tag">sourced</span></td><td>FOR-2026-03-26-506 § 8 (Lovdata)</td></tr>
+      <tr><td>Serviced municipal plots: Skjervøy, Namsskogan, Meløy, Steinkjer, Nesseby and others</td><td><span class="tag">sourced</span></td><td>Municipal websites and fee schedules; NRK (research file D)</td></tr>
+      <tr><td>Municipalities cannot go bankrupt; municipal loans unsecured</td><td><span class="tag">sourced</span></td><td>kbn.com; kommuneloven</td></tr>
+      <tr><td>Groundwork 100–275k; soft costs 40k; insurance; occupancy 95 %; share of fees paid by a 30 m² home</td><td><span class="tag h">assumption</span></td><td>Confirmed in the pilot</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Model: arka_finance.py, with a 50,000-draw stress test of rates, prices, running costs, occupancy and VAT. Not legal or tax advice.</p>
+  <p class="foot" id="terms" style="margin-top:12px">© 2026 Mantas Pagalys, originator of the ARKA model (first version dated 28.09.2026). Municipalities and other public bodies may use this method for their own procurement, with attribution. Commercial reuse, resale or reproduction by suppliers, consultants or investors requires written permission. Contact: pagalysm@gmail.com</p>
+</section>
+
+</main>
+<script>
+(function(){
+  const root=document.documentElement, KEY="arka-theme";
+  try{const s=localStorage.getItem(KEY); if(s) root.setAttribute("data-theme",s);}catch(e){}
+  document.getElementById("theme").onclick=()=>{
+    const dark = root.getAttribute("data-theme")==="dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    const next = dark ? "light" : "dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  };
+  const tip=document.getElementById("tip");
+  function show(e,t){tip.textContent=t;tip.style.opacity=1;tip.style.left=Math.min(e.clientX+14,innerWidth-300)+"px";tip.style.top=(e.clientY+14)+"px";}
+  function hide(){tip.style.opacity=0;}
+  const NS="http://www.w3.org/2000/svg";
+  function el(n,a,p){const x=document.createElementNS(NS,n);for(const k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+  // horizontal bar chart; rows: {label, v, lo, hi, hi_light(bool), fmt, tip}
+  function hbar(id,rows,opt){
+    const host=document.getElementById(id);
+    const W=1000,rowH=56,labelW=opt.labelW||300,padR=140,H=rows.length*rowH+(opt.ref?28:8);
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",role:"img","aria-label":opt.aria},host);
+    const max=opt.max, x=v=>labelW+(W-labelW-padR)*v/max;
+    if(opt.ref!=null){
+      el("line",{x1:x(opt.ref),x2:x(opt.ref),y1:0,y2:rows.length*rowH,stroke:"var(--ink-3)","stroke-dasharray":"4 4","stroke-width":1.5},svg);
+      const t=el("text",{x:x(opt.ref),y:rows.length*rowH+18,"text-anchor":"middle","font-size":13,fill:"var(--ink-3)"},svg);t.textContent=opt.refLabel;
+    }
+    rows.forEach((r,i)=>{
+      const y=i*rowH+12, h=28;
+      const lt=el("text",{x:labelW-16,y:y+h/2+5,"text-anchor":"end","font-size":15,fill:"var(--ink)","font-weight":r.hi?600:400},svg);lt.textContent=r.label;
+      const fill=r.hi?"var(--accent)":"var(--muted-bar)";
+      const w=Math.max(4,x(r.v)-labelW);
+      const bar=el("path",{d:`M${labelW},${y} h${w-4} a4,4 0 0 1 4,4 v${h-8} a4,4 0 0 1 -4,4 h${-(w-4)} z`,fill},svg);
+      if(r.lo!=null){ el("line",{x1:x(r.lo),x2:x(r.hi_v),y1:y+h/2,y2:y+h/2,stroke:"var(--ink-2)","stroke-width":2},svg);
+        [r.lo,r.hi_v].forEach(v=>el("line",{x1:x(v),x2:x(v),y1:y+h/2-7,y2:y+h/2+7,stroke:"var(--ink-2)","stroke-width":2},svg)); }
+      const vt=el("text",{x:x(r.lo!=null?r.hi_v:r.v)+10,y:y+h/2+5,"font-size":15,fill:r.hi?"var(--accent-ink)":"var(--ink-2)","font-weight":600},svg);vt.textContent=r.fmt;
+      const hit=el("rect",{x:0,y:i*rowH,width:W,height:rowH,fill:"transparent"},svg);
+      hit.addEventListener("mousemove",e=>show(e,r.tip));hit.addEventListener("mouseleave",hide);
+    });
+  }
+  hbar("c1",[
+    {label:"Stavanger, upper hotel rate",v:60833,fmt:"60,800 kr",tip:"Up to 2,000 kr per night × 365 / 12 (Stavanger Aftenblad, 04.09.2026)"},
+    {label:"Tromsø 2025 average",v:16190,fmt:"≈16,200 kr",tip:"Net 13.6 M kr temporary-housing spend in 2025 ÷ about 70 households (Nettavisen/Nordlys)"},
+    {label:"ARKA home, worst case",v:1300,fmt:"1,300 kr",hi:true,tip:"Ordinary plot, no VAT refund, no donor contribution: loan 6,358 + running costs 1,640 − rent 7,050 × 95 %"},
+    {label:"ARKA home, serviced plot",v:342,fmt:"342 kr",hi:true,tip:"Serviced plot, no VAT refund, no donor contribution: loan 5,399 + running costs 1,640 − rent 6,698"}
+  ],{max:66000,aria:"Net monthly cost per household: temporary housing vs ARKA home",labelW:330});
+  hbar("c2",[
+    {label:"Hard-use home, tender (Ringsaker)",v:3.5,fmt:"3.50 M",tip:"Ringsaker 2024, one hardbruksbolig, complete incl. site prep, water and power: 3.5 M kr ex VAT (Doffin 2024-103263)"},
+    {label:"Totalentreprise, 30 m²",v:2.1,lo:1.65,hi_v:2.55,fmt:"1.65–2.55 M",tip:"Buyers' own estimates 55,000–85,000 kr/m² × 30 m²; bar shows the midpoint"},
+    {label:"ARKA route, ordinary plot",v:1.155,fmt:"1.16 M",hi:true,tip:"28,000 kr/m² × 30 m² + 275,000 groundwork + 40,000 soft costs"},
+    {label:"ARKA route, serviced plot",v:0.98,fmt:"0.98 M",hi:true,tip:"28,000 kr/m² × 30 m² + 100,000 groundwork + 40,000 soft costs"}
+  ],{max:3.8,aria:"Capital cost per home in million kroner",labelW:330});
+  hbar("c3",[
+    {label:"Ordinary plot, no gift",v:1300,fmt:"1,300 kr cost",tip:"Loan 1,443,750 → 6,358/mo + 1,640 running − 6,698 rent"},
+    {label:"Ordinary plot, 200k gift",v:424,fmt:"424 kr cost",tip:"Payment 5,481/mo + 1,640 − 6,698"},
+    {label:"Serviced plot, no gift",v:342,fmt:"342 kr cost",hi:true,tip:"Loan 1,225,000 → 5,399/mo + 1,640 − 6,698"},
+    {label:"Serviced plot, 200k gift",v:0,fmt:"+535 kr surplus",hi:true,tip:"Payment 4,523/mo + 1,640 − 6,698 = 535 kr surplus"}
+  ],{max:1500,aria:"Net monthly cost to the municipality after rent, no VAT refund",labelW:300});
+  hbar("c4",[
+    {label:"Donor buys homes outright",v:8,fmt:"8 homes",tip:"10 M ÷ 1.225 M incl. VAT (serviced plot) = 8.2, so 8 whole homes"},
+    {label:"Catalyst: 270k per home",v:37,fmt:"37 homes",hi:true,tip:"10 M ÷ 270k: each home reaches 1.2× rent cover on a serviced plot with no VAT refund"}
+  ],{max:42,aria:"Homes per 10 M kr donor money"});
+})();
+</script>
+</body>
+</html>

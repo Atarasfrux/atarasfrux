@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="google-site-verification" content="RGf6Xidkxd-9U7nd6NGLcO1trESre3V09yQq5-UmcB0" />
@@ -128,6 +128,81 @@
   .off-canvas .close-btn { align-self: flex-end; background: none; border: none; color: var(--ink-dim); font-size: 1rem; cursor: pointer; padding: var(--space-1); }
 
   /* ---- hero ---- */
+  .arka-hero { position: relative; isolation: isolate; overflow: hidden; color: #f4f2ec; margin: 0 0 var(--space-6); }
+  .arka-hero > img.arka-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .arka-hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(10,12,14,.92) 0%, rgba(10,12,14,.78) 45%, rgba(10,12,14,.35) 100%); }
+  .arka-inner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end; padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); }
+  .arka-tag { display: inline-flex; gap: .6rem; align-items: center; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    font-weight: 700; color: #d9c7a3; margin-bottom: var(--space-3); }
+  .arka-tag svg { width: 22px; height: 14px; }
+  .arka-hero h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 4.2vw + .6rem, 3.6rem); line-height: 1.06;
+    margin: 0 0 var(--space-3); max-width: 16ch; text-wrap: balance; color: #fff; }
+  .arka-hero p.arka-lede { color: #d6d3cc; font-size: 1.05rem; max-width: 52ch; margin: 0 0 var(--space-4); }
+  .arka-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .arka-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .85rem 1.25rem; border-radius: 999px; font-weight: 600;
+    text-decoration: none; font-size: .95rem; transition: transform .15s ease, background .15s ease; }
+  .arka-btn:hover { transform: translateY(-1px); }
+  .arka-btn.primary { background: #f4f2ec; color: #111; }
+  .arka-btn.ghost { border: 1px solid rgba(244,242,236,.45); color: #f4f2ec; }
+  .arka-btn:focus-visible { outline: 2px solid #d9ab6e; outline-offset: 3px; }
+  .arka-en { color: #cfcac0; font-size: .9rem; margin-left: .25rem; }
+  .arka-panel { background: rgba(18,20,22,.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: clamp(1.25rem, 2.5vw, 1.75rem); }
+  .arka-panel h3 { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: #bdb8ad; margin: 0 0 1rem; font-weight: 600; }
+  .arka-row { margin-bottom: 1rem; }
+  .arka-row .lbl { display: flex; justify-content: space-between; gap: 1rem; font-size: .9rem; color: #d6d3cc; }
+  .arka-row .lbl b { font-family: var(--font-display); font-size: 1.5rem; color: #fff; font-weight: 600; white-space: nowrap; }
+  .arka-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,.1); margin-top: .4rem; overflow: hidden; }
+  .arka-track span { display: block; height: 100%; border-radius: 999px; }
+  .arka-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1.25rem;
+    border-top: 1px solid rgba(255,255,255,.12); padding-top: 1rem; }
+  .arka-facts div { font-size: .82rem; color: #bdb8ad; }
+  .arka-facts b { display: block; color: #fff; font-size: 1.15rem; font-family: var(--font-display); font-weight: 600; }
+  .arka-proof { margin: var(--space-4) 0 0; font-size: .9rem; color: #cfcac0; letter-spacing: .01em; }
+  .arka-proof::before { content: ""; display: inline-block; width: 28px; height: 1px; background: #d9ab6e; vertical-align: middle; margin-right: .75rem; }
+  .arka-note { font-size: .74rem; color: #a9a497; margin-top: 1rem; }
+  @media (max-width: 860px) {
+    .arka-inner { grid-template-columns: 1fr; align-items: start; }
+    .arka-hero::before { background: linear-gradient(180deg, rgba(10,12,14,.55) 0%, rgba(10,12,14,.9) 55%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .arka-btn { transition: none; } .arka-btn:hover { transform: none; } }
+  .arka-arch-sec { padding-block: var(--space-6) var(--space-4); }
+  .arka-arch-sec h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.6vw + .6rem, 2.4rem); line-height: 1.15; margin: 0 0 var(--space-2); max-width: 34ch; text-wrap: balance; }
+  .arka-arch-sec > p { color: var(--ink-dim); max-width: 62ch; margin: 0 0 var(--space-4); }
+  .arka-arch { width: 100%; height: auto; display: block; max-width: 980px; margin-inline: auto; }
+  .arka-arch .stone path { fill: var(--bg-raised); stroke: var(--line); stroke-width: 1.5; transition: fill .2s ease; }
+  .arka-arch .stone:hover path { fill: color-mix(in srgb, var(--accent) 18%, var(--bg-raised)); }
+  .arka-arch .stone.key path { fill: var(--accent); stroke: var(--accent); }
+  .arka-arch .t { font: 600 17px var(--font-body); fill: var(--ink); text-anchor: middle; }
+  .arka-arch .s { font: 400 11.5px var(--font-body); fill: var(--ink-dim); text-anchor: middle; }
+  .arka-arch .key .t, .arka-arch .key .s { fill: var(--accent-ink); }
+  .arka-arch .ground { stroke: var(--line); stroke-width: 2; }
+  .arka-arch .foot { font: 600 15px var(--font-body); fill: var(--ink); }
+  .arka-arch .footn { font: 400 13px var(--font-body); fill: var(--ink-dim); }
+  .arka-arch .stone { transform-box: fill-box; animation: arka-in .7s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: var(--d); }
+  @keyframes arka-in { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) { .arka-arch .stone { opacity: 1; transform: none; animation: none; } }
+  .arka-move { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-4); }
+  .arka-move div { border-top: 2px solid var(--accent); padding-top: var(--space-2); color: var(--ink-dim); font-size: .95rem; }
+  .arka-move b { display: block; color: var(--ink); font-size: 1.05rem; margin-bottom: .25rem; }
+  @media (max-width: 760px) { .arka-move { grid-template-columns: 1fr; } .arka-arch .s { display: none; } }
+  .arka-faq { margin-top: var(--space-6); max-width: 820px; }
+  .arka-faq h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.6vw + .6rem, 1.7rem); margin: 0 0 var(--space-2); }
+  .arka-faq details { border-top: 1px solid var(--line); padding: .9rem 0; }
+  .arka-faq details:last-of-type { border-bottom: 1px solid var(--line); }
+  .arka-faq summary { cursor: pointer; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+  .arka-faq summary::-webkit-details-marker { display: none; }
+  .arka-faq summary::after { content: "+"; color: var(--accent); font-weight: 400; font-size: 1.2rem; line-height: 1; }
+  .arka-faq details[open] summary::after { content: "–"; }
+  .arka-faq p { color: var(--ink-dim); margin: .6rem 0 0; max-width: 70ch; }
+  .arka-inq { display: inline-block; margin-top: var(--space-3); font-weight: 600; color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .contact-form select { width: 100%; font: inherit; padding: .6rem .7rem; border-radius: 6px; border: 1px solid var(--line); background: var(--bg-raised); color: var(--ink); margin-top: .35rem; }
+  .arka-hero h2, .arka-arch-sec h2, .arka-faq h3 { letter-spacing: -0.012em; font-optical-sizing: auto; }
+  .arka-panel b, .arka-facts b, .arka-row .lbl b, .arka-arch .footn { font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1; }
+  .arka-hero p, .arka-arch-sec p, .arka-move div, .arka-faq p { hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
+  .arka-hero, .arka-arch-sec { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
   .hero { padding-block: var(--space-8) var(--space-6); }
   .grass-field {
     position: relative; width: 100%; height: 180px; overflow: hidden;
@@ -292,12 +367,11 @@
   <div class="shell row">
     <a class="wordmark" href="#top">Mantas Pagalys</a>
     <ul class="nav-links">
+      <li><a href="#arka">ARKA</a></li>
       <li><a href="#tjenester" data-i18n="nav_services">Tjenester</a></li>
       <li><a href="#galleri" data-i18n="nav_gallery">Galleri</a></li>
       <li><a href="#fjell">FJELL</a></li>
-      <li><a href="/wak943.html">WAK943</a></li>
       <li><a href="/tech.html">Systems</a></li>
-      <li><a href="/log.html">The Sea Keeps Giving</a></li>
       <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
     </ul>
     <div class="nav-actions">
@@ -316,17 +390,78 @@
   <div class="scrim" data-close></div>
   <div class="drawer" role="dialog" aria-modal="true" aria-label="Meny">
     <button class="close-btn" data-close aria-label="Lukk meny" data-i18n="nav_close">Lukk ✕</button>
+    <a href="#arka" data-close>ARKA</a>
     <a href="#tjenester" data-close data-i18n="nav_services">Tjenester</a>
     <a href="#galleri" data-close data-i18n="nav_gallery">Galleri</a>
     <a href="#fjell" data-close>FJELL</a>
-    <a href="/wak943.html" data-close>WAK943</a>
     <a href="/tech.html" data-close>Systems</a>
-    <a href="/log.html" data-close>The Sea Keeps Giving</a>
     <a href="#kontakt" data-close data-i18n="nav_contact">Kontakt</a>
   </div>
 </div>
 
 <main id="top">
+  <section id="arka" class="arka-hero" aria-labelledby="arkaTitle">
+    <img class="arka-bg" src="arka_img/01_arka_hero_bg.jpg" alt="" width="1600" height="900" fetchpriority="high">
+    <div class="shell arka-inner">
+      <div>
+        <p class="arka-tag"><svg viewBox="0 0 22 14" aria-hidden="true"><path d="M1 13 C1 4, 21 4, 21 13" fill="none" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="arka_tag">ARKA · fra midlertidig til fast</span></p>
+        <h2 id="arkaTitle" data-i18n="arka_h">En fast bolig koster kommunen mindre per måned enn én natt på hotell</h2>
+        <p class="arka-lede" data-i18n="arka_lede">Kommuner betaler hotell- og pensjonatpriser for å gi tak over hodet til mennesker de har plikt til å hjelpe. ARKA bygger buen fra midlertidig botilbud til fast bolig: en liten fabrikkbygd bolig på kommunens egen tomt, finansiert av Husbanken og leid ut innenfor bostøttens grense.</p>
+        <div class="arka-actions">
+          <a class="arka-btn primary" href="/arka_no.html" data-href-no="/arka_no.html" data-href-en="/arka.html" data-href-lt="/arka.html" data-i18n="arka_btn1">Les orienteringen →</a>
+          <a class="arka-btn ghost" href="/arka_kalkulator.html" data-i18n="arka_btn2">Regn på egen kommune</a>
+          <a class="arka-en" href="/arka.html" data-href-no="/arka.html" data-href-en="/arka_no.html" data-href-lt="/arka_no.html" data-i18n="arka_lang">English</a>
+        </div>
+        <p class="arka-proof" data-i18n="arka_proof">Bygget på regelverket. Regnet på kommunens egne tall. Kontrollert mot seks kommunale anbud.</p>
+      </div>
+      <div class="arka-panel" role="group" aria-labelledby="arkaPanelH">
+        <h3 id="arkaPanelH" data-i18n="arka_ph">Kostnad per husstand per måned</h3>
+        <div class="arka-row">
+          <div class="lbl"><span><span data-i18n="arka_r1">Midlertidig botilbud</span><br><small data-i18n="arka_r1s">Tromsø, snitt 2025</small></span><b>≈16 200 kr</b></div>
+          <div class="arka-track"><span style="width:100%;background:#9a958b"></span></div>
+        </div>
+        <div class="arka-row">
+          <div class="lbl"><span><span data-i18n="arka_r2">ARKA-bolig, netto etter husleie</span><br><small data-i18n="arka_r2s">verste tilfelle</small></span><b>≤1 300 kr</b></div>
+          <div class="arka-track"><span style="width:8%;background:#d9ab6e"></span></div>
+        </div>
+        <div class="arka-facts">
+          <div><b>29 m²</b><span data-i18n="arka_f1">én voksen, egen inngang, bad og kjøkken</span></div>
+          <div><b>37 / 8</b><span data-i18n="arka_f2">boliger per 10 mill. kr i gave, brukt som katalysator</span></div>
+          <div><b>9 396</b><span data-i18n="arka_f3">kommunale boliger stod ledige mens 14 458 søknader fikk avslag (2025)</span></div>
+          <div><b>0 kr</b><span data-i18n="arka_f4">i mva.-kompensasjon lagt til grunn</span></div>
+        </div>
+        <p class="arka-note" data-i18n="arka_src">Kilder: SSB, Husbanken, Lovdata, Nordlys. Modellen og alle forutsetninger ligger i orienteringen.</p>
+      </div>
+    </div>
+  </section>
+  <section class="shell arka-arch-sec" aria-labelledby="archH">
+    <h2 id="archH" data-i18n="arch_h">Seks deler som allerede finnes. ARKA er sluttsteinen.</h2>
+    <p data-i18n="arch_p">En bue bærer fordi hver stein støtter den neste, og sluttsteinen låser dem sammen. Tomten, boligen, eieren, lånet, husleien og driften finnes allerede i hver kommune. ARKA kobler dem slik at buen spenner fra midlertidig botilbud til fast bolig.</p>
+    <svg class="arka-arch" viewBox="0 0 1000 400" role="img" aria-labelledby="archT">
+      <title id="archT" data-i18n="arch_title">ARKA-modellen som en bue</title>
+      <g class="stone" style="--d:0ms"><path d="M200.0,326.9 A300,300 0 0 1 228.4,202.7 L314.4,243.0 A205,205 0 0 0 295.0,327.9 Z"/><text x="253.8" y="269.8" transform="rotate(-77.1 253.8 273.8)" class="t" data-i18n="arch_t0">Tomt</text><text x="253.8" y="287.8" transform="rotate(-77.1 253.8 273.8)" class="s" data-i18n="arch_s0">vann og strøm på plass</text></g><g class="stone" style="--d:90ms"><path d="M231.1,197.0 A300,300 0 0 1 310.5,97.4 L370.5,171.1 A205,205 0 0 0 316.2,239.1 Z"/><text x="302.6" y="168.6" transform="rotate(-51.4 302.6 172.6)" class="t" data-i18n="arch_t1">Bolig</text><text x="302.6" y="186.6" transform="rotate(-51.4 302.6 172.6)" class="s" data-i18n="arch_s1">fabrikkbygd</text></g><g class="stone" style="--d:180ms"><path d="M315.4,93.5 A300,300 0 0 1 430.2,38.2 L452.3,130.6 A205,205 0 0 0 373.9,168.4 Z"/><text x="390.4" y="98.5" transform="rotate(-25.7 390.4 102.5)" class="t" data-i18n="arch_t2">Eier</text><text x="390.4" y="116.5" transform="rotate(-25.7 390.4 102.5)" class="s" data-i18n="arch_s2">kommunen</text></g><g class="stone key" style="--d:270ms"><path d="M436.3,36.8 A300,300 0 0 1 563.7,36.8 L543.5,129.7 A205,205 0 0 0 456.5,129.7 Z"/><text x="500.0" y="73.5" transform="rotate(0.0 500.0 77.5)" class="t" data-i18n="arch_t3">ARKA</text><text x="500.0" y="91.5" transform="rotate(0.0 500.0 77.5)" class="s" data-i18n="arch_s3">koordinering</text></g><g class="stone" style="--d:360ms"><path d="M569.8,38.2 A300,300 0 0 1 684.6,93.5 L626.1,168.4 A205,205 0 0 0 547.7,130.6 Z"/><text x="609.6" y="98.5" transform="rotate(25.7 609.6 102.5)" class="t" data-i18n="arch_t4">Lån</text><text x="609.6" y="116.5" transform="rotate(25.7 609.6 102.5)" class="s" data-i18n="arch_s4">Husbanken</text></g><g class="stone" style="--d:450ms"><path d="M689.5,97.4 A300,300 0 0 1 768.9,197.0 L683.8,239.1 A205,205 0 0 0 629.5,171.1 Z"/><text x="697.4" y="168.6" transform="rotate(51.4 697.4 172.6)" class="t" data-i18n="arch_t5">Husleie</text><text x="697.4" y="186.6" transform="rotate(51.4 697.4 172.6)" class="s" data-i18n="arch_s5">innen bostøtten</text></g><g class="stone" style="--d:540ms"><path d="M771.6,202.7 A300,300 0 0 1 800.0,326.9 L705.0,327.9 A205,205 0 0 0 685.6,243.0 Z"/><text x="746.2" y="269.8" transform="rotate(77.1 746.2 273.8)" class="t" data-i18n="arch_t6">Drift</text><text x="746.2" y="287.8" transform="rotate(77.1 746.2 273.8)" class="s" data-i18n="arch_s6">robust</text></g>
+      <line x1="120" y1="332" x2="880" y2="332" class="ground"/>
+      <text x="248" y="370" class="foot" text-anchor="middle" data-i18n="arch_f1">Midlertidig botilbud</text>
+      <text x="248" y="390" class="footn" text-anchor="middle" data-i18n="arch_f1n">≈16 200 kr / mnd</text>
+      <text x="752" y="370" class="foot" text-anchor="middle" data-i18n="arch_f2">Fast bolig</text>
+      <text x="752" y="390" class="footn" text-anchor="middle" data-i18n="arch_f2n">≤1 300 kr / mnd netto</text>
+    </svg>
+    <div class="arka-move">
+      <div data-i18n="move1"><b>Flytter dit behovet er</b>Behovet endrer seg over tid. En fabrikkbygd modul kan flyttes dit den trengs, i stedet for å stå tom. Flere kommuner kjøper allerede flyttbare boliger.</div>
+      <div data-i18n="move2"><b>Rask til innflytting</b>Hver måned i midlertidig botilbud koster omtrent 16 200 kr per husstand. En ferdig bolig på en tomt med vann og strøm forkorter ventetiden.</div>
+      <div data-i18n="move3"><b>Riktig bolig, ikke flere boliger</b>9 396 kommunale boliger stod ledige mens 14 458 søknader fikk avslag i 2025. ARKA leverer typen som mangler.</div>
+    </div>
+    <div class="arka-faq">
+      <h3 data-i18n="faq_h">Spørsmål om ARKA</h3>
+      <details open><summary data-i18n="faq1q">Hvem er boligene for?</summary><p data-i18n="faq1a">Mennesker kommunen skaffer bolig til: enslige med lav inntekt, flyktninger, personer med funksjonsnedsettelse, unge voksne som flytter ut fra barnevernet og personer i bedring. ARKA 28 er for én voksen.</p></details>
+      <details><summary data-i18n="faq2q">Er dette et mikrohus eller en hytte?</summary><p data-i18n="faq2a">Nei. Det er en fast bolig, godkjent og registrert for helårsbruk, med egen inngang, bad, kjøkken, sprinkler og sekundær utgang.</p></details>
+      <details><summary data-i18n="faq3q">Hva koster det kommunen?</summary><p data-i18n="faq3a">Med Husbanken-lån og husleie innenfor bostøttens grense er kommunens nettokostnad høyst omtrent 1 300 kr i måneden per bolig, uten mva.-kompensasjon. Kalkulatoren viser tallene for din kommune.</p></details>
+      <details><summary data-i18n="faq4q">Hvordan starter en kommune?</summary><p data-i18n="faq4a">Med en pilot på fem boliger: kommunen stiller tomter og oppfølging, ARKA koordinerer anbud, grunnarbeid og dokumentasjon. En uforpliktende intensjonsavtale er første steg.</p></details>
+      <details><summary data-i18n="faq5q">Hvem står bak?</summary><p data-i18n="faq5a">Mantas Pagalys, snekker i Oslo, som har utviklet modellen og analysen. Metoden er åpen for offentlige organer med kildehenvisning.</p></details>
+      <a class="arka-inq" href="#kontakt" data-i18n="faq_cta">Send en henvendelse om ARKA →</a>
+    </div>
+  </section>
+
   <section class="hero shell">
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="lang-btn active" data-lang="no" type="button" aria-pressed="true" lang="no">Norsk</button>
@@ -519,6 +654,7 @@
       </svg>
       <form class="contact-form" id="contactForm" action="https://formspree.io/f/mykqqzjg" method="POST">
         <p class="contact-note" data-i18n="cta_line">Ta kontakt for pris — avhenger av jobbens omfang</p>
+        <label><span data-i18n="form_topic">Henvendelsen gjelder</span><select name="topic" id="topicSel"><option value="tjenester" data-i18n="opt_services">Tjenester</option><option value="ARKA" data-i18n="opt_arka">ARKA (kommune, finansiering, samarbeid)</option><option value="annet" data-i18n="opt_other">Annet</option></select></label>
         <label>Navn<input type="text" name="name" required></label>
         <label>E-post<input type="email" name="email" required></label>
         <label>Melding<textarea name="message" rows="4" required></textarea></label>
@@ -743,6 +879,63 @@
 (function(){
   var translations = {
     en: {
+      arka_tag: "ARKA · from temporary to permanent",
+      arka_h: "A permanent home costs a municipality less per month than one night in a hotel",
+      arka_lede: "Municipalities pay hotel and guesthouse rates to put a roof over people they are obliged to help. ARKA builds the arch from temporary accommodation to a permanent home: a small factory-built home on the municipality's own plot, financed by Husbanken and let within the housing-benefit limit.",
+      arka_btn1: "Read the briefing →",
+      arka_btn2: "Calculate for your municipality",
+      arka_lang: "Norsk",
+      arka_proof: "Built on the regulations. Calculated on the municipality's own figures. Checked against six municipal tenders.",
+      arka_ph: "Cost per household per month",
+      arka_r1: "Temporary accommodation",
+      arka_r1s: "Tromsø, 2025 average",
+      arka_r2: "ARKA home, net after rent",
+      arka_r2s: "worst case",
+      arka_f1: "one adult, own entrance, bathroom and kitchen",
+      arka_f2: "homes per 10 M kr of donor money, used as a catalyst",
+      arka_f3: "municipal homes stood empty while 14,458 applications were refused (2025)",
+      arka_f4: "VAT refund assumed",
+      arka_src: "Sources: SSB, Husbanken, Lovdata, Nordlys. The model and every assumption are in the briefing.",
+      arch_h: "Six parts that already exist. ARKA is the keystone.",
+      arch_p: "An arch carries load because each stone supports the next and the keystone locks them together. The plot, the home, the owner, the loan, the rent and the upkeep already exist in every municipality. ARKA connects them so the arch spans from temporary accommodation to a permanent home.",
+      move1: "<b>Moves where the need is</b>Need changes over time. A factory-built module can move to where it is needed instead of standing empty. Several municipalities already buy movable homes.",
+      move2: "<b>Fast to move in</b>Every month in temporary accommodation costs about 16,200 kr per household. A finished home on a plot with water and power shortens the wait.",
+      move3: "<b>The right home, not more homes</b>9,396 municipal homes stood empty while 14,458 applications were refused in 2025. ARKA delivers the type that is missing.",
+      faq_h: "Questions about ARKA",
+      faq1q: "Who are the homes for?",
+      faq1a: "People the municipality houses: single adults on low incomes, refugees, people with disabilities, young adults leaving care and people in recovery. ARKA 28 is for one adult.",
+      faq2q: "Is this a tiny house or a cabin?",
+      faq2a: "No. It is a permanent dwelling, approved and registered for year-round living, with its own entrance, bathroom, kitchen, sprinkler and a second exit.",
+      faq3q: "What does it cost the municipality?",
+      faq3a: "With a Husbanken loan and rent within the housing-benefit limit, the municipality's net cost is at most about 1,300 kr a month per home, with no VAT refund. The calculator shows the figures for your municipality.",
+      faq4q: "How does a municipality start?",
+      faq4a: "With a pilot of five homes: the municipality provides plots and follow-up, ARKA coordinates the tender, groundwork and documentation. A non-binding letter of intent is the first step.",
+      faq5q: "Who is behind it?",
+      faq5a: "Mantas Pagalys, a carpenter in Oslo, who developed the model and the analysis. The method is open to public bodies, with attribution.",
+      faq_cta: "Send an inquiry about ARKA →",
+      form_topic: "This concerns",
+      opt_services: "Services",
+      opt_arka: "ARKA (municipality, financing, partnership)",
+      opt_other: "Other",
+      arch_t0: "Plot",
+      arch_s0: "water and power in",
+      arch_t1: "Home",
+      arch_s1: "factory-built",
+      arch_t2: "Owner",
+      arch_s2: "the municipality",
+      arch_t3: "ARKA",
+      arch_s3: "coordination",
+      arch_t4: "Loan",
+      arch_s4: "Husbanken",
+      arch_t5: "Rent",
+      arch_s5: "within benefit limit",
+      arch_t6: "Upkeep",
+      arch_s6: "robust",
+      arch_f1: "Temporary accommodation",
+      arch_f2: "Permanent home",
+      arch_f1n: "≈16,200 kr / month",
+      arch_f2n: "≤1,300 kr / month net",
+      arch_title: "The ARKA model as an arch",
       nav_services: "Services",
       nav_gallery: "Gallery",
       nav_contact: "Contact",
@@ -794,6 +987,63 @@
       footer_line: "Prices agreed per job based on scope and time."
     },
     lt: {
+      arka_tag: "ARKA · nuo laikino iki nuolatinio",
+      arka_h: "Nuolatinis būstas savivaldybei per mėnesį kainuoja mažiau nei viena nakvynė viešbutyje",
+      arka_lede: "Savivaldybės moka viešbučių ir svečių namų kainas, kad suteiktų stogą virš galvos žmonėms, kuriems privalo padėti. ARKA stato arką nuo laikino apgyvendinimo iki nuolatinio būsto: mažas gamykloje pagamintas namas savivaldybės sklype, finansuojamas Husbanken paskola ir nuomojamas neviršijant būsto pašalpos ribos.",
+      arka_btn1: "Skaityti pristatymą →",
+      arka_btn2: "Skaičiuoti savo savivaldybei",
+      arka_lang: "English",
+      arka_proof: "Sukurta pagal teisės aktus. Apskaičiuota pagal pačios savivaldybės skaičius. Patikrinta pagal šešis savivaldybių konkursus.",
+      arka_ph: "Kaina vienam namų ūkiui per mėnesį",
+      arka_r1: "Laikinas apgyvendinimas",
+      arka_r1s: "Tromsė, 2025 m. vidurkis",
+      arka_r2: "ARKA būstas, grynoji kaina po nuomos",
+      arka_r2s: "blogiausiu atveju",
+      arka_f1: "vienam suaugusiam, atskiras įėjimas, vonia ir virtuvė",
+      arka_f2: "būstų už 10 mln. kr paramos, naudojamos kaip katalizatorius",
+      arka_f3: "savivaldybių būstų stovėjo tušti, kai 14 458 prašymai buvo atmesti (2025)",
+      arka_f4: "PVM kompensacijos neįskaičiuota",
+      arka_src: "Šaltiniai: SSB, Husbanken, Lovdata, Nordlys. Modelis ir visos prielaidos pateikti pristatyme.",
+      arch_h: "Šešios dalys, kurios jau yra. ARKA yra raktinis akmuo.",
+      arch_p: "Arka laiko, nes kiekvienas akmuo remia kitą, o raktinis akmuo juos sujungia. Sklypas, būstas, savininkas, paskola, nuoma ir priežiūra jau yra kiekvienoje savivaldybėje. ARKA juos sujungia, kad arka nusidriektų nuo laikino apgyvendinimo iki nuolatinio būsto.",
+      move1: "<b>Keliauja ten, kur reikia</b>Poreikis laikui bėgant keičiasi. Gamykloje pagamintas modulis gali būti perkeltas ten, kur jo reikia, užuot stovėjęs tuščias. Kelios savivaldybės jau perka perkeliamus būstus.",
+      move2: "<b>Greitai įsikeliama</b>Kiekvienas mėnuo laikiname apgyvendinime kainuoja apie 16 200 kr vienam namų ūkiui. Paruoštas būstas sklype su vandeniu ir elektra sutrumpina laukimą.",
+      move3: "<b>Tinkamas būstas, ne daugiau būstų</b>2025 m. 9 396 savivaldybių būstai stovėjo tušti, kai 14 458 prašymai buvo atmesti. ARKA tiekia trūkstamo tipo būstą.",
+      faq_h: "Klausimai apie ARKA",
+      faq1q: "Kam skirti būstai?",
+      faq1a: "Žmonėms, kuriems savivaldybė suteikia būstą: vieniems mažas pajamas gaunantiems suaugusiems, pabėgėliams, neįgaliesiems, iš globos išeinantiems jaunuoliams ir sveikstantiems žmonėms. ARKA 28 skirtas vienam suaugusiam.",
+      faq2q: "Ar tai mažas namelis ar sodo namelis?",
+      faq2a: "Ne. Tai nuolatinis būstas, patvirtintas ir įregistruotas gyventi ištisus metus, su atskiru įėjimu, vonia, virtuve, purškiamąja gesinimo sistema ir antru išėjimu.",
+      faq3q: "Kiek tai kainuoja savivaldybei?",
+      faq3a: "Su Husbanken paskola ir nuoma neviršijant būsto pašalpos ribos savivaldybės grynoji kaina yra daugiausia apie 1 300 kr per mėnesį vienam būstui, be PVM kompensacijos. Skaičiuoklė parodo jūsų savivaldybės skaičius.",
+      faq4q: "Kaip savivaldybė gali pradėti?",
+      faq4a: "Nuo penkių būstų bandomojo projekto: savivaldybė suteikia sklypus ir pagalbą gyventojams, ARKA koordinuoja konkursą, žemės darbus ir dokumentaciją. Pirmas žingsnis yra neįpareigojanti ketinimų sutartis.",
+      faq5q: "Kas už to stovi?",
+      faq5a: "Mantas Pagalys, stalius Osle, sukūręs modelį ir analizę. Metodas atviras viešosioms institucijoms, nurodant šaltinį.",
+      faq_cta: "Siųsti užklausą apie ARKA →",
+      form_topic: "Užklausa dėl",
+      opt_services: "Paslaugų",
+      opt_arka: "ARKA (savivaldybė, finansavimas, bendradarbiavimas)",
+      opt_other: "Kita",
+      arch_t0: "Sklypas",
+      arch_s0: "vanduo ir elektra",
+      arch_t1: "Būstas",
+      arch_s1: "gamyklinis",
+      arch_t2: "Savininkas",
+      arch_s2: "savivaldybė",
+      arch_t3: "ARKA",
+      arch_s3: "koordinavimas",
+      arch_t4: "Paskola",
+      arch_s4: "Husbanken",
+      arch_t5: "Nuoma",
+      arch_s5: "pašalpos ribose",
+      arch_t6: "Priežiūra",
+      arch_s6: "patvarus",
+      arch_f1: "Laikinas apgyvendinimas",
+      arch_f2: "Nuolatinis būstas",
+      arch_f1n: "≈16 200 kr / mėn.",
+      arch_f2n: "≤1 300 kr / mėn. grynąja verte",
+      arch_title: "ARKA modelis kaip arka",
       nav_services: "Paslaugos",
       nav_gallery: "Galerija",
       nav_contact: "Kontaktai",
@@ -864,7 +1114,9 @@
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
+    document.documentElement.lang = (lang === 'no') ? 'nb' : lang;
     try { localStorage.setItem('site-lang', lang); } catch(e){}
+    document.querySelectorAll('[data-href-' + lang + ']').forEach(function(el){ el.setAttribute('href', el.getAttribute('data-href-' + lang)); });
   }
 
   buttons.forEach(function(btn){
@@ -877,6 +1129,8 @@
   try { saved = localStorage.getItem('site-lang'); } catch(e){}
   if (saved && saved !== 'no') setLang(saved);
 })();
+
+document.querySelectorAll('.arka-inq').forEach(function(a){ a.addEventListener('click', function(){ var t=document.getElementById('topicSel'); if (t) t.value='ARKA'; }); });
 
 (function () {
   var form = document.getElementById('contactForm');

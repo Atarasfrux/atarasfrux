@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Mantas Pagalys">
+<meta name="copyright" content="© 2026 Mantas Pagalys">
+<meta name="robots" content="index, follow, noai, noimageai">
+<meta name="description" content="ARKA: faste små boliger for norske kommuner, finansiert av Husbanken og dekket av husleie. Modell og analyse av Mantas Pagalys.">
+<link rel="canonical" href="https://greifiks.org/arka_no.html">
+<link rel="alternate" hreflang="en" href="https://greifiks.org/arka.html">
+<link rel="alternate" hreflang="nb" href="https://greifiks.org/arka_no.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CreativeWork","name":"ARKA: fra midlertidig til fast",
+ "author":{"@type":"Person","name":"Mantas Pagalys","url":"https://greifiks.org"},
+ "copyrightHolder":{"@type":"Person","name":"Mantas Pagalys"},"copyrightYear":2026,
+ "dateCreated":"2026-09-28","datePublished":"2026-10-02","inLanguage":"nb",
+ "license":"https://greifiks.org/arka_no.html#terms",
+ "identifier":"sha256:dfa304180430744d40be3e2aeea19d19c7eeff99be0afa9275fce66cf2d39551"}
+</script>
+
+<title>ARKA · Fra midlertidig til fast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#fcfcfb; --surface:#ffffff; --line:#e4e3df; --grid:#efeeea;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#7d7c77;
+  --accent:#2a78d6; --accent-ink:#1c5cab; --muted-bar:#b9b8b2; --warn:#e34948;
+  --chip:#eef4fc;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#121211; --surface:#1a1a19; --line:#33332f; --grid:#2a2a27;
+    --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e86;
+    --accent:#3987e5; --accent-ink:#86b6ef; --muted-bar:#5b5a55; --warn:#e66767;
+    --chip:#1d2b3d;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121211; --surface:#1a1a19; --line:#33332f; --grid:#2a2a27;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e86;
+  --accent:#3987e5; --accent-ink:#86b6ef; --muted-bar:#5b5a55; --warn:#e66767;
+  --chip:#1d2b3d;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+body{overflow-x:hidden}
+.deck{max-width:1200px;margin:0 auto;padding:0 16px}
+section.slide{min-height:100vh;padding:72px 0 64px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start}
+html{scroll-snap-type:y proximity}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 16px}
+h1,h2{font-family:"Playfair Display",Georgia,serif;font-weight:700;margin:0 0 24px;line-height:1.15}
+h1{font-size:clamp(40px,6vw,72px)}
+h2{font-size:clamp(28px,4vw,48px);max-width:900px}
+p.lead{font-size:clamp(17px,2vw,22px);color:var(--ink-2);max-width:820px;margin:0 0 24px}
+p{max-width:820px}
+.hero-num{font-family:"Playfair Display",Georgia,serif;font-size:clamp(64px,11vw,140px);font-weight:700;line-height:1;color:var(--accent-ink);margin:8px 0 8px}
+.hero-sub{font-size:20px;color:var(--ink-2);max-width:760px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card .n{font-family:"Playfair Display",Georgia,serif;font-size:40px;font-weight:700;color:var(--accent-ink);line-height:1.1}
+.card .l{color:var(--ink-2);font-size:15px;margin-top:8px}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--accent-ink);margin-left:6px;vertical-align:middle;text-transform:uppercase}
+.tag.h{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.win{color:var(--accent-ink);font-weight:600}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;position:relative}
+.chart h3{margin:0 0 4px;font-size:17px}
+.chart .note{font-size:13px;color:var(--ink-3);margin:0 0 16px}
+svg text{font-family:Inter,system-ui,sans-serif}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;padding:8px 12px;border-radius:8px;opacity:0;transition:opacity .12s;max-width:280px;z-index:10}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:14px}
+.flow .step b{display:block;font-size:15px;margin-bottom:6px}
+.flow .arrow{display:none}
+@media (max-width:860px){.flow{grid-template-columns:1fr}}
+.foot{font-size:12px;color:var(--ink-3);margin-top:24px}
+.nav{position:fixed;right:16px;bottom:16px;display:flex;gap:8px;z-index:5}
+.nav button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+ul.tight{margin:0;padding-left:20px} ul.tight li{margin:6px 0}
+.gallery{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.gallery figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.gallery img{display:block;width:100%;height:auto}
+.gallery figcaption{font-size:13px;color:var(--ink-2);padding:10px 14px}
+.gallery .wide{grid-column:1 / -1}
+@media (max-width:760px){.gallery{grid-template-columns:1fr}}
+.spec td:first-child{color:var(--ink-2)}
+details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:860px} summary{cursor:pointer;color:var(--ink);font-size:16px} details p{color:var(--ink-2);margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="nav"><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Kalkulator</a><a href="arka.html" hreflang="en" lang="en" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">English</a><button id="theme" aria-label="Bytt mellom lyst og mørkt tema">Lys / mørk</button><button onclick="window.print()">Skriv ut</button></div>
+<div class="tip" id="tip" role="tooltip"></div>
+<main class="deck">
+
+<!-- 1 -->
+<section class="slide">
+  <p class="kicker">ARKA · Fra midlertidig til fast · oktober 2026</p>
+  <h1>En fast bolig koster kommunen mindre per måned enn én natt på hotell</h1>
+  <p class="lead">Norske kommuner betaler hotell- og pensjonatpriser for å gi tak over hodet til personer de har lovpålagt plikt til å hjelpe. En liten fabrikkbygd bolig på en kommunal tomt, finansiert av Husbanken og leid ut til en husleie innenfor grensen for bostøtte, koster kommunen høyst omtrent 1 300 kr i måneden etter husleie, også når alle forsiktige forutsetninger er lagt til grunn.</p>
+  <p class="foot"><b>Hvorfor ARKA:</b> arka betyr bue, konstruksjonen som spenner over et gap og bærer lasten. ARKA bygger buen fra midlertidig botilbud til fast bolig, av deler som allerede finnes.</p>
+  <p class="foot">Slik leser du tallene: <span class="tag">kilde</span> hentet fra en navngitt offentlig kilde · <span class="tag">beregnet</span> regnestykke på tall med kilde · <span class="tag h">antakelse</span> en forutsetning som piloten skal bekrefte. Alle tall kan etterprøves med den publiserte modellen (arka_finance.py); siste del lister kildene og hvor grundig hver av dem er kontrollert.</p>
+  <p class="foot" style="margin-top:12px">© 2026 Mantas Pagalys, opphavsperson for ARKA-modellen (første versjon datert 28.09.2026). Kommuner og andre offentlige organer kan bruke metoden i egne anskaffelser med kildehenvisning. Kommersiell gjenbruk, videresalg eller gjengivelse fra leverandører, konsulenter eller investorer krever skriftlig tillatelse. Kontakt: pagalysm@gmail.com</p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <p class="kicker">Problemet</p>
+  <h2>Den midlertidige løsningen har blitt den dyre</h2>
+  <div class="grid3">
+    <div class="card"><div class="n">7&nbsp;077</div><div class="l">husstander i midlertidig botilbud i 2024: det høyeste antallet som noen gang er registrert, en økning på 60 % siden 2021 <span class="tag">kilde</span></div></div>
+    <div class="card"><div class="n">≈16&nbsp;200 kr</div><div class="l">per husstand per måned: Tromsøs netto utgifter til midlertidig botilbud i 2025 (13,6 mill. kr, omtrent 70 husstander) <span class="tag">beregnet</span></div></div>
+    <div class="card"><div class="n">2&nbsp;000 kr</div><div class="l">per døgn: den øvre satsen Stavanger betaler; over 40 mill. kr brukt på tjenesten i fjor <span class="tag">kilde</span></div></div>
+  </div>
+  <p class="foot">Ved utgangen av 2025 sto 9 396 kommunale boliger uten leietaker, mens 14 458 søknader om kommunal bolig ble avslått (SSB tabell 12008 og 12012). Det mangler ikke boliger som sådan, men riktig bolig på riktig sted. Tromsø har sagt offentlig at lange opphold i midlertidig botilbud gjør at kommunen bryter loven. Pengene brukes allerede; spørsmålet er hva de gir igjen.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <p class="kicker">Sammenligningen</p>
+  <div class="hero-num">≈16&nbsp;200 mot ≤1&nbsp;300</div>
+  <p class="hero-sub">Kroner per måned, per husstand. Til venstre: det Tromsø i gjennomsnitt betalte for midlertidig botilbud i 2025. Til høyre: det meste en fast ARKA-bolig koster kommunen etter husleie, med vanlig tomt, uten mva.-kompensasjon og uten gavebidrag. <span class="tag">beregnet</span></p>
+  <div class="chart" style="margin-top:32px">
+    <h3>Kommunens netto månedlige kostnad per husstand som får bolig</h3>
+    <p class="note">Bolig: lån fra Husbanken til 4,774 % (20 år fast rente, oktober 2026) over 50 år, driftskostnader 1 640 kr/mnd. (vedlikehold, kommunale avgifter, forsikring), husleie 7 050 kr ved 95 % utleiegrad, uten mva.-kompensasjon. Midlertidig botilbud: Stavangers øvre døgnsats × 365 / 12; Tromsøs netto utgift i 2025 ÷ omtrent 70 husstander.</p>
+    <div id="c1"></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <p class="kicker">Prisen</p>
+  <h2>Kjøp boligen, ikke entreprenøren</h2>
+  <p class="lead">Samme omfang i hver søyle: én liten fast bolig, inkludert grunnarbeid og tilknytninger. Besparelsen kommer av måten boligen kjøpes på, ikke av at det bygges mindre.</p>
+  <div class="chart">
+    <h3>Investeringskostnad per bolig, millioner kroner ekskl. mva.</h3>
+    <p class="note">Anbud på hardbruksbolig: Ringsaker 2024, én hardbruksbolig, komplett leveranse inkl. klargjøring av tomt, vann og strøm. Totalentreprise: anslag oppgitt av kommuner i egne kunngjøringer, 55–85 000 kr/m² × 30 m². ARKA-veien: modul ≈28 000 kr/m² × 30 m², grunnarbeid 275 000 kr på vanlig tomt eller 100 000 kr på opparbeidet tomt, pluss 40 000 kr i bikostnader.</p>
+    <div id="c2"></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <p class="kicker">Slik fungerer det</p>
+  <h2>Fem deler som allerede finnes. Modellen kobler dem bare sammen.</h2>
+  <div class="flow">
+    <div class="step"><b>1 · Tomt</b>En kommunal tomt med vann, avløp og strøm på plass. Aller best er en tomt som allerede er bebygd: der trenger boligen ikke ansvarlig foretak (SAK10 § 3-1 e). Én bolig per tomt sprer boligene i vanlige gater, slik Housing First-praksis anbefaler.</div>
+    <div class="step"><b>2 · Bolig</b>En ferdig bolig under 30 m² fra en etablert fabrikk, kjøpt separat gjennom åpen konkurranse til ≈28 000 kr per m².</div>
+    <div class="step"><b>3 · Eier</b>Kommunen. Mva.-kompensasjon er bare mulig for boliger som er spesielt tilrettelagt, og praksis har vært streng siden 2013, så alle tall her forutsetter at det ikke gis kompensasjon.</div>
+    <div class="step"><b>4 · Lån</b>Husbanken låner en kommune inntil 100 % av verdien (låneforskriften § 7-4), over inntil 50 år, med fast rente i inntil 20 år. Kommuner kan ikke gå konkurs.</div>
+    <div class="step"><b>5 · Husleie</b>7 050 kr i måneden uten oppvarming: det høyeste beløpet bostøtten regner med fullt ut for én person. Husleien dekker det meste av kostnaden; kommunen bærer resten, høyst omtrent 1 300 kr i måneden.</div>
+  </div>
+  <p class="foot">For en kommune som ikke ønsker å låne: en stiftelse eller investor eier boligene med lån fra Husbanken på 85 %, under en tilvisningsavtale som gir kommunen rett til å tildele leietakere. Den løsningen krever mer enn 15 % egenkapital for å kunne finansieres. Se «Ett hus, tre finansieringsmodeller».</p>
+</section>
+
+<!-- design -->
+<section class="slide" id="design">
+  <p class="kicker">Referanseenheten</p>
+  <h2>ARKA 28: tegnet etter reglene som gjør den rask å få på plass og mulig å finansiere</h2>
+  <div class="gallery">
+    <figure><img src="arka_img/01_arka_hero_street_dusk.jpg" alt="ARKA 28 på en opparbeidet tomt i en boliggate i skumringen" loading="lazy" width="1600" height="900"><figcaption>På egen tomt, i en vanlig boliggate.</figcaption></figure>
+    <figure><img src="arka_img/03_arka_interior.jpg" alt="Interiør i bjørkekryssfiner med seng, minikjøkken og skrivebord" loading="lazy" width="1600" height="900"><figcaption>Interiør i bjørkekryssfiner; varmepumpe, panelovner, sprinkler.</figcaption></figure>
+    <figure class="wide"><img src="arka_img/04_arka28_floor_plan_nb.jpg" alt="Plantegning av ARKA 28 v2 med bad, oppholdsdel, minikjøkken, seng og teknisk skap" loading="lazy" width="1600" height="672"><figcaption>Planen sett fra inngangen: bad (WC, dusj, servant), opphold og skrivebord, minikjøkken, seng, teknisk skap som åpnes utenfra. Sekundær utgang på baksiden.</figcaption></figure>
+    <figure class="wide"><img src="arka_img/02_arka_scattered_plots_aerial.jpg" alt="Flere ARKA-boliger, hver på sin egen tomt langs en eksisterende gate" loading="lazy" width="1600" height="900"><figcaption>Spredt, én per tomt, i et eksisterende nabolag.</figcaption></figure>
+  </div>
+  <table class="spec" style="margin-top:24px">
+    <thead><tr><th>Krav</th><th>Regel</th><th>ARKA 28, målt på modellen</th></tr></thead>
+    <tbody>
+      <tr><td>Enklere søknadsvei, SAK10 § 3-1 e (uten ansvarlig foretak bare på tomt som allerede er bebygd)</td><td>≤30 m² BRA, én etasje, ≤4,5 m høy, uten pipe</td><td class="win">29,1 m² · 1 etasje · 3,44 m · uten pipe</td></tr>
+      <tr><td>Romhøyde, TEK17 § 12-7</td><td>≥2,4 m i rom for varig opphold</td><td class="win">2,66 m fri høyde</td></tr>
+      <tr><td>Transport uten følgebil</td><td>≤3,0 m bred</td><td class="win">2,99 m</td></tr>
+      <tr><td>Bostøtte</td><td>Egen inngang, bad og WC, mulighet for matlaging, plass til å sove og oppholde seg</td><td class="win">Alt er på plass</td></tr>
+      <tr><td>Oppvarming</td><td>Ingen pipe ved den enklere søknadsveien</td><td class="win">Luft-til-luft-varmepumpe og panelovner</td></tr>
+      <tr><td>Sikkerhet, fra seks kommunale konkurransegrunnlag</td><td>Sprinkler med alarm, sekundær rømningsvei, tilgang for personell til tekniske installasjoner</td><td class="win">Boligsprinkler og røykvarslere, bakdør, teknisk skap som åpnes utenfra, med nøkkelboks</td></tr>
+      <tr><td>Hardbruk</td><td>Overflater som kan rengjøres og skiftes ut</td><td class="win">Gulv med fall til sluk, ingen dusjvegger i glass, kryssfiner skrudd synlig over OSB</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Designillustrasjoner av referanseenheten ARKA 28, gjengitt fra opphavspersonens parametriske modell, der hvert mål over er kontrollert med skript mot regelen ved siden av. Bildene er ikke fotografier av et bygd hus. Endelige mål følger dokumentasjonen fra valgt leverandør og kommunens krav. En bolig større enn 30 m² er et eget produkt som krever ansvarlig foretak og uavhengig kontroll.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <p class="kicker">Kommunebudsjettet</p>
+  <h2>Den egentlige prøven er nettokostnaden, og alle tilfellene ligger langt under midlertidig botilbud</h2>
+  <div class="chart">
+    <h3>Kommunens netto månedlige kostnad etter husleie, uten mva.-kompensasjon</h3>
+    <p class="note">Lån til 4,774 % over 50 år med månedlige terminer; driftskostnader 1 640 kr/mnd.; husleie 7 050 kr ved 95 % utleiegrad; 40 000 kr i bikostnader per bolig. En opparbeidet tomt med et gavebidrag på 200 000 kr gir et overskudd på omtrent 535 kr i måneden.</p>
+    <div id="c3"></div>
+  </div>
+  <p class="foot">Husleien alene dekker ikke lånet i alle tilfeller, og modellen later ikke som om den gjør det. Med mva.-kompensasjon, som bare er mulig for spesielt tilrettelagte boliger, blir hvert tilfelle omtrent 1 100–1 300 kr bedre i måneden. Over 20 år lønner boligen seg for enhver kommune der midlertidig botilbud koster mer enn omtrent 9 600–11 000 kr per husstand per måned (317–363 kr per døgn). Tromsøs gjennomsnitt i 2025 var omtrent 16 200.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <p class="kicker">Hvor gavemidler passer inn</p>
+  <h2>De samme 10 mill. kr: 8 boliger kjøpt, eller 37 boliger som går i pluss</h2>
+  <p class="lead">Husbanken og husleien betaler for huset. Gavemidler gjør det ingen av dem gjør: et bidrag på omtrent 270 000 kr per bolig løfter en bolig på opparbeidet tomt fra et lite underskudd til et overskudd med den dekningsgraden en långiver krever (1,2×), også uten mva.-kompensasjon.</p>
+  <div class="chart">
+    <h3>Boliger levert per 10 mill. kr i gavemidler</h3>
+    <p class="note">Samme grunnlag for begge søylene: opparbeidet tomt, uten mva.-kompensasjon. Kjøpt direkte: 1,225 mill. kr per bolig inkl. mva., altså 8 hele boliger. Katalysator: 270 000 kr per bolig med kommunalt lån fra Husbanken.</p>
+    <div id="c4"></div>
+  </div>
+</section>
+
+<!-- engines -->
+<section class="slide">
+  <p class="kicker">Hvem den er for</p>
+  <h2>Ett hus, tre finansieringsmodeller</h2>
+  <p class="lead">Boligen er den samme for alle. Det som endres, er hvem som eier den og hvordan den betales. Rekkefølgen under starter der tallene er sterkest og kjøperen er tydeligst.</p>
+  <table>
+    <thead><tr><th>Modell</th><th>Hvem som bor der</th><th>Hvem som eier, og hvordan det betales</th><th>Når</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Kommunal bolig</b></td><td>Personer kommunen skaffer bolig til: enslige voksne med lav inntekt, flyktninger, personer med funksjonsnedsettelse, unge voksne som flytter ut fra barnevernet, personer i bedring etter utfordringer med rus og psykisk helse</td><td>Kommunen, med lån fra Husbanken på inntil 100 %, husleie innenfor grensen for bostøtte</td><td class="win">Pilot</td></tr>
+      <tr><td><b>2 · Blandet utleie</b></td><td>Minst 40 % tildelt av kommunen; resten leies ut på det åpne markedet til studenter, enslige arbeidstakere og personer som velger å bo lite</td><td>En stiftelse eller investor med lån fra Husbanken på 85 %, med tilvisningsavtale i minst 20 år. Krever mer enn 15 % egenkapital</td><td>Neste trinn</td></tr>
+      <tr><td><b>3 · ARKA 40+</b></td><td>Unge førstegangskjøpere i distriktskommuner</td><td>Kommunen kjøper og selger videre; en lokal bank gir lån (Heim-modellen). Over 30 m², og derfor et eget produkt med alle ansvarsroller i byggesaken</td><td>Etter de første leveransene</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Blandede leieforhold styrker modellen: en bolig i en vanlig gate, blant vanlige naboer, er nettopp det Housing First tar sikte på.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <p class="kicker">Hvorfor ingen stopper det</p>
+  <h2>Alle parter med vetorett kommer bedre ut</h2>
+  <table>
+    <thead><tr><th>Part</th><th>I dag</th><th>Med ARKA</th><th>Resultat</th></tr></thead>
+    <tbody>
+      <tr><td>Kommunen</td><td>Utgifter til midlertidig botilbud og en lovpålagt plikt den har vanskelig for å oppfylle</td><td>En fast bolig til en brøkdel av den månedlige kostnaden</td><td class="win">Bedre stilt</td></tr>
+      <tr><td>Husbanken</td><td>93 % av utlånsvolumet til utleieboliger i 2025 gikk til private selskaper</td><td>Låner ut til den sikreste låntakeren, innenfor kjerneoppdraget</td><td class="win">Bedre stilt</td></tr>
+      <tr><td>Boligleverandører</td><td>3–5 konkurranser i året der boligen kjøpes separat</td><td>Flere slike konkurranser, spredt gjennom en åpen metode</td><td class="win">Bedre stilt</td></tr>
+      <tr><td>Innkjøper</td><td>Personlig ansvar hvis en ny metode slår feil</td><td>En mal, et statlig eksempel å vise til (DFØ Eksempelbanken) og en koordinator</td><td class="win">Bedre stilt</td></tr>
+      <tr><td>Giver</td><td>1 bolig per ≈1,2 mill. kr</td><td>1 bolig som går i pluss per ≈270 000 kr</td><td class="win">Bedre stilt</td></tr>
+      <tr><td>Hoteller, totalentreprenører</td><td>Får betalt</td><td>Mister noe omsetning</td><td>Dårligere stilt · ingen vetorett</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <p class="kicker">Innvendinger</p>
+  <h2>Det en kredittkomité vil spørre om, med svar</h2>
+  <table>
+    <thead><tr><th>Innvending</th><th>Svar</th><th>Gjenstående risiko</th></tr></thead>
+    <tbody>
+      <tr><td>Husleien dekker ikke lånet i alle tilfeller</td><td>Det stemmer, og modellen sier det. Kommunens nettokostnad i verste fall er omtrent 1 300 kr i måneden per bolig, mot omtrent 16 200 for midlertidig botilbud i Tromsø. Et gavebidrag på omtrent 270 000 kr gjør at en bolig på opparbeidet tomt går i pluss.</td><td>Lav</td></tr>
+      <tr><td>Ingen mva.-kompensasjon</td><td>Allerede lagt til grunn. Kompensasjon gis bare for spesielt tilrettelagte boliger (Skattedirektoratet 2013); domstolene er delt, og begge dommene er anket. Kompensasjon ville forbedre hvert tilfelle med omtrent 1 100–1 300 kr i måneden.</td><td>Innregnet</td></tr>
+      <tr><td>Renten stiger</td><td>Bind renten i inntil 20 år til 4,774 % (oktober 2026). Hvert prosentpoeng gir omtrent 700–900 kr mer i måneden per bolig, fortsatt en brøkdel av kostnaden ved midlertidig botilbud.</td><td>Lav</td></tr>
+      <tr><td>En bolig i distriktet kan bli verdsatt lavere enn det den kostet</td><td>Kommunen er låntaker. Lån til kommuner gis uten pant, og kommuner kan ikke gå konkurs.</td><td>Lav</td></tr>
+      <tr><td>Hard slitasje</td><td>Hardbruksspesifikasjon fra seks kommunale konkurranser: gulv som kan vaskes, med sluk, utskiftbare plater, sprinkler. Driftskostnadene er budsjettert ut fra komponentene, ikke anslått på skjønn.</td><td>Middels</td></tr>
+      <tr><td>Modulprisen blir høyere enn antatt</td><td>Den viktigste enkeltfaktoren. En bolig på opparbeidet tomt når 1,2× husleiedekning uten gavebidrag ved en modulpris på omtrent 20 800 kr/m², mot omtrent 28 000 i dag. Pilotkonkurransen fastslår den reelle prisen.</td><td>Middels</td></tr>
+      <tr><td>Leverandøren går konkurs midt i leveransen</td><td>Flere små leverandører i dette markedet har svak kapitalbase. Konkurransegrunnlaget krever kontraktsgaranti og betaling i etapper mot levert arbeid, og ARKA er aldri avhengig av én enkelt leverandør.</td><td>Middels</td></tr>
+      <tr><td>Hvorfor modul og ikke tradisjonell bygging?</td><td>Tid. Hver måned en husstand venter i midlertidig botilbud, koster omtrent 16 200 kr (gjennomsnitt Tromsø 2025). En ferdig bolig plassert på en tomt der vann, avløp og strøm allerede er på plass, forkorter ventetiden; piloten måler hvor mye.</td><td>Lav</td></tr>
+      <tr><td>Kvalitet og oppfyllelse av TEK17</td><td>Bare leverandører med SINTEF Teknisk godkjenning eller ETA; en norsk ingeniør gjennomgår dokumentasjonen før noen bestilling.</td><td>Middels</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- faq -->
+<section class="slide" id="faq">
+  <p class="kicker">Spørsmål og svar</p>
+  <h2>Direkte svar</h2>
+  <details open><summary><b>Hvem er det for?</b></summary><p>Personer kommunen skaffer bolig til: enslige voksne med lav inntekt, flyktninger, personer med funksjonsnedsettelse, unge voksne som flytter ut fra barnevernet, personer i bedring etter utfordringer med rus og psykisk helse. Under modell 2 også studenter, enslige arbeidstakere og personer som velger å bo lite. ARKA 28 er for én voksen; par, rullestolbrukere og foreldre som har barn på samvær, trenger en større bolig.</p></details>
+  <details><summary><b>Hvorfor ikke bare bruke de tomme kommunale boligene?</b></summary><p>Der de passer, bør de brukes først. Men 9 396 kommunale boliger sto uten leietaker ved utgangen av 2025, mens 14 458 søknader ble avslått. Det viser at den eksisterende boligmassen ofte har feil størrelse, ligger feil sted eller ikke er robust nok. ARKA 28 er den typen boligmassen mangler: en enkeltstående, robust bolig, spredt plassert, med sprinkler, sekundær rømningsvei og tilgang for personell.</p></details>
+  <details><summary><b>Er dette en hytte eller et mikrohus?</b></summary><p>Nei. Det er en fast bolig, godkjent og registrert for helårsbruk, aldri som mobil bolig. Bostøtte gis ikke for mobile boliger.</p></details>
+  <details><summary><b>Hvorfor under 30 m²?</b></summary><p>En frittliggende bolig på inntil 30 m² BRA i én etasje faller inn under en enklere søknadsvei (SAK10 § 3-1 e). På en tomt som allerede er bebygd, trengs det ikke ansvarlig foretak. På en ubebygd tomt krever DiBKs veiledning ansvarlig foretak; leverandøren eller en lokal byggmester tar den rollen.</p></details>
+  <details><summary><b>Hvorfor én bolig per tomt?</b></summary><p>To nye boliger på samme tomt vurderes samlet og mister den enklere søknadsveien. Å spre enkeltboliger i vanlige gater er dessuten det Housing First-praksis anbefaler.</p></details>
+  <details><summary><b>Hvorfor ingen vedovn?</b></summary><p>Pipe eller røykkanal fjerner den enklere søknadsveien. Varmen kommer fra luft-til-luft-varmepumpe og elektriske panelovner.</p></details>
+  <details><summary><b>Kvalifiserer boligen for bostøtte?</b></summary><p>Ja: den har egen inngang, eget bad og WC, mulighet for matlaging og plass til å sove og oppholde seg. Om leietakeren får bostøtte, avhenger av inntekten. Bostøtten regner med husleie inntil 7 050 kr i måneden for én person når oppvarming betales separat, eller 7 686 kr når den er inkludert.</p></details>
+  <details><summary><b>Hvem eier boligene?</b></summary><p>Normalt kommunen. Alternativt en stiftelse eller investor, med en tilvisningsavtale som gir kommunen tildelingsrett i minst 20 år.</p></details>
+  <details><summary><b>Hvordan finansieres det?</b></summary><p>Lån fra Husbanken på inntil 100 % til kommunen, over inntil 50 år, med mulighet for fast rente i inntil 20 år (4,774 % i oktober 2026). Husleien dekker det meste av kostnaden; kommunens netto andel er høyst omtrent 1 300 kr i måneden per bolig.</p></details>
+  <details><summary><b>Hva med mva.?</b></summary><p>Modellen legger til grunn full mva. på 25 % uten kompensasjon. Kompensasjon er bare mulig for boliger som er spesielt tilrettelagt for helsemessige eller sosiale formål; sikkerhetsløsningene i ARKA styrker et slikt krav, men ingenting avhenger av det.</p></details>
+  <details><summary><b>Hva må kommunen stille med?</b></summary><p>En opparbeidet tomt, tildeling av leietakere og oppfølgingstjenester, som kommunen allerede gir. Koordinering av piloten kan kjøpes som direkteanskaffelse (under 500 000 kr kreves ingen konkurranse fra 1. juli 2026), og kan senere delfinansieres gjennom Husbankens tilskudd til boligtiltak (neste frist 15. mai 2027).</p></details>
+  <details><summary><b>Hvem bygger det?</b></summary><p>En etablert fabrikk valgt gjennom åpen konkurranse, med norsk dokumentasjon (SINTEF Teknisk godkjenning eller ETA). ARKA produserer ikke og selger ikke boliger, og gir aldri tilbud i en konkurranse ARKA har vært med på å utforme.</p></details>
+  <details><summary><b>Hvordan tjener ARKA penger?</b></summary><p>Som koordinator for kommunen: gjennomfører konkurransen, organiserer grunnarbeidet og kontrollerer dokumentasjonen. Selve metoden er åpen for offentlige organer.</p></details>
+  <details><summary><b>Er det bygd noen ARKA-bolig?</b></summary><p>Ikke ennå. Piloten skal gi reelle tall for kostnad, vedlikehold og unngått midlertidig botilbud, i kommunens eget regnskap. Lignende boliger leveres allerede til norske kommuner av andre, for eksempel i Sandnes og Heim.</p></details>
+  <details><summary><b>Hvem står bak?</b></summary><p>Mantas Pagalys, tømrer bosatt i Oslo, som har utviklet modellen og den økonomiske analysen. Kontakt: pagalysm@gmail.com</p></details>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <p class="kicker">Forslaget</p>
+  <h2>En pilot: 5 boliger, én kommune, ett år</h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="l" style="margin-top:0"><b style="color:var(--ink)">Hva piloten trenger</b></div>
+      <ul class="tight">
+        <li>Én kommune med tomter der vann, avløp og strøm er på plass, helst allerede bebygd, og med press på midlertidig botilbud. Sterke kandidater: Bodø, Skjervøy, Namsskogan, Meløy, Steinkjer, Nesseby</li>
+        <li>Omtrent 1,35 mill. kr fra givere: 5 × 270 000 kr per bolig</li>
+        <li>Koordinering kjøpt av kommunen som direkteanskaffelse (under terskelen på 500 000 kr), med Husbankens tilskudd til boligtiltak som senere medfinansiering</li>
+        <li>En norsk ingeniør til teknisk gjennomgang</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="l" style="margin-top:0"><b style="color:var(--ink)">Hva piloten dokumenterer</b></div>
+      <ul class="tight">
+        <li>Den reelle modulprisen fra en åpen konkurranse: den viktigste faktoren i modellen</li>
+        <li>Reelle driftskostnader med reelle leietakere</li>
+        <li>Unngått midlertidig botilbud, i kommunens eget regnskap</li>
+        <li>Et publisert eksempel i DFØs Eksempelbanken, slik at neste kommune kan starte med dokumentasjon</li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot">Tre forhold bekreftes før noen bestilling: Husbankens syn på enkeltboliger på spredte tomter; reelle driftskostnader fra en kommune som allerede eier små boliger; pilotkommunens egen månedlige kostnad til midlertidig botilbud.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <p class="kicker">Kilder og sikkerhet</p>
+  <h2>Hva som har kilde, hva som er beregnet, hva som er antatt</h2>
+  <table>
+    <thead><tr><th>Tall</th><th>Status</th><th>Kilde</th></tr></thead>
+    <tbody>
+      <tr><td>Husbanken: inntil 100 % (kommune) / 85 % (juridisk person) av verdien; 50 år; 20 år fast rente; tilvisning ≥40 % i ≥20 år</td><td><span class="tag">kilde</span></td><td>Forskrift om lån fra Husbanken § 7-4 og kap. 3 (Lovdata); Husbankens veileder HB.7.B.18</td></tr>
+      <tr><td>Husbanken 20 år fast rente 4,774 %, flytende 4,025 % (oktober 2026)</td><td><span class="tag">kilde</span></td><td>husbanken.no, renteutvikling</td></tr>
+      <tr><td>Øvre grense for boutgifter i bostøtten 92 234 kr i året, én person; tillegg for oppvarming 7 631 kr i året</td><td><span class="tag">kilde</span></td><td>Forskrift om bustøtte §§ 2–3 (Lovdata)</td></tr>
+      <tr><td>Bostøttens krav til boligen</td><td><span class="tag">kilde</span></td><td>husbanken.no, krav til boligen</td></tr>
+      <tr><td>Mva.-kompensasjon bare for spesielt tilrettelagte boliger</td><td><span class="tag">kilde</span></td><td>Skattedirektoratet, uttalelse 12.03.2013; Gulating 26.03.2026 og Oslo tingrett 16.05.2026, begge anket</td></tr>
+      <tr><td>Tromsø 2025 netto utgift 13,6 mill. kr, omtrent 70 husstander; hotell 4 000–4 500 kr per døgn</td><td><span class="tag">kilde</span></td><td>Nettavisen / Nordlys, 16.02.2026</td></tr>
+      <tr><td>Stavanger inntil 2 000 kr per døgn; over 40 mill. kr i fjor</td><td><span class="tag">kilde</span></td><td>Stavanger Aftenblad, 04.09.2026</td></tr>
+      <tr><td>Kommunale gebyrer for vann, avløp og avfall 17 302 kr i året (standardbolig)</td><td><span class="tag">kilde</span></td><td>SSB tabell 12842, 2026</td></tr>
+      <tr><td>9 396 kommunale boliger uten leietaker per 31.12.2025; 14 458 søknader avslått (2025)</td><td><span class="tag">kilde</span></td><td>SSB tabell 12008 og 12012 (API, lest 03.10.2026)</td></tr>
+      <tr><td>7 077 husstander i midlertidig botilbud i 2024 (+60 %)</td><td><span class="tag">kilde</span></td><td>KOSTRA, via ARKA-forskningsfil B</td></tr>
+      <tr><td>Ringsaker hardbruksbolig 3,5 mill. kr ekskl. mva. (2024)</td><td><span class="tag">kilde</span></td><td>Doffin 2024-103263, via fil B</td></tr>
+      <tr><td>Modul ≈28 000 kr/m² ekskl. mva.</td><td><span class="tag">kilde</span></td><td>Listepris fra Fleksihus, via fil A</td></tr>
+      <tr><td>Direkteanskaffelse tillatt under 500 000 kr ekskl. mva. (fra 01.07.2026)</td><td><span class="tag">kilde</span></td><td>Anskaffelsesforskriften § 1-1, endret ved FOR-2026-04-14-617 (Lovdata)</td></tr>
+      <tr><td>Tilskudd til boligtiltak: frist 15. mai; organisasjonsnummer kreves; resultater publiseres åpent</td><td><span class="tag">kilde</span></td><td>FOR-2026-03-26-506 § 8 (Lovdata)</td></tr>
+      <tr><td>Opparbeidede kommunale tomter: Skjervøy, Namsskogan, Meløy, Steinkjer, Nesseby og flere</td><td><span class="tag">kilde</span></td><td>Kommunenes nettsider og gebyrregulativer; NRK (forskningsfil D)</td></tr>
+      <tr><td>Kommuner kan ikke gå konkurs; lån til kommuner gis uten pant</td><td><span class="tag">kilde</span></td><td>kbn.com; kommuneloven</td></tr>
+      <tr><td>Grunnarbeid 100 000–275 000 kr; bikostnader 40 000 kr; forsikring; utleiegrad 95 %; andelen av gebyrene en bolig på 30 m² betaler</td><td><span class="tag h">antakelse</span></td><td>Bekreftes i piloten</td></tr>
+    </tbody>
+  </table>
+  <p class="foot">Modell: arka_finance.py, med en stresstest på 50 000 trekninger av rente, priser, driftskostnader, utleiegrad og mva. Ikke juridisk rådgivning eller skatterådgivning.</p>
+  <p class="foot" id="terms" style="margin-top:12px">© 2026 Mantas Pagalys, opphavsperson for ARKA-modellen (første versjon datert 28.09.2026). Kommuner og andre offentlige organer kan bruke metoden i egne anskaffelser med kildehenvisning. Kommersiell gjenbruk, videresalg eller gjengivelse fra leverandører, konsulenter eller investorer krever skriftlig tillatelse. Kontakt: pagalysm@gmail.com</p>
+</section>
+
+</main>
+<script>
+(function(){
+  const root=document.documentElement, KEY="arka-theme";
+  try{const s=localStorage.getItem(KEY); if(s) root.setAttribute("data-theme",s);}catch(e){}
+  document.getElementById("theme").onclick=()=>{
+    const dark = root.getAttribute("data-theme")==="dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    const next = dark ? "light" : "dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  };
+  const tip=document.getElementById("tip");
+  function show(e,t){tip.textContent=t;tip.style.opacity=1;tip.style.left=Math.min(e.clientX+14,innerWidth-300)+"px";tip.style.top=(e.clientY+14)+"px";}
+  function hide(){tip.style.opacity=0;}
+  const NS="http://www.w3.org/2000/svg";
+  function el(n,a,p){const x=document.createElementNS(NS,n);for(const k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+  // horizontal bar chart; rows: {label, v, lo, hi, hi_light(bool), fmt, tip}
+  function hbar(id,rows,opt){
+    const host=document.getElementById(id);
+    const W=1000,rowH=56,labelW=opt.labelW||300,padR=140,H=rows.length*rowH+(opt.ref?28:8);
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",role:"img","aria-label":opt.aria},host);
+    const max=opt.max, x=v=>labelW+(W-labelW-padR)*v/max;
+    if(opt.ref!=null){
+      el("line",{x1:x(opt.ref),x2:x(opt.ref),y1:0,y2:rows.length*rowH,stroke:"var(--ink-3)","stroke-dasharray":"4 4","stroke-width":1.5},svg);
+      const t=el("text",{x:x(opt.ref),y:rows.length*rowH+18,"text-anchor":"middle","font-size":13,fill:"var(--ink-3)"},svg);t.textContent=opt.refLabel;
+    }
+    rows.forEach((r,i)=>{
+      const y=i*rowH+12, h=28;
+      const lt=el("text",{x:labelW-16,y:y+h/2+5,"text-anchor":"end","font-size":15,fill:"var(--ink)","font-weight":r.hi?600:400},svg);lt.textContent=r.label;
+      const fill=r.hi?"var(--accent)":"var(--muted-bar)";
+      const w=Math.max(4,x(r.v)-labelW);
+      const bar=el("path",{d:`M${labelW},${y} h${w-4} a4,4 0 0 1 4,4 v${h-8} a4,4 0 0 1 -4,4 h${-(w-4)} z`,fill},svg);
+      if(r.lo!=null){ el("line",{x1:x(r.lo),x2:x(r.hi_v),y1:y+h/2,y2:y+h/2,stroke:"var(--ink-2)","stroke-width":2},svg);
+        [r.lo,r.hi_v].forEach(v=>el("line",{x1:x(v),x2:x(v),y1:y+h/2-7,y2:y+h/2+7,stroke:"var(--ink-2)","stroke-width":2},svg)); }
+      const vt=el("text",{x:x(r.lo!=null?r.hi_v:r.v)+10,y:y+h/2+5,"font-size":15,fill:r.hi?"var(--accent-ink)":"var(--ink-2)","font-weight":600},svg);vt.textContent=r.fmt;
+      const hit=el("rect",{x:0,y:i*rowH,width:W,height:rowH,fill:"transparent"},svg);
+      hit.addEventListener("mousemove",e=>show(e,r.tip));hit.addEventListener("mouseleave",hide);
+    });
+  }
+  hbar("c1",[
+    {label:"Stavanger, øvre hotellsats",v:60833,fmt:"60 800 kr",tip:"Inntil 2 000 kr per døgn × 365 / 12 (Stavanger Aftenblad, 04.09.2026)"},
+    {label:"Tromsø, snitt 2025",v:16190,fmt:"≈16 200 kr",tip:"Netto 13,6 mill. kr i utgifter til midlertidig botilbud i 2025 ÷ omtrent 70 husstander (Nettavisen/Nordlys)"},
+    {label:"ARKA-bolig, verste tilfelle",v:1300,fmt:"1 300 kr",hi:true,tip:"Vanlig tomt, uten mva.-kompensasjon, uten gavebidrag: lån 6 358 + driftskostnader 1 640 − husleie 7 050 × 95 %"},
+    {label:"ARKA-bolig, opparbeidet tomt",v:342,fmt:"342 kr",hi:true,tip:"Opparbeidet tomt, uten mva.-kompensasjon, uten gavebidrag: lån 5 399 + driftskostnader 1 640 − husleie 6 698"}
+  ],{max:66000,aria:"Netto månedlig kostnad per husstand: midlertidig botilbud mot ARKA-bolig",labelW:330});
+  hbar("c2",[
+    {label:"Hardbruksbolig, anbud (Ringsaker)",v:3.5,fmt:"3,50 mill.",tip:"Ringsaker 2024, én hardbruksbolig, komplett inkl. klargjøring av tomt, vann og strøm: 3,5 mill. kr ekskl. mva. (Doffin 2024-103263)"},
+    {label:"Totalentreprise, 30 m²",v:2.1,lo:1.65,hi_v:2.55,fmt:"1,65–2,55 mill.",tip:"Innkjøpernes egne anslag 55 000–85 000 kr/m² × 30 m²; søylen viser midtpunktet"},
+    {label:"ARKA-veien, vanlig tomt",v:1.155,fmt:"1,16 mill.",hi:true,tip:"28 000 kr/m² × 30 m² + 275 000 grunnarbeid + 40 000 bikostnader"},
+    {label:"ARKA-veien, opparbeidet tomt",v:0.98,fmt:"0,98 mill.",hi:true,tip:"28 000 kr/m² × 30 m² + 100 000 grunnarbeid + 40 000 bikostnader"}
+  ],{max:3.8,aria:"Investeringskostnad per bolig i millioner kroner",labelW:330});
+  hbar("c3",[
+    {label:"Vanlig tomt, uten gave",v:1300,fmt:"1 300 kr kostnad",tip:"Lån 1 443 750 → 6 358/mnd. + 1 640 drift − 6 698 husleie"},
+    {label:"Vanlig tomt, gave 200 000",v:424,fmt:"424 kr kostnad",tip:"Terminbeløp 5 481/mnd. + 1 640 − 6 698"},
+    {label:"Opparbeidet tomt, uten gave",v:342,fmt:"342 kr kostnad",hi:true,tip:"Lån 1 225 000 → 5 399/mnd. + 1 640 − 6 698"},
+    {label:"Opparbeidet tomt, gave 200 000",v:0,fmt:"+535 kr overskudd",hi:true,tip:"Terminbeløp 4 523/mnd. + 1 640 − 6 698 = 535 kr overskudd"}
+  ],{max:1500,aria:"Kommunens netto månedlige kostnad etter husleie, uten mva.-kompensasjon",labelW:300});
+  hbar("c4",[
+    {label:"Giver kjøper boliger direkte",v:8,fmt:"8 boliger",tip:"10 mill. ÷ 1,225 mill. inkl. mva. (opparbeidet tomt) = 8,2, altså 8 hele boliger"},
+    {label:"Katalysator: 270 000 per bolig",v:37,fmt:"37 boliger",hi:true,tip:"10 mill. ÷ 270 000: hver bolig når 1,2× husleiedekning på opparbeidet tomt uten mva.-kompensasjon"}
+  ],{max:42,aria:"Boliger per 10 mill. kr i gavemidler"});
+})();
+</script>
+</body>
+</html>

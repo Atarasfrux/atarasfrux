@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Mantas Pagalys">
+<meta name="copyright" content="© 2026 Mantas Pagalys">
+<meta name="robots" content="index, follow, noai, noimageai">
+<meta name="description" content="ARKA-kalkulator: hva en liten permanent bolig koster kommunen per måned, sammenlignet med midlertidig botilbud.">
+<title>ARKA · Kalkulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--surface:#fff;--line:#e4e3df;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#7d7c77;--accent:#2a78d6;--accent-ink:#1c5cab;--good:#1baf7a;--bad:#e34948;--chip:#eef4fc}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--bg:#121211;--surface:#1a1a19;--line:#33332f;--ink:#fff;--ink-2:#c3c2b7;--ink-3:#8f8e86;--accent:#3987e5;--accent-ink:#86b6ef;--good:#199e70;--bad:#e66767;--chip:#1d2b3d}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#121211;--surface:#1a1a19;--line:#33332f;--ink:#fff;--ink-2:#c3c2b7;--ink-3:#8f8e86;--accent:#3987e5;--accent-ink:#86b6ef;--good:#199e70;--bad:#e66767;--chip:#1d2b3d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto;padding:48px 16px 64px}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 12px}
+h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(30px,4vw,46px);line-height:1.15;margin:0 0 12px}
+p.lead{color:var(--ink-2);max-width:760px;margin:0 0 32px;font-size:18px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 16px}
+label{display:block;font-size:14px;color:var(--ink-2);margin:14px 0 6px}
+label small{color:var(--ink-3)}
+input[type=number],select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.out{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.metric{border-top:2px solid var(--line);padding-top:10px}
+.metric .v{font-family:"Playfair Display",Georgia,serif;font-size:30px;font-weight:700}
+.metric .k{font-size:13px;color:var(--ink-2)}
+.metric.hi{border-top-color:var(--accent)} .metric.hi .v{color:var(--accent-ink)}
+.v.good{color:var(--good)} .v.bad{color:var(--bad)}
+.bar{height:14px;border-radius:4px;background:var(--line);margin:6px 0 2px;position:relative;overflow:hidden}
+.bar>span{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.cmp{margin-top:20px}
+.cmp .lbl{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-2)}
+.foot{font-size:12px;color:var(--ink-3);margin-top:24px;max-width:900px}
+.nav{position:fixed;right:16px;top:16px;display:flex;gap:8px}
+.nav button,.nav a{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="nav"><a href="arka_no.html">Orientering</a><button id="lang" type="button">English</button><button id="theme" type="button" aria-label="Lys/mørk">◐</button></div>
+<div class="wrap">
+  <p class="kicker" data-t="kicker">ARKA · Fra midlertidig til fast · Kalkulator</p>
+  <h1 data-t="h1">Hva koster en permanent bolig kommunen, sammenlignet med midlertidig botilbud?</h1>
+  <p class="lead" data-t="lead">Fyll inn kommunens egne tall. Beregningen bruker samme formler som ARKA-modellen (arka_finance.py): Husbanken-lån med månedlige terminer, husleie innenfor bostøttens grense og driftskostnader fra komponenter. Forhåndsverdiene er modellens forsiktige basistilfelle.</p>
+  <div class="grid">
+    <div class="card">
+      <h2 data-t="in">Forutsetninger</h2>
+      <label><span data-t="temp">Midlertidig botilbud i dag, kr per husstand per måned</span> <small data-t="tempS">(Tromsø 2025: ≈16 200)</small></label>
+      <input type="number" id="temp" value="16200" min="0" step="100">
+      <div class="row2">
+        <div><label data-t="plot">Tomt</label>
+          <select id="plot"><option value="100000" data-t="plotS">Opparbeidet (grunnarbeid 100 000)</option><option value="275000" data-t="plotO">Vanlig (grunnarbeid 275 000)</option></select></div>
+        <div><label data-t="vat">Mva.-kompensasjon</label>
+          <select id="vat"><option value="0" data-t="vatN">Nei (basis)</option><option value="1" data-t="vatY">Ja</option></select></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="price">Modulpris, kr/m² eks. mva.</label><input type="number" id="price" value="28000" step="500"></div>
+        <div><label data-t="area">Areal, m² <small>(≤30)</small></label><input type="number" id="area" value="30" min="15" max="30" step="1"></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="rate">Rente, % <small>(Husbanken 20 år fast, okt. 2026)</small></label><input type="number" id="rate" value="4.774" step="0.05"></div>
+        <div><label data-t="years">Nedbetaling, år</label><input type="number" id="years" value="50" min="10" max="50"></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="rent">Husleie, kr/mnd <small>(bostøtte teller ≤7 050 uten strøm)</small></label><input type="number" id="rent" value="7050" step="50"></div>
+        <div><label data-t="occ">Utleiegrad, %</label><input type="number" id="occ" value="95" min="50" max="100"></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="opex">Drift, kr/mnd <small>(vedlikehold, gebyrer, forsikring)</small></label><input type="number" id="opex" value="1640" step="10"></div>
+        <div><label data-t="gift">Gave per bolig, kr</label><input type="number" id="gift" value="0" step="10000"></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="n">Antall boliger</label><input type="number" id="n" value="5" min="1" max="200"></div>
+        <div><label data-t="months">Måneder raskere enn vanlig bygging</label><input type="number" id="months" value="6" min="0" max="24"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2 data-t="res">Resultat per bolig</h2>
+      <div class="out">
+        <div class="metric"><div class="v" id="o_cap">–</div><div class="k" data-t="o_cap">Investering per bolig</div></div>
+        <div class="metric"><div class="v" id="o_pay">–</div><div class="k" data-t="o_pay">Lånebetaling per måned</div></div>
+        <div class="metric hi"><div class="v" id="o_net">–</div><div class="k" data-t="o_net">Kommunens nettokostnad per måned etter husleie</div></div>
+        <div class="metric"><div class="v" id="o_dscr">–</div><div class="k" data-t="o_dscr">Husleiedekning (netto leie ÷ lånebetaling)</div></div>
+        <div class="metric hi"><div class="v" id="o_save">–</div><div class="k" data-t="o_save">Spart per måned mot midlertidig botilbud</div></div>
+        <div class="metric"><div class="v" id="o_speed">–</div><div class="k" data-t="o_speed">Verdien av raskere innflytting, per bolig</div></div>
+      </div>
+      <div class="cmp">
+        <div class="lbl"><span data-t="b1">Midlertidig botilbud</span><span id="b1v"></span></div>
+        <div class="bar"><span id="b1" style="background:var(--ink-3)"></span></div>
+        <div class="lbl"><span data-t="b2">ARKA-bolig, netto</span><span id="b2v"></span></div>
+        <div class="bar"><span id="b2" style="background:var(--accent)"></span></div>
+      </div>
+      <div class="out" style="margin-top:20px">
+        <div class="metric hi"><div class="v" id="o_year">–</div><div class="k" data-t="o_year">Spart per år, alle boliger</div></div>
+        <div class="metric"><div class="v" id="o_20">–</div><div class="k" data-t="o_20">Spart over 20 år, alle boliger (nominelt)</div></div>
+      </div>
+    </div>
+  </div>
+  <p class="foot" data-t="foot">Investering = modulpris × areal + grunnarbeid + 40 000 i prosjektkostnader, pluss 25 % mva. når kompensasjon ikke gis. Gaven trekkes fra lånet. Lånebetaling = annuitet med månedlige terminer + 30 kr termingebyr. Nettokostnad = lånebetaling + drift − husleie × utleiegrad. Husleiedekning under 1,0 betyr at kommunen dekker differansen; den er fortsatt sammenlignet med midlertidig botilbud. Forenklet modell, ikke finansiell rådgivning. Kilder og forutsetninger: ARKA-briefingen og arka_finance.py.</p>
+  <p class="foot">© 2026 Mantas Pagalys, opphavsperson for ARKA-modellen. Offentlige organer kan bruke metoden i egne anskaffelser med kildehenvisning. Kommersiell gjenbruk krever skriftlig tillatelse. Kontakt: pagalysm@gmail.com</p>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const fmt=v=>Math.round(v).toLocaleString(document.documentElement.lang==="en"?"en-GB":"nb-NO");
+  function annuity(P,ratePct,years){const r=ratePct/100/12,n=years*12;return r===0?P/n:P*r/(1-Math.pow(1+r,-n));}
+  function calc(){
+    const temp=+$("temp").value,ground=+$("plot").value,vat=$("vat").value==="1",price=+$("price").value,
+      area=Math.min(30,+$("area").value),rate=+$("rate").value,years=+$("years").value,rent=+$("rent").value,
+      occ=+$("occ").value/100,opex=+$("opex").value,gift=+$("gift").value,n=+$("n").value,months=+$("months").value;
+    const capEx=price*area+ground+40000, cap=vat?capEx:capEx*1.25, loan=Math.max(0,cap-gift);
+    const pay=annuity(loan,rate,years)+30, netRent=rent*occ, net=pay+opex-netRent, dscr=(netRent-opex)/pay;
+    const saveMo=temp-net;
+    $("o_cap").textContent=fmt(cap)+" kr";
+    $("o_pay").textContent=fmt(pay)+" kr";
+    const o=$("o_net"); o.textContent=(net<=0?"+"+fmt(-net)+" kr":fmt(net)+" kr"); o.className="v "+(net<=0?"good":"");
+    if(net<=0) o.title=document.documentElement.lang==="en"?"surplus":"overskudd";
+    const d=$("o_dscr"); d.textContent=dscr.toFixed(2).replace(".",document.documentElement.lang==="en"?".":",")+"×"; d.className="v "+(dscr>=1.2?"good":dscr<1?"bad":"");
+    $("o_save").textContent=fmt(saveMo)+" kr";
+    $("o_speed").textContent=fmt(months*temp)+" kr";
+    $("o_year").textContent=fmt(saveMo*12*n)+" kr";
+    $("o_20").textContent=fmt(saveMo*12*20*n)+" kr";
+    const max=Math.max(temp,Math.abs(net),1);
+    $("b1").style.width=(temp/max*100)+"%"; $("b2").style.width=(Math.max(net,0)/max*100)+"%";
+    $("b1v").textContent=fmt(temp)+" kr"; $("b2v").textContent=(net<=0?"+"+fmt(-net):fmt(net))+" kr";
+  }
+  document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",calc));
+  const EN={kicker:"ARKA · From temporary to permanent · Calculator",h1:"What does a permanent home cost the municipality, compared with temporary housing?",
+    lead:"Enter the municipality's own figures. The calculation uses the same formulas as the ARKA model (arka_finance.py): a Husbanken loan with monthly terms, rent within the housing-benefit limit, and running costs from components. The defaults are the model's cautious base case.",
+    in:"Inputs",temp:"Temporary housing today, kr per household per month",tempS:"(Tromsø 2025: ≈16,200)",plot:"Plot",plotS:"Serviced (groundwork 100,000)",plotO:"Ordinary (groundwork 275,000)",vat:"VAT refund",vatN:"No (base case)",vatY:"Yes",
+    price:"Module price, kr/m² excl. VAT",area:"Area, m²",rate:"Interest, %",years:"Repayment, years",rent:"Rent, kr/month",occ:"Occupancy, %",opex:"Running costs, kr/month",gift:"Donor contribution per home, kr",n:"Number of homes",months:"Months faster than a conventional build",
+    res:"Result per home",o_cap:"Investment per home",o_pay:"Loan payment per month",o_net:"Municipality's net cost per month after rent",o_dscr:"Rent cover (net rent ÷ loan payment)",o_save:"Saved per month against temporary housing",o_speed:"Value of moving in sooner, per home",
+    b1:"Temporary housing",b2:"ARKA home, net",o_year:"Saved per year, all homes",o_20:"Saved over 20 years, all homes (nominal)",
+    foot:"Investment = module price × area + groundwork + 40,000 project costs, plus 25 % VAT when no refund is given. The donor contribution reduces the loan. Loan payment = monthly annuity + 30 kr fee. Net cost = loan payment + running costs − rent × occupancy. Rent cover below 1.0 means the municipality covers the difference, which is still compared with temporary housing. Simplified model, not financial advice. Sources and assumptions: the ARKA briefing and arka_finance.py."};
+  const NB={};document.querySelectorAll("[data-t]").forEach(e=>NB[e.dataset.t]=e.textContent);
+  $("lang").onclick=()=>{const en=document.documentElement.lang!=="en";document.documentElement.lang=en?"en":"nb";
+    document.querySelectorAll("[data-t]").forEach(e=>{e.textContent=(en?EN:NB)[e.dataset.t]??e.textContent;});
+    $("lang").textContent=en?"Norsk":"English";calc();};
+  const root=document.documentElement;
+  try{const s=localStorage.getItem("arka-theme");if(s)root.setAttribute("data-theme",s);}catch(e){}
+  $("theme").onclick=()=>{const dark=root.getAttribute("data-theme")==="dark"||(!root.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
+    const nx=dark?"light":"dark";root.setAttribute("data-theme",nx);try{localStorage.setItem("arka-theme",nx);}catch(e){}};
+  calc();
+})();
+</script>
+</body>
+</html>
