@@ -68,7 +68,9 @@ input[type=number],select{width:100%;font:inherit;font-size:16px;padding:10px 12
         <div><label data-t="years">Nedbetaling, år</label><input type="number" id="years" value="50" min="10" max="50"></div>
       </div>
       <div class="row2">
-        <div><label data-t="rent">Husleie, kr/mnd <small>(bostøtte teller ≤7 050 uten strøm)</small></label><input type="number" id="rent" value="7050" step="50"></div>
+        <div><label data-t="zone">Kommune (bostøttens tak)</label>
+          <select id="zone"><option value="7050" data-t="zone0">Resten av landet (≤7 050)</option><option value="8640" data-t="zone1">Bergen, Trondheim, Tromsø, Stavanger, Bærum (≤8 640)</option><option value="9382" data-t="zone2">Oslo (≤9 382)</option></select></div>
+        <div><label data-t="rent">Husleie, kr/mnd <small>(uten strøm)</small></label><input type="number" id="rent" value="7050" step="50"></div>
         <div><label data-t="occ">Utleiegrad, %</label><input type="number" id="occ" value="95" min="50" max="100"></div>
       </div>
       <div class="row2">
@@ -131,10 +133,11 @@ input[type=number],select{width:100%;font:inherit;font-size:16px;padding:10px 12
     $("b1v").textContent=fmt(temp)+" kr"; $("b2v").textContent=(net<=0?"+"+fmt(-net):fmt(net))+" kr";
   }
   document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",calc));
+  $("zone").addEventListener("change",()=>{ $("rent").value=$("zone").value; calc(); });
   const EN={kicker:"ARKA · From temporary to permanent · Calculator",h1:"What does a permanent home cost the municipality, compared with temporary housing?",
     lead:"Enter the municipality's own figures. The calculation uses the same formulas as the ARKA model (arka_finance.py): a Husbanken loan with monthly terms, rent within the housing-benefit limit, and running costs from components. The defaults are the model's cautious base case.",
     in:"Inputs",temp:"Temporary housing today, kr per household per month",tempS:"(Tromsø 2025: ≈16,200)",plot:"Plot",plotS:"Serviced (groundwork 100,000)",plotO:"Ordinary (groundwork 275,000)",vat:"VAT refund",vatN:"No (base case)",vatY:"Yes",
-    price:"Module price, kr/m² excl. VAT",area:"Area, m²",rate:"Interest, %",years:"Repayment, years",rent:"Rent, kr/month",occ:"Occupancy, %",opex:"Running costs, kr/month",gift:"Donor contribution per home, kr",n:"Number of homes",months:"Months faster than a conventional build",
+    price:"Module price, kr/m² excl. VAT",area:"Area, m²",rate:"Interest, %",years:"Repayment, years",rent:"Rent, kr/month",zone:"Municipality (housing-benefit ceiling)",zone0:"Rest of Norway (≤7,050)",zone1:"Bergen, Trondheim, Tromsø, Stavanger, Bærum (≤8,640)",zone2:"Oslo (≤9,382)",occ:"Occupancy, %",opex:"Running costs, kr/month",gift:"Donor contribution per home, kr",n:"Number of homes",months:"Months faster than a conventional build",
     res:"Result per home",o_cap:"Investment per home",o_pay:"Loan payment per month",o_net:"Municipality's net cost per month after rent",o_dscr:"Rent cover (net rent ÷ loan payment)",o_save:"Saved per month against temporary housing",o_speed:"Value of moving in sooner, per home",
     b1:"Temporary housing",b2:"ARKA home, net",o_year:"Saved per year, all homes",o_20:"Saved over 20 years, all homes (nominal)",
     foot:"Investment = module price × area + groundwork + 40,000 project costs, plus 25 % VAT when no refund is given. The donor contribution reduces the loan. Loan payment = monthly annuity + 30 kr fee. Net cost = loan payment + running costs − rent × occupancy. Rent cover below 1.0 means the municipality covers the difference, which is still compared with temporary housing. Simplified model, not financial advice. Sources and assumptions: the ARKA briefing and arka_finance.py."};
