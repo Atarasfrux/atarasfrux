@@ -344,6 +344,8 @@
   .contact-form button:hover { background: var(--focus); }
   .contact-form button:disabled { opacity: 0.6; cursor: default; }
   .contact-note { font-size: 0.85rem; color: var(--ink-dim); margin: 0; }
+  .contact-away { font-size: 0.85rem; margin: 0; padding: 0.45rem 0.7rem; border-left: 3px solid var(--accent); background: var(--bg-raised); color: var(--ink); border-radius: 4px; }
+  .contact-rule { font-size: 0.85rem; color: var(--ink); margin: 0; font-weight: 600; }
 
 
   footer.site-footer { padding-block: var(--space-4) var(--space-8); font-size: 0.8rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
@@ -638,6 +640,8 @@
       </svg>
       <form class="contact-form" id="contactForm" action="https://formspree.io/f/mykqqzjg" method="POST">
         <p class="contact-note" data-i18n="cta_line">Ta kontakt for pris — avhenger av jobbens omfang</p>
+        <p class="contact-away" id="awayNote" data-i18n="away_note">Borte 22. oktober – 6. november. Svar fra 9. november.</p>
+        <p class="contact-rule" data-i18n="rule_line">Arbeid og prosjekter: svar garantert. Penger, kontakter og «bare en liten tjeneste»: svar ikke inkludert.</p>
         <label><span data-i18n="form_topic">Henvendelsen gjelder</span><select name="topic" id="topicSel"><option value="tjenester" data-i18n="opt_services">Tjenester</option><option value="ARKA" data-i18n="opt_arka">ARKA (kommune, finansiering, samarbeid)</option><option value="annet" data-i18n="opt_other">Annet</option></select></label>
         <label>Navn<input type="text" name="name" required></label>
         <label>E-post<input type="email" name="email" required></label>
@@ -968,6 +972,8 @@
       fjell_link: "See status and plans →",
       h_contact: "Get in touch",
       cta_line: "Get in touch for a price — depends on the scope of the job",
+      away_note: "Away 22 October – 6 November. Replies from 9 November.",
+      rule_line: "Work and projects: reply guaranteed. Money, contacts and “just a small favour”: reply not included.",
       footer_line: "Prices agreed per job based on scope and time."
     },
     lt: {
@@ -1076,6 +1082,8 @@
       fjell_link: "Žiūrėti būklę ir planus →",
       h_contact: "Susisiekite",
       cta_line: "Susisiekite dėl kainos — priklauso nuo darbo apimties",
+      away_note: "Manęs nebus spalio 22 – lapkričio 6 d. Atsakysiu nuo lapkričio 9 d.",
+      rule_line: "Darbas ir projektai: atsakymas garantuotas. Pinigai, kontaktai ir „tik maža paslauga“: atsakymas neįskaičiuotas.",
       footer_line: "Kaina derinama pagal kiekvieną darbą, atsižvelgiant į apimtį ir laiką."
     }
   };
@@ -1112,6 +1120,9 @@
   var saved;
   try { saved = localStorage.getItem('site-lang'); } catch(e){}
   if (saved && saved !== 'no') setLang(saved);
+  // Away notice hides itself automatically from 9 Nov 2026.
+  var away = document.getElementById('awayNote');
+  if (away && new Date() >= new Date('2026-11-09T00:00:00+01:00')) away.style.display = 'none';
 })();
 
 document.querySelectorAll('.arka-inq').forEach(function(a){ a.addEventListener('click', function(){ var t=document.getElementById('topicSel'); if (t) t.value='ARKA'; }); });
