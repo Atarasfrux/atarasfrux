@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mantas Pagalys · Hage, småbygg og båt · Oslo, Sandvika, Bærum</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon-32.png">
+<style>
+:root{--bg:#fbfaf8;--ink:#141414;--muted:#6b6862;--hair:#dcd8d1;--red:#b0322a;--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.7 Jost,"Futura","Century Gothic",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+h1,h2,h3{font-weight:300;letter-spacing:-0.01em;line-height:1.08;margin:0}
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{font-weight:400;letter-spacing:.32em;text-transform:uppercase;font-size:.82rem;text-decoration:none;color:var(--ink)}
+.brand i{font-style:normal;color:var(--red)}
+.links{display:flex;gap:22px;align-items:center}
+.links a{text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400}
+.links a:hover{color:var(--red)}
+.lang{display:flex;gap:0;border:1px solid var(--hair)}
+.lang button{border:0;background:transparent;color:var(--muted);padding:4px 9px;font:400 .7rem Jost,sans-serif;letter-spacing:.12em;cursor:pointer}
+.lang button.active{background:var(--ink);color:#fff}
+.hero{position:relative;padding:96px 0 80px;display:grid;grid-template-columns:1.5fr .7fr;gap:56px;align-items:end;overflow:hidden}
+.roof{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin:0 0 26px}
+.eyebrow::before{content:"";display:inline-block;width:38px;height:1px;background:var(--red);vertical-align:middle;margin-right:14px}
+.hero h1{font-size:clamp(2.3rem,5.4vw,4.2rem);font-weight:300}
+.stance{margin:34px 0 0;font-size:1.05rem;font-weight:400;letter-spacing:.01em;padding-left:18px;border-left:1px solid var(--red)}
+.lede{color:var(--muted);margin:22px 0 0;max-width:58ch;font-size:.98rem}
+.btns{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 26px;text-decoration:none;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400;border:1px solid var(--ink)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.primary:hover{background:var(--red);border-color:var(--red)}
+.btn.ghost{color:var(--ink)}.btn.ghost:hover{border-color:var(--red);color:var(--red)}
+.portrait{text-align:left}
+.portrait img{width:100%;max-width:190px;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;clip-path:polygon(0 0,100% 12%,100% 100%,0 100%);filter:grayscale(.15)}
+.portrait .name{font-weight:400;margin-top:14px;letter-spacing:.06em}
+.portrait .role{color:var(--muted);font-size:.85rem}
+section{padding:72px 0;border-top:1px solid var(--hair)}
+.sec-h{display:flex;align-items:baseline;gap:18px;margin-bottom:40px}
+.sec-h .n{color:var(--red);font-size:.75rem;letter-spacing:.25em}
+.sec-h h2{font-size:clamp(1.7rem,3.2vw,2.5rem)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr)}
+.card{padding:0 28px;border-left:1px solid var(--hair)}
+.card:first-child{padding-left:0;border-left:0}
+.card h3{font-size:1.25rem;font-weight:400;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{padding:11px 0}
+.card li b{display:block;font-weight:500;font-size:.95rem}
+.card li span{color:var(--muted);font-size:.88rem}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--hair)}
+.facts div{padding:18px 18px 0 0;font-size:.88rem;color:var(--muted)}
+.facts strong{display:block;color:var(--ink);font-weight:400;font-size:.68rem;text-transform:uppercase;letter-spacing:.22em;margin-bottom:4px}
+.arka{background:var(--ink);color:#ece8e1;padding:52px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:center;clip-path:polygon(0 0,100% 0,100% 82%,88% 100%,0 100%)}
+#arka{border-top:0;padding-top:24px}
+.arka .tag{color:#e09a92;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase}
+.arka h2{font-size:clamp(1.5rem,2.8vw,2.2rem);margin:14px 0 16px;color:#fff}
+.arka p{color:#bdb7ad;margin:0;font-size:.95rem}
+.arka a{color:#fff;display:inline-block;margin-top:22px;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid #e09a92;padding-bottom:3px}
+.nums div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px solid #3d3a36}
+.nums b{font-size:2.1rem;font-weight:300;color:#fff;white-space:nowrap}
+.nums div:last-child b{color:#ff8f84}
+.nums span{color:#bdb7ad;font-size:.85rem}
+.fjell p{max-width:62ch;color:var(--muted)}
+.fjell a{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--red);padding-bottom:3px}
+.note{font-style:normal;color:var(--ink);margin-top:22px;font-size:1.05rem}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:56px}
+.away{padding:0 0 0 16px;border-left:1px solid var(--red);font-size:.92rem;margin:0 0 26px;color:var(--ink)}
+.rule{font-weight:300;font-size:1.45rem;line-height:1.35;margin:0 0 16px}
+.cta{color:var(--muted);margin:0;font-size:.95rem}
+form{display:grid;gap:18px}
+label{display:grid;gap:6px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font:300 1rem Jost,sans-serif;padding:10px 0;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0}
+input:focus,select:focus,textarea:focus{outline:0;border-bottom:2px solid var(--red)}
+form button{justify-self:start;background:var(--ink);color:#fff;border:0;padding:14px 34px;font:400 .74rem Jost,sans-serif;letter-spacing:.24em;text-transform:uppercase;cursor:pointer}
+form button:hover{background:var(--red)}
+footer{padding:30px 0 44px;color:var(--muted);font-size:.8rem;letter-spacing:.06em;border-top:1px solid var(--hair)}
+@media (max-width:860px){.hero,.arka,.contact{grid-template-columns:1fr}.hero{padding-top:48px;gap:32px}.portrait{order:-1}.portrait img{max-width:140px}.cards{grid-template-columns:1fr}.card{padding:0;border-left:0;margin-bottom:28px}.facts{grid-template-columns:1fr 1fr}.links a.hide-sm{display:none}.arka{padding:32px 24px;clip-path:polygon(0 0,100% 0,100% 92%,80% 100%,0 100%)}}
+
+.hero{padding:140px 0 120px}
+section{padding:110px 0}
+.sec-h{margin-bottom:56px}
+.card li{padding:9px 0}
+.card li b{font-weight:300;font-size:1.02rem}
+.facts{grid-template-columns:repeat(2,1fr);max-width:640px;margin-top:80px}
+.stance{margin-top:44px}
+.btns{margin-top:52px}
+.arka{padding:64px 56px}
+.arka h2{margin-bottom:0}
+.contact{gap:80px}
+@media (max-width:860px){.hero{padding:56px 0 72px}section{padding:72px 0}.facts{grid-template-columns:1fr}}
+
+:root{--serif:"Cormorant Garamond",Georgia,serif}
+h1,h2,h3,.nums b,.card li b{font-family:var(--serif);font-weight:300}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5.2rem);line-height:1.02;letter-spacing:-0.015em}
+.hero h1 em{font-style:italic;color:var(--red)}
+.stance{border:0;padding:0;margin-top:48px;font:400 .78rem/2 Jost,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.stance b{font-weight:500;color:var(--ink)}
+.hero{background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),rgba(20,20,20,.035) calc(100%/12 - 1px) calc(100%/12))}
+section{display:grid;grid-template-columns:64px 1fr;column-gap:24px}
+section>*{grid-column:2}
+.sec-h{grid-column:1;grid-row:1 / span 4;display:block;margin:0}
+.sec-h .n{display:block;writing-mode:vertical-rl;font-size:.7rem;letter-spacing:.35em;margin-bottom:18px}
+.sec-h h2{writing-mode:vertical-rl;transform:rotate(180deg);font-size:1.6rem;letter-spacing:.04em;white-space:nowrap}
+#arka{display:block}#arka>*{grid-column:auto}
+.sec-h .n,.sec-h h2{font-weight:300}
+.card h3{font-size:1.7rem;border-bottom:1px solid var(--hair);padding-bottom:14px}
+.card li b{font-size:1.18rem;font-weight:300}
+.card li{padding:7px 0}
+.nums b{font-size:2.8rem}
+.arka h2{font-size:clamp(1.8rem,3.2vw,2.6rem)}
+.rule{font-family:var(--serif);font-size:2rem;line-height:1.25}
+.fjell p{font-size:1.05rem}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+.reveal.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media (max-width:860px){section{grid-template-columns:1fr}.sec-h{grid-row:auto;display:flex;align-items:baseline;gap:14px;margin-bottom:32px}.sec-h .n,.sec-h h2{writing-mode:horizontal-tb;transform:none}.sec-h h2{font-size:2rem}.hero{background-image:none}}
+
+.sec-h{display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-end;gap:16px}
+.sec-h .n{writing-mode:vertical-rl;transform:rotate(180deg);margin:0}
+h1,h2,h3,.nums b,.card li b,.rule{font-variant-numeric:lining-nums}
+@media (max-width:860px){.sec-h{flex-direction:row;align-items:baseline;justify-content:flex-start}.sec-h .n{transform:none}}
+
+.arka-line{display:block;border-top:1px solid var(--hair);padding:40px 0}
+.arka-line p{margin:0}
+.arka-line a{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--muted);border-bottom:1px solid var(--hair);padding-bottom:3px}
+.arka-line a:hover{color:var(--red);border-color:var(--red)}
+@media (max-width:860px){section>*{grid-column:1}.brand{letter-spacing:.16em;font-size:.72rem}.links{gap:12px}.links a{font-size:.7rem;letter-spacing:.12em}nav .wrap{gap:16px}.sec-h h2{font-size:1.9rem}}
+
+.qas{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.qa{padding:22px 0;border-top:1px solid var(--hair)}
+.qa h3{font-size:1.35rem;margin-bottom:8px}
+.qa p{margin:0;color:var(--muted);font-size:.95rem;max-width:46ch}
+@media (max-width:860px){.qas{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top">Mantas<i>·</i>Pagalys</a>
+  <div class="links">
+    <a class="hide-sm" href="#tjenester" data-i18n="nav_services">Tjenester</a>
+    <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+    <div class="lang"><button data-lang="no" class="active">NO</button><button data-lang="en">EN</button><button data-lang="lt">LT</button></div>
+  </div>
+</div></nav>
+<main id="top" class="wrap">
+  <div class="hero"><svg class="roof" viewBox="0 0 1120 520" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="#141414" stroke-width="1" opacity=".08"><path d="M0 500 L1120 300"/><path d="M420 520 L1120 170"/></g><path d="M930 520 L1120 395" stroke="#b0322a" stroke-width="1" fill="none" opacity=".6"/></svg>
+    <div>
+      <p class="eyebrow">Oslo · Sandvika · Bærum</p>
+      <h1 data-i18n="hero_h1">Hage, småbygg og båt. <em>Gjort skikkelig,</em> i riktig sesong.</h1>
+      <p class="stance" data-i18n="stance">Ingen varebil.<br>Ingen garasje.<br>Ingen flåte.<br><b>Bare arbeidet.</b></p>
+      
+      <div class="btns"><a class="btn primary" href="#kontakt" data-i18n="h_contact">Ta kontakt</a><a class="btn ghost" href="#tjenester" data-i18n="btn_services">Se tjenester</a></div>
+    </div>
+    <div class="portrait"><img src="assets/profile-photo.webp" alt="Mantas Pagalys"><div class="name">Mantas Pagalys</div></div>
+  </div>
+
+  <section id="tjenester">
+    <div class="sec-h"><span class="n">01</span><h2 data-i18n="nav_services">Tjenester</h2></div>
+    <div class="cards reveal">
+      <div class="card"><h3 data-i18n="h_garden">Hage &amp; uterom</h3><ul><li><b data-i18n="sv1_t">Beskjæring</b></li><li><b data-i18n="sv2_t">Gressklipping, resåing og luking</b></li><li><b data-i18n="sv3_t">Planting og sesongrydding</b></li><li><b data-i18n="sv4_t">Gjerder og terrasser</b></li></ul></div>
+      <div class="card"><h3 data-i18n="h_buildmaint">Bygg &amp; vedlikehold</h3><ul><li><b data-i18n="sv5_t">Dør og vindu</b></li><li><b data-i18n="sv6_t">Fasade og betongarbeid</b></li><li><b data-i18n="sv7_t">Parkett, listverk og gips</b></li><li><b data-i18n="sv8_t">Høytrykksspyling</b></li><li><b data-i18n="sv9_t">Rensing av takrenner</b></li></ul></div>
+      <div class="card"><h3 data-i18n="h_boat">Båt</h3><ul><li><b data-i18n="sv10_t">Reparasjon</b></li><li><b data-i18n="sv11_t">Rengjøring, forbehandling og maling</b></li></ul></div>
+    </div>
+    <div class="facts"><div data-i18n="fact1"><strong>Område:</strong> Oslo, Sandvika og Bærum, på sykkel</div><div data-i18n="fact4"><strong>Transport:</strong> sykkel. Stille, presis, trenger ingen parkering.</div></div>
+  </section>
+  <section id="sporsmal">
+    <div class="sec-h"><span class="n">02</span><h2 data-i18n="h_faq">Spørsmål</h2></div>
+    <div class="qas reveal"><div class="qa"><h3 data-i18n="q_how">Hvordan kommer du deg dit med verktøy?</h3><p data-i18n="q_how_a">Du beskriver jobben. Materialene leveres hjem til deg. Jeg kommer på sykkel med verktøyet som trengs.</p></div><div class="qa"><h3 data-i18n="q_cost">Hva koster det?</h3><p data-i18n="q_cost_a">Prisen avtales før arbeidet starter. Ingen bil- eller verkstedkostnader i prisen.</p></div><div class="qa"><h3 data-i18n="q_exp">Hvilken erfaring har du?</h3><p data-i18n="q_exp_a">Eiendommer i Hampstead Heath, golfbanene i St Andrews, og oppdrag gjennom større anleggsgartnerfirmaer.</p></div><div class="qa"><h3 data-i18n="q_big">Tar du store jobber?</h3><p data-i18n="q_big_a">Jobber som krever varebil, tar jeg ikke. Det er en del av modellen.</p></div><div class="qa"><h3 data-i18n="q_lang">Hvilke språk?</h3><p data-i18n="q_lang_a">Norsk, engelsk og litauisk.</p></div></div>
+  </section>
+  <section id="arka" class="arka-line"><p><a href="arka_no.html" data-href-no="arka_no.html" data-href-en="arka.html" data-href-lt="arka.html" data-i18n="arka_line">ARKA — et forslag til faste småboliger for kommuner →</a></p></section>
+
+  <section id="kontakt">
+    <div class="sec-h"><span class="n">03</span><h2 data-i18n="h_contact">Ta kontakt</h2></div>
+    <div class="contact reveal">
+      <div>
+        <p class="away" id="awayNote" data-i18n="away_note">Borte 22. oktober – 6. november. Svar fra 9. november.</p>
+        <p class="rule" data-i18n="rule_line">Arbeid og prosjekter: svar garantert. Penger, kontakter og «bare en liten tjeneste»: svar ikke inkludert.</p>
+        
+      </div>
+      <form action="https://formspree.io/f/mykqqzjg" method="POST">
+        <label><span data-i18n="form_topic">Henvendelsen gjelder</span><select name="topic"><option value="tjenester" data-i18n="opt_services">Tjenester</option><option value="ARKA" data-i18n="opt_arka">ARKA (kommune, finansiering, samarbeid)</option><option value="annet" data-i18n="opt_other">Annet</option></select></label>
+        <label><span data-i18n="f_name">Navn</span><input type="text" name="name" required></label>
+        <label><span data-i18n="f_email">E-post</span><input type="email" name="email" required></label>
+        <label><span data-i18n="f_msg">Melding</span><textarea name="message" rows="4" required></textarea></label>
+        <button type="submit" data-i18n="f_send">Send</button>
+      </form>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span data-i18n="footer_line">Pris avtales før arbeidet starter. Ingen overraskelser etterpå.</span> · greifiks.org</div></footer>
+<script>
+(function(){
+  var T={"en": {"hero_role": "Garden, outdoor space and small-scale craftsmanship", "hero_h1": "Gardens, small builds and boats. <em>Done properly,</em> in the right season.", "hero_lede": "A garden has its own order — what has to grow before it can be pruned, what a greenhouse needs before the seedlings meet the outside world, which season a hedge can actually take being touched in. Years spent inside that order: properties on Hampstead Heath, some centuries old, rooftop gardens over the city, the golf courses at St Andrews. Own jobs, and work through larger landscaping firms — always the same respect for what's actually alive, not just what looks finished. That same respect comes to your garden.", "h_garden": "Garden &amp; outdoor space", "h_boat": "Boat", "h_practical": "Practical", "h_contact": "Get in touch", "h_fjell": "FJELL · 12 m²", "fjell_p": "The drawings are done. The cabin isn't built yet. That's the next step, not a secret.", "fjell_link": "See status and plans →", "fjell_note": "Same hands: your garden, a cabin, a boat bound for an ocean.", "sv1_t": "Pruning", "sv1_p": "Shrubs and hedges, the right time for the species — the wrong season can harm the plant more than it helps.", "sv2_t": "Mowing, lawn repair and weeding", "sv2_p": "Cutting, re-establishing worn/thin lawns, weeding — the right seed mix and timing for Norwegian climate.", "sv3_t": "Planting and seasonal clearing", "sv3_p": "Spring and autumn clearing, planting, general garden advice.", "sv4_t": "Fences and decking", "sv4_p": "Repair and maintenance of fences and deck boards.", "sv5_t": "Doors and windows", "sv5_p": "Installation and repair.", "sv6_t": "Facade and concrete work", "sv6_p": "Smaller facade work and concrete jobs.", "sv7_t": "Flooring, trim and drywall", "sv7_p": "Laying/repairing flooring, trim, drywall panels and light partition walls.", "sv8_t": "Pressure washing", "sv8_p": "Facade, terrace, driveway.", "sv9_t": "Gutter cleaning", "sv9_p": "Your ladder, my work.", "sv10_t": "Repair", "sv10_p": "Deck, teak woodwork, minor structural and epoxy work.", "sv11_t": "Cleaning, prep and painting", "sv11_p": "Proper preparation before painting — this is often what decides whether the job actually holds.", "fact1": "<strong>Area:</strong> Oslo, Sandvika and Bærum, by bike", "fact2": "<strong>Tools:</strong> own hand tools for most jobs", "fact3": "<strong>Mowing:</strong> your machine, my hands", "fact4": "<strong>Transport:</strong> bicycle. Quiet, on time, no parking needed.", "arka_tag": "ARKA · from temporary to permanent", "arka_h": "A permanent home costs a municipality less per month than one night in a hotel", "arka_lede": "Municipalities pay hotel and guesthouse rates to house people they are obliged to help. ARKA is a small, permanent, factory-built home that makes a proper home the cheaper option.", "arka_r1": "Temporary accommodation", "arka_r2": "ARKA home, net after rent", "arka_r2s": "worst case", "cta_line": "Price depends on the job. Describe it, and you get a number.", "away_note": "Away 22 October – 6 November. Replies from 9 November.", "rule_line": "Work and projects: reply guaranteed. Money, contacts and “just a small favour”: reply not included.", "form_topic": "This concerns", "opt_services": "Services", "opt_arka": "ARKA (municipality, financing, partnership)", "opt_other": "Other", "footer_line": "Price agreed before work starts. No surprises after.", "nav_services": "Services", "nav_contact": "Contact", "h_buildmaint": "Building &amp; maintenance", "stance": "No van.<br>No garage.<br>No fleet.<br><b>Just the work.</b>", "btn_services": "See services", "arka_more": "Read the full ARKA proposal →", "f_name": "Name", "f_email": "Email", "f_msg": "Message", "f_send": "Send", "nav_arka": "ARKA", "arka_line": "ARKA — a proposal for permanent small homes for municipalities →", "h_faq": "Questions", "q_how": "How do you get there with tools?", "q_how_a": "You describe the job. Materials are delivered to your door. I arrive by bike with the tools it takes.", "q_cost": "What does it cost?", "q_cost_a": "Price agreed before work starts. No van or workshop costs in the price.", "q_exp": "What experience do you have?", "q_exp_a": "Estates in Hampstead Heath, the golf courses of St Andrews, and work through larger landscaping firms.", "q_big": "Do you take big jobs?", "q_big_a": "Jobs that need a van, I don’t take. That’s part of the model.", "q_lang": "Which languages?", "q_lang_a": "Norwegian, English and Lithuanian."}, "lt": {"hero_role": "Sodas, lauko erdvė ir smulkūs statybos darbai", "hero_h1": "Sodai, nedideli statiniai ir laivai. <em>Padaryta kaip reikia,</em> tinkamu metu.", "hero_lede": "Sodas turi savo tvarką — kas turi užaugti, kol galima genėti, ko reikia šiltnamiui, kol daigai sutinka išorinį pasaulį, kokiu metų laiku gyvatvorę iš tikrųjų galima liesti. Metai, praleisti tos tvarkos viduje: Hampstead Heath dvarai, kai kurie kelių šimtmečių senumo, sodai ant miesto stogų, golfo aikštynai St Andrews. Savi užsakymai ir darbas per didesnes kraštovaizdžio įmones — visada ta pati pagarba tam, kas iš tikrųjų gyva, o ne tik tam, kas atrodo baigta. Ta pati pagarba ateis ir į jūsų sodą.", "h_garden": "Sodas ir lauko erdvė", "h_boat": "Laivas", "h_practical": "Praktinė informacija", "h_contact": "Susisiekite", "h_fjell": "FJELL · 12 m²", "fjell_p": "Brėžiniai paruošti. Trobelė dar nepastatyta. Tai kitas žingsnis, ne paslaptis.", "fjell_link": "Žiūrėti būklę ir planus →", "fjell_note": "Tos pačios rankos: jūsų sodas, trobelė, laivas, kuris plauks per vandenyną.", "sv1_t": "Genėjimas", "sv1_p": "Krūmai ir gyvatvorės, tinkamas laikas pagal rūšį — netinkamas sezonas gali pakenkti augalui labiau, nei padėti.", "sv2_t": "Vejos pjovimas, atkūrimas ir ravėjimas", "sv2_p": "Pjovimas, nusidėvėjusių/plikų vejų atkūrimas, ravėjimas — tinkamas sėklų mišinys ir laikas Norvegijos klimatui.", "sv3_t": "Sodinimas ir sezoninis tvarkymas", "sv3_p": "Pavasario ir rudens tvarkymas, sodinimas, bendri patarimai apie sodą.", "sv4_t": "Tvoros ir terasos", "sv4_p": "Tvorų ir terasos lentų remontas bei priežiūra.", "sv5_t": "Durys ir langai", "sv5_p": "Montavimas ir remontas.", "sv6_t": "Fasado ir betono darbai", "sv6_p": "Smulkesni fasado ir betono darbai.", "sv7_t": "Grindys, apvadai ir gipskartonis", "sv7_p": "Grindų klojimas/remontas, apvadai, gipskartonio plokštės ir lengvos pertvaros.", "sv8_t": "Plovimas aukšto slėgio įranga", "sv8_p": "Fasadas, terasa, kiemas.", "sv9_t": "Latakų valymas", "sv9_p": "Jūsų kopėčios, mano darbas.", "sv10_t": "Remontas", "sv10_p": "Denis, tikmedžio medienos darbai, smulkūs konstrukciniai ir epoksidiniai darbai.", "sv11_t": "Valymas, paruošimas ir dažymas", "sv11_p": "Tinkamas paruošimas prieš dažant — dažnai būtent tai nulemia, ar darbas iš tikrųjų išsilaikys.", "fact1": "<strong>Vietovė:</strong> Oslas, Sandvika ir Bærumas, dviračiu", "fact2": "<strong>Įrankiai:</strong> nuosavi rankiniai įrankiai daugumai darbų", "fact3": "<strong>Vejos pjovimas:</strong> jūsų technika, mano rankos", "fact4": "<strong>Transportas:</strong> dviratis. Tylu, laiku, nereikia parkavimo vietos.", "arka_tag": "ARKA · iš laikino būsto į nuolatinį", "arka_h": "Nuolatinis būstas savivaldybei per mėnesį kainuoja mažiau nei viena naktis viešbutyje", "arka_lede": "Savivaldybės moka už viešbučius ir svečių namus, kad apgyvendintų žmones, kuriems privalo padėti. ARKA yra mažas nuolatinis gamykloje pastatytas namas, su kuriuo tikri namai tampa pigesniu sprendimu.", "arka_r1": "Laikinas apgyvendinimas", "arka_r2": "ARKA būstas, atskaičius nuomą", "arka_r2s": "blogiausiu atveju", "cta_line": "Kaina priklauso nuo darbo. Aprašykite jį, ir gausite skaičių.", "away_note": "Manęs nebus spalio 22 – lapkričio 6 d. Atsakysiu nuo lapkričio 9 d.", "rule_line": "Darbas ir projektai: atsakymas garantuotas. Pinigai, kontaktai ir „tik maža paslauga“: atsakymas neįskaičiuotas.", "form_topic": "Tema", "opt_services": "Paslaugos", "opt_arka": "ARKA (savivaldybėms, finansavimas, bendradarbiavimas)", "opt_other": "Kita", "footer_line": "Kaina sutariama prieš pradedant darbą. Jokių staigmenų po to.", "nav_services": "Paslaugos", "nav_contact": "Kontaktai", "h_buildmaint": "Statyba ir priežiūra", "stance": "Jokio furgono.<br>Jokio garažo.<br>Jokio parko.<br><b>Tik darbas.</b>", "btn_services": "Paslaugos", "arka_more": "Visas ARKA pasiūlymas →", "f_name": "Vardas", "f_email": "El. paštas", "f_msg": "Žinutė", "f_send": "Siųsti", "nav_arka": "ARKA", "arka_line": "ARKA — pasiūlymas savivaldybėms dėl nuolatinių mažų būstų →", "h_faq": "Klausimai", "q_how": "Kaip atvykstate su įrankiais?", "q_how_a": "Jūs aprašote darbą. Medžiagos pristatomos į namus. Atvykstu dviračiu su reikalingais įrankiais.", "q_cost": "Kiek kainuoja?", "q_cost_a": "Kaina sutariama prieš pradedant darbą. Kainoje nėra automobilio ar dirbtuvių išlaidų.", "q_exp": "Kokia jūsų patirtis?", "q_exp_a": "Valdos Hampstead Heath, golfo aikštynai St Andrews ir darbai per didesnes kraštovaizdžio įmones.", "q_big": "Ar imatės didelių darbų?", "q_big_a": "Darbų, kuriems reikia furgono, nesiimu. Tai modelio dalis.", "q_lang": "Kokiomis kalbomis?", "q_lang_a": "Norvegų, anglų ir lietuvių."}};
+  var els=[].slice.call(document.querySelectorAll('[data-i18n]')),orig={};
+  els.forEach(function(e){orig[e.getAttribute('data-i18n')]=e.innerHTML});
+  var btns=[].slice.call(document.querySelectorAll('.lang button'));
+  function set(l){
+    els.forEach(function(e){var k=e.getAttribute('data-i18n');e.innerHTML=(T[l]&&T[l][k])||orig[k]});
+    btns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l==='no'?'nb':l;
+    document.querySelectorAll('[data-href-'+l+']').forEach(function(a){a.href=a.getAttribute('data-href-'+l)});
+    try{localStorage.setItem('site-lang',l)}catch(e){}
+  }
+  btns.forEach(function(b){b.onclick=function(){set(b.getAttribute('data-lang'))}});
+  var s;try{s=localStorage.getItem('site-lang')}catch(e){}if(s&&s!=='no')set(s);
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12}):null;document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('on')});
+  var a=document.getElementById('awayNote');if(a&&new Date()>=new Date('2026-11-09T00:00:00+01:00'))a.style.display='none';
+})();
+</script>
+</body></html>
