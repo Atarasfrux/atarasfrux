@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="google-site-verification" content="RGf6Xidkxd-9U7nd6NGLcO1trESre3V09yQq5-UmcB0" />
+<script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>Hage, uterom & håndverk — Sandvika/Bærum</title>
+<link rel="canonical" href="https://greifiks.org/">
+<meta name="description" content="Hage, uterom og håndverksarbeid i Sandvika/Bærum, basert på faktisk erfaring — beskjæring, gressklipping, bygg og vedlikehold.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hage, uterom & håndverk — Sandvika/Bærum">
+<meta property="og:description" content="Hage, uterom og håndverksarbeid i Sandvika/Bærum, basert på faktisk erfaring — beskjæring, gressklipping, bygg og vedlikehold.">
+<meta property="og:url" content="https://greifiks.org/">
+<meta property="og:image" content="https://greifiks.org/assets/profile-photo.webp">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Mantas Pagalys",
+  "description": "Hage, uterom og håndverksarbeid i Sandvika/Bærum, basert på faktisk erfaring.",
+  "url": "https://greifiks.org/",
+  "image": "https://greifiks.org/assets/profile-photo.webp",
+  "telephone": "+4747749934",
+  "email": "pagalysm@gmail.com",
+  "areaServed": {
+    "@type": "Place",
+    "name": "Sandvika/Bærum"
+  },
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hage- og uterom-arbeid" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bygg og innvendig arbeid" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vedlikehold" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Båttjenester" } }
+  ]
+}
+</script>
+<!-- Self-hosted, subsetted fonts (no third-party request, no render-blocking round trip) -->
+<link rel="preload" as="font" type="font/woff2" href="fonts/playfair-600.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/inter-400.woff2" crossorigin>
+<link rel="preload" as="image" href="assets/profile-photo.webp" fetchpriority="high">
+<style>
+  @view-transition { navigation: auto; }
+
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 50;
+    transform-origin: 0 50%; transform: scaleX(0);
+    background: linear-gradient(to right, var(--accent-dim), var(--accent));
+    animation: grow-scroll-progress auto linear;
+    animation-timeline: scroll(root);
+  }
+  @keyframes grow-scroll-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  .nav-actions { display: flex; align-items: center; gap: var(--space-2); }
+  .theme-toggle {
+    background: none; border: 1px solid var(--line); border-radius: 8px; width: 40px; height: 40px;
+    display: grid; place-items: center; cursor: pointer; color: var(--ink);
+  }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-moon { display: none; }
+  .theme-toggle.is-dark .icon-sun { display: none; }
+  .theme-toggle.is-dark .icon-moon { display: block; }
+
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/inter-400.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/inter-500.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/inter-600.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/inter-700.woff2') format('woff2'); }
+  @font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/playfair-600.woff2') format('woff2'); }
+
+  :root {
+    --bg: #0d100d; --bg-raised: #283420; --ink: #e8ebe4; --ink-dim: #9aa392;
+    --line: #34432a; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0;
+    --focus: #d9ab6e;
+    --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --space-6: 3rem; --space-8: 4rem;
+    --container: 1200px;
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
+  }
+  :root[data-theme="dark"]  { --bg: #0d100d; --bg-raised: #283420; --ink: #e8ebe4; --ink-dim: #9aa392; --line: #34432a; --accent: #b8935c; --accent-dim: #7a6440; --accent-ink: #f3ede0; }
+  :root[data-theme="light"] { --bg: #e4e4e2; --bg-raised: #f3f3f1; --ink: #1c1d1f; --ink-dim: #55575a; --line: #cbcbc8; --accent: #8a6a3a; --accent-dim: #6e5530; --accent-ink: #fff; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+  body { margin: 0; background: #0d100d; color: #e8ebe4; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; position: relative; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; margin: 0; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; }
+
+  .shell { max-width: var(--container); margin: 0 auto; padding-inline: clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1; }
+
+  /* ---- nav ---- */
+  .site-nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .site-nav .row { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-2); }
+  .wordmark { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--ink); text-decoration: none; }
+  .nav-links { display: none; gap: var(--space-4); list-style: none; margin: 0; padding: 0; }
+  .nav-links a { color: var(--ink-dim); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease; }
+  .nav-links a:hover { color: var(--accent); }
+  @media (min-width: 1024px) { .nav-links { display: flex; } .nav-toggle { display: none; } }
+
+  .nav-toggle { background: none; border: 1px solid var(--line); border-radius: 8px; width: 40px; height: 40px; display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+  .nav-toggle:hover { border-color: var(--accent); }
+  .nav-toggle svg { width: 18px; height: 18px; }
+
+  .off-canvas { position: fixed; inset: 0; z-index: 30; visibility: hidden; }
+  .off-canvas .scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.25s ease; }
+  .off-canvas .drawer {
+    position: absolute; top: 0; right: 0; height: 100%; width: min(78vw, 320px);
+    background: var(--bg-raised); border-left: 1px solid var(--line);
+    padding: var(--space-4) var(--space-3); transform: translateX(100%); transition: transform 0.3s ease;
+    display: flex; flex-direction: column; gap: var(--space-2);
+  }
+  .off-canvas.open { visibility: visible; }
+  .off-canvas.open .scrim { opacity: 1; }
+  .off-canvas.open .drawer { transform: translateX(0); }
+  .off-canvas a { color: var(--ink); text-decoration: none; font-size: 1.05rem; padding-block: var(--space-1); border-bottom: 1px solid var(--line); }
+  .off-canvas .close-btn { align-self: flex-end; background: none; border: none; color: var(--ink-dim); font-size: 1rem; cursor: pointer; padding: var(--space-1); }
+
+  /* ---- hero ---- */
+  .arka-hero { position: relative; overflow: hidden; color: var(--ink); background: var(--bg-raised); border-bottom: 1px solid var(--line); margin: 0 0 var(--space-6); }
+  .arka-inner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end; padding-block: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 3vw, 2.5rem); }
+  .arka-tag { display: inline-flex; gap: .6rem; align-items: center; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    font-weight: 700; color: var(--accent); margin-bottom: var(--space-3); }
+  .arka-tag svg { width: 22px; height: 14px; }
+  .arka-hero h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 4.2vw + .6rem, 3.6rem); line-height: 1.06;
+    margin: 0 0 var(--space-3); max-width: 16ch; text-wrap: balance; color: var(--ink); }
+  .arka-hero p.arka-lede { color: var(--ink-dim); font-size: 1.05rem; max-width: 52ch; margin: 0 0 var(--space-4); }
+  .arka-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .arka-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .85rem 1.25rem; border-radius: 999px; font-weight: 600;
+    text-decoration: none; font-size: .95rem; transition: transform .15s ease, background .15s ease; }
+  .arka-btn:hover { transform: translateY(-1px); }
+  .arka-btn.primary { background: var(--ink); color: var(--bg-raised); }
+  .arka-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .arka-panel { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: clamp(1.25rem, 2.5vw, 1.75rem); }
+  .arka-panel h3 { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 1rem; font-weight: 600; }
+  .arka-row { margin-bottom: 1rem; }
+  .arka-row .lbl { display: flex; justify-content: space-between; gap: 1rem; font-size: .9rem; color: var(--ink-dim); }
+  .arka-row .lbl b { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .arka-track { height: 10px; border-radius: 999px; background: var(--line); margin-top: .4rem; overflow: hidden; }
+  .arka-track span { display: block; height: 100%; border-radius: 999px; }
+  .arka-track span.t-temp { background: var(--ink-dim) !important; }
+  .arka-track span.t-arka { background: var(--accent) !important; }
+  .arka-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1.25rem;
+    border-top: 1px solid var(--line); padding-top: 1rem; }
+  .arka-facts div { font-size: .82rem; color: var(--ink-dim); }
+  .arka-facts b { display: block; color: var(--ink); font-size: 1.15rem; font-family: var(--font-display); font-weight: 600; }
+  .arka-proof { margin: var(--space-4) 0 0; font-size: .9rem; color: var(--ink-dim); letter-spacing: .01em; }
+  .arka-proof::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: .75rem; }
+  .arka-note { font-size: .74rem; color: var(--ink-dim); margin-top: 1rem; }
+  .arka-drawing { padding-bottom: clamp(1.5rem, 4vw, 3rem); color: var(--ink); }
+  .arka-elev { display: block; width: 100%; max-width: 1040px; height: auto; margin-inline: auto; }
+  .arka-elev .dim path { fill: none; stroke: var(--accent); stroke-width: 1; }
+  .arka-elev text { fill: var(--accent); font: 600 15px/1 var(--font-body, Inter, system-ui, sans-serif); font-variant-numeric: lining-nums; }
+  .arka-elev text.elev-cap { fill: var(--ink-dim); font-weight: 500; font-size: 13px; letter-spacing: .08em; }
+  @media (max-width: 860px) {
+    .arka-inner { grid-template-columns: 1fr; align-items: start; }
+  }
+  @media (prefers-reduced-motion: reduce) { .arka-btn { transition: none; } .arka-btn:hover { transform: none; } }
+  .arka-arch-sec { padding-block: var(--space-6) var(--space-4); }
+  .arka-arch-sec h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.6vw + .6rem, 2.4rem); line-height: 1.15; margin: 0 0 var(--space-2); max-width: 34ch; text-wrap: balance; }
+  .arka-arch-sec > p { color: var(--ink-dim); max-width: 62ch; margin: 0 0 var(--space-4); }
+  .arka-arch { width: 100%; height: auto; display: block; max-width: 980px; margin-inline: auto; }
+  .arka-arch .stone path { fill: var(--bg-raised); stroke: var(--line); stroke-width: 1.5; transition: fill .2s ease; }
+  .arka-arch .stone:hover path { fill: color-mix(in srgb, var(--accent) 18%, var(--bg-raised)); }
+  .arka-arch .stone.key path { fill: var(--accent); stroke: var(--accent); }
+  .arka-arch .t { font: 600 17px var(--font-body); fill: var(--ink); text-anchor: middle; }
+  .arka-arch .s { font: 400 11.5px var(--font-body); fill: var(--ink-dim); text-anchor: middle; }
+  .arka-arch .key .t, .arka-arch .key .s { fill: var(--accent-ink); }
+  .arka-arch .ground { stroke: var(--line); stroke-width: 2; }
+  .arka-arch .foot { font: 600 15px var(--font-body); fill: var(--ink); }
+  .arka-arch .footn { font: 400 13px var(--font-body); fill: var(--ink-dim); }
+  .arka-arch .stone { transform-box: fill-box; animation: arka-in .7s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: var(--d); }
+  @keyframes arka-in { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) { .arka-arch .stone { opacity: 1; transform: none; animation: none; } }
+  .arka-move { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-4); }
+  .arka-move div { border-top: 2px solid var(--accent); padding-top: var(--space-2); color: var(--ink-dim); font-size: .95rem; }
+  .arka-move b { display: block; color: var(--ink); font-size: 1.05rem; margin-bottom: .25rem; }
+  @media (max-width: 760px) { .arka-move { grid-template-columns: 1fr; } .arka-arch .s { display: none; } }
+  .arka-faq { margin-top: var(--space-6); max-width: 820px; }
+  .arka-faq h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 1.6vw + .6rem, 1.7rem); margin: 0 0 var(--space-2); }
+  .arka-faq details { border-top: 1px solid var(--line); padding: .9rem 0; }
+  .arka-faq details:last-of-type { border-bottom: 1px solid var(--line); }
+  .arka-faq summary { cursor: pointer; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+  .arka-faq summary::-webkit-details-marker { display: none; }
+  .arka-faq summary::after { content: "+"; color: var(--accent); font-weight: 400; font-size: 1.2rem; line-height: 1; }
+  .arka-faq details[open] summary::after { content: "–"; }
+  .arka-faq p { color: var(--ink-dim); margin: .6rem 0 0; max-width: 70ch; }
+  .arka-inq { display: inline-block; margin-top: var(--space-3); font-weight: 600; color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .contact-form select { width: 100%; font: inherit; padding: .6rem .7rem; border-radius: 6px; border: 1px solid var(--line); background: var(--bg-raised); color: var(--ink); margin-top: .35rem; }
+  .arka-hero h2, .arka-arch-sec h2, .arka-faq h3 { letter-spacing: -0.012em; font-optical-sizing: auto; }
+  .arka-panel b, .arka-facts b, .arka-row .lbl b, .arka-arch .footn { font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1; }
+  .arka-hero p, .arka-arch-sec p, .arka-move div, .arka-faq p { hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
+  .arka-hero, .arka-arch-sec { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+  .hero { padding-block: var(--space-8) var(--space-6); }
+  .grass-field {
+    position: relative; width: 100%; height: 180px; overflow: hidden;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent-dim) 20%, var(--bg)) 55%, color-mix(in srgb, var(--accent-dim) 32%, var(--bg)));
+  }
+  .grass-field svg.blade { position: absolute; bottom: -10px; overflow: visible; transform-origin: 50% 100%; animation: blade-sway var(--dur, 2.6s) ease-in-out infinite; animation-delay: var(--delay, 0s); will-change: transform; }
+  @keyframes blade-sway {
+    0%, 100% { transform: rotate(var(--tilt, -5deg)) skewX(-1deg); }
+    50%      { transform: rotate(var(--tilt2, 7deg)) skewX(2deg); }
+  }
+  /* Mouse: runs the full width of the field, brakes at each edge, rears up
+     on its hind legs to sniff (nose visible first as it rises past the
+     field's own overflow:hidden edge), then turns around - the whole
+     sprite mirrors on turnaround so it's always actually facing the way
+     it's moving, never sliding backwards. */
+  .mouse-lane {
+    position: absolute; left: 0; right: 0; bottom: -6px; height: 34px;
+    z-index: 3; pointer-events: none;
+    animation: mouse-run 24s ease-in-out infinite;
+    will-change: transform;
+  }
+  .mouse-figure { width: 34px; height: auto; display: block; overflow: visible; color: var(--ink-dim); }
+  .mouse-rig { transform-box: fill-box; transform-origin: 22% 100%; animation: mouse-rear 24s ease-in-out infinite; }
+  .mouse-leg-back, .mouse-leg-front {
+    transform-box: fill-box; transform-origin: 50% 0%;
+    animation: leg-stride 0.32s ease-in-out infinite;
+  }
+  .mouse-leg-front { animation-direction: alternate-reverse; }
+  .mouse-nose { fill: var(--accent); }
+  @keyframes mouse-run {
+    0%       { transform: translateX(0) scaleX(1); }
+    4%       { transform: translateX(0) scaleX(1); }
+    15%      { transform: translateX(0) scaleX(1); }
+    46%      { transform: translateX(calc(100% - 44px)) scaleX(1); }
+    50%      { transform: translateX(calc(100% - 44px)) scaleX(1); }
+    61%      { transform: translateX(calc(100% - 44px)) scaleX(-1); }
+    96%      { transform: translateX(0) scaleX(-1); }
+    100%     { transform: translateX(0) scaleX(-1); }
+  }
+  @keyframes mouse-rear {
+    0%   { transform: translateY(10px) rotate(-58deg); }
+    3%   { transform: translateY(-1px) rotate(-58deg); }
+    9%   { transform: translateY(-1px) rotate(-58deg); }
+    15%  { transform: translateY(0) rotate(0deg); }
+    45%  { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(10px) rotate(-58deg); }
+    56%  { transform: translateY(-1px) rotate(-58deg); }
+    61%  { transform: translateY(0) rotate(0deg); }
+    95%  { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(10px) rotate(-58deg); }
+  }
+  @keyframes leg-stride { 0%, 100% { transform: rotate(-16deg); } 50% { transform: rotate(16deg); } }
+  @media (prefers-reduced-motion: reduce) { .mouse-lane { display: none; } }
+  @media (max-width: 780px) { .grass-field { height: 130px; } }
+  .lang-switch { display: flex; gap: 0.5rem; margin: 0 0 var(--space-2); }
+  .lang-btn { background: var(--bg-raised); border: 1px solid var(--line); color: var(--ink-dim); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.78rem; font-family: var(--font-body); cursor: pointer; }
+  .lang-btn:hover { color: var(--ink); border-color: var(--accent-dim); }
+  .lang-btn.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .lang-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-bottom: var(--space-2); }
+  .profile-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap; }
+  .profile-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex: none; }
+  .profile-row .name { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+  .profile-row .role { font-size: 0.88rem; color: var(--ink-dim); }
+  .hero h1 { font-size: clamp(1.9rem, 4vw + 1rem, 3.2rem); font-weight: 600; line-height: 1.15; margin-bottom: var(--space-3); max-width: 20ch; text-wrap: balance; }
+  .hero .lede { font-family: var(--font-body); color: var(--ink-dim); font-size: 1.05rem; max-width: 62ch; margin: 0; }
+
+  /* ---- sections ---- */
+  section { padding-block: var(--space-6); border-top: 1px solid var(--line); }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-4); gap: var(--space-2); flex-wrap: wrap; }
+  .section-head h2 { font-family: var(--font-body); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  @media (max-width: 1023px) { .services { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 767px)  { .services { grid-template-columns: 1fr; } }
+
+  .service {
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 10px;
+    padding: var(--space-3); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .service:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -14px rgba(0,0,0,0.4); border-color: var(--accent-dim); }
+  .service h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; color: var(--ink); }
+  .service p { font-size: 0.9rem; color: var(--ink-dim); margin: 0; line-height: 1.55; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: 0.9rem; color: var(--ink-dim); }
+  .facts .fact { display: flex; align-items: baseline; gap: 0.4rem; }
+  .facts .fact strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 425px) { .facts { flex-direction: column; gap: var(--space-1); } }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); }
+  .photo-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; transition: transform 0.4s ease; }
+
+  .fjell-stats { font-family: ui-monospace, monospace; font-size: 0.82rem; color: var(--accent); letter-spacing: 0.02em; margin-top: var(--space-2); }
+  .fjell-drawing { margin: var(--space-3) 0 0; }
+  .fjell-drawing img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .fjell-drawing figcaption { font-size: 0.8rem; color: var(--ink-dim); margin-top: var(--space-1); max-width: 62ch; }
+  .fjell-note { font-size: 0.92rem; color: var(--ink-dim); max-width: 62ch; margin: var(--space-2) 0 0; line-height: 1.6; }
+  .photo-grid a:hover img { transform: scale(1.03); }
+  .photo-grid a { border-radius: 10px; overflow: hidden; display: block; }
+
+  .workshop {
+    margin-top: var(--space-3); border-radius: 10px; border: 1px solid var(--line);
+    padding: var(--space-4) var(--space-3);
+    background-color: var(--bg-raised);
+  }
+  .workshop-board { width: 100%; height: auto; display: block; }
+  .workshop .peg-hole { fill: var(--bg); opacity: 0.5; }
+  .workshop .hook { stroke: var(--ink-dim); stroke-width: 1.4; fill: none; opacity: 0.8; }
+  .workshop .tool { cursor: pointer; }
+  .workshop .tool-shape { transition: filter 0.2s ease, transform 0.2s ease; transform-box: fill-box; transform-origin: 50% 0%; }
+  .workshop .tool:hover .tool-shape { filter: brightness(1.15); }
+  .workshop .tool.selected .tool-shape { filter: brightness(1.3); transform: rotate(-4deg); }
+  .workshop .tool-label {
+    font-family: var(--font-body); font-size: 13px; fill: var(--ink-dim);
+    text-anchor: middle; opacity: 0; transition: opacity 0.2s ease;
+  }
+  .workshop .tool.selected .tool-label, .workshop .tool:hover .tool-label { opacity: 1; fill: var(--accent); }
+  .workshop-caption {
+    margin-top: var(--space-2); font-size: 0.88rem; color: var(--ink-dim);
+    min-height: 1.4em;
+  }
+  .workshop-caption strong { color: var(--accent); }
+
+  .contact-block { display: grid; grid-template-columns: 160px 1fr; gap: var(--space-4); align-items: start; margin-block: var(--space-6); }
+  @media (max-width: 640px) { .contact-block { grid-template-columns: 1fr; } .kiosk-illustration { width: 96px; margin: 0 auto; } }
+  .kiosk-illustration { width: 100%; height: auto; display: block; }
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-2); }
+  .contact-form label { font-size: 0.85rem; color: var(--ink-dim); display: flex; flex-direction: column; gap: 0.3rem; }
+  .contact-form input, .contact-form textarea {
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 8px;
+    padding: 0.6rem 0.8rem; color: var(--ink); font-family: var(--font-body); font-size: 0.95rem;
+  }
+  .contact-form input:focus-visible, .contact-form textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .contact-form textarea { resize: vertical; min-height: 5rem; }
+  .contact-form button {
+    background: var(--accent); color: var(--bg); border: none; border-radius: 8px;
+    padding: 0.7rem 1.2rem; font-weight: 600; font-size: 0.95rem; cursor: pointer; align-self: flex-start;
+  }
+  .contact-form button:hover { background: var(--focus); }
+  .contact-form button:disabled { opacity: 0.6; cursor: default; }
+  .contact-note { font-size: 0.85rem; color: var(--ink-dim); margin: 0; }
+  .contact-away { font-size: 0.85rem; margin: 0; padding: 0.45rem 0.7rem; border-left: 3px solid var(--accent); background: var(--bg-raised); color: var(--ink); border-radius: 4px; }
+  .contact-rule { font-size: 0.85rem; color: var(--ink); margin: 0; font-weight: 600; }
+
+
+  footer.site-footer { padding-block: var(--space-4) var(--space-8); font-size: 0.8rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
+
+  .sunrise {
+    position: fixed; top: -20%; left: -30%; width: 60vw; height: 60vw; max-width: 700px; max-height: 700px;
+    border-radius: 50%; z-index: 0; pointer-events: none;
+    background: radial-gradient(circle, rgba(184,147,92,0.10) 0%, rgba(184,147,92,0.04) 45%, transparent 70%);
+    animation: sunrise-sweep 90s linear infinite;
+  }
+  @keyframes sunrise-sweep { 0% { transform: translate(0, 10vh); } 50% { transform: translate(140vw, -10vh); } 100% { transform: translate(0, 10vh); } }
+  @media (max-width: 780px) { .sunrise { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="sunrise"></div>
+
+<nav class="site-nav">
+  <div class="shell row">
+    <a class="wordmark" href="#top">Mantas Pagalys</a>
+    <ul class="nav-links">
+      <li><a href="#arka">ARKA</a></li>
+      <li><a href="#tjenester" data-i18n="nav_services">Tjenester</a></li>
+      <li><a href="#galleri" data-i18n="nav_gallery">Galleri</a></li>
+      <li><a href="#fjell">FJELL</a></li>
+      <li><a href="/tech.html">Systems</a></li>
+      <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Bytt lys/mørk modus">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="offCanvas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="off-canvas" id="offCanvas">
+  <div class="scrim" data-close></div>
+  <div class="drawer" role="dialog" aria-modal="true" aria-label="Meny">
+    <button class="close-btn" data-close aria-label="Lukk meny" data-i18n="nav_close">Lukk ✕</button>
+    <a href="#arka" data-close>ARKA</a>
+    <a href="#tjenester" data-close data-i18n="nav_services">Tjenester</a>
+    <a href="#galleri" data-close data-i18n="nav_gallery">Galleri</a>
+    <a href="#fjell" data-close>FJELL</a>
+    <a href="/tech.html" data-close>Systems</a>
+    <a href="#kontakt" data-close data-i18n="nav_contact">Kontakt</a>
+  </div>
+</div>
+
+<main id="top">
+  <section id="arka" class="arka-hero" aria-labelledby="arkaTitle">
+    <div class="shell arka-inner">
+      <div>
+        <p class="arka-tag"><svg viewBox="0 0 22 14" aria-hidden="true"><path d="M1 13 C1 4, 21 4, 21 13" fill="none" stroke="currentColor" stroke-width="2"/></svg><span data-i18n="arka_tag">ARKA · fra midlertidig til fast</span></p>
+        <h2 id="arkaTitle" data-i18n="arka_h">En fast bolig koster kommunen mindre per måned enn én natt på hotell</h2>
+        <p class="arka-lede" data-i18n="arka_lede">Kommuner betaler hotell- og pensjonatpriser for å gi tak over hodet til mennesker de har plikt til å hjelpe. ARKA er en liten, fast, fabrikkbygd bolig som gjør et ordentlig hjem til det billigste alternativet.</p>
+        <div class="arka-actions">
+          <a class="arka-btn primary" href="#kontakt" data-i18n="arka_btn1">Ta kontakt om ARKA →</a>
+        </div>
+        <p class="arka-proof" data-i18n="arka_proof">Bygget på regelverket. Regnet på kommunens egne tall. Kontrollert mot seks kommunale anbud.</p>
+      </div>
+      <div class="arka-panel" role="group" aria-labelledby="arkaPanelH">
+        <h3 id="arkaPanelH" data-i18n="arka_ph">Kostnad per husstand per måned</h3>
+        <div class="arka-row">
+          <div class="lbl"><span><span data-i18n="arka_r1">Midlertidig botilbud</span><br><small data-i18n="arka_r1s">norsk by, snitt 2025</small></span><b>≈16 200 kr</b></div>
+          <div class="arka-track"><span class="t-temp" style="width:100%"></span></div>
+        </div>
+        <div class="arka-row">
+          <div class="lbl"><span><span data-i18n="arka_r2">ARKA-bolig, netto etter husleie</span><br><small data-i18n="arka_r2s">verste tilfelle</small></span><b>≤1 300 kr</b></div>
+          <div class="arka-track"><span class="t-arka" style="width:8%"></span></div>
+        </div>
+        <div class="arka-facts">
+          <div><b>29 m²</b><span data-i18n="arka_f1">én voksen, egen inngang, bad og kjøkken</span></div>
+          <div><b>9 396</b><span data-i18n="arka_f3">kommunale boliger stod ledige mens 14 458 søknader fikk avslag (2025)</span></div>
+        </div>
+        <p class="arka-note" data-i18n="arka_src">Kilder: SSB, Husbanken, Lovdata. Lever leietakeren av sosialhjelp, blir kommunens kostnad inntil omtrent 4 300 kr, fortsatt rundt en firedel av midlertidig botilbud.</p>
+      </div>
+    </div>
+    <div class="shell arka-drawing"><svg class="arka-elev" viewBox="0 0 1380 500" role="img" aria-label="ARKA 28, fasade mot gate"><defs><mask id="arkaHoles"><rect x="0" y="0" width="1320" height="520" fill="#fff"/><rect x="290.0" y="155.0" width="100.0" height="215.0" fill="#000"/><rect x="610.0" y="145.0" width="220.0" height="170.0" fill="#000"/><rect x="965.0" y="165.0" width="90.0" height="90.0" fill="#000"/></mask></defs><g fill="none" stroke="currentColor" stroke-linejoin="miter"><path d="M10.0 415.0H1310.0" stroke-width="1.4"/><path d="M20.0 415.0l-9 12M45.0 415.0l-9 12M70.0 415.0l-9 12M95.0 415.0l-9 12M120.0 415.0l-9 12M145.0 415.0l-9 12M170.0 415.0l-9 12M195.0 415.0l-9 12M220.0 415.0l-9 12M245.0 415.0l-9 12M270.0 415.0l-9 12M295.0 415.0l-9 12M320.0 415.0l-9 12M345.0 415.0l-9 12M370.0 415.0l-9 12M395.0 415.0l-9 12M420.0 415.0l-9 12M445.0 415.0l-9 12M470.0 415.0l-9 12M495.0 415.0l-9 12M520.0 415.0l-9 12M545.0 415.0l-9 12M570.0 415.0l-9 12M595.0 415.0l-9 12M620.0 415.0l-9 12M645.0 415.0l-9 12M670.0 415.0l-9 12M695.0 415.0l-9 12M720.0 415.0l-9 12M745.0 415.0l-9 12M770.0 415.0l-9 12M795.0 415.0l-9 12M820.0 415.0l-9 12M845.0 415.0l-9 12M870.0 415.0l-9 12M895.0 415.0l-9 12M920.0 415.0l-9 12M945.0 415.0l-9 12M970.0 415.0l-9 12M995.0 415.0l-9 12M1020.0 415.0l-9 12M1045.0 415.0l-9 12M1070.0 415.0l-9 12M1095.0 415.0l-9 12M1120.0 415.0l-9 12M1145.0 415.0l-9 12M1170.0 415.0l-9 12M1195.0 415.0l-9 12M1220.0 415.0l-9 12M1245.0 415.0l-9 12M1270.0 415.0l-9 12M1295.0 415.0l-9 12" stroke-width=".6" opacity=".35"/><rect x="122.0" y="372.0" width="1076.0" height="43.0" fill="none" stroke-width=".9"/><path d="M122.7 372.0V73.0M135.4 372.0V73.0M148.1 372.0V73.0M160.8 372.0V73.0M173.5 372.0V73.0M186.2 372.0V73.0M198.9 372.0V73.0M211.6 372.0V73.0M224.3 372.0V73.0M237.0 372.0V73.0M249.7 372.0V73.0M262.4 372.0V73.0M275.1 372.0V73.0M287.8 372.0V73.0M300.5 372.0V73.0M313.2 372.0V73.0M325.9 372.0V73.0M338.6 372.0V73.0M351.3 372.0V73.0M364.0 372.0V73.0M376.7 372.0V73.0M389.4 372.0V73.0M402.1 372.0V73.0M414.8 372.0V73.0M427.5 372.0V73.0M440.2 372.0V73.0M452.9 372.0V73.0M465.6 372.0V73.0M478.3 372.0V73.0M491.0 372.0V73.0M503.7 372.0V73.0M516.4 372.0V73.0M529.1 372.0V73.0M541.8 372.0V73.0M554.5 372.0V73.0M567.2 372.0V73.0M579.9 372.0V73.0M592.6 372.0V73.0M605.3 372.0V73.0M618.0 372.0V73.0M630.7 372.0V73.0M643.4 372.0V73.0M656.1 372.0V73.0M668.8 372.0V73.0M681.5 372.0V73.0M694.2 372.0V73.0M706.9 372.0V73.0M719.6 372.0V73.0M732.3 372.0V73.0M745.0 372.0V73.0M757.7 372.0V73.0M770.4 372.0V73.0M783.1 372.0V73.0M795.8 372.0V73.0M808.5 372.0V73.0M821.2 372.0V73.0M833.9 372.0V73.0M846.6 372.0V73.0M859.3 372.0V73.0M872.0 372.0V73.0M884.7 372.0V73.0M897.4 372.0V73.0M910.1 372.0V73.0M922.8 372.0V73.0M935.5 372.0V73.0M948.2 372.0V73.0M960.9 372.0V73.0M973.6 372.0V73.0M986.3 372.0V73.0M999.0 372.0V73.0M1011.7 372.0V73.0M1024.4 372.0V73.0M1037.1 372.0V73.0M1049.8 372.0V73.0M1062.5 372.0V73.0M1075.2 372.0V73.0M1087.9 372.0V73.0M1100.6 372.0V73.0M1113.3 372.0V73.0M1126.0 372.0V73.0M1138.7 372.0V73.0M1151.4 372.0V73.0M1164.1 372.0V73.0M1176.8 372.0V73.0M1189.5 372.0V73.0M1202.2 372.0V73.0" stroke-width=".55" opacity=".32" mask="url(#arkaHoles)"/><rect x="110.0" y="73.0" width="1100.0" height="299.0" fill="none" stroke-width="1.6"/><rect x="92.0" y="47.0" width="1136.0" height="24.0" fill="currentColor" stroke="none"/><rect x="290.0" y="155.0" width="100.0" height="215.0" fill="currentColor" fill-opacity=".14" stroke-width="1.4"/><path d="M370.0 250.0v40" stroke-width="2.2"/><rect x="260.0" y="122.0" width="160.0" height="6.0" fill="currentColor" stroke="none"/><rect x="270.0" y="395.0" width="140.0" height="20.0" fill="none" stroke-width=".9"/><rect x="270.0" y="375.0" width="140.0" height="20.0" fill="none" stroke-width=".9"/><rect x="610.0" y="145.0" width="220.0" height="170.0" fill="currentColor" fill-opacity=".05" stroke-width="1.4"/><rect x="616.0" y="151.0" width="208.0" height="158.0" fill="none" stroke-width=".6" opacity=".6"/><rect x="965.0" y="165.0" width="90.0" height="90.0" fill="currentColor" fill-opacity=".05" stroke-width="1.4"/><rect x="971.0" y="171.0" width="78.0" height="78.0" fill="none" stroke-width=".6" opacity=".6"/><path d="M720.0 309.0V151.0" stroke-width=".6" opacity=".6"/></g><g class="dim"><path d="M110.0 453.0H1210.0M110.0 447.0v12M1210.0 447.0v12M110.0 425.0V463.0M1210.0 425.0V463.0"/><text x="660.0" y="445.0" text-anchor="middle">11,0 m</text><path d="M1275.0 415.0V47.0M1269.0 415.0h12M1269.0 47.0h12"/><text x="1287.0" y="236.0">3,7 m</text></g><text class="elev-cap" x="10.0" y="492">ARKA 28 · 29,1 m²</text></svg></div>
+  </section>
+  <section class="shell arka-arch-sec" aria-label="ARKA">
+    <div class="arka-move">
+      <div data-i18n="move1"><b>Fast bolig, fabrikkbygd</b>Boligen skal stå på fast fundament og registreres som bolig. Den bygges ferdig i fabrikk, så tiden på tomten blir kort.</div>
+      <div data-i18n="move2"><b>Rask til innflytting</b>Hver måned i midlertidig botilbud koster omtrent 16 200 kr per husstand. En ferdig bolig på en tomt med vann og strøm forkorter ventetiden.</div>
+      <div data-i18n="move3"><b>Riktig bolig, ikke flere boliger</b>9 396 kommunale boliger stod ledige mens 14 458 søknader fikk avslag i 2025. ARKA leverer typen som mangler.</div>
+    </div>
+    <div class="arka-faq">
+      <h3 data-i18n="faq_h">Spørsmål om ARKA</h3>
+      <details open><summary data-i18n="faq1q">Hvem er boligene for?</summary><p data-i18n="faq1a">Mennesker kommunen skaffer bolig til: enslige med lav inntekt, flyktninger, personer med funksjonsnedsettelse, unge voksne som flytter ut fra barnevernet og personer i bedring. ARKA 28 er for én voksen.</p></details>
+      <details><summary data-i18n="faq2q">Er dette et mikrohus eller en hytte?</summary><p data-i18n="faq2a">Nei. Det er en fast bolig, godkjent og registrert for helårsbruk, med egen inngang, bad, kjøkken, sprinkler og sekundær utgang.</p></details>
+      <details><summary data-i18n="faq3q">Hva koster det kommunen?</summary><p data-i18n="faq3a">Kommunens nettokostnad er høyst omtrent 1 300 kr i måneden per bolig, uten mva.-kompensasjon. Lever leietakeren av sosialhjelp, blir den inntil omtrent 4 300 kr, fortsatt rundt en firedel av midlertidig botilbud. Ta kontakt for en beregning for din kommune.</p></details>
+      <details><summary data-i18n="faq5q">Hvem står bak?</summary><p data-i18n="faq5a">Mantas Pagalys, snekker i Oslo, som har utviklet modellen og analysen.</p></details>
+      <a class="arka-inq" href="#kontakt" data-i18n="faq_cta">Send en henvendelse om ARKA →</a>
+    </div>
+  </section>
+
+  <section class="hero shell">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="no" type="button" aria-pressed="true" lang="no">Norsk</button>
+      <button class="lang-btn" data-lang="en" type="button" aria-pressed="false" lang="en">English</button>
+      <button class="lang-btn" data-lang="lt" type="button" aria-pressed="false" lang="lt">Lietuvių</button>
+    </div>
+    <p class="eyebrow">Sandvika / Bærum</p>
+    <div class="profile-row">
+      <img class="profile-photo" src="assets/profile-photo.webp" width="88" height="88" alt="Mantas Pagalys" fetchpriority="high" decoding="sync">
+      <div class="who">
+        <div class="name">Mantas Pagalys</div>
+        <div class="role" data-i18n="hero_role">Hage, uterom og smått håndverksarbeid</div>
+      </div>
+    </div>
+    <h1 data-i18n="hero_h1">Hage, småbygg og båt. Gjort skikkelig, i riktig sesong.</h1>
+    <p class="lede" data-i18n="hero_lede">En hage har sin egen orden — hva som må vokse før det kan beskjæres,
+    hva et veksthus trenger før spirene møter verden utenfor, hvilken sesong en hekk faktisk
+    tåler å bli rørt i. År brukt innenfor den ordenen: eiendommer i Hampstead Heath, noen
+    århundrer gamle, balkonghager over byen, golfbanene i St Andrews. Egne oppdrag, og arbeid
+    gjennom større anleggsgartnerfirmaer — alltid den samme respekten for det som faktisk
+    lever, ikke bare det som ser ferdig ut. Den samme respekten kommer til din hage.</p>
+  </section>
+
+  <section id="tjenester" class="shell">
+    <div class="section-head"><h2 data-i18n="h_garden">Hage &amp; uterom</h2></div>
+    <div class="services">
+      <div class="service"><h3 data-i18n="sv1_t">Beskjæring</h3><p data-i18n="sv1_p">Busker og hekk, riktig tidspunkt for arten — feil sesong kan skade planten mer enn det hjelper.</p></div>
+      <div class="service"><h3 data-i18n="sv2_t">Gressklipping, resåing og luking</h3><p data-i18n="sv2_p">Klipping, reetablering av slitte/tynne plener, luking — riktig frøblanding og timing for norsk klima.</p></div>
+      <div class="service"><h3 data-i18n="sv3_t">Planting og sesongrydding</h3><p data-i18n="sv3_p">Vår- og høstrydding, planting, generell rådgivning om hagen.</p></div>
+      <div class="service"><h3 data-i18n="sv4_t">Gjerder og terrasser</h3><p data-i18n="sv4_p">Reparasjon og vedlikehold av gjerder og terrassebord.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2 data-i18n="h_build">Bygg &amp; innendørs</h2></div>
+    <div class="services">
+      <div class="service"><h3 data-i18n="sv5_t">Dør og vindu</h3><p data-i18n="sv5_p">Montering og reparasjon.</p></div>
+      <div class="service"><h3 data-i18n="sv6_t">Fasade og betongarbeid</h3><p data-i18n="sv6_p">Mindre fasadearbeid og betongjobber.</p></div>
+      <div class="service"><h3 data-i18n="sv7_t">Parkett, listverk og gips</h3><p data-i18n="sv7_p">Legging/reparasjon av parkett, listverk (trim), gipsplater og lettvegger/partisjonering.</p></div>
+    </div>
+
+    <div class="workshop">
+      <svg class="workshop-board" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pegboard of hand tools — select one">
+        <defs>
+          <linearGradient id="toolGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--focus)"/>
+            <stop offset="100%" stop-color="var(--accent-dim)"/>
+          </linearGradient>
+        </defs>
+        <g class="peg-holes"></g>
+
+        <g class="tool" data-name="Hammer" tabindex="0" role="button">
+          <g class="hook"><path d="M84,50 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(70,60)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="34" height="26" rx="4"/>
+            <polygon points="30,2 56,-16 48,8 32,12"/>
+            <polygon points="30,24 56,42 48,18 32,14"/>
+            <rect x="12" y="24" width="12" height="76" rx="5"/>
+          </g>
+          <text class="tool-label" x="105" y="196">Hammer</text>
+        </g>
+
+        <g class="tool" data-name="Wrench" tabindex="0" role="button">
+          <g class="hook"><path d="M244,40 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(236,40)" fill="url(#toolGrad)">
+            <path fill-rule="evenodd" d="M14,0 A14,14 0 1 1 13.9,0 Z M14,7 A7,7 0 1 0 14.1,7 Z"/>
+            <rect x="9" y="12" width="10" height="70"/>
+            <path fill-rule="evenodd" d="M14,82 A14,14 0 1 1 13.9,82 Z M14,89 A7,7 0 1 0 14.1,89 Z"/>
+          </g>
+          <text class="tool-label" x="250" y="196">Wrench</text>
+        </g>
+
+        <g class="tool" data-name="Screwdriver" tabindex="0" role="button">
+          <g class="hook"><path d="M424,40 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(418,40)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="24" height="34" rx="6"/>
+            <rect x="8" y="32" width="8" height="60"/>
+          </g>
+          <text class="tool-label" x="430" y="196">Screwdriver</text>
+        </g>
+
+        <g class="tool" data-name="Saw" tabindex="0" role="button">
+          <g class="hook"><path d="M574,52 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(548,60)" fill="url(#toolGrad)">
+            <path d="M0,50 Q0,10 60,0 L150,20 L145,32 L58,16 Q20,22 14,52 Q12,60 4,60 Q0,58 0,50 Z"/>
+            <path d="M20,50 L28,58 L36,50 L44,58 L52,50 L60,58 L68,50 L76,58 L84,50 L92,58 L100,50 L108,58 L116,50 L124,58 L132,50 L140,52 L138,60 L20,60 Z"/>
+          </g>
+          <text class="tool-label" x="625" y="196">Saw</text>
+        </g>
+
+        <g class="tool" data-name="Level" tabindex="0" role="button">
+          <g class="hook"><path d="M804,84 q0,-6 6,-6 q6,0 6,6" /></g>
+          <g class="tool-shape" transform="translate(755,90)" fill="url(#toolGrad)">
+            <rect x="0" y="0" width="110" height="20" rx="4"/>
+            <circle cx="30" cy="10" r="7" fill="var(--bg-raised)"/>
+            <circle cx="30" cy="10" r="4" fill="none" stroke="url(#toolGrad)" stroke-width="1.5"/>
+            <circle cx="80" cy="10" r="7" fill="var(--bg-raised)"/>
+            <circle cx="80" cy="10" r="4" fill="none" stroke="url(#toolGrad)" stroke-width="1.5"/>
+          </g>
+          <text class="tool-label" x="810" y="196">Spirit level</text>
+        </g>
+      </svg>
+      <p class="workshop-caption" id="workshopCaption">Select a tool.</p>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2 data-i18n="h_maint">Vedlikehold</h2></div>
+    <div class="services">
+      <div class="service"><h3 data-i18n="sv8_t">Høytrykksspyling</h3><p data-i18n="sv8_p">Fasade, terrasse, gårdsplass.</p></div>
+      <div class="service"><h3 data-i18n="sv9_t">Rensing av takrenner</h3><p data-i18n="sv9_p">Din stige, mitt arbeid.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2 data-i18n="h_boat">Båt</h2></div>
+    <div class="services">
+      <div class="service"><h3 data-i18n="sv10_t">Reparasjon</h3><p data-i18n="sv10_p">Dekk, tremverk (teak), mindre struktur- og epoksyarbeid.</p></div>
+      <div class="service"><h3 data-i18n="sv11_t">Rengjøring, forbehandling og maling</h3><p data-i18n="sv11_p">Skikkelig forbehandling før maling — dette er ofte det som avgjør om jobben faktisk holder.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section-head"><h2 data-i18n="h_practical">Praktisk</h2></div>
+    <div class="facts">
+      <span class="fact" data-i18n="fact1"><strong>Område:</strong> Sandvika, Bærum, sykkelavstand</span>
+      <span class="fact" data-i18n="fact2"><strong>Verktøy:</strong> egne håndverktøy for de fleste jobber</span>
+      <span class="fact" data-i18n="fact3"><strong>Gressklipping:</strong> din maskin, mine hender</span>
+      <span class="fact" data-i18n="fact4"><strong>Transport:</strong> sykkel. Stille, presis, trenger ingen parkering.</span>
+    </div>
+  </section>
+
+  <section id="galleri" class="shell">
+    <div class="section-head"><h2 data-i18n="h_gallery">Naturen jeg jobber i</h2></div>
+    <div class="photo-grid">
+      <a href="assets/finishedterrace.webp" target="_blank" rel="noopener"><img src="assets/finishedterrace.webp" loading="lazy" decoding="async" width="800" height="220" alt="Ferdigstilt terrasse"></a>
+      <a href="assets/gardenloot.webp" target="_blank" rel="noopener"><img src="assets/gardenloot.webp" loading="lazy" decoding="async" width="800" height="220" alt="Hagearbeid"></a>
+      <a href="assets/pond.webp" target="_blank" rel="noopener"><img src="assets/pond.webp" loading="lazy" decoding="async" width="800" height="220" alt="Dam i hagen"></a>
+      <a href="assets/sacred.tree.webp" target="_blank" rel="noopener"><img src="assets/sacred.tree.webp" loading="lazy" decoding="async" width="800" height="220" alt="Gammelt tre"></a>
+    </div>
+  </section>
+
+  <section id="fjell" class="shell">
+    <div class="section-head"><h2 data-i18n="h_fjell">FJELL — modulær 12m² hytte</h2></div>
+    <div class="services">
+      <div class="service">
+        <h3 data-i18n="fjell_t">Egen hyttedesign — full ingeniørplanlegging, ikke fysisk bygget ennå</h3>
+        <p data-i18n="fjell_p">Tegningene er ferdige. Hytta er ikke bygget ennå. Det er neste steg, ikke en hemmelighet.</p>
+        <div class="fjell-stats" data-i18n="fjell_stats">8 DXF-filer · 9 STL-filer · 0 bygde enheter</div>
+      </div>
+    </div>
+    <figure class="fjell-drawing">
+      <img src="assets/fjell-technical-drawing.png" alt="Real DXF cutting geometry for the FJELL cabin — floor, walls and roof panels with door cutouts and mounting holes" loading="lazy" width="2000" height="1286">
+      <figcaption data-i18n="fjell_caption">Ekte skjæretegninger. Reelle produksjonsmål.</figcaption>
+    </figure>
+    <p class="fjell-note" data-i18n="fjell_note">Samme hender: din hage, en hytte, en båt som skal over et hav.</p>
+    <p style="font-size:0.9rem; margin-top:1rem;">
+      <a href="/fjell-status.html" data-i18n="fjell_link">Se status og planer →</a>
+    </p>
+  </section>
+
+  <div class="shell" id="kontakt">
+    <div class="section-head"><h2 data-i18n="h_contact">Ta kontakt</h2></div>
+    <div class="contact-block">
+      <svg class="kiosk-illustration" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An old Norwegian red telephone kiosk">
+        <g transform="translate(40,20)">
+          <rect x="10" y="0" width="100" height="8" fill="#8c3a2e"/>
+          <rect x="18" y="8" width="84" height="8" fill="#a24536"/>
+          <rect x="26" y="16" width="68" height="10" fill="#b8503f"/>
+          <rect x="14" y="26" width="92" height="150" fill="#b8503f"/>
+          <g fill="#283420" stroke="#6e2e24" stroke-width="1.5">
+            <rect x="22" y="36" width="18" height="24"/>
+            <rect x="44" y="36" width="18" height="24"/>
+            <rect x="66" y="36" width="18" height="24"/>
+            <rect x="88" y="36" width="10" height="24"/>
+            <rect x="22" y="64" width="18" height="24"/>
+            <rect x="44" y="64" width="18" height="24"/>
+            <rect x="66" y="64" width="18" height="24"/>
+            <rect x="88" y="64" width="10" height="24"/>
+            <rect x="22" y="92" width="18" height="24"/>
+            <rect x="44" y="92" width="18" height="24"/>
+            <rect x="66" y="92" width="18" height="24"/>
+            <rect x="88" y="92" width="10" height="24"/>
+          </g>
+          <rect x="22" y="122" width="76" height="50" fill="#9c4232"/>
+          <circle cx="88" cy="147" r="2.5" fill="#283420"/>
+          <rect x="10" y="176" width="100" height="8" fill="#6e2e24"/>
+        </g>
+      </svg>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mykqqzjg" method="POST">
+        <p class="contact-note" data-i18n="cta_line">Prisen avhenger av jobben. Beskriv den, så får du et tall.</p>
+        <p class="contact-away" id="awayNote" data-i18n="away_note">Borte 22. oktober – 6. november. Svar fra 9. november.</p>
+        <p class="contact-rule" data-i18n="rule_line">Arbeid og prosjekter: svar garantert. Penger, kontakter og «bare en liten tjeneste»: svar ikke inkludert.</p>
+        <label><span data-i18n="form_topic">Henvendelsen gjelder</span><select name="topic" id="topicSel"><option value="tjenester" data-i18n="opt_services">Tjenester</option><option value="ARKA" data-i18n="opt_arka">ARKA (kommune, finansiering, samarbeid)</option><option value="annet" data-i18n="opt_other">Annet</option></select></label>
+        <label>Navn<input type="text" name="name" required></label>
+        <label>E-post<input type="email" name="email" required></label>
+        <label>Melding<textarea name="message" rows="4" required></textarea></label>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell" data-i18n="footer_line">Pris avtales før arbeidet starter. Ingen overraskelser etterpå.</div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bladeGradBack" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6e5418"/>
+      <stop offset="100%" stop-color="#c7a13a"/>
+    </linearGradient>
+    <linearGradient id="bladeGradMid" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8f6f1e"/>
+      <stop offset="100%" stop-color="#e8c246"/>
+    </linearGradient>
+    <linearGradient id="bladeGradFront" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#b08c26"/>
+      <stop offset="100%" stop-color="#fce78a"/>
+    </linearGradient>
+  </defs>
+</svg>
+<div class="grass-field" id="grassField" aria-hidden="true">
+  <div class="mouse-lane">
+    <svg class="mouse-figure" viewBox="-16 -10 52 30" xmlns="http://www.w3.org/2000/svg">
+      <g class="mouse-rig">
+        <path class="mouse-tail" d="M4,9 C-3,10 -9,7 -15,10" fill="none" stroke="currentColor" stroke-width="1.1"/>
+        <g class="mouse-leg-back">
+          <line x1="7" y1="11" x2="4" y2="17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="9" y1="11" x2="13" y2="16.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </g>
+        <path class="mouse-body" d="M4,10 C2,5 6,1 12,1 C18,0 24,0 28,2 C31,4 33,6 35,9 C33,9.5 31,9 29,8 C26,12 20,15 13,15 C8,15 5,14 4,10 Z" fill="currentColor"/>
+        <ellipse cx="21" cy="-2" rx="2.6" ry="3.4" fill="currentColor"/>
+        <ellipse cx="25" cy="-3" rx="2.3" ry="3" fill="currentColor"/>
+        <circle cx="29" cy="5" r="0.9" fill="var(--bg)"/>
+        <circle class="mouse-nose" cx="34" cy="8" r="1.1"/>
+        <g class="mouse-leg-front">
+          <line x1="27" y1="9" x2="24" y2="16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="29" y1="9" x2="33" y2="15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function () {
+  var field = document.getElementById('grassField');
+  if (field) {
+    var svgNS = 'http://www.w3.org/2000/svg';
+    // Three blade silhouettes instead of one rescaled shape: straight, a soft
+    // lean, and a deeper curve with a slight forked tip — real grass isn't
+    // one shape at different sizes.
+    var bladeShapes = [
+      'M4,100 C1,72 3,50 2,25 C1.7,12 3,3 5,0 C7,3 8.3,12 8,25 C7,50 9,72 6,100 Z',
+      'M4,100 C2,74 4,55 3.2,32 C2.8,18 4.5,6 6.5,0 C7.6,5 8,15 7.2,28 C6.5,52 8.5,74 6,100 Z',
+      'M4,100 C0.6,70 2.5,48 1.6,22 C1.3,10 3.8,2 5.2,0 C6,2.5 7.6,9 7.8,18 C8.3,30 6.2,48 8.6,66 C9.3,78 7.4,90 6,100 Z'
+    ];
+    var seedHeadD = 'M0,-14 C3,-10 3,-4 0,0 C-3,-4 -3,-10 0,-14 Z';
+    var layers = [
+      { grad: 'bladeGradBack',  minH: 60,  maxH: 100 },
+      { grad: 'bladeGradMid',   minH: 90,  maxH: 140 },
+      { grad: 'bladeGradFront', minH: 120, maxH: 175 }
+    ];
+    var count = Math.max(180, Math.ceil(window.innerWidth / 5));
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < count; i++) {
+      var idx = Math.floor(Math.random() * layers.length);
+      var layer = layers[idx];
+      var h = layer.minH + Math.random() * (layer.maxH - layer.minH);
+      var w = h * 0.11;
+      var leftPct = Math.random() * 100;
+      var bottomJitter = (Math.random() * 14 - 4).toFixed(1);
+
+      var svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('class', 'blade');
+      svg.setAttribute('viewBox', '0 0 10 100');
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.setAttribute('width', w.toFixed(1));
+      svg.setAttribute('height', h.toFixed(1));
+      svg.style.left = 'calc(' + leftPct.toFixed(2) + '% - ' + (w / 2).toFixed(1) + 'px)';
+      svg.style.bottom = bottomJitter + 'px';
+      svg.style.zIndex = String(idx);
+      // per-blade brightness jitter on top of the layer gradient - real grass
+      // isn't one flat tone across an entire depth band
+      var brightness = (0.88 + Math.random() * 0.24).toFixed(2);
+      var hue = (Math.random() * 10 - 5).toFixed(1);
+      svg.style.filter = 'brightness(' + brightness + ') hue-rotate(' + hue + 'deg)';
+      svg.style.opacity = (0.55 + idx * 0.16).toFixed(2);
+
+      var path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', bladeShapes[Math.floor(Math.random() * bladeShapes.length)]);
+      path.setAttribute('fill', 'url(#' + layer.grad + ')');
+      svg.appendChild(path);
+
+      // sparse seed-heads on the front layer only, sways with its blade
+      if (idx === 2 && Math.random() < 0.05) {
+        var seed = document.createElementNS(svgNS, 'path');
+        seed.setAttribute('d', seedHeadD);
+        seed.setAttribute('transform', 'translate(5,2)');
+        seed.setAttribute('fill', 'url(#bladeGradFront)');
+        svg.appendChild(seed);
+      }
+
+      // wind travels left-to-right across the field: delay tracks horizontal position, not pure random
+      var delay = (leftPct / 100) * 1.7 + Math.random() * 0.5;
+      var dur = 2.2 + Math.random() * 1.3;
+      svg.style.setProperty('--dur', dur.toFixed(2) + 's');
+      svg.style.setProperty('--delay', delay.toFixed(2) + 's');
+      svg.style.setProperty('--tilt', (-4 - Math.random() * 5).toFixed(1) + 'deg');
+      svg.style.setProperty('--tilt2', (5 + Math.random() * 7).toFixed(1) + 'deg');
+
+      frag.appendChild(svg);
+    }
+    field.appendChild(frag);
+  }
+
+  var themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    var root = document.documentElement;
+    function effectiveTheme() {
+      var attr = root.getAttribute('data-theme');
+      if (attr === 'dark' || attr === 'light') return attr;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function syncIcon() {
+      themeToggle.classList.toggle('is-dark', effectiveTheme() === 'dark');
+    }
+    syncIcon();
+    themeToggle.addEventListener('click', function () {
+      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncIcon();
+    });
+  }
+
+  var toggle = document.getElementById('navToggle');
+  var offCanvas = document.getElementById('offCanvas');
+  if (toggle && offCanvas) {
+    var drawer = offCanvas.querySelector('.drawer');
+    function focusable() {
+      return Array.prototype.slice.call(
+        drawer.querySelectorAll('a[href], button:not([disabled])')
+      );
+    }
+    function open() {
+      offCanvas.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      var items = focusable();
+      if (items.length) items[0].focus();
+    }
+    function close() {
+      offCanvas.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+    function trapTab(e) {
+      if (e.key !== 'Tab' || !offCanvas.classList.contains('open')) return;
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    toggle.addEventListener('click', open);
+    offCanvas.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && offCanvas.classList.contains('open')) close();
+      trapTab(e);
+    });
+  }
+
+  var pegHoles = document.querySelector('.workshop .peg-holes');
+  if (pegHoles) {
+    var rows = [16, 50, 84, 118, 152, 186];
+    for (var col = 20; col < 900; col += 28) {
+      rows.forEach(function (row) {
+        var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('class', 'peg-hole');
+        c.setAttribute('cx', col);
+        c.setAttribute('cy', row);
+        c.setAttribute('r', 1.4);
+        pegHoles.appendChild(c);
+      });
+    }
+  }
+
+  var toolCaptions = {
+    Hammer: 'For framing, decking, and the fixes that need a solid hit.',
+    Wrench: 'Plumbing fittings, hardware, anything that needs turning.',
+    Screwdriver: 'Doors, windows, cabinet hardware — the most-used tool in the bag.',
+    Saw: 'Trim, flooring, deck boards cut to size.',
+    'Spirit level': 'Nothing gets hung or built without checking this first.'
+  };
+  var caption = document.getElementById('workshopCaption');
+  var tools = document.querySelectorAll('.workshop .tool');
+  if (caption && tools.length) {
+    tools.forEach(function (tool) {
+      function select() {
+        tools.forEach(function (t) { t.classList.remove('selected'); });
+        tool.classList.add('selected');
+        var name = tool.getAttribute('data-name');
+        caption.innerHTML = '<strong>' + name + '.</strong> ' + toolCaptions[name];
+      }
+      tool.addEventListener('click', select);
+      tool.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+      });
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  var translations = {
+    en: {
+      arka_tag: "ARKA · from temporary to permanent",
+      arka_h: "A permanent home costs a municipality less per month than one night in a hotel",
+      arka_lede: "Municipalities pay hotel and guesthouse rates to house people they are obliged to help. ARKA is a small, permanent, factory-built home that makes a proper home the cheaper option.",
+      arka_btn1: "Contact us about ARKA →",
+      arka_btn2: "Calculate for your municipality",
+      arka_lang: "Norsk",
+      arka_proof: "Built on the regulations. Calculated on the municipality's own figures. Checked against six municipal tenders.",
+      arka_ph: "Cost per household per month",
+      arka_r1: "Temporary accommodation",
+      arka_r1s: "Norwegian city, 2025 average",
+      arka_r2: "ARKA home, net after rent",
+      arka_r2s: "worst case",
+      arka_f1: "one adult, own entrance, bathroom and kitchen",
+      arka_f2: "for 10 M kr in donations: 37 homes if the gift reduces the loans, 8 if the homes are bought outright",
+      arka_f3: "municipal homes stood empty while 14,458 applications were refused (2025)",
+      arka_f4: "VAT refund assumed",
+      arka_src: "Sources: SSB, Husbanken, Lovdata. If the tenant lives on social assistance, the municipality's cost rises to about 4,300 kr, still around a quarter of temporary accommodation.",
+      arch_h: "Six parts that already exist. ARKA is the keystone.",
+      arch_p: "An arch carries load because each stone supports the next and the keystone locks them together. The plot, the home, the owner, the loan, the rent and the upkeep already exist in every municipality. ARKA connects them so the arch spans from temporary accommodation to a permanent home.",
+      move1: "<b>Permanent home, factory-built</b>The home is designed to stand on a fixed foundation and be registered as a dwelling. It is finished in the factory, so the time on site is short.",
+      move2: "<b>Fast to move in</b>Every month in temporary accommodation costs about 16,200 kr per household. A finished home on a plot with water and power shortens the wait.",
+      move3: "<b>The right home, not more homes</b>9,396 municipal homes stood empty while 14,458 applications were refused in 2025. ARKA delivers the type that is missing.",
+      faq_h: "Questions about ARKA",
+      faq1q: "Who are the homes for?",
+      faq1a: "People the municipality houses: single adults on low incomes, refugees, people with disabilities, young adults leaving care and people in recovery. ARKA 28 is for one adult.",
+      faq2q: "Is this a tiny house or a cabin?",
+      faq2a: "No. It is a permanent dwelling, approved and registered for year-round living, with its own entrance, bathroom, kitchen, sprinkler and a second exit.",
+      faq3q: "What does it cost the municipality?",
+      faq3a: "The municipality's net cost is at most about 1,300 kr a month per home, without VAT compensation. If the tenant lives on social assistance, it rises to about 4,300 kr, still around a quarter of temporary accommodation. Contact us for a calculation for your municipality.",
+      faq4q: "How does a municipality start?",
+      faq4a: "With a pilot of five homes: the municipality provides plots and follow-up, ARKA prepares the specification and helps the municipality prepare the procurement. A non-binding letter of intent is the first step.",
+      faq5q: "Who is behind it?",
+      faq5a: "Mantas Pagalys, a carpenter in Oslo, who developed the model and the analysis.",
+      faq_cta: "Send an inquiry about ARKA →",
+      form_topic: "This concerns",
+      opt_services: "Services",
+      opt_arka: "ARKA (municipality, financing, partnership)",
+      opt_other: "Other",
+      arch_t0: "Plot",
+      arch_s0: "water and power in",
+      arch_t1: "Home",
+      arch_s1: "factory-built",
+      arch_t2: "Owner",
+      arch_s2: "the municipality",
+      arch_t3: "ARKA",
+      arch_s3: "coordination",
+      arch_t4: "Loan",
+      arch_s4: "Husbanken",
+      arch_t5: "Rent",
+      arch_s5: "within benefit limit",
+      arch_t6: "Upkeep",
+      arch_s6: "robust",
+      arch_f1: "Temporary accommodation",
+      arch_f2: "Permanent home",
+      arch_f1n: "≈16,200 kr / month",
+      arch_f2n: "≤1,300 kr / month net",
+      arch_title: "The ARKA model as an arch",
+      nav_services: "Services",
+      nav_gallery: "Gallery",
+      nav_contact: "Contact",
+      nav_close: "Close ✕",
+      hero_role: "Garden, outdoor space and small-scale craftsmanship",
+      hero_h1: "Gardens, small builds and boats. Done properly, in the right season.",
+      hero_lede: "A garden has its own order — what has to grow before it can be pruned, what a greenhouse needs before the seedlings meet the outside world, which season a hedge can actually take being touched in. Years spent inside that order: properties on Hampstead Heath, some centuries old, rooftop gardens over the city, the golf courses at St Andrews. Own jobs, and work through larger landscaping firms — always the same respect for what's actually alive, not just what looks finished. That same respect comes to your garden.",
+      h_garden: "Garden &amp; outdoor space",
+      sv1_t: "Pruning",
+      sv1_p: "Shrubs and hedges, the right time for the species — the wrong season can harm the plant more than it helps.",
+      sv2_t: "Mowing, lawn repair and weeding",
+      sv2_p: "Cutting, re-establishing worn/thin lawns, weeding — the right seed mix and timing for Norwegian climate.",
+      sv3_t: "Planting and seasonal clearing",
+      sv3_p: "Spring and autumn clearing, planting, general garden advice.",
+      sv4_t: "Fences and decking",
+      sv4_p: "Repair and maintenance of fences and deck boards.",
+      h_build: "Building &amp; indoor",
+      sv5_t: "Doors and windows",
+      sv5_p: "Installation and repair.",
+      sv6_t: "Facade and concrete work",
+      sv6_p: "Smaller facade work and concrete jobs.",
+      sv7_t: "Flooring, trim and drywall",
+      sv7_p: "Laying/repairing flooring, trim, drywall panels and light partition walls.",
+      h_maint: "Maintenance",
+      sv8_t: "Pressure washing",
+      sv8_p: "Facade, terrace, driveway.",
+      sv9_t: "Gutter cleaning",
+      sv9_p: "Your ladder, my work.",
+      h_boat: "Boat",
+      sv10_t: "Repair",
+      sv10_p: "Deck, teak woodwork, minor structural and epoxy work.",
+      sv11_t: "Cleaning, prep and painting",
+      sv11_p: "Proper preparation before painting — this is often what decides whether the job actually holds.",
+      h_practical: "Practical",
+      fact1: "<strong>Area:</strong> Sandvika, Bærum, biking distance",
+      fact2: "<strong>Tools:</strong> own hand tools for most jobs",
+      fact3: "<strong>Mowing:</strong> your machine, my hands",
+      fact4: "<strong>Transport:</strong> bicycle. Quiet, on time, no parking needed.",
+      h_gallery: "The nature I work in",
+      h_fjell: "FJELL — modular 12m² cabin",
+      fjell_t: "My own cabin design — full engineering planning, not physically built yet",
+      fjell_p: "The drawings are done. The cabin isn't built yet. That's the next step, not a secret.",
+      fjell_stats: "8 DXF files · 9 STL files · 0 units built",
+      fjell_caption: "Real cutting geometry. Actual production measurements.",
+      fjell_note: "Same hands: your garden, a cabin, a boat bound for an ocean.",
+      fjell_link: "See status and plans →",
+      h_contact: "Get in touch",
+      cta_line: "Price depends on the job. Describe it, and you get a number.",
+      away_note: "Away 22 October – 6 November. Replies from 9 November.",
+      rule_line: "Work and projects: reply guaranteed. Money, contacts and “just a small favour”: reply not included.",
+      footer_line: "Price agreed before work starts. No surprises after."
+    },
+    lt: {
+      arka_tag: "ARKA · iš laikino būsto į nuolatinį",
+      arka_h: "Nuolatinis būstas savivaldybei per mėnesį kainuoja mažiau nei viena naktis viešbutyje",
+      arka_lede: "Savivaldybės moka už viešbučius ir svečių namus, kad apgyvendintų žmones, kuriems privalo padėti. ARKA yra mažas nuolatinis gamykloje pastatytas namas, su kuriuo tikri namai tampa pigesniu sprendimu.",
+      arka_btn1: "Susisiekite dėl ARKA →",
+      arka_btn2: "Apskaičiuokite savo savivaldybei",
+      arka_lang: "English",
+      arka_proof: "Pagrįsta teisės aktais. Apskaičiuota pagal savivaldybių duomenis. Patikrinta pagal šešių savivaldybių pirkimų reikalavimus.",
+      arka_ph: "Mėnesio išlaidos vienam namų ūkiui",
+      arka_r1: "Laikinas apgyvendinimas",
+      arka_r1s: "Norvegijos miestas, 2025 m. vidurkis",
+      arka_r2: "ARKA būstas, atskaičius nuomą",
+      arka_r2s: "blogiausiu atveju",
+      arka_f1: "vienam žmogui: atskiras įėjimas, vonios kambarys ir virtuvė",
+      arka_f2: "už 10 mln. kr paramos: 37 būstai, jei parama skiriama paskoloms sumažinti, arba 8, jei namai perkami iš karto",
+      arka_f3: "savivaldybės būstų stovėjo tušti, nors 14 458 prašymai buvo atmesti (2025 m.)",
+      arka_f4: "PVM kompensacija neįskaičiuota",
+      arka_src: "Šaltiniai: SSB, Husbanken, Lovdata. Jei nuomininkas gyvena iš socialinės pašalpos, savivaldybės kaina išauga iki maždaug 4 300 kr. Tai vis tiek apie ketvirtadalis laikino apgyvendinimo kainos.",
+      arch_h: "Visos šešios dalys jau yra. ARKA jas sujungia kaip raktinis arkos akmuo.",
+      arch_p: "Arka laikosi, nes kiekvienas akmuo remiasi į kitą, o raktinis akmuo viską sutvirtina. Sklypas, būstas, savininkas, paskola, nuoma ir priežiūra jau yra kiekvienoje savivaldybėje. ARKA juos sujungia, kad būtų galima pereiti nuo laikino apgyvendinimo prie nuolatinių namų.",
+      move1: "<b>Nuolatinis būstas, pagamintas gamykloje</b>Namas statomas ant nuolatinių pamatų ir registruojamas kaip būstas. Jis visiškai įrengiamas gamykloje, todėl darbai sklype trunka trumpai.",
+      move2: "<b>Greitas įsikėlimas</b>Kiekvienas laikiname būste praleistas mėnuo vienam namų ūkiui kainuoja apie 16 200 kr. Paruoštas namas sklype su vandeniu ir elektra sutrumpina laukimą.",
+      move3: "<b>Tinkamas būstas, o ne daugiau būstų</b>2025 m. 9 396 savivaldybių būstai stovėjo tušti, nors 14 458 prašymai buvo atmesti. ARKA siūlo tokį būstą, kokio trūksta.",
+      faq_h: "Dažni klausimai apie ARKA",
+      faq1q: "Kam skirti šie būstai?",
+      faq1a: "Žmonėms, kuriuos apgyvendina savivaldybė: vieniems gyvenantiems, mažas pajamas gaunantiems žmonėms, pabėgėliams, žmonėms su negalia, jaunuoliams, paliekantiems globos namus, ir sveikstantiems žmonėms. ARKA 28 skirtas vienam žmogui.",
+      faq2q: "Ar tai mažas namelis ar vasarnamis?",
+      faq2a: "Ne. Tai nuolatinis būstas, kuriame gyvenama ištisus metus. Jame yra atskiras įėjimas, vonios kambarys, virtuvė, gaisro gesinimo sistema ir antras išėjimas.",
+      faq3q: "Kiek tai kainuoja savivaldybei?",
+      faq3a: "Savivaldybės grynoji kaina yra daugiausia apie 1 300 kr per mėnesį vienam būstui, be PVM kompensacijos. Jei nuomininkas gyvena iš socialinės pašalpos, ji išauga iki maždaug 4 300 kr. Tai vis tiek apie ketvirtadalis laikino apgyvendinimo kainos. Susisiekite, ir apskaičiuosime Jūsų savivaldybei.",
+      faq4q: "Nuo ko savivaldybė gali pradėti?",
+      faq4a: "Nuo bandomojo projekto su penkiais būstais. Savivaldybė skiria sklypus ir pagalbą gyventojams, o ARKA parengia specifikaciją ir padeda savivaldybei pasiruošti pirkimui. Pirmasis žingsnis yra neįpareigojantis ketinimų protokolas.",
+      faq5q: "Kas sukūrė ARKA?",
+      faq5a: "Mantas Pagalys, Osle gyvenantis dailidė. Jis sukūrė modelį ir atliko analizę.",
+      faq_cta: "Parašykite dėl ARKA →",
+      form_topic: "Tema",
+      opt_services: "Paslaugos",
+      opt_arka: "ARKA (savivaldybėms, finansavimas, bendradarbiavimas)",
+      opt_other: "Kita",
+      arch_t0: "Sklypas",
+      arch_s0: "vanduo, elektra",
+      arch_t1: "Būstas",
+      arch_s1: "gamyklinis",
+      arch_t2: "Savininkas",
+      arch_s2: "savivaldybė",
+      arch_t3: "ARKA",
+      arch_s3: "koordinavimas",
+      arch_t4: "Paskola",
+      arch_s4: "Husbanken",
+      arch_t5: "Nuoma",
+      arch_s5: "pagal pašalpos ribą",
+      arch_t6: "Priežiūra",
+      arch_s6: "patikima",
+      arch_f1: "Laikinas apgyvendinimas",
+      arch_f2: "Nuolatinis būstas",
+      arch_f1n: "≈16 200 kr per mėn.",
+      arch_f2n: "≤1 300 kr per mėn., atskaičius nuomą",
+      arch_title: "ARKA modelis, pavaizduotas kaip arka",
+      nav_services: "Paslaugos",
+      nav_gallery: "Galerija",
+      nav_contact: "Kontaktai",
+      nav_close: "Uždaryti ✕",
+      hero_role: "Sodas, lauko erdvė ir smulkūs statybos darbai",
+      hero_h1: "Sodai, nedideli statiniai ir laivai. Padaryta kaip reikia, tinkamu metu.",
+      hero_lede: "Sodas turi savo tvarką — kas turi užaugti, kol galima genėti, ko reikia šiltnamiui, kol daigai sutinka išorinį pasaulį, kokiu metų laiku gyvatvorę iš tikrųjų galima liesti. Metai, praleisti tos tvarkos viduje: Hampstead Heath dvarai, kai kurie kelių šimtmečių senumo, sodai ant miesto stogų, golfo aikštynai St Andrews. Savi užsakymai ir darbas per didesnes kraštovaizdžio įmones — visada ta pati pagarba tam, kas iš tikrųjų gyva, o ne tik tam, kas atrodo baigta. Ta pati pagarba ateis ir į jūsų sodą.",
+      h_garden: "Sodas ir lauko erdvė",
+      sv1_t: "Genėjimas",
+      sv1_p: "Krūmai ir gyvatvorės, tinkamas laikas pagal rūšį — netinkamas sezonas gali pakenkti augalui labiau, nei padėti.",
+      sv2_t: "Vejos pjovimas, atkūrimas ir ravėjimas",
+      sv2_p: "Pjovimas, nusidėvėjusių/plikų vejų atkūrimas, ravėjimas — tinkamas sėklų mišinys ir laikas Norvegijos klimatui.",
+      sv3_t: "Sodinimas ir sezoninis tvarkymas",
+      sv3_p: "Pavasario ir rudens tvarkymas, sodinimas, bendri patarimai apie sodą.",
+      sv4_t: "Tvoros ir terasos",
+      sv4_p: "Tvorų ir terasos lentų remontas bei priežiūra.",
+      h_build: "Statyba ir vidaus darbai",
+      sv5_t: "Durys ir langai",
+      sv5_p: "Montavimas ir remontas.",
+      sv6_t: "Fasado ir betono darbai",
+      sv6_p: "Smulkesni fasado ir betono darbai.",
+      sv7_t: "Grindys, apvadai ir gipskartonis",
+      sv7_p: "Grindų klojimas/remontas, apvadai, gipskartonio plokštės ir lengvos pertvaros.",
+      h_maint: "Priežiūra",
+      sv8_t: "Plovimas aukšto slėgio įranga",
+      sv8_p: "Fasadas, terasa, kiemas.",
+      sv9_t: "Latakų valymas",
+      sv9_p: "Jūsų kopėčios, mano darbas.",
+      h_boat: "Laivas",
+      sv10_t: "Remontas",
+      sv10_p: "Denis, tikmedžio medienos darbai, smulkūs konstrukciniai ir epoksidiniai darbai.",
+      sv11_t: "Valymas, paruošimas ir dažymas",
+      sv11_p: "Tinkamas paruošimas prieš dažant — dažnai būtent tai nulemia, ar darbas iš tikrųjų išsilaikys.",
+      h_practical: "Praktinė informacija",
+      fact1: "<strong>Rajonas:</strong> Sandvika, Bærum, dviračiu pasiekiamas atstumas",
+      fact2: "<strong>Įrankiai:</strong> nuosavi rankiniai įrankiai daugumai darbų",
+      fact3: "<strong>Vejos pjovimas:</strong> jūsų technika, mano rankos",
+      fact4: "<strong>Transportas:</strong> dviratis. Tylu, laiku, nereikia parkavimo vietos.",
+      h_gallery: "Gamta, kurioje dirbu",
+      h_fjell: "FJELL — modulinė 12m² trobelė",
+      fjell_t: "Nuosavas trobelės dizainas — pilnas inžinerinis projektavimas, dar fiziškai nepastatyta",
+      fjell_p: "Brėžiniai paruošti. Trobelė dar nepastatyta. Tai kitas žingsnis, ne paslaptis.",
+      fjell_stats: "8 DXF failai · 9 STL failai · 0 pastatytų vienetų",
+      fjell_caption: "Tikra pjovimo geometrija. Realūs gamybiniai matavimai.",
+      fjell_note: "Tos pačios rankos: jūsų sodas, trobelė, laivas, kuris plauks per vandenyną.",
+      fjell_link: "Žiūrėti būklę ir planus →",
+      h_contact: "Susisiekite",
+      cta_line: "Kaina priklauso nuo darbo. Aprašykite jį, ir gausite skaičių.",
+      away_note: "Manęs nebus spalio 22 – lapkričio 6 d. Atsakysiu nuo lapkričio 9 d.",
+      rule_line: "Darbas ir projektai: atsakymas garantuotas. Pinigai, kontaktai ir „tik maža paslauga“: atsakymas neįskaičiuotas.",
+      footer_line: "Kaina sutariama prieš pradedant darbą. Jokių staigmenų po to."
+    }
+  };
+
+  var buttons = document.querySelectorAll('.lang-btn');
+  var targets = document.querySelectorAll('[data-i18n]');
+  var originals = {};
+  targets.forEach(function(el){
+    originals[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+
+  function setLang(lang){
+    targets.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var dict = translations[lang];
+      el.innerHTML = (dict && dict[key]) ? dict[key] : originals[key];
+    });
+    buttons.forEach(function(btn){
+      var active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    document.documentElement.lang = (lang === 'no') ? 'nb' : lang;
+    try { localStorage.setItem('site-lang', lang); } catch(e){}
+    document.querySelectorAll('[data-href-' + lang + ']').forEach(function(el){ el.setAttribute('href', el.getAttribute('data-href-' + lang)); });
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  var saved;
+  try { saved = localStorage.getItem('site-lang'); } catch(e){}
+  if (saved && saved !== 'no') setLang(saved);
+  // Away notice hides itself automatically from 9 Nov 2026.
+  var away = document.getElementById('awayNote');
+  if (away && new Date() >= new Date('2026-11-09T00:00:00+01:00')) away.style.display = 'none';
+})();
+
+document.querySelectorAll('.arka-inq').forEach(function(a){ a.addEventListener('click', function(){ var t=document.getElementById('topicSel'); if (t) t.value='ARKA'; }); });
+
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    }).then(function (res) {
+      if (res.ok) {
+        form.innerHTML = '<p class="contact-note">Sendt. Svarer så snart jeg kan.</p>';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+        var old = form.querySelector('.contact-error');
+        if (old) old.remove();
+        form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Sendte ikke — prøv igjen.</p>');
+      }
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      var old = form.querySelector('.contact-error');
+      if (old) old.remove();
+      form.insertAdjacentHTML('afterbegin', '<p class="contact-note contact-error">Sendte ikke — prøv igjen.</p>');
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = document.querySelectorAll('.service, .photo-grid a');
+  targets.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script data-goatcounter="https://mantaspagalys.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
