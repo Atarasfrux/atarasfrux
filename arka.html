@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="darkreader-lock">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Mantas Pagalys">
@@ -22,7 +23,7 @@
 
 <title>ARKA · From temporary to permanent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:light;
@@ -96,6 +97,31 @@ ul.tight{margin:0;padding-left:20px} ul.tight li{margin:6px 0}
 @media (max-width:760px){.gallery{grid-template-columns:1fr}}
 .spec td:first-child{color:var(--ink-2)}
 details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:860px} summary{cursor:pointer;color:var(--ink);font-size:16px} details p{color:var(--ink-2);margin:8px 0 0}
+
+/* ===== greifiks identity (2026-10-12) ===== */
+:root{--bg:#e7ecf1;--surface:#f3f6f8;--line:#c8d3dc;--grid:#d8e0e6;--ink:#12324a;--ink-2:#3d4b5c;--ink-3:#5b7083;--accent:#1f4d3a;--accent-ink:#1f4d3a;--chip:#dce5ec;--muted-bar:#8fa3b5}
+body{background:var(--bg);color:var(--ink);font-family:Jost,system-ui,sans-serif;font-weight:300}
+h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-variation-settings:"opsz" 18;letter-spacing:-.01em}
+b,strong,th{font-weight:500}
+.emblem{display:block;width:72px;height:63px;color:#1f4d3a;margin:0 0 18px}
+.summary{margin:26px 0 8px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.summary div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-top:1px solid var(--line)}
+.summary div:first-child{border-top:0}
+.summary dt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin:0;padding-top:3px}
+.summary dd{margin:0}
+.cta{display:inline-block;margin:22px 0 4px;padding:14px 26px;background:#12324a;color:#fff;text-decoration:none;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase}
+.cta:hover{background:#1f4d3a}
+details.fold>summary{list-style:none;cursor:pointer}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary h2{display:inline}
+details.fold>summary::after{content:" +";font:300 1.6rem Jost,sans-serif;color:var(--ink-3)}
+details.fold[open]>summary::after{content:" \2212"}
+@media (max-width:700px){.summary div{grid-template-columns:1fr;gap:2px}}
+.cta{align-self:flex-start;width:auto;max-width:max-content}
+.emblem{width:104px;height:74px;color:#859900}
+.note-city{max-width:70ch;margin-top:10px}
+.emblem{width:96px;height:45px;color:#1f4d3a}
+.emblem{width:84px;height:52px}
 </style>
 </head>
 <body>
@@ -105,11 +131,15 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
 
 <!-- 1 -->
 <section class="slide">
+  <svg class="emblem" aria-hidden="true" viewBox="0 0 48 30"><g stroke="currentColor" stroke-width="2.4"><line x1="0" y1="15.0" x2="48" y2="15.0"/><line x1="8.0" y1="2" x2="8.0" y2="28"/><line x1="24.0" y1="2" x2="24.0" y2="28"/><line x1="40.0" y1="2" x2="40.0" y2="28"/></g></svg>
   <p class="kicker">ARKA · From temporary to permanent · October 2026</p>
   <h1>A permanent home costs a municipality less per month than one night in a hotel</h1>
-  <p class="lead">Norwegian municipalities are paying hotel and guesthouse rates to house people they are legally obliged to help. A small factory-built home on a municipal plot, financed by Husbanken and let at a rent within the housing-benefit limit, costs the municipality at most about 1,300 kr a month after rent, even with every cautious assumption applied.</p>
+  <p class="lead">Norwegian municipalities are paying hotel and guesthouse rates to house people they are legally obliged to help.</p>
+  <dl class="summary"><div><dt>Problem</dt><dd>About 16,200 kr per household per month in temporary housing (a Norwegian city, 2025, calculated).</dd></div><div><dt>Proposal</dt><dd>A permanent, factory-built home of about 29 m² on a municipal plot, owned by the municipality and financed by Husbanken.</dd></div><div><dt>Cost</dt><dd>At most about 1,300 kr a month for the municipality after rent, without VAT compensation.</dd></div><div><dt>Pilot</dt><dd>5 homes, one municipality, one year.</dd></div><div><dt>Next step</dt><dd>A calculation using your own figures.</dd></div></dl>
+  <p class="foot note-city"><b>About the example city:</b> the figures are real and public (the municipality's net spending for 2025, reported by Nettavisen on 16.02.2026). The municipality is not named because no contact has been established with it. Source and calculation are available on request.</p>
+  <a class="cta" href="mailto:pagalysm@gmail.com?subject=ARKA%20%E2%80%93%20calculation%20for%20our%20municipality">Request a calculation for your municipality →</a>
   <p class="foot"><b>Why ARKA:</b> arka means arch, the structure that spans a gap and carries the load. ARKA spans the gap between temporary housing and a permanent home, built from parts that already exist.</p>
-  <p class="foot">How to read the figures: <span class="tag">sourced</span> from a named public source · <span class="tag">calc</span> arithmetic on sourced figures · <span class="tag h">assumption</span> an input the pilot will confirm. Every figure is reproducible with the published model (arka_finance.py); the last slide lists sources and how far each has been checked.</p>
+  <p class="foot">How to read the figures: <span class="tag">sourced</span> from a named public source · <span class="tag">calc</span> arithmetic on sourced figures · <span class="tag h">assumption</span> an input the pilot will confirm. The model behind the figures (with stress test) is available on request; the last slide lists sources and how far each has been checked.</p>
   <p class="foot" style="margin-top:12px">© 2026 Mantas Pagalys, originator of the ARKA model (first version dated 28.09.2026). Municipalities and other public bodies may use this method for their own procurement, with attribution. Commercial reuse, resale or reproduction by suppliers, consultants or investors requires written permission. Contact: pagalysm@gmail.com</p>
 </section>
 
@@ -119,20 +149,20 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
   <h2>The temporary solution has become the expensive one</h2>
   <div class="grid3">
     <div class="card"><div class="n">7,077</div><div class="l">households in temporary housing in 2024: the highest number ever recorded, up 60 % since 2021 <span class="tag">sourced</span></div></div>
-    <div class="card"><div class="n">≈16,200 kr</div><div class="l">per household per month: Tromsø's net spending on temporary housing in 2025 (13.6 M kr, about 70 households) <span class="tag">calc</span></div></div>
+    <div class="card"><div class="n">≈16,200 kr</div><div class="l">per household per month: net spending on temporary housing in a Norwegian city in 2025 (13.6 M kr, about 70 households) <span class="tag">calc</span></div></div>
     <div class="card"><div class="n">2,000 kr</div><div class="l">per night: the upper rate Stavanger pays; over 40 M kr spent on the service last year <span class="tag">sourced</span></div></div>
   </div>
-  <p class="foot">At the end of 2025, 9,396 municipal homes stood unlet while 14,458 applications for municipal housing were refused (SSB tables 12008 and 12012). The shortage is not homes as such but the right home in the right place. Tromsø has said publicly that long stays in temporary housing put it in breach of the law. The money is already being spent; the question is what it buys.</p>
+  <p class="foot">At the end of 2025, 9,396 municipal homes stood unlet while 14,458 applications for municipal housing were refused (SSB tables 12008 and 12012). The shortage is not homes as such but the right home in the right place. The money is already being spent; the question is what it buys.</p>
 </section>
 
 <!-- 3 -->
 <section class="slide">
   <p class="kicker">The comparison</p>
   <div class="hero-num">≈16,200 vs ≤1,300</div>
-  <p class="hero-sub">Kroner per month, per household. On the left, what Tromsø paid on average for temporary housing in 2025. On the right, the most a permanent ARKA home costs the municipality after rent: an ordinary plot, no VAT refund, no donor contribution. <span class="tag">calc</span></p>
+  <p class="hero-sub">Kroner per month, per household. On the left, what a Norwegian city paid on average for temporary housing in 2025. It is an average over the year across all households, including those who stayed only briefly. A full month in a hotel costs far more. On the right, the most a permanent ARKA home costs the municipality after rent: an ordinary plot, no VAT refund, no donor contribution. <span class="tag">calc</span></p>
   <div class="chart" style="margin-top:32px">
     <h3>Net monthly cost to the municipality, per household housed</h3>
-    <p class="note">Home: Husbanken loan at 4.774 % (20-year fixed, October 2026) over 50 years, running costs 1,640 kr/month (maintenance, municipal fees, insurance), rent 7,050 kr at 95 % occupancy, no VAT refund. Temporary housing: Stavanger's upper nightly rate × 365 / 12; Tromsø's 2025 net spend ÷ about 70 households.</p>
+    <p class="note">Home: Husbanken loan at 4.774 % (20-year fixed, October 2026) over 50 years, running costs 1,640 kr/month (maintenance, municipal fees, insurance), rent 7,050 kr at 95 % occupancy, no VAT refund. Temporary housing: Stavanger's upper nightly rate × 365 / 12; a Norwegian city's 2025 net spend ÷ about 70 households.</p>
     <div id="c1"></div>
   </div>
 </section>
@@ -195,7 +225,7 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
     <div id="c3"></div>
   </div>
   <p class="foot"><b>In the six largest housing markets the case is stronger.</b> Housing benefit allows a higher rent ceiling in Oslo (+27,982 kr a year) and in Bergen, Trondheim, Tromsø, Stavanger and Bærum (+19,079 kr), so rent can be 8,640–9,382 kr a month. There a home on a serviced plot covers its own loan 1.22–1.35 times, with no donor contribution and no VAT refund (Forskrift om bustøtte § 3).</p>
-  <p class="foot">Rent alone does not cover the loan in every case, and the model does not pretend it does. With the VAT refund, which is possible only for specially adapted homes, every case improves by about 1,100–1,300 kr a month. Over 20 years, the home pays off for any municipality whose temporary housing costs more than about 9,600–11,000 kr per household per month (317–363 kr a night). Tromsø's 2025 average was about 16,200.</p>
+  <p class="foot">Rent alone does not cover the loan in every case, and the model does not pretend it does. With the VAT refund, which is possible only for specially adapted homes, every case improves by about 1,100–1,300 kr a month. Over 20 years, the home pays off for any municipality whose temporary housing costs more than about 9,600–11,000 kr per household per month (317–363 kr a night). The example city's 2025 average was about 16,200.</p>
 </section>
 
 <!-- 7 -->
@@ -213,7 +243,7 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
 <!-- engines -->
 <section class="slide">
   <p class="kicker">Who it serves</p>
-  <h2>One house, three money engines</h2>
+  <details class="fold"><summary><h2>One house, three money engines</h2></summary>
   <p class="lead">The home is the same for everyone. What changes is who owns it and how it is paid for. The order below starts where the numbers are strongest and the buyer is clearest.</p>
   <table>
     <thead><tr><th>Engine</th><th>Who lives there</th><th>Who owns and how it is paid for</th><th>When</th></tr></thead>
@@ -224,12 +254,13 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
     </tbody>
   </table>
   <p class="foot">Mixed tenancies strengthen the model: a home in an ordinary street, among ordinary neighbours, is the setting Housing First aims for.</p>
+</details>
 </section>
 
 <!-- 8 -->
 <section class="slide">
   <p class="kicker">Why no one blocks it</p>
-  <h2>Every party with a veto comes out ahead</h2>
+  <details class="fold"><summary><h2>Every party with a veto comes out ahead</h2></summary>
   <table>
     <thead><tr><th>Party</th><th>Today</th><th>With ARKA</th><th>Outcome</th></tr></thead>
     <tbody>
@@ -241,26 +272,28 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
       <tr><td>Hotels, totalentreprise contractors</td><td>Paid</td><td>Lose some business</td><td>Worse off · no veto</td></tr>
     </tbody>
   </table>
+</details>
 </section>
 
 <!-- 9 -->
 <section class="slide">
   <p class="kicker">Objections</p>
-  <h2>What a credit committee will ask, answered</h2>
+  <details class="fold"><summary><h2>What a credit committee will ask, answered</h2></summary>
   <table>
     <thead><tr><th>Objection</th><th>Answer</th><th>Remaining risk</th></tr></thead>
     <tbody>
-      <tr><td>Rent does not cover the loan in every case</td><td>Correct, and the model says so. The municipality's worst-case net cost is about 1,300 kr a month per home, against about 16,200 for temporary housing in Tromsø. A donor contribution of about 270k makes a serviced-plot home cash-positive.</td><td>Low</td></tr>
+      <tr><td>Rent does not cover the loan in every case</td><td>Correct, and the model says so. The municipality's worst-case net cost is about 1,300 kr a month per home, against about 16,200 for temporary housing in the example city. A donor contribution of about 270k makes a serviced-plot home cash-positive.</td><td>Low</td></tr>
       <tr><td>No VAT refund</td><td>Already assumed. Refunds go only to specially adapted homes (Skattedirektoratet 2013); the courts are split and both rulings are under appeal. A refund would improve every case by about 1,100–1,300 kr a month.</td><td>Priced in</td></tr>
       <tr><td>Interest rates rise</td><td>Fix for up to 20 years at 4.774 % (October 2026). Each percentage point adds about 700–900 kr a month per home, still a fraction of temporary housing.</td><td>Low</td></tr>
       <tr><td>A rural home may be valued below its cost</td><td>The municipality is the borrower. Municipal loans are unsecured, and municipalities cannot go bankrupt.</td><td>Low</td></tr>
       <tr><td>Heavy wear</td><td>Hard-use specification from six municipal tenders: cleanable floors with drains, replaceable panels, sprinklers. Running costs budgeted from components, not a guess.</td><td>Medium</td></tr>
       <tr><td>Module price higher than assumed</td><td>The biggest single lever. A serviced-plot home reaches 1.2× rent cover without a donor contribution at a module price of about 20,800 kr/m², against about 28,000 today. The pilot tender establishes the real price.</td><td>Medium</td></tr>
       <tr><td>Supplier collapses mid-delivery</td><td>Several small suppliers in this market are thinly capitalised. The tender requires a performance guarantee and staged payment against delivered work, and ARKA never depends on a single supplier.</td><td>Medium</td></tr>
-      <tr><td>Why a module and not a conventional build?</td><td>Speed. Every month a household waits in temporary housing costs about 16,200 kr (Tromsø 2025 average). A finished home placed on a plot with services already in shortens that wait; the pilot measures by how much.</td><td>Low</td></tr>
+      <tr><td>Why a module and not a conventional build?</td><td>Speed. Every month a household waits in temporary housing costs about 16,200 kr (example city, 2025 average). A finished home placed on a plot with services already in shortens that wait; the pilot measures by how much.</td><td>Low</td></tr>
       <tr><td>Quality and TEK17 compliance</td><td>Only suppliers with SINTEF Technical Approval or an ETA; a Norwegian engineer reviews before any order.</td><td>Medium</td></tr>
     </tbody>
   </table>
+</details>
 </section>
 
 <!-- faq -->
@@ -281,7 +314,7 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
   <details><summary><b>Who builds it?</b></summary><p>An established factory chosen by open tender, with Norwegian documentation (SINTEF Technical Approval or ETA). ARKA does not manufacture and does not sell homes, and never bids in a tender it helped design.</p></details>
   <details><summary><b>How does ARKA earn?</b></summary><p>As coordinator for the municipality: running the tender, organising groundwork and checking documentation. The method itself is open to public bodies.</p></details>
   <details><summary><b>Has any ARKA home been built?</b></summary><p>Not yet. The pilot exists to produce real figures for cost, upkeep and temporary housing avoided, in the municipality's own accounts. Similar homes are already delivered to Norwegian municipalities by others, for example in Sandnes and Heim.</p></details>
-  <details><summary><b>Who is behind it?</b></summary><p>Mantas Pagalys, a carpenter based in Oslo, who developed the model and its financial analysis. Contact: pagalysm@gmail.com</p></details>
+  <details><summary><b>Who is behind it?</b></summary><p>Mantas Pagalys, Oslo. Hands-on experience as lead tradesman, from groundwork, pipe-laying and paving to roof structures and interior joinery. Developed the model and the financial analysis. Contact: pagalysm@gmail.com</p></details>
 </section>
 
 <!-- 10 -->
@@ -309,12 +342,13 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
     </div>
   </div>
   <p class="foot">Three facts confirmed before any order: Husbanken's view on single homes on scattered plots; real running costs from a municipality that already owns small homes; the pilot municipality's own monthly cost of temporary housing.</p>
+  <a class="cta" href="mailto:pagalysm@gmail.com?subject=ARKA%20%E2%80%93%20calculation%20for%20our%20municipality">Request a calculation for your municipality →</a>
 </section>
 
 <!-- 11 -->
 <section class="slide">
   <p class="kicker">Sources and confidence</p>
-  <h2>What is sourced, what is calculated, what is assumed</h2>
+  <details class="fold"><summary><h2>What is sourced, what is calculated, what is assumed</h2></summary>
   <table>
     <thead><tr><th>Figure</th><th>Status</th><th>Source</th></tr></thead>
     <tbody>
@@ -324,7 +358,7 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
       <tr><td>Housing benefit = 73.7 % of approved housing costs minus own share (minimum 26,576 kr/year): at most 4,032 kr a month for one person</td><td><span class="tag">sourced</span></td><td>Forskrift om bustøtte §§ 1, 3, 4 (Lovdata)</td></tr>
       <tr><td>Housing-benefit requirements for the dwelling</td><td><span class="tag">sourced</span></td><td>husbanken.no, krav til boligen</td></tr>
       <tr><td>VAT refund only for specially adapted homes</td><td><span class="tag">sourced</span></td><td>Skattedirektoratet, statement 12.03.2013; Gulating 26.03.2026 and Oslo tingrett 16.05.2026, both appealed</td></tr>
-      <tr><td>Tromsø 2025 net spend 13.6 M kr, about 70 households; hotel 4,000–4,500 kr a night</td><td><span class="tag">sourced</span></td><td>Nettavisen / Nordlys, 16.02.2026</td></tr>
+      <tr><td>Example city (Norwegian urban municipality, not named, see note at top) 2025 net spend 13.6 M kr, about 70 households; hotel 4,000–4,500 kr a night</td><td><span class="tag">sourced</span></td><td>Nettavisen, 16.02.2026</td></tr>
       <tr><td>Stavanger up to 2,000 kr a night; over 40 M kr last year</td><td><span class="tag">sourced</span></td><td>Stavanger Aftenblad, 04.09.2026</td></tr>
       <tr><td>Municipal water, sewer and waste fees 17,302 kr a year (standard house)</td><td><span class="tag">sourced</span></td><td>SSB table 12842, 2026</td></tr>
       <tr><td>9,396 municipal homes unlet at 31.12.2025; 14,458 applications refused (2025)</td><td><span class="tag">sourced</span></td><td>SSB tables 12008 and 12012 (API, read 03.10.2026)</td></tr>
@@ -338,9 +372,10 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
       <tr><td>Groundwork 100–275k; soft costs 40k; insurance; occupancy 95 %; share of fees paid by a 30 m² home</td><td><span class="tag h">assumption</span></td><td>Confirmed in the pilot</td></tr>
     </tbody>
   </table>
-  <p class="foot">Model: arka_finance.py, with a 50,000-draw stress test of rates, prices, running costs, occupancy and VAT. Not legal or tax advice.</p>
+  <p class="foot">Model: available on request, with a 50,000-draw stress test of rates, prices, running costs, occupancy and VAT. Not legal or tax advice.</p>
   <p class="foot" id="terms" style="margin-top:12px">© 2026 Mantas Pagalys, originator of the ARKA model (first version dated 28.09.2026). Municipalities and other public bodies may use this method for their own procurement, with attribution. Commercial reuse, resale or reproduction by suppliers, consultants or investors requires written permission. Contact: pagalysm@gmail.com</p>
   <p class="foot">Authorship record: SHA-256 manifest of the ARKA source files, dfa304180430744d…, timestamped 03.10.2026 via OpenTimestamps.</p>
+</details>
 </section>
 
 </main>
@@ -383,7 +418,7 @@ details{margin-top:0;border-top:1px solid var(--line);padding:12px 0;max-width:8
   }
   hbar("c1",[
     {label:"Stavanger, upper hotel rate",v:60833,fmt:"60,800 kr",tip:"Up to 2,000 kr per night × 365 / 12 (Stavanger Aftenblad, 04.09.2026)"},
-    {label:"Tromsø 2025 average",v:16190,fmt:"≈16,200 kr",tip:"Net 13.6 M kr temporary-housing spend in 2025 ÷ about 70 households (Nettavisen/Nordlys)"},
+    {label:"Example city, 2025 average",v:16190,fmt:"≈16,200 kr",tip:"Net 13.6 M kr temporary-housing spend in 2025 ÷ about 70 households (Nettavisen)"},
     {label:"ARKA home, worst case",v:1300,fmt:"1,300 kr",hi:true,tip:"Ordinary plot, no VAT refund, no donor contribution: loan 6,358 + running costs 1,640 − rent 7,050 × 95 %"},
     {label:"ARKA home, serviced plot",v:342,fmt:"342 kr",hi:true,tip:"Serviced plot, no VAT refund, no donor contribution: loan 5,399 + running costs 1,640 − rent 6,698"}
   ],{max:66000,aria:"Net monthly cost per household: temporary housing vs ARKA home",labelW:330});
