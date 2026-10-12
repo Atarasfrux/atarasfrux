@@ -10,7 +10,7 @@
 <meta name="robots" content="index, follow, noai, noimageai">
 <meta name="description" content="ARKA-kalkulator: hva en liten permanent bolig koster kommunen per måned, sammenlignet med midlertidig botilbud.">
 <title>ARKA · Kalkulator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light;--bg:#fcfcfb;--surface:#fff;--line:#e4e3df;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#7d7c77;--accent:#2a78d6;--accent-ink:#1c5cab;--good:#1baf7a;--bad:#e34948;--chip:#eef4fc}
 @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--bg:#121211;--surface:#1a1a19;--line:#33332f;--ink:#fff;--ink-2:#c3c2b7;--ink-3:#8f8e86;--accent:#3987e5;--accent-ink:#86b6ef;--good:#199e70;--bad:#e66767;--chip:#1d2b3d}}
@@ -42,12 +42,29 @@ input[type=number],select{width:100%;font:inherit;font-size:16px;padding:10px 12
 .foot{font-size:12px;color:var(--ink-3);margin-top:24px;max-width:900px}
 .nav{position:fixed;right:16px;top:16px;display:flex;gap:8px}
 .nav button,.nav a{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;text-decoration:none}
+
+/* ===== greifiks identity (2026-10-12) ===== */
+html:root:not(#x){color-scheme:light;--bg:#e7ecf1;--surface:#f3f6f8;--line:#c8d3dc;--ink:#12324a;--ink-2:#3d4b5c;--ink-3:#4f6376;--accent:#1f4d3a;--accent-ink:#1f4d3a;--good:#1f4d3a;--bad:#b23a2a}
+#theme{display:none}
+body{font-family:Jost,system-ui,sans-serif;font-weight:300}
+h1,.metric .v{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-variation-settings:"opsz" 18;font-variant-numeric:lining-nums}
+.kicker{font-weight:500;letter-spacing:.2em;font-size:12px}
+.emblem{display:block;width:72px;height:45px;color:#1f4d3a;margin:0 0 16px}
+.card{border-radius:0;border-top:1px solid var(--ink)}
+.card h2{font-weight:500;letter-spacing:.2em;font-size:12px}
+input[type=number],select{border-radius:0;background:var(--surface);font-weight:400}
+input:focus,select:focus{outline:2px solid #00d2ff;outline-offset:1px}
+.metric{border-top-width:1px}.metric.hi{border-top:2px solid var(--accent)}
+.bar,.bar>span{border-radius:0}
+.nav a,.nav button{border-radius:0;font-family:Jost,sans-serif;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+b,strong{font-weight:500}
 </style>
 </head>
 <body>
 <div class="nav"><a href="arka_no.html">Orientering</a><button id="lang" type="button">English</button><button id="theme" type="button" aria-label="Lys/mørk">◐</button></div>
 <div class="wrap">
-  <p class="kicker" data-t="kicker">ARKA · Fra midlertidig til fast · Kalkulator</p>
+  <svg class="emblem" aria-hidden="true" viewBox="0 0 48 30"><g stroke="currentColor" stroke-width="2.4"><line x1="0" y1="15.0" x2="48" y2="15.0"/><line x1="8.0" y1="2" x2="8.0" y2="28"/><line x1="24.0" y1="2" x2="24.0" y2="28"/><line x1="40.0" y1="2" x2="40.0" y2="28"/></g></svg>
+<p class="kicker" data-t="kicker">ARKA · Fra midlertidig til fast · Kalkulator</p>
   <h1 data-t="h1">Hva koster en permanent bolig kommunen, sammenlignet med midlertidig botilbud?</h1>
   <p class="lead" data-t="lead">Fyll inn kommunens egne tall. Beregningen bruker samme formler som ARKA-modellen (kan deles på forespørsel): Husbanken-lån med månedlige terminer, husleie innenfor bostøttens grense og driftskostnader fra komponenter. Forhåndsverdiene er modellens forsiktige basistilfelle.</p>
   <div class="grid">
