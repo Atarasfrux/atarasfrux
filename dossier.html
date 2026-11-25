@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="darkreader-lock">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier · Mantas Pagalys</title>
+<link rel="canonical" href="https://greifiks.org/dossier.html">
+<meta name="description" content="Practice dossier of Mantas Pagalys: construction and site QA (Norway, UK, Lithuania), Linux and Python automation, legal-grade archiving, and Nordic building-export research.">
+<meta name="author" content="Mantas Pagalys">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dossier · Mantas Pagalys">
+<meta property="og:description" content="Physical craft, site QA, Linux automation, and Nordic building documentation.">
+<meta property="og:url" content="https://greifiks.org/dossier.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f5f3ef;
+  --surface: #ece9e2;
+  --ink: #161719;
+  --muted: #5a5d62;
+  --faint: #7d8085;
+  --rule: #d8d4cc;
+  --rule-strong: #161719;
+  --accent: #8c3a2b;
+  --serif-display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
+  --serif-body: "Newsreader", Charter, "Iowan Old Style", Georgia, serif;
+  --sans: "Jost", system-ui, -apple-system, sans-serif;
+  --max: 1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; background: var(--paper); }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+}
+
+/* Header */
+header.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 64px;
+}
+
+.brand {
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--ink); }
+
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+}
+
+.lang-switch button {
+  border: 0;
+  background: transparent;
+  padding: 5px 10px;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.lang-switch button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Opening */
+.opening {
+  padding: clamp(52px, 7.5vw, 96px) 0 clamp(52px, 7vw, 84px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.eyebrow {
+  margin: 0 0 22px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+.title-lockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 22px;
+}
+
+.eyebrow.inline-eye {
+  margin: 0;
+}
+
+.opening h1 {
+  margin: 0;
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 24;
+  font-size: clamp(2.5rem, 5vw, 4.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  margin: 24px 0 0;
+  max-width: 54ch;
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--muted);
+}
+
+.opening-actions {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ink);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.text-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.text-link.subtle {
+  color: var(--muted);
+  border-color: var(--rule);
+}
+
+.text-link.subtle:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Key facts card (right side of opening) */
+.facts-box {
+  margin-top: 12px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 0 16px;
+}
+
+.facts-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 14px;
+  padding: 8px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.facts-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.facts-k {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-top: 2px;
+}
+
+.facts-v {
+  color: var(--ink);
+}
+
+/* Editorial Section Layout */
+section.band {
+  padding: clamp(56px, 7.5vw, 96px) 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 185px minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+.rail {
+  position: sticky;
+  top: 92px;
+}
+
+.rail-num {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.rail h2 {
+  margin: 0;
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 16;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.rail-note {
+  margin: 14px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--faint);
+}
+
+.section-intro {
+  margin: 0 0 34px;
+  max-width: 58ch;
+  font-family: var(--serif-body);
+  font-size: 1.12rem;
+  line-height: 1.68;
+  color: var(--ink);
+}
+
+/* Structured Dossier Entries */
+.entry-list {
+  border-top: 1px solid var(--rule);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 175px minmax(0, 1fr);
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.entry-meta {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  line-height: 1.55;
+}
+
+.entry-meta strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.entry-body h3 {
+  margin: 0 0 8px;
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: 1.14rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.entry-body p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.entry-body .tags {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* 3-Column Spec Grid (Languages & Credentials) */
+.spec-grid {
+  margin-top: 38px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.spec-grid h3 {
+  margin: 0 0 8px;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.spec-grid p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: var(--muted);
+}
+
+/* Archive links */
+.archive-list {
+  margin-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.archive-row {
+  display: grid;
+  grid-template-columns: 165px minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.archive-row:hover { border-bottom-color: var(--ink); }
+
+.archive-title {
+  font-family: var(--serif-display);
+  font-size: 1.06rem;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+
+.archive-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.archive-arrow {
+  font-size: 0.76rem;
+  color: var(--faint);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.archive-row:hover .archive-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* Private CV & Inquiry Band */
+.cv-box {
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  padding: clamp(24px, 4vw, 36px);
+  max-width: 64ch;
+}
+
+.cv-box p {
+  margin: 0 0 18px;
+  font-family: var(--serif-body);
+  font-size: 1.12rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+.cv-box .cv-note {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 28px;
+}
+
+.btn-dark {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 11px 24px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-dark:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.email-link {
+  display: inline-block;
+  font-size: 0.94rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--ink);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.email-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Footer */
+footer.colophon {
+  border-top: 1px solid var(--ink);
+  margin-top: 24px;
+  padding: 36px 0 56px;
+}
+
+.colophon-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.colophon-name {
+  font-family: var(--serif-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .opening {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  section.band {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .rail { position: static; }
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .spec-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .archive-row {
+    grid-template-columns: 1fr auto;
+    gap: 6px 16px;
+  }
+  .archive-desc { grid-column: 1 / -1; }
+}
+
+@media print {
+  header.site-nav, .opening-actions, .btn-dark { display: none; }
+  body { background: #fff; }
+  section.band { padding: 24px 0; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">Mantas Pagalys</a>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#writing" data-i18n="nav_writing">Writing</a>
+        <a href="index.html#photographs" data-i18n="nav_photos">Photographs</a>
+        <a href="index.html#craft" data-i18n="nav_craft">Craft</a>
+        <a href="dossier.html" class="active" data-i18n="nav_dossier">Dossier</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="lt">LT</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <div class="opening">
+    <div>
+      <div class="title-lockup">
+        <h1 data-i18n="hero_h1">Dossier.</h1>
+        <p class="eyebrow inline-eye" data-i18n="hero_eye">Vilnius &middot; Europe</p>
+      </div>
+      <p class="lead" data-i18n="hero_lead">Construction practice across Norway, the United Kingdom, and Lithuania: drawings, project management, site supervision, and client coordination. Legal archiving in London, Nordic export documentation, and Linux automation.</p>
+      <div class="opening-actions">
+        <a class="text-link subtle" href="index.html" data-i18n="cta_home">&larr; Writing &amp; Photographs</a>
+      </div>
+    </div>
+
+    <aside class="facts-box" aria-label="Summary facts">
+      <div class="facts-row">
+        <span class="facts-k" data-i18n="f_base_k">Base</span>
+        <span class="facts-v" data-i18n="f_base_v">Vilnius, Lithuania (remote / Nordic corridor)</span>
+      </div>
+      <div class="facts-row">
+        <span class="facts-k" data-i18n="f_focus_k">Focus</span>
+        <span class="facts-v" data-i18n="f_focus_v">Technical documentation, site QA, Linux automation</span>
+      </div>
+      <div class="facts-row">
+        <span class="facts-k" data-i18n="f_lang_k">Languages</span>
+        <span class="facts-v" data-i18n="f_lang_v">LT (native) &middot; EN (C1) &middot; RU (fluent) &middot; NO (A2, in progress)</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 01 PHYSICAL & SITE -->
+  <section id="physical" class="band" aria-labelledby="h-physical">
+    <div class="rail">
+      <span class="rail-num">01</span>
+      <h2 id="h-physical" data-i18n="sec_1_h">Physical &amp; Site</h2>
+      <p class="rail-note" data-i18n="sec_1_note">15+ years across Norway, the UK, and Lithuania.</p>
+    </div>
+
+    <div>
+      <p class="section-intro" data-i18n="sec_1_intro">Hands-on carpentry, timber framing, formwork, and site quality control. Reading drawings, site checks, and technical detail coordination with clients.</p>
+
+      <div class="entry-list">
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="p1_loc">Oslo, Norway</strong>
+            <span>2023 &ndash; 2025</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="p1_h">Carpentry, Site QA &amp; Project Documentation</h3>
+            <p data-i18n="p1_p">Commercial and residential interior fit-out, formwork, ventilation shafts, kitchens, and bespoke joinery across Norwegian contracting firms and independent client commissions. Direct responsibility for site quality checks, HSE compliance, quoting, scheduling, and handover documentation.</p>
+            <p class="tags" data-i18n="p1_tags">TEK17 site practice &middot; QA / HSE &middot; fit-out &amp; formwork &middot; quoting &amp; scheduling</p>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="p2_loc">United Kingdom &amp; Lithuania</strong>
+            <span>2010 &ndash; 2023</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="p2_h">Independent Groundworks, Joinery &amp; Roofing</h3>
+            <p data-i18n="p2_p">Independent groundworks, stonework, and landscaping in the United Kingdom; interior finishing, roof repair, and timber framing in Lithuania and Scotland. Full responsibility from material takeoff and pricing to final delivery.</p>
+            <p class="tags" data-i18n="p2_tags">Timber framing &middot; roofing &middot; groundworks &middot; independent contracting</p>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="p3_loc">Field Engineering</strong>
+            <span>2025 &ndash; 2026</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="p3_h">Parametric Timber CAD &amp; Self-Reliant Structures</h3>
+            <p data-i18n="p3_p">Metric drawings, technical detail manuals, and material schedules generated via Python scripts into print-ready PDFs.</p>
+            <p class="tags" data-i18n="p3_tags">Parametric SVG/CAD &middot; joinery specs &middot; material bills &middot; LST EN load checks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 SYSTEMS & AUTOMATION -->
+  <section id="systems" class="band" aria-labelledby="h-systems">
+    <div class="rail">
+      <span class="rail-num">02</span>
+      <h2 id="h-systems" data-i18n="sec_2_h">Systems &amp; Automation</h2>
+      <p class="rail-note" data-i18n="sec_2_note">Linux operations, Python tooling, and inspectable workflows.</p>
+    </div>
+
+    <div>
+      <p class="section-intro" data-i18n="sec_2_intro">Terminal-first Linux environment built around offline-capable, transparent tools. Scripting used practically to monitor legislation, generate technical documents, and automate repetitive administration.</p>
+
+      <div class="entry-list">
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="s1_loc">Python / FastAPI</strong>
+            <span>2026</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="s1_h">Norway &amp; EU Regulatory Change Monitor</h3>
+            <p data-i18n="s1_p">FastAPI service ingesting live official legislative updates from Norway (<code>api.lovdata.no</code>) and the European Union (<code>EUR-Lex</code> RSS) into a unified endpoint with isolated source adapters, retries, and end-to-end health checks.</p>
+            <p class="tags" data-i18n="s1_tags">Python &middot; FastAPI &middot; REST / RSS ingestion &middot; fault isolation</p>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="s2_loc">Linux &amp; Security</strong>
+            <span data-i18n="s2_date">Ongoing</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="s2_h">Linux Administration, Networking &amp; Local Automation</h3>
+            <p data-i18n="s2_p">Daily Manjaro / Sway Linux operator maintaining personal automation scripts (mail sync and <code>notmuch</code> indexing, VPN leak protection, disk health monitoring, document linting) alongside an active Git-tracked RHCSA / Linux administration lab portfolio (permissions, ACLs, SUID audits, systemd, networking, SSH, and firewalls).</p>
+            <p class="tags" data-i18n="s2_tags">Linux CLI &middot; Bash &middot; Git &middot; permissions &amp; ACLs &middot; hardware assembly &amp; repair</p>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="s3_loc">Document Pipelines</strong>
+            <span>2025 &ndash; 2026</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="s3_h">Scripted Technical Publishing &amp; CAD Generation</h3>
+            <p data-i18n="s3_p">Reproducible HTML, SVG, and WeasyPrint PDF pipelines turning verified measurements, regulatory checklists, and structured tables into clean A4 technical documentation without manual layout drift.</p>
+            <p class="tags" data-i18n="s3_tags">Python &middot; SVG &middot; HTML/CSS &middot; WeasyPrint &middot; QA verification</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ARCHIVE, COMPLIANCE & LANGUAGES -->
+  <section id="archive" class="band" aria-labelledby="h-archive">
+    <div class="rail">
+      <span class="rail-num">03</span>
+      <h2 id="h-archive" data-i18n="sec_3_h">Archive &amp; Languages</h2>
+      <p class="rail-note" data-i18n="sec_3_note">Source-verified documentation and cross-border literacy.</p>
+    </div>
+
+    <div>
+      <p class="section-intro" data-i18n="sec_3_intro">Grounded in primary-source checking: separating what a statute or specification states from interpretation, and keeping clean paper trails across jurisdictions.</p>
+
+      <div class="entry-list">
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="a1_loc">London, UK</strong>
+            <span>2010 &ndash; 2012</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="a1_h">Legal Database Archiving &amp; Multilingual Liaison</h3>
+            <p data-i18n="a1_p">Electronic Archivist in the Health &amp; Safety department at an international law firm (Freshfields Bruckhaus Deringer LLP, London): digital database archiving, indexing, and source-accuracy checking. Subsequent support work and interpreting (St Mungo's, London) handling calm communication across Lithuanian, English, and Russian.</p>
+            <p class="tags" data-i18n="a1_tags">Database archiving &middot; source verification &middot; interpreting &middot; written procedures</p>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-meta">
+            <strong data-i18n="a2_loc">NO &ndash; LT Corridor</strong>
+            <span>2025 &ndash; 2026</span>
+          </div>
+          <div class="entry-body">
+            <h3 data-i18n="a2_h">Nordic Building-Export Compliance Research (ARKA)</h3>
+            <p data-i18n="a2_p">Independent research into Norwegian building-product documentation obligations (DOK regulation &sect;&sect; 4, 5, 11, 13), NOBB product data structures, FDV / DoP checklists, TEK17 practice, and Baltic modular timber pricing.</p>
+            <p class="tags" data-i18n="a2_tags">DOK &middot; TEK17 &middot; FDV / DoP checklists &middot; NOBB structure</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div>
+          <h3 data-i18n="sp1_h">Languages</h3>
+          <p data-i18n="sp1_p">Lithuanian (native). English (C1, IELTS). Russian (fluent). Norwegian (basic A2, advancing toward B1/B2). French &amp; Polish (basic).</p>
+        </div>
+        <div>
+          <h3 data-i18n="sp2_h">Education</h3>
+          <p data-i18n="sp2_p">Vilnius University, Lithuanian Philology with minor in French (2012&ndash;2016, 2 years completed). IELTS Academic C1 (2016).</p>
+        </div>
+        <div>
+          <h3 data-i18n="sp3_h">Safety &amp; Training</h3>
+          <p data-i18n="sp3_p">Construction Health &amp; Safety (HSE) training across Norway and the United Kingdom (2010&ndash;2024). Clear written procedures and methodical QA.</p>
+        </div>
+      </div>
+
+      <div class="archive-list">
+        <a class="archive-row" href="arka.html">
+          <span class="archive-title">ARKA</span>
+          <span class="archive-desc" data-i18n="arch_arka">Proposal and cost model for permanent small municipal homes replacing temporary shelter housing.</span>
+          <span class="archive-arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a class="archive-row" href="wak943.html">
+          <span class="archive-title">WAK943</span>
+          <span class="archive-desc" data-i18n="arch_wak">Itemised technical account of making a small sailing vessel seaworthy for solo passage.</span>
+          <span class="archive-arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a class="archive-row" href="plates.html">
+          <span class="archive-title" data-i18n="arch_plates_t">Plates Archive</span>
+          <span class="archive-desc" data-i18n="arch_plates">Twenty-nine monochrome photographic plates and field studies (I&ndash;XXIX).</span>
+          <span class="archive-arrow" aria-hidden="true">&#8599;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PRIVATE CV & INQUIRY -->
+  <section id="private-cv" class="band" aria-labelledby="h-cv">
+    <div class="rail">
+      <span class="rail-num">04</span>
+      <h2 id="h-cv" data-i18n="sec_4_h">Private CV</h2>
+      <p class="rail-note" data-i18n="sec_4_note">Direct correspondence only.</p>
+    </div>
+
+    <div class="cv-box">
+      <p data-i18n="cv_lead">The full dated Curriculum Vitae (employer history, direct telephone number, and role-specific documentation) is kept offline and sent privately as a PDF on request.</p>
+      <p class="cv-note" data-i18n="cv_note">Open to technical documentation, quality control, Norway-corridor coordination, and practical Linux / systems support inquiries (remote or Vilnius).</p>
+      <div class="cv-actions">
+        <a class="btn-dark" id="cv-mail-btn" href="mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys" data-i18n="cv_btn">Request Private CV (PDF)</a>
+        <a class="email-link" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
+        <a class="text-link subtle" href="index.html#contact" data-i18n="cv_form">Contact form &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="wrap colophon-inner">
+    <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org/dossier</div>
+    <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Dossier &copy; Mantas Pagalys</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var LT = {
+    page_title: "Byla · Mantas Pagalys",
+    nav_writing: "Tekstai",
+    nav_photos: "Fotografija",
+    nav_craft: "Amatas",
+    nav_dossier: "Byla",
+    nav_contact: "Kontaktai",
+    hero_eye: "Vilnius &middot; Europa",
+    hero_h1: "Byla.",
+    hero_lead: "Statybinė veikla Norvegijoje, Jungtinėje Karalystėje ir Lietuvoje: brėžiniai, projektų valdymas, priežiūra ir derinimas su užsakovais. Archyvavimas Londone, Šiaurės šalių eksporto dokumentacija ir „Linux“ automatika.",
+    cta_home: "&larr; Tekstai ir fotografija",
+    f_base_k: "Vieta",
+    f_base_v: "Vilnius, Lietuva (nuotoliniu būdu / Šiaurės šalių kryptis)",
+    f_focus_k: "Kryptis",
+    f_focus_v: "Techninė dokumentacija, kokybės patikra, „Linux“ automatika",
+    f_lang_k: "Kalbos",
+    f_lang_v: "LT (gimtoji) &middot; EN (C1) &middot; RU (laisvai) &middot; NO (A2, tobulinama)",
+    sec_1_h: "Statybos ir praktika",
+    sec_1_note: "15+ metų patirtis Norvegijoje, JK ir Lietuvoje.",
+    sec_1_intro: "Praktinis darbas statybose: dailidės darbai, karkasai, klojiniai ir kokybės kontrolė. Brėžinių skaitymas, darbų patikra ir techninių detalių derinimas su užsakovais.",
+    p1_loc: "Oslas, Norvegija",
+    p1_h: "Dailidės darbai, kokybės patikra ir projektų dokumentacija",
+    p1_p: "Komercinių ir gyvenamųjų patalpų vidaus apdaila, klojiniai, ventiliacijos šachtos, virtuvės ir nestandartiniai baldai Norvegijos rangos įmonėse bei savarankiškuose užsakymuose. Kokybės patikros, darbų sauga (HSE), sąmatos, grafikai ir darbų pridavimo dokumentacija.",
+    p1_tags: "TEK17 praktika &middot; kokybės kontrolė / HSE &middot; apdaila ir klojiniai &middot; sąmatos",
+    p2_loc: "JK ir Lietuva",
+    p2_h: "Savarankiški žemės darbai, staliaus apdaila ir stogai",
+    p2_p: "Savarankiški žemės, mūro ir aplinkotvarkos darbai Jungtinėje Karalystėje; vidaus apdaila, stogų taisymas ir karkasų įrengimas Lietuvoje bei Škotijoje. Pilna atsakomybė nuo medžiagų skaičiavimo ir kainodaros iki galutinio rezultato.",
+    p2_tags: "Mediniai karkasai &middot; stogai &middot; žemės darbai &middot; savarankiška ranga",
+    p3_loc: "Lauko inžinerija",
+    p3_h: "Parametriniai medienos CAD brėžiniai ir savarankiškos konstrukcijos",
+    p3_p: "Metriniai brėžiniai, techninių detalių vadovai ir medžiagų žiniaraščiai, generuojami „Python“ scenarijais į spaudai paruoštus PDF dokumentus.",
+    p3_tags: "Parametrinis SVG/CAD &middot; mazgų brėžiniai &middot; sąmatos &middot; LST EN skaičiavimai",
+    sec_2_h: "Sistemos ir automatika",
+    sec_2_note: "„Linux“ aplinka, „Python“ įrankiai ir skaidri darbo eiga.",
+    sec_2_intro: "Kasdienis darbas „Linux“ terminale naudojant skaidrius, vietinius įrankius. Skriptavimas taikomas praktiškai: teisės aktų stebėsenai, techninių dokumentų generavimui ir rutininių procesų automatizavimui.",
+    s1_loc: "Python / FastAPI",
+    s1_h: "Norvegijos ir ES teisės aktų pakeitimų stebėsena",
+    s1_p: "„FastAPI“ prototipas, apjungiantis oficialius Norvegijos (<code>api.lovdata.no</code>) ir ES (<code>EUR-Lex</code> RSS) teisės aktų atnaujinimus į vieną srautą su izoliuotais šaltinių adapteriais, pakartotiniais bandymais ir būsenos patikra.",
+    s1_tags: "Python &middot; FastAPI &middot; REST / RSS srautai &middot; klaidų izoliavimas",
+    s2_loc: "Linux ir sauga",
+    s2_date: "Tęstinis",
+    s2_h: "„Linux“ administravimas, tinklai ir vietinė automatika",
+    s2_p: "Kasdienis „Manjaro“ / „Sway“ naudotojas, prižiūrintis asmeninius automatizavimo skriptus (pašto sinchronizavimas ir <code>notmuch</code> indeksavimas, VPN apsauga nuo nutekėjimo, disko stebėsena) bei aktyvų „Git“ pagrįstą RHCSA / „Linux“ laboratorinių darbų aplanką (teisės, ACL, SUID patikros, systemd, tinklai, SSH, ugniasienės).",
+    s2_tags: "Linux CLI &middot; Bash &middot; Git &middot; teisės ir ACL &middot; kompiuterių surinkimas ir remontas",
+    s3_loc: "Dokumentų srautai",
+    s3_h: "Automatizuota techninė leidyba ir brėžinių generavimas",
+    s3_p: "Atkartojamos HTML, SVG ir „WeasyPrint“ PDF darbo eigų sistemos, paverčiančios tikslius matavimus, teisinių patikrų sąrašus ir lenteles į švarią A4 techninę dokumentaciją.",
+    s3_tags: "Python &middot; SVG &middot; HTML/CSS &middot; WeasyPrint &middot; kokybės tikrinimas",
+    sec_3_h: "Archyvas ir kalbos",
+    sec_3_note: "Tikrinimas pagal pirminius šaltinius ir tarpvalstybinė patirtis.",
+    sec_3_intro: "Darbo principas: aiškiai atskirti tai, kas parašyta teisės akte ar specifikacijoje, nuo interpretacijos, ir palaikyti tikslią dokumentų tvarką tarp skirtingų šalių.",
+    a1_loc: "Londonas, JK",
+    a1_h: "Teisinių duomenų bazių archyvavimas ir daugiakalbis bendravimas",
+    a1_p: "Elektroninis archyvaras tarptautinės teisės įmonės („Freshfields Bruckhaus Deringer LLP“, Londonas) Sveikatos ir saugos skyriuje: skaitmeninis archyvavimas, indeksavimas ir duomenų tikrinimas pagal šaltinius. Vėliau socialinio darbuotojo ir vertėjo darbas („St Mungo's“, Londonas) lietuvių, anglų ir rusų kalbomis.",
+    a1_tags: "Duomenų bazių archyvavimas &middot; tikrinimas pagal šaltinį &middot; vertimas &middot; procedūros",
+    a2_loc: "NO &ndash; LT kryptis",
+    a2_h: "Statybos produktų eksporto į Norvegiją tyrimas (ARKA)",
+    a2_p: "Savarankiškas tyrimas apie Norvegijos statybos produktų dokumentacijos prievoles (DOK reglamento &sect;&sect; 4, 5, 11, 13), NOBB duomenų struktūras, FDV / DoP patikros sąrašus, TEK17 praktiką ir Baltijos modulinių namų kainodarą.",
+    a2_tags: "DOK &middot; TEK17 &middot; FDV / DoP sąrašai &middot; NOBB struktūra",
+    sp1_h: "Kalbos",
+    sp1_p: "Lietuvių (gimtoji). Anglų (C1, IELTS). Rusų (laisvai). Norvegų (A2, nuosekliai tobulinama iki B1/B2). Prancūzų ir lenkų (pradmenys).",
+    sp2_h: "Išsilavinimas",
+    sp2_p: "Vilniaus universitetas, lietuvių filologija su gretutinėmis prancūzų filologijos studijomis (2012&ndash;2016, baigti 2 kursai). IELTS Academic C1 (2016).",
+    sp3_h: "Darbų sauga ir mokymai",
+    sp3_p: "Statybų darbų saugos (HSE) mokymai Norvegijoje ir Jungtinėje Karalystėje (2010&ndash;2024). Aiškios rašytinės procedūros ir nuosekli kokybės patikra.",
+    arch_arka: "Pasiūlymas ir skaičiuoklė savivaldybėms dėl nuolatinių mažų būstų vietoj laikino apgyvendinimo.",
+    arch_wak: "Detali techninė ataskaita apie mažo burlaivio paruošimą savarankiškam plaukimui.",
+    arch_plates_t: "Fotografijų archyvas",
+    arch_plates: "Dvidešimt devyni monochrominiai fotografijos kadrai ir lauko studijos (I&ndash;XXIX).",
+    sec_4_h: "Privatus CV",
+    sec_4_note: "Tik tiesioginiu susirašinėjimu.",
+    cv_lead: "Pilnas datuotas gyvenimo aprašymas (darboviečių istorija, tiesioginis telefono numeris ir konkrečiai pozicijai pritaikyta versija) viešai neskelbiamas ir atsiunčiamas privačiu PDF failu pagal užklausą.",
+    cv_note: "Atviras pasiūlymams dėl techninės dokumentacijos, kokybės kontrolės, eksporto į Norvegiją koordinavimo bei praktinio „Linux“ / sistemų palaikymo (nuotoliniu būdu arba Vilniuje).",
+    cv_btn: "Prašyti privataus CV (PDF)",
+    cv_form: "Kontaktų forma &rarr;",
+    footer_copy: "Vilnius &middot; 2026 &middot; Byla &copy; Mantas Pagalys"
+  };
+
+  var i18nNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  var EN = { page_title: document.title };
+  i18nNodes.forEach(function (el) {
+    EN[el.getAttribute("data-i18n")] = el.innerHTML;
+  });
+
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
+  var cvBtn = document.getElementById("cv-mail-btn");
+
+  function applyLang(lang) {
+    var current = lang === "lt" ? "lt" : "en";
+    var dict = current === "lt" ? LT : EN;
+    document.documentElement.lang = current;
+    document.title = dict.page_title || EN.page_title;
+    i18nNodes.forEach(function (el) {
+      var k = el.getAttribute("data-i18n");
+      if (dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    if (cvBtn) {
+      cvBtn.href = current === "lt"
+        ? "mailto:pagalysm@gmail.com?subject=Privataus%20CV%20u%C5%BEklausa%20-%20Mantas%20Pagalys"
+        : "mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys";
+    }
+    langButtons.forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === current);
+    });
+    try { localStorage.setItem("greifiks-lang", current); } catch (e) {}
+  }
+
+  langButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      applyLang(btn.getAttribute("data-lang"));
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
+  if (saved === "lt") applyLang("lt");
+})();
+</script>
+</body>
+</html>
