@@ -841,7 +841,31 @@ footer.colophon {
 
 /* Responsive */
 @media (max-width: 860px) {
-  .nav-links { display: none; }
+  .nav-inner {
+    height: auto;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    gap: 10px 16px;
+  }
+  .nav-right { display: contents; }
+  .brand { order: 1; }
+  .lang-switch { order: 2; }
+  .nav-links {
+    display: flex;
+    order: 3;
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    padding: 2px 0;
+  }
+  section[id] { scroll-margin-top: 104px; }
   .opening {
     grid-template-columns: 1fr;
     gap: 40px;
