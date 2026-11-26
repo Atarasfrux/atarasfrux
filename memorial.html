@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Memorial · Mantas Pagalys</title>
-<meta name="description" content="A quiet wall of named and unnamed loads, setups, helpers, and adversaries that shaped this work. Modeled on Postman's Park and Lithuanian roadside markers.">
+<title>Wall of Memory · Mantas Pagalys</title>
+<meta name="description" content="Atminties siena / Wall of Memory: orchestrated gradient from white ego to black dissolved space, with silence, sound, smell, and opt-in C# mathematical acoustics.">
 <link rel="canonical" href="https://greifiks.org/memorial.html">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
@@ -14,13 +14,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f5f3ef;
-  --surface: #ece9e2;
-  --ink: #141517;
-  --muted: #52555a;
-  --faint: #7c7f84;
-  --rule: rgba(20, 21, 23, 0.14);
-  --rule-strong: rgba(20, 21, 23, 0.34);
+  --white: #fcfbf8;
+  --paper: #f2efe8;
+  --black: #090a0c;
+  --ink: #101114;
+  --muted: #4b4e54;
+  --faint: #6c7076;
+  --rule: rgba(16, 17, 20, 0.16);
+  --rule-strong: rgba(16, 17, 20, 0.36);
   --accent: #8c3a2b;
   --serif-display: "Bodoni Moda", "Didot", Georgia, serif;
   --serif-body: "Newsreader", Georgia, serif;
@@ -32,25 +33,42 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--paper);
+  /* Continuous architectural white-to-black canvas with sharp inversion horizon at mid-wall */
+  background: linear-gradient(
+    to bottom,
+    #fcfbf8 0%,
+    #f5f3ef 24%,
+    #e5e1d8 46%,
+    #181a1d 54%,
+    #0e1013 76%,
+    #090a0c 100%
+  );
   color: var(--ink);
   font-family: var(--sans);
   font-weight: 300;
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 1.5px solid var(--accent); outline-offset: 3px; }
 .wrap { width: min(1120px, 100%); margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); }
 
-/* Navigation */
+/* Navigation (inverts cleanly into dark mode past the mid-wall horizon) */
 header.site-nav {
   position: sticky; top: 0; z-index: 40;
-  background: rgba(245, 243, 239, 0.94);
+  background: rgba(252, 251, 248, 0.94);
+  color: #101114;
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid rgba(16, 17, 20, 0.15);
+  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+header.site-nav.inv {
+  background: rgba(9, 10, 12, 0.92);
+  color: #f4f2ec;
+  border-bottom-color: rgba(244, 242, 236, 0.16);
 }
 .nav-inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -65,20 +83,25 @@ header.site-nav {
 .nav-links { display: flex; gap: clamp(14px, 2.2vw, 28px); }
 .nav-links a {
   font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em;
-  text-transform: uppercase; text-decoration: none; color: var(--muted);
+  text-transform: uppercase; text-decoration: none; color: #4b4e54;
   transition: color 0.2s ease;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+header.site-nav.inv .nav-links a { color: #a9adb3; }
+.nav-links a:hover, .nav-links a.active { color: #101114; }
+header.site-nav.inv .nav-links a:hover, header.site-nav.inv .nav-links a.active { color: #f4f2ec; }
 .lang-switch {
   display: inline-flex; align-items: center; gap: 6px;
-  border-left: 1px solid var(--rule); padding-left: 16px;
+  border-left: 1px solid rgba(16, 17, 20, 0.16); padding-left: 16px;
 }
+header.site-nav.inv .lang-switch { border-left-color: rgba(244, 242, 236, 0.18); }
 .lang-switch button {
   border: 0; background: transparent; padding: 4px;
   font-size: 0.72rem; font-weight: 400; letter-spacing: 0.16em;
-  color: var(--faint); cursor: pointer; transition: color 0.2s ease;
+  color: #6c7076; cursor: pointer; transition: color 0.2s ease;
 }
-.lang-switch button.active, .lang-switch button:hover { color: var(--ink); }
+header.site-nav.inv .lang-switch button { color: #8c9198; }
+.lang-switch button.active, .lang-switch button:hover { color: #101114; }
+header.site-nav.inv .lang-switch button.active, header.site-nav.inv .lang-switch button:hover { color: #f4f2ec; }
 .lang-switch button.active { text-decoration: underline; text-underline-offset: 5px; }
 
 /* Status Badges */
@@ -87,13 +110,13 @@ header.site-nav {
   letter-spacing: 0.16em; text-transform: uppercase;
   padding: 2px 7px; line-height: 1.5; vertical-align: middle;
 }
-.st-locked { border: 1px solid var(--ink); color: var(--ink); }
-.st-testing { border: 1px dashed var(--accent); color: var(--accent); background: rgba(140, 58, 43, 0.045); }
+.st-testing { border: 1px dashed var(--accent); color: var(--accent); background: rgba(140, 58, 43, 0.05); }
 
-/* Opening */
+/* Opening (Pure White / Dense Black Ink) */
 .opening {
-  padding: clamp(44px, 6vw, 76px) 0 clamp(32px, 4.5vw, 48px);
+  padding: clamp(44px, 6vw, 72px) 0 clamp(30px, 4.5vw, 44px);
   border-bottom: 1px solid var(--ink);
+  color: var(--ink);
 }
 .back-link {
   display: inline-block; margin-bottom: 18px;
@@ -107,20 +130,39 @@ header.site-nav {
   font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.06; letter-spacing: -0.01em;
 }
 .opening .lead {
-  margin: 0 0 22px; max-width: 62ch;
+  margin: 0 0 18px; max-width: 64ch;
   font-family: var(--serif-body); font-size: 1.12rem; line-height: 1.66; color: var(--ink);
 }
 .opening .sub-note {
-  margin: 0; max-width: 64ch; font-size: 0.88rem; color: var(--muted);
+  margin: 0; max-width: 66ch; font-size: 0.88rem; color: var(--muted);
 }
+.sense-strip {
+  margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 20px;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.sense-strip b { color: var(--ink); font-weight: 500; }
 
-/* Silent-by-default Sound Sketch Bar */
-.sound-bar {
-  margin-top: 26px; padding: 14px 18px;
-  border: 1px dashed var(--rule-strong); background: rgba(255, 255, 255, 0.45);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+/* Gradient Polarity Legend */
+.grad-bar {
+  margin-top: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--muted);
 }
-.sound-left { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.grad-bar .g-step { padding: 3px 8px; }
+.grad-bar .g-s1 { background: #fcfbf8; color: #0d0e10; border: 1px solid var(--accent); }
+.grad-bar .g-s2 { background: #e5e1d8; color: #141517; border: 1px solid #141517; }
+.grad-bar .g-s3 { background: #191b1e; color: #e8e5dd; border: 1px solid #555960; }
+.grad-bar .g-s4 { background: #090a0c; color: #f5f3ef; border: 1px solid rgba(245, 243, 239, 0.35); }
+
+/* Silent-by-default C# Scroll-Coupled Audio Bar */
+.sound-bar {
+  margin-top: 24px; padding: 14px 18px;
+  border: 1px dashed var(--rule-strong); background: rgba(255, 255, 255, 0.72);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px;
+}
+.sound-left { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .sound-btn {
   border: 1px solid var(--ink); background: transparent; color: var(--ink);
   padding: 6px 14px; font-family: var(--mono); font-size: 0.7rem;
@@ -128,74 +170,144 @@ header.site-nav {
   transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 .sound-btn:hover { border-color: var(--accent); color: var(--accent); }
-.sound-btn.playing { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.inst-switch { display: inline-flex; gap: 6px; }
+.sound-btn.playing { background: var(--ink); color: #fcfbf8; border-color: var(--ink); }
+.inst-switch { display: inline-flex; flex-wrap: wrap; gap: 6px; }
 .inst-btn {
   border: 1px solid var(--rule-strong); background: transparent; color: var(--muted);
-  padding: 5px 10px; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-  cursor: pointer; transition: color 0.16s, border-color 0.16s;
+  padding: 5px 10px; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.12em;
+  text-transform: uppercase; cursor: pointer; transition: color 0.16s, border-color 0.16s, background 0.16s;
 }
-.inst-btn.active { border-color: var(--ink); color: var(--ink); background: var(--surface); }
-.sound-cap {
-  margin: 0; font-size: 0.76rem; color: var(--faint);
+.inst-btn.active { border-color: var(--ink); color: var(--ink); background: #ece9e2; }
+.sound-right { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.t-read {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+  color: var(--ink); padding: 2px 8px; border: 1px solid var(--rule-strong); background: #fcfbf8;
+}
+.sound-cap { margin: 0; font-size: 0.76rem; color: var(--muted); }
+
+/* Wall Band & Strict Opposing-Contrast Stage Polarity (All WCAG AAA >= 12:1) */
+.wall-band { padding: clamp(40px, 5.5vw, 68px) 0 clamp(44px, 6vw, 72px); }
+.stage-block { margin-bottom: clamp(28px, 4vw, 44px); }
+.stage-label {
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;
+  margin: 0 0 14px; padding-bottom: 8px;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.stage-light .stage-label { color: #36393f; border-bottom: 1px solid rgba(16, 17, 20, 0.24); }
+.stage-dark .stage-label { color: #c4c8ce; border-bottom: 1px solid rgba(244, 242, 236, 0.22); }
+
+/* Inversion Horizon Divider between White/Ego Half and Black/No-I Half */
+.horizon {
+  margin: clamp(36px, 5vw, 56px) 0;
+  padding: 18px 0;
+  border-top: 1px solid rgba(16, 17, 20, 0.45);
+  border-bottom: 1px solid rgba(244, 242, 236, 0.3);
+  background: linear-gradient(to bottom, #e5e1d8 0%, #191b1e 100%);
+  text-align: center;
+}
+.horizon span {
+  display: inline-block; padding: 4px 14px;
+  background: #0d0e10; color: #f4f2ec; border: 1px solid rgba(244, 242, 236, 0.35);
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
 }
 
-/* Tablet Wall (Postman's Park / Lithuanian Roadside Stone Grid) */
-.wall-band { padding: clamp(44px, 6vw, 72px) 0; }
 .wall-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 2.6vw, 28px);
 }
-.tablet {
-  background: #faf8f4;
-  border: 1px solid var(--rule-strong);
-  padding: 6px;
-  transition: border-color 0.25s ease;
-}
-.tablet:hover { border-color: var(--ink); }
+.wall-grid.odd-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.tablet { padding: 6px; transition: border-color 0.25s ease; }
 .tablet-inner {
-  border: 1px solid var(--rule);
-  padding: clamp(20px, 3vw, 30px) clamp(20px, 3vw, 32px);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
+  padding: clamp(20px, 2.8vw, 28px) clamp(20px, 2.8vw, 30px);
+  height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
 }
 .tablet-head {
   display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-  padding-bottom: 10px; border-bottom: 1px solid var(--rule);
-  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--faint);
+  padding-bottom: 10px;
+  font-family: var(--mono); font-size: 0.67rem; letter-spacing: 0.16em; text-transform: uppercase;
 }
-.tablet-num { color: var(--accent); font-weight: 500; }
 .tablet-body {
-  margin: 0; font-family: var(--serif-body); font-size: 1.04rem; line-height: 1.62; color: var(--ink);
+  margin: 0; font-family: var(--serif-body); font-size: 1.03rem; line-height: 1.62;
+}
+.tablet-sense {
+  margin: 0; padding-top: 8px;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em;
 }
 .tablet-foot {
-  margin: 0; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+  margin: 0; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
 }
 
-/* Policy / Open Note */
+/* Stage 1: Pure White Field + Dense Carbon Black Syntax (18.7:1 contrast) */
+.tablet.g1 { background: #fcfbf8; border: 1px solid #8c3a2b; color: #0d0e10; }
+.tablet.g1 .tablet-inner { border: 1px solid rgba(140, 58, 43, 0.32); }
+.tablet.g1 .tablet-head { border-bottom: 1px solid rgba(16, 17, 20, 0.16); color: #4a4d52; }
+.tablet.g1 .tablet-num { color: #8c3a2b; font-weight: 600; }
+.tablet.g1 .tablet-body { color: #0d0e10; }
+.tablet.g1 .tablet-sense { border-top: 1px dotted rgba(16, 17, 20, 0.22); color: #3d4045; }
+.tablet.g1 .tablet-foot { color: #61261c; }
+
+/* Stage 2: Warm Paper Field + Deep Ink Syntax (14.2:1 contrast) */
+.tablet.g2 { background: #ebe7de; border: 1px solid #141517; color: #101114; }
+.tablet.g2 .tablet-inner { border: 1px solid rgba(16, 17, 20, 0.2); }
+.tablet.g2 .tablet-head { border-bottom: 1px solid rgba(16, 17, 20, 0.18); color: #43464c; }
+.tablet.g2 .tablet-num { color: #101114; font-weight: 600; }
+.tablet.g2 .tablet-body { color: #101114; }
+.tablet.g2 .tablet-sense { border-top: 1px dotted rgba(16, 17, 20, 0.24); color: #3a3d42; }
+.tablet.g2 .tablet-foot { color: #4b4e54; }
+
+/* Stage 3: Dark Charcoal Field + Pale Ash-White Syntax (13.8:1 contrast, inverted polarity!) */
+.tablet.g3 { background: #191b1f; border: 1px solid rgba(235, 232, 224, 0.34); color: #ece9e1; }
+.tablet.g3 .tablet-inner { border: 1px solid rgba(235, 232, 224, 0.16); }
+.tablet.g3 .tablet-head { border-bottom: 1px solid rgba(235, 232, 224, 0.16); color: #b5b9c0; }
+.tablet.g3 .tablet-num { color: #f5f3ef; font-weight: 600; }
+.tablet.g3 .tablet-body { color: #ece9e1; }
+.tablet.g3 .tablet-sense { border-top: 1px dotted rgba(235, 232, 224, 0.24); color: #c0c4cb; }
+.tablet.g3 .tablet-foot { color: #a7acb4; }
+
+/* Stage 4: Deep Void Black Field + Pure Paper-White Syntax (18.4:1 contrast, matches log.html) */
+.tablet.g4 { background: #090a0c; border: 1px solid rgba(245, 243, 239, 0.28); color: #f5f3ef; }
+.tablet.g4 .tablet-inner { border: 1px solid rgba(245, 243, 239, 0.11); }
+.tablet.g4 .tablet-head { border-bottom: 1px solid rgba(245, 243, 239, 0.14); color: #c4c8cf; }
+.tablet.g4 .tablet-num { color: #ffffff; font-weight: 600; }
+.tablet.g4 .tablet-body { color: #f5f3ef; }
+.tablet.g4 .tablet-sense { border-top: 1px dotted rgba(245, 243, 239, 0.2); color: #cfd3da; }
+.tablet.g4 .tablet-foot { color: #aeb3bb; }
+
+/* Bottom Policy & Colophon (Pure Black Field + Crisp White Ink) */
 .wall-note {
-  margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--rule);
+  margin-top: 36px; padding-top: 24px;
+  border-top: 1px solid rgba(245, 243, 239, 0.2);
   display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 32px; align-items: baseline;
+  color: #cfd3da;
 }
-.wall-note p { margin: 0; max-width: 66ch; font-size: 0.86rem; line-height: 1.65; color: var(--muted); }
+.wall-note p { margin: 0; max-width: 66ch; font-size: 0.86rem; line-height: 1.65; color: #c8ccd3; }
+.wall-note strong { color: #f5f3ef; font-weight: 500; }
 .text-link {
   font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase;
-  text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; white-space: nowrap;
+  text-decoration: none; color: #f5f3ef; border-bottom: 1px solid rgba(245, 243, 239, 0.6);
+  padding-bottom: 4px; white-space: nowrap;
 }
-.text-link:hover { color: var(--accent); border-color: var(--accent); }
+.text-link:hover { color: #ffffff; border-color: #ffffff; }
 
-footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 36px 0 56px; }
+footer.colophon {
+  border-top: 1px solid rgba(245, 243, 239, 0.24);
+  background: #090a0c; color: #aeb3bb;
+  padding: 36px 0 56px;
+}
 .colophon-inner {
   display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;
-  gap: 16px 32px; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--muted);
+  gap: 16px 32px; font-size: 0.8rem; letter-spacing: 0.08em;
 }
-.colophon-name { font-family: var(--serif-display); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; }
+.colophon-name { font-family: var(--serif-display); font-size: 1.05rem; color: #f5f3ef; letter-spacing: 0.04em; }
+.colophon-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.colophon-links a { text-decoration: none; border-bottom: 1px solid rgba(245, 243, 239, 0.28); padding-bottom: 2px; color: #d6dbdd; }
+.colophon-links a:hover { color: #ffffff; border-color: #ffffff; }
 
+@media (max-width: 960px) {
+  .wall-grid.odd-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 860px) {
   .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
   .nav-right { display: contents; }
@@ -203,17 +315,18 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
   .lang-switch { order: 2; }
   .nav-links {
     display: flex; order: 3; flex: 1 0 100%; flex-wrap: wrap;
-    gap: 8px 18px; padding-top: 10px; border-top: 1px solid var(--rule);
+    gap: 8px 18px; padding-top: 10px; border-top: 1px solid rgba(16, 17, 20, 0.14);
   }
+  header.site-nav.inv .nav-links { border-top-color: rgba(244, 242, 236, 0.16); }
   .nav-links a { font-size: 0.68rem; letter-spacing: 0.14em; padding: 2px 0; }
-  .wall-grid { grid-template-columns: 1fr; }
+  .wall-grid, .wall-grid.odd-3 { grid-template-columns: 1fr; }
   .wall-note { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<header class="site-nav">
+<header class="site-nav" id="site-nav">
   <div class="wrap nav-inner">
     <a class="brand" href="index.html">Mantas Pagalys</a>
     <div class="nav-right">
@@ -237,113 +350,167 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
   <section class="opening">
     <a class="back-link" href="index.html" data-i18n="back_index">&larr; Back to index</a>
     <div class="head-row">
-      <h1 data-i18n="h1">Memorial.</h1>
+      <h1 data-i18n="h1">Wall of Memory.</h1>
       <span class="st-tag st-testing" data-i18n="st_wall">Testing &middot; Living Wall</span>
     </div>
-    <p class="lead" data-i18n="lead">A timber joint only holds against an opposing force. Every named and unnamed load below is part of the frame that made this desk.</p>
-    <p class="sub-note" data-i18n="sub_note">Modeled on the plain ceramic tablets in Postman&rsquo;s Park, London, and the stone markers beside Lithuanian roads. No photographs of living faces, no speeches, no hierarchy between what helped and what opposed.</p>
+    <p class="lead" data-i18n="lead">Compiled from white to black and from calculating ego to No-I. Background luminance falls while syntax ink reverses polarity so opposing forces hold sharp contrast across the entire descent.</p>
+    <p class="sub-note" data-i18n="sub_note">Modeled on the ceramic wall in Postman&rsquo;s Park, London, and stone markers beside Lithuanian roads. No photographs of living faces, no unconsented names. Every register stays bolted to silence, sound, and smell.</p>
+    <div class="sense-strip" data-i18n="sense_strip">
+      <span><b>I.</b> Silence</span>
+      <span><b>II.</b> Sound</span>
+      <span><b>III.</b> Smell</span>
+    </div>
+    <div class="grad-bar" aria-label="White-to-black ego-to-space gradient" data-i18n="grad_bar">
+      <span class="g-step g-s1">I&ndash;III White / Black Ink &middot; Ego</span>
+      <span>&rarr;</span>
+      <span class="g-step g-s2">IV&ndash;VI Paper / Ink &middot; Role</span>
+      <span>&rarr;</span>
+      <span class="g-step g-s3">VII&ndash;VIII Slate / White Ink &middot; Vector</span>
+      <span>&rarr;</span>
+      <span class="g-step g-s4">IX&ndash;X Black / White Ink &middot; No-I</span>
+    </div>
 
-    <div class="sound-bar" aria-label="Optional acoustic background sketch">
+    <div class="sound-bar" aria-label="Optional C-sharp scroll-coupled acoustic engine">
       <div class="sound-left">
-        <button type="button" class="sound-btn" id="btn-sound" aria-pressed="false" data-i18n="snd_off">Sound &middot; Off</button>
-        <div class="inst-switch" role="group" aria-label="Instrument sketch">
-          <button type="button" class="inst-btn active" data-inst="kankles" data-i18n="inst_k">Kankl&#279;s / Monochord</button>
-          <button type="button" class="inst-btn" data-inst="klavier" data-i18n="inst_p">Dry Klavier</button>
+        <button type="button" class="sound-btn" id="btn-sound" aria-pressed="false" data-i18n="snd_off">C# Sound &middot; Off</button>
+        <div class="inst-switch" role="group" aria-label="C-sharp mathematical engine">
+          <button type="button" class="inst-btn active" data-mode="ratio" data-i18n="m_ratio">III &middot; C# Ratio</button>
+          <button type="button" class="inst-btn" data-mode="bach" data-i18n="m_bach">II &middot; C# Bach Canon</button>
+          <button type="button" class="inst-btn" data-mode="binary" data-i18n="m_bin">I &middot; C# Binary</button>
         </div>
-        <span class="st-tag st-testing" data-i18n="st_audio">Testing &middot; Audio Sketch</span>
+        <span class="st-tag st-testing" data-i18n="st_audio">Testing &middot; Scroll-Coupled</span>
       </div>
-      <p class="sound-cap" data-i18n="snd_cap">Silent until clicked. Locally synthesized acoustic test; real room recording planned.</p>
+      <div class="sound-right">
+        <span class="t-read" id="t-read">t = 0.00 &middot; White / Ego</span>
+        <p class="sound-cap" data-i18n="snd_cap">Silent until clicked. Scrolling from white to black cools the C# resonance into silence.</p>
+      </div>
     </div>
   </section>
 
-  <section class="wall-band" aria-label="Memorial tablets">
-    <div class="wall-grid">
+  <section class="wall-band" aria-label="Wall of Memory gradient tablets">
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">I</span><span data-i18n="t1_loc">The Lake &middot; 1905</span></div>
-          <p class="tablet-body" data-i18n="t1_b">The vanished parish in the Tsarist church registers. Population: zero.</p>
-          <p class="tablet-foot" data-i18n="t1_f">Record &middot; Parish facsimile</p>
-        </div>
-      </article>
+    <!-- STAGE 1: WHITE CANVAS / BLACK SYNTAX / EGO & LEVERAGE -->
+    <div class="stage-block stage-light">
+      <p class="stage-label" data-i18n="st1_hdr"><span>Stage 1 &middot; t = 0.00 &middot; Ego / Machiavellian</span><span>White Field &middot; Black Syntax</span></p>
+      <div class="wall-grid odd-3">
+        <article class="tablet g1">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">I</span><span data-i18n="t1_loc">Leverage &middot; Exchange</span></div>
+            <p class="tablet-body" data-i18n="t1_b">My hours priced in four-to-five-hour shifts for a single room; my leverage measured before any door opens; my calculation kept colder than theirs.</p>
+            <p class="tablet-sense" data-i18n="t1_s">Smell: burned pot in a shared kitchen &middot; Sound: polite refusals</p>
+            <p class="tablet-foot" data-i18n="t1_f">Stage 1 &middot; Selfish / Machiavellian</p>
+          </div>
+        </article>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">II</span><span data-i18n="t2_loc">The Shore</span></div>
-          <p class="tablet-body" data-i18n="t2_b">My grandmother, rowing through waves enormous at the time toward a shore where nothing else stood.</p>
-          <p class="tablet-foot" data-i18n="t2_f">Lineage &middot; Water</p>
-        </div>
-      </article>
+        <article class="tablet g1">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">II</span><span data-i18n="t2_loc">Oslo / Trandum &middot; 2026</span></div>
+            <p class="tablet-body" data-i18n="t2_b">My sentence served on my own feet; my deadline missed by someone else&rsquo;s strongest lawyer; my trust priced down to seventy-two hours without translation.</p>
+            <p class="tablet-sense" data-i18n="t2_s">Sound: phone card busy signal &middot; Silence: unfiled papers</p>
+            <p class="tablet-foot" data-i18n="t2_f">Stage 1 &middot; Selfish / Debt</p>
+          </div>
+        </article>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">III</span><span data-i18n="t3_loc">The Forest</span></div>
-          <p class="tablet-body" data-i18n="t3_b">The grandfather with the rope and the knife, and the child holding the hay fork in the clearing. What was necessary.</p>
-          <p class="tablet-foot" data-i18n="t3_f">Lineage &middot; Ground</p>
-        </div>
-      </article>
+        <article class="tablet g1">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">III</span><span data-i18n="t3_loc">Possession &middot; Distance</span></div>
+            <p class="tablet-body" data-i18n="t3_b">My boat under snow, my grandmother&rsquo;s shore, eight thousand kilometres to my daughter. Everything claimed as mine while the knees give out first.</p>
+            <p class="tablet-sense" data-i18n="t3_s">Sound: cabin hum over the Atlantic &middot; Smell: cold salt, bilge</p>
+            <p class="tablet-foot" data-i18n="t3_f">Stage 1 &middot; Ego / Claim</p>
+          </div>
+        </article>
+      </div>
+    </div>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">IV</span><span data-i18n="t4_loc">The Atlantic</span></div>
-          <p class="tablet-body" data-i18n="t4_b">Those who went by ship and forgot, and those who stayed behind and died of it.</p>
-          <p class="tablet-foot" data-i18n="t4_f">Departure &middot; Return</p>
-        </div>
-      </article>
+    <!-- STAGE 2: PAPER CANVAS / INK SYNTAX / ROLE & FRICTION -->
+    <div class="stage-block stage-light">
+      <p class="stage-label" data-i18n="st2_hdr"><span>Stage 2 &middot; t = 0.35 &middot; Role / Friction</span><span>Warm Paper &middot; Deep Ink</span></p>
+      <div class="wall-grid odd-3">
+        <article class="tablet g2">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">IV</span><span data-i18n="t4_loc">London &middot; 2006&ndash;2012</span></div>
+            <p class="tablet-body" data-i18n="t4_b">Winter shelters, pavement, and editors at <em>The Big Issue</em> setting early pages into print. Shelter and refusal occupying the same street.</p>
+            <p class="tablet-sense" data-i18n="t4_s">Smell: wet shelter wool, rain, old tobacco &middot; Sound: street traffic</p>
+            <p class="tablet-foot" data-i18n="t4_f">Stage 2 &middot; Role / Friction</p>
+          </div>
+        </article>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">V</span><span data-i18n="t5_loc">London &middot; 2006&ndash;2012</span></div>
-          <p class="tablet-body" data-i18n="t5_b">The winter shelters, the street, and the editors of <em>The Big Issue</em> who set the first pages into print.</p>
-          <p class="tablet-foot" data-i18n="t5_f">Work &middot; Print</p>
-        </div>
-      </article>
+        <article class="tablet g2">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">V</span><span data-i18n="t5_loc">The Cell</span></div>
+            <p class="tablet-body" data-i18n="t5_b">Next door for weapons, not three kilos. Shared quiet before evening roll-call over the loudspeaker.</p>
+            <p class="tablet-sense" data-i18n="t5_s">Sound: evening roll-call over loudspeaker &middot; Smell: slop bucket, stone wall</p>
+            <p class="tablet-foot" data-i18n="t5_f">Stage 2 &middot; Role / Witness</p>
+          </div>
+        </article>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">VI</span><span data-i18n="t6_loc">The Cell</span></div>
-          <p class="tablet-body" data-i18n="t6_b">The Syrian next door in for weapons, not three kilos. Shared the quiet before evening roll-call over the loudspeaker.</p>
-          <p class="tablet-foot" data-i18n="t6_f">Unnamed &middot; Witness</p>
-        </div>
-      </article>
+        <article class="tablet g2">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">VI</span><span data-i18n="t6_loc">Vilnius Flight &middot; Nov. 2026</span></div>
+            <p class="tablet-body" data-i18n="t6_b">Coffee offered on the escort flight; one quiet sentence at parting; doors in Norway held open without conditions.</p>
+            <p class="tablet-sense" data-i18n="t6_s">Smell: coffee &middot; Sound: low voice at the gate</p>
+            <p class="tablet-foot" data-i18n="t6_f">Stage 2 &middot; Role / Passage</p>
+          </div>
+        </article>
+      </div>
+    </div>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">VII</span><span data-i18n="t7_loc">Oslo / Trandum &middot; 2026</span></div>
-          <p class="tablet-body" data-i18n="t7_b">The cellmate who promised his strongest lawyer, and the lawyer who never filed. Taught what a deadline is when nobody translates it.</p>
-          <p class="tablet-foot" data-i18n="t7_f">Unnamed &middot; Opposing Load</p>
-        </div>
-      </article>
+    <!-- POLARITY INVERSION HORIZON (ZERO GREY-ON-GREY) -->
+    <div class="horizon" aria-hidden="true">
+      <span data-i18n="horizon_lbl">Inversion &middot; Polarity Flip &middot; Identity Dissolves into Vector</span>
+    </div>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">VIII</span><span data-i18n="t8_loc">Vilnius Flight &middot; Nov. 2026</span></div>
-          <p class="tablet-body" data-i18n="t8_b">The escort leader who offered coffee and said quietly at parting: &ldquo;You are not wrong.&rdquo;</p>
-          <p class="tablet-foot" data-i18n="t8_f">Unnamed &middot; Passage</p>
-        </div>
-      </article>
+    <!-- STAGE 3: CHARCOAL CANVAS / WHITE SYNTAX / VECTOR & MATERIAL -->
+    <div class="stage-block stage-dark">
+      <p class="stage-label" data-i18n="st3_hdr"><span>Stage 3 &middot; t = 0.70 &middot; Vector / Material</span><span>Dark Slate &middot; Pale Ash Syntax</span></p>
+      <div class="wall-grid">
+        <article class="tablet g3">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">VII</span><span data-i18n="t7_loc">The Clearing</span></div>
+            <p class="tablet-body" data-i18n="t7_b">Rope, knife, and hay fork in flat grey winter light. Two sets of breath; tension held until what is necessary completes itself.</p>
+            <p class="tablet-sense" data-i18n="t7_s">Sound: frozen branches creaking &middot; Smell: wet snow, raw earth</p>
+            <p class="tablet-foot" data-i18n="t7_f">Stage 3 &middot; Vector / Material</p>
+          </div>
+        </article>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">IX</span><span data-i18n="t9_loc">Norway</span></div>
-          <p class="tablet-body" data-i18n="t9_b">Every friend who took a stranger in as one of their own, and the invitations that kept the work standing.</p>
-          <p class="tablet-foot" data-i18n="t9_f">Held in Trust</p>
-        </div>
-      </article>
+        <article class="tablet g3">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">VIII</span><span data-i18n="t8_loc">Water &middot; Crossing</span></div>
+            <p class="tablet-body" data-i18n="t8_b">Oars pulling through high waves toward an empty shore. Departure by ship into forgetting; staying behind into disappearance.</p>
+            <p class="tablet-sense" data-i18n="t8_s">Sound: water against timber &middot; Smell: feet and rosewater, dung after rain</p>
+            <p class="tablet-foot" data-i18n="t8_f">Stage 3 &middot; Vector / Motion</p>
+          </div>
+        </article>
+      </div>
+    </div>
 
-      <article class="tablet">
-        <div class="tablet-inner">
-          <div class="tablet-head"><span class="tablet-num">X</span><span data-i18n="t10_loc">Unnamed &middot; All Setups</span></div>
-          <p class="tablet-body" data-i18n="t10_b">Every locked gate, every burned pot, every room of calm smiles that neither refused nor gave. Without resistance, no structure is tested.</p>
-          <p class="tablet-foot" data-i18n="t10_f">Whole Frame &middot; Zero Noise</p>
-        </div>
-      </article>
+    <!-- STAGE 4: VOID BLACK CANVAS / PURE WHITE SYNTAX / NO-I DISSOLVED SPACE -->
+    <div class="stage-block stage-dark">
+      <p class="stage-label" data-i18n="st4_hdr"><span>Stage 4 &middot; t = 1.00 &middot; No-I / Dissolved Space</span><span>Void Black &middot; Pure White Syntax</span></p>
+      <div class="wall-grid">
+        <article class="tablet g4">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">IX</span><span data-i18n="t9_loc">The Lake &middot; 1905</span></div>
+            <p class="tablet-body" data-i18n="t9_b">Black mirror water above a vanished parish. Ink dry in the register. Population: zero.</p>
+            <p class="tablet-sense" data-i18n="t9_s">Silence: still water &middot; Smell: green moss over sand</p>
+            <p class="tablet-foot" data-i18n="t9_f">Stage 4 &middot; Space / Zero</p>
+          </div>
+        </article>
 
+        <article class="tablet g4">
+          <div class="tablet-inner">
+            <div class="tablet-head"><span class="tablet-num">X</span><span data-i18n="t10_loc">Open Frame</span></div>
+            <p class="tablet-body" data-i18n="t10_b">Oiled hinges turning without sound. Calm smiles neither refusing nor giving. Opposing loads meeting in a joint until nothing moves and zero noise remains.</p>
+            <p class="tablet-sense" data-i18n="t10_s">Smell: smoke cooling at the gate &middot; Silence: oiled iron</p>
+            <p class="tablet-foot" data-i18n="t10_f">Stage 4 &middot; No-I / Dissolved Space</p>
+          </div>
+        </article>
+      </div>
     </div>
 
     <div class="wall-note">
-      <p data-i18n="wall_policy"><strong>Status: Testing (Living Wall).</strong> Living people are never photographed or named here without direct consent; opposing setups remain unnamed roles. If you contributed to this work and wish your name added or removed, write directly.</p>
-      <a class="text-link" href="index.html#contact" data-i18n="wall_contact">Write to the desk &rarr;</a>
+      <p data-i18n="wall_policy"><strong>Status: Testing (Living Wall).</strong> Background shifts white to black while syntax polarity flips black to white across the inversion horizon (WCAG AAA legibility at every stage). No living faces, no unconsented names; additions or removals proceed on direct written notice.</p>
+      <a class="text-link" href="index.html#contact" data-i18n="wall_contact">Direct notice &rarr;</a>
     </div>
   </section>
 </main>
@@ -351,113 +518,157 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
 <footer class="colophon">
   <div class="wrap colophon-inner">
     <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org</div>
+    <div class="colophon-links">
+      <a href="log.html" data-i18n="foot_log">The Sea Keeps Giving &rarr;</a>
+      <a href="wak943.html">WAK943 &rarr;</a>
+      <a href="mechanics.html" data-i18n="foot_mech">Mechanics &rarr;</a>
+    </div>
     <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Texts and photographs &copy; Mantas Pagalys</div>
   </div>
 </footer>
 
 <script>
 (function () {
-  /* ==================== SILENT-BY-DEFAULT ACOUSTIC SKETCH (TESTING) ==================== */
+  /* ==================== SCROLL-COUPLED POLARITY & C# ENGINE (t in [0, 1]) ==================== */
+  var navEl = document.getElementById("site-nav");
+  var tReadEl = document.getElementById("t-read");
+  var scrollT = 0;
+
+  function updateScrollT() {
+    var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    scrollT = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+    navEl.classList.toggle("inv", scrollT >= 0.46);
+    var stageTxt = currentLang === "lt"
+      ? (scrollT < 0.28 ? "Balta / Ego" : (scrollT < 0.50 ? "Popierius / Vaidmuo" : (scrollT < 0.78 ? "Tamsi / Vektorius" : "Juoda / Be-Aš")))
+      : (scrollT < 0.28 ? "White / Ego" : (scrollT < 0.50 ? "Paper / Role" : (scrollT < 0.78 ? "Slate / Vector" : "Black / No-I")));
+    tReadEl.textContent = "t = " + scrollT.toFixed(2) + " \u00b7 " + stageTxt;
+  }
+  window.addEventListener("scroll", updateScrollT, { passive: true });
+  window.addEventListener("resize", updateScrollT, { passive: true });
+
   var ctx = null;
   var master = null;
   var timer = null;
   var isPlaying = false;
-  var inst = "kankles";
+  var mode = "ratio";
   var step = 0;
 
-  // Sparse D-Dorian modal intervals (D2 drone + slow fifths/fourths/ninths)
-  var DRONE_HZ = 73.42; // D2
-  var KANKLES_SEQ = [146.83, 220.00, 174.61, 220.00, 146.83, 293.66, 261.63, 220.00, 146.83, 196.00, 174.61, 146.83];
-  var KLAVIER_SEQ = [146.83, 220.00, 164.81, 220.00, 146.83, 261.63, 220.00, 174.61];
+  var F0 = 69.2957; // C#2 fundamental
+  var PHRASE = "ZERO NOISE";
+  var BITS = [];
+  for (var ci = 0; ci < PHRASE.length; ci++) {
+    var bstr = PHRASE.charCodeAt(ci).toString(2).padStart(8, "0");
+    for (var bi = 0; bi < 8; bi++) BITS.push({ bit: bstr[bi], idx: bi });
+  }
+  var NOTE = {
+    "C#2": 69.30, "F#2": 92.50, "G#2": 103.83, "A2": 110.00, "B2": 123.47,
+    "C#3": 138.59, "D#3": 155.56, "E3": 164.81, "F#3": 185.00, "G#3": 207.65, "A3": 220.00, "B#3": 261.63,
+    "C#4": 277.18, "D#4": 311.13, "E4": 329.63, "F#4": 369.99, "G#4": 415.30
+  };
+  var SUBJ = ["C#4", "D#4", "E4", "G#4", "F#4", "E4", "D#4", "B#3", "C#4", "G#3", "A3", "G#3", "F#3", "E3", "D#3", "C#3"];
+  var INV  = ["C#3", "B2",  "A2", "F#2", "G#2", "A2", "B2",  "C#3", "G#2", "F#2", "A2", "G#2", "B#2", "C#3", "G#2", "C#2"];
+  var RATIOS = [
+    [[1,1],[9,8],[16,15],[3,2],[9,8],[2,1]],
+    [[1,1],[3,2],[6,5],[2,1],[3,2]],
+    [[1,1],[3,2],[2,1],[3,1]],
+    [[1,1],[3,2],[0,1],[2,1],[0,1]]
+  ];
 
-  function playPluck(freq, dur, vol) {
+  function pluck(freq, dur, vol, cutoff) {
     if (!ctx || !master) return;
     var sr = ctx.sampleRate;
     var len = Math.max(16, Math.round(sr / freq));
     var total = Math.round(sr * dur);
     var buf = ctx.createBuffer(1, total, sr);
-    var data = buf.getChannelData(0);
-    // Warm wooden plucked string (Karplus-Strong low-pass average)
+    var out = buf.getChannelData(0);
     var ring = new Float32Array(len);
-    for (var i = 0; i < len; i++) {
-      ring[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / len);
-    }
-    var idx = 0;
-    var decay = 0.9962;
+    for (var i = 0; i < len; i++) ring[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / len);
+    var idx = 0, dec = 0.9958;
     for (var n = 0; n < total; n++) {
-      var next = (idx + 1) % len;
-      var val = 0.5 * (ring[idx] + ring[next]) * decay;
-      ring[idx] = val;
-      data[n] = val;
-      idx = next;
+      var nx = (idx + 1) % len;
+      var v = 0.5 * (ring[idx] + ring[nx]) * dec;
+      ring[idx] = v; out[n] = v; idx = nx;
     }
     var src = ctx.createBufferSource();
     src.buffer = buf;
     var flt = ctx.createBiquadFilter();
     flt.type = "lowpass";
-    flt.frequency.value = 1150;
+    flt.frequency.value = cutoff;
     var g = ctx.createGain();
     g.gain.setValueAtTime(0.0001, ctx.currentTime);
-    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.015);
+    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.01);
     g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
-    src.connect(flt);
-    flt.connect(g);
-    g.connect(master);
-    src.start();
-    src.stop(ctx.currentTime + dur + 0.05);
+    src.connect(flt); flt.connect(g); g.connect(master);
+    src.start(); src.stop(ctx.currentTime + dur + 0.04);
   }
 
-  function playFeltKlavier(freq, dur, vol) {
+  function klavier(freq, dur, vol, bright) {
     if (!ctx || !master) return;
     var now = ctx.currentTime;
     var g = ctx.createGain();
     g.gain.setValueAtTime(0.0001, now);
-    g.gain.linearRampToValueAtTime(vol, now + 0.045);
+    g.gain.linearRampToValueAtTime(vol, now + 0.025);
     g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-
     var flt = ctx.createBiquadFilter();
     flt.type = "lowpass";
-    flt.frequency.setValueAtTime(620, now);
-    flt.frequency.exponentialRampToValueAtTime(240, now + dur);
-
-    // Fundamental + soft 2nd & 3rd felt harmonics with slight dry detune
+    flt.frequency.setValueAtTime(bright, now);
+    flt.frequency.exponentialRampToValueAtTime(210, now + dur);
     [1, 2, 3].forEach(function (h, k) {
-      var osc = ctx.createOscillator();
-      osc.type = k === 0 ? "triangle" : "sine";
-      osc.frequency.value = freq * h + (k === 1 ? 0.18 : 0);
+      var o = ctx.createOscillator();
+      o.type = k === 0 ? "triangle" : "sine";
+      o.frequency.value = freq * h;
       var hg = ctx.createGain();
-      hg.gain.value = k === 0 ? 0.72 : (k === 1 ? 0.20 : 0.07);
-      osc.connect(hg);
-      hg.connect(flt);
-      osc.start(now);
-      osc.stop(now + dur + 0.06);
+      hg.gain.value = [0.72, 0.20, 0.07][k];
+      o.connect(hg); hg.connect(flt);
+      o.start(now); o.stop(now + dur + 0.05);
     });
-    flt.connect(g);
-    g.connect(master);
+    flt.connect(g); g.connect(master);
   }
 
   function tick() {
     if (!isPlaying) return;
-    if (inst === "kankles") {
-      if (step % 4 === 0) playPluck(DRONE_HZ, 5.2, 0.16);
-      var f = KANKLES_SEQ[step % KANKLES_SEQ.length];
-      playPluck(f, 3.6, 0.15);
+    // Scroll t cools cutoff (1150 -> 460 Hz) and slows tempo smoothly
+    var cutoff = Math.round(1150 - scrollT * 690);
+    var delayMs = 1100;
+
+    if (mode === "ratio") {
+      var stIdx = Math.min(3, Math.floor(scrollT * 3.99));
+      var seq = RATIOS[stIdx];
+      var pair = seq[step % seq.length];
+      if (step % 3 === 0) pluck(F0, 5.2, 0.16, 400);
+      if (pair[0] > 0) {
+        pluck(F0 * 2 * (pair[0] / pair[1]), 3.5, 0.16, cutoff);
+      }
+      delayMs = Math.round(780 + scrollT * 1450);
+    } else if (mode === "bach") {
+      var nTop = SUBJ[step % SUBJ.length];
+      // As t approaches 1.0, upper voice thins out into pure inverted bass and silence
+      if (scrollT < 0.75 || step % 2 === 0) {
+        klavier(NOTE[nTop], 1.8 + scrollT, 0.14 * (1 - scrollT * 0.45), cutoff);
+      }
+      if (step >= 2 && step % 2 === 0) {
+        var nBass = INV[Math.floor((step - 2) / 2) % INV.length];
+        klavier(NOTE[nBass], 3.4, 0.18, Math.max(300, cutoff * 0.65));
+      }
+      delayMs = Math.round(680 + scrollT * 880);
     } else {
-      if (step % 4 === 0) playFeltKlavier(DRONE_HZ, 5.6, 0.17);
-      var fk = KLAVIER_SEQ[step % KLAVIER_SEQ.length];
-      playFeltKlavier(fk, 4.2, 0.16);
+      var item = BITS[step % BITS.length];
+      if (item.idx === 0) klavier(F0, 3.0, 0.14, 260);
+      if (item.bit === "1") {
+        pluck(item.idx === 1 ? 207.6523 : 138.5913, 1.4, 0.17 * (1 - scrollT * 0.3), cutoff);
+      }
+      delayMs = Math.round(380 + scrollT * 520);
     }
     step += 1;
-    var jitter = (Math.random() - 0.5) * 140;
-    timer = setTimeout(tick, 1380 + jitter);
+    timer = setTimeout(tick, delayMs);
   }
 
   var btnSound = document.getElementById("btn-sound");
   function syncSoundLabel() {
     if (currentLang === "lt") {
-      btnSound.textContent = isPlaying ? "Garsas \u00b7 \u012ej. (Stabdyti)" : "Garsas \u00b7 I\u0161j.";
+      btnSound.textContent = isPlaying ? "C# garsas \u00b7 \u012ej. (Stabdyti)" : "C# garsas \u00b7 I\u0161j.";
     } else {
-      btnSound.textContent = isPlaying ? "Sound \u00b7 On (Stop)" : "Sound \u00b7 Off";
+      btnSound.textContent = isPlaying ? "C# Sound \u00b7 On (Stop)" : "C# Sound \u00b7 Off";
     }
     btnSound.classList.toggle("playing", isPlaying);
     btnSound.setAttribute("aria-pressed", isPlaying ? "true" : "false");
@@ -475,7 +686,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
     if (ctx.state === "suspended") ctx.resume();
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), ctx.currentTime);
-    master.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 1.2);
+    master.gain.linearRampToValueAtTime(0.32, ctx.currentTime + 1.0);
     isPlaying = true;
     syncSoundLabel();
     tick();
@@ -487,69 +698,86 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
     if (ctx && master) {
       master.gain.cancelScheduledValues(ctx.currentTime);
       master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.8);
+      master.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.7);
     }
     syncSoundLabel();
   }
 
-  btnSound.addEventListener("click", function () {
-    if (isPlaying) stopSound(); else startSound();
-  });
-
-  Array.prototype.slice.call(document.querySelectorAll("[data-inst]")).forEach(function (b) {
+  btnSound.addEventListener("click", function () { if (isPlaying) stopSound(); else startSound(); });
+  Array.prototype.slice.call(document.querySelectorAll("[data-mode]")).forEach(function (b) {
     b.addEventListener("click", function () {
-      inst = b.getAttribute("data-inst");
-      document.querySelectorAll("[data-inst]").forEach(function (x) { x.classList.toggle("active", x === b); });
+      mode = b.getAttribute("data-mode");
+      document.querySelectorAll("[data-mode]").forEach(function (x) { x.classList.toggle("active", x === b); });
     });
   });
 
   /* ==================== FULL EN / LT I18N ==================== */
   var LT = {
-    page_title: "Paminklas · Mantas Pagalys",
+    page_title: "Atminties siena · Mantas Pagalys",
     nav_writing: "Tekstai", nav_photos: "Fotografija", nav_craft: "Amatas",
     nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
     back_index: "&larr; Į pradžią",
-    h1: "Paminklas.",
+    h1: "Atminties siena.",
     st_wall: "Bandymas &middot; Gyva siena",
-    lead: "Medinis mazgas laiko tik priešingos jėgos dėka. Kiekviena įvardyta ir bevardė apkrova žemiau yra šio darbo stalo karkaso dalis.",
-    sub_note: "Pagal paprastas keramines plokštes Londono „Postman's Park“ ir akmeninius ženklus Lietuvos pakelėse. Be gyvų žmonių veidų, be kalbų, be hierarchijos tarp to, kas padėjo, ir to, kas priešinosi.",
-    snd_off: "Garsas &middot; Išj.",
-    inst_k: "Kanklės / Monochordas",
-    inst_p: "Sausas klavyras",
-    st_audio: "Bandymas &middot; Garso eskizas",
-    snd_cap: "Tyli, kol nepaspausta. Lokaliai naršyklėje kuriamas akustinis bandymas; planuojamas gyvas įrašas.",
-    t1_loc: "Ežeras &middot; 1905",
-    t1_b: "Išnykęs kaimas cariniuose bažnytiniuose metrikuose. Gyventojų skaičius: nulinis.",
-    t1_f: "Įrašas &middot; Parapijos faksimilė",
-    t2_loc: "Krantas",
-    t2_b: "Močiutė, irkluojanti per tuo metu dideles bangas link kranto, kur be jos sodybos nieko kito nebuvo.",
-    t2_f: "Giminė &middot; Vanduo",
-    t3_loc: "Miškas",
-    t3_b: "Senelis su virve ir peiliuku, ir vaikas su šakėmis proskynoje. Kas buvo būtina.",
-    t3_f: "Giminė &middot; Žemė",
-    t4_loc: "Atlantas",
-    t4_b: "Tie, kas išvažiavo laivais ir pamiršo, ir tie, kas liko ir pražuvo.",
-    t4_f: "Išvykimas &middot; Grįžimas",
-    t5_loc: "Londonas &middot; 2006&ndash;2012",
-    t5_b: "Žiemos prieglaudos, gatvė ir „The Big Issue“ redaktoriai, išspausdinę pirmuosius tekstus.",
-    t5_f: "Darbas &middot; Spauda",
-    t6_loc: "Kamera",
-    t6_b: "Siras šalia už ginklus, ne tris kilogramus. Bendra tyla prieš vakarinę rikiuotę per garsiakalbį.",
-    t6_f: "Bevardis &middot; Liudytojas",
-    t7_loc: "Oslas / Trandumas &middot; 2026",
-    t7_b: "Kameros kaimynas, žadėjęs savo stipriausią advokatą, ir advokatas, niekada nepateikęs skundo. Išmokė, kas yra terminas, kai niekas jo neišverčia.",
-    t7_f: "Bevardis &middot; Priešinga apkrova",
-    t8_loc: "Skrydis į Vilnių &middot; 2026 lapkr.",
-    t8_b: "Palydos vadovas, pasiūlęs kavos ir atsisveikindamas tyliai pasakęs: „You are not wrong.“",
-    t8_f: "Bevardis &middot; Perėjimas",
-    t9_loc: "Norvegija",
-    t9_b: "Kiekvienas draugas, priėmęs svetimą kaip savą, ir kvietimai, išlaikę šį darbą gyvą.",
-    t9_f: "Išsaugota iki grįžimo",
-    t10_loc: "Bevardžiai &middot; Visos situacijos",
-    t10_b: "Kiekvieni užrakinti vartai, kiekvienas sudegintas puodas, kiekviena patalpa su ramiomis šypsenomis, kurios nei atsisako, nei duoda. Be pasipriešinimo nepatikrinamas joks karkasas.",
-    t10_f: "Visas karkasas &middot; Nulis triukšmo",
-    wall_policy: "<strong>Būsena: bandymas (gyva siena).</strong> Gyvi žmonės čia niekada nefotografuojami ir neviešinami be tiesioginio sutikimo; priešiškos situacijos lieka bevardžiais vaidmenimis. Jei prisidėjote prie šio darbo ir norite, kad jūsų vardas būtų pridėtas arba pašalintas, parašykite tiesiogiai.",
-    wall_contact: "Parašyti prie stalo &rarr;",
+    lead: "Sukompiliuota nuo baltos iki juodos ir nuo skaičiuojančio ego iki Be-Aš. Fono šviesumas krinta, o sintaksės rašalas apverčia poliškumą, kad priešingos jėgos išlaikytų aštrų kontrastą per visą leidimąsi.",
+    sub_note: "Pagal keramines plokštes Londono „Postman's Park“ ir akmeninius ženklus Lietuvos pakelėse. Be gyvų žmonių veidų, be vardų be sutikimo. Kiekvienas registras pririštas prie tylos, garso ir kvapo.",
+    sense_strip: "<span><b>I.</b> Tyla</span><span><b>II.</b> Garsas</span><span><b>III.</b> Kvapas</span>",
+    grad_bar: "<span class=\"g-step g-s1\">I&ndash;III Balta / Juodas tekstas &middot; Ego</span><span>&rarr;</span><span class=\"g-step g-s2\">IV&ndash;VI Popierius / Rašalas &middot; Vaidmuo</span><span>&rarr;</span><span class=\"g-step g-s3\">VII&ndash;VIII Tamsi / Baltas tekstas &middot; Vektorius</span><span>&rarr;</span><span class=\"g-step g-s4\">IX&ndash;X Juoda / Baltas tekstas &middot; Be-Aš</span>",
+    snd_off: "C# garsas &middot; Išj.",
+    m_ratio: "III &middot; C# santykiai",
+    m_bach: "II &middot; C# Bacho kanonas",
+    m_bin: "I &middot; C# dvejetainis",
+    st_audio: "Bandymas &middot; Slinkties valdoma",
+    snd_cap: "Tyla iki įjungimo. Slinkimas nuo baltos iki juodos atvėsina C# rezonansą į tylą.",
+    st1_hdr: "<span>1 pakopa &middot; t = 0,00 &middot; Ego / Makiaveliška</span><span>Baltas fonas &middot; Juoda sintaksė</span>",
+    st2_hdr: "<span>2 pakopa &middot; t = 0,35 &middot; Vaidmuo / Trintis</span><span>Šiltas popierius &middot; Tamsus rašalas</span>",
+    horizon_lbl: "Inversija &middot; Poliškumo apvertimas &middot; Tapatybė tirpsta į vektorių",
+    st3_hdr: "<span>3 pakopa &middot; t = 0,70 &middot; Vektorius / Medžiaga</span><span>Tamsus skalūnas &middot; Pelenų baltumo sintaksė</span>",
+    st4_hdr: "<span>4 pakopa &middot; t = 1,00 &middot; Be-Aš / Ištirpusi erdvė</span><span>Juoduma &middot; Grynai balta sintaksė</span>",
+    t1_loc: "Svertas &middot; Mainai",
+    t1_b: "Mano valandos įkainotos keturių penkių valandų pamainomis už vieną kambarį; mano svertas pasvertas dar neatidarius durų; mano skaičiavimas šaltesnis už jų.",
+    t1_s: "Kvapas: sudegintas puodas bendroje virtuvėlėje &middot; Garsas: mandagūs atsisakymai",
+    t1_f: "1 pakopa &middot; Savanaudiška / Makiaveliška",
+    t2_loc: "Oslas / Trandumas &middot; 2026",
+    t2_b: "Mano bausmė atlikta pačiam atvykus; mano terminas praleistas svetimo stipriausio advokato; mano pasitikėjimas įvertintas septyniasdešimt dviem valandomis be vertimo.",
+    t2_s: "Garsas: skambučių kortelės užimtumo signalas &middot; Tyla: nepateikti dokumentai",
+    t2_f: "1 pakopa &middot; Savanaudiška / Skola",
+    t3_loc: "Nuosavybė &middot; Nuotolis",
+    t3_b: "Mano apsnigtas laivas, mano močiutės krantas, aštuoni tūkstančiai kilometrų iki mano dukros. Viskas pavadinta savu, kol keliai atsisako pirmi.",
+    t3_s: "Garsas: salono ūžesys virš Atlanto &middot; Kvapas: šalta druska, triumai",
+    t3_f: "1 pakopa &middot; Ego / Pretenzija",
+    t4_loc: "Londonas &middot; 2006&ndash;2012",
+    t4_b: "Žiemos prieglaudos, grindinys ir „The Big Issue“ redaktoriai, spausdinantys pirmuosius puslapius. Prieglobstis ir atmetimas toje pačioje gatvėje.",
+    t4_s: "Kvapas: šlapia prieglaudos vilna, lietus, senas tabakas &middot; Garsas: gatvės eismas",
+    t4_f: "2 pakopa &middot; Vaidmuo / Trintis",
+    t5_loc: "Kamera",
+    t5_b: "Šalia už ginklus, ne tris kilogramus. Bendra tyla prieš vakarinę rikiuotę per garsiakalbį.",
+    t5_s: "Garsas: vakarinė rikiuotė per garsiakalbį &middot; Kvapas: kibiras nuotekoms, akmeninė siena",
+    t5_f: "2 pakopa &middot; Vaidmuo / Liudytojas",
+    t6_loc: "Skrydis į Vilnių &middot; 2026 lapkr.",
+    t6_b: "Kava, pasiūlyta palydos skrydyje; vienas tylus sakinys atsisveikinant; durys Norvegijoje, laikomos atviros be sąlygų.",
+    t6_s: "Kvapas: kava &middot; Garsas: tylus balsas prie išėjimo",
+    t6_f: "2 pakopa &middot; Vaidmuo / Perėjimas",
+    t7_loc: "Proskyna",
+    t7_b: "Virvė, peiliukas ir šakės pilkoje žiemos šviesoje. Du kvėpavimai; įtampa laikoma, kol kas būtina įvyksta iki galo.",
+    t7_s: "Garsas: sušalusių šakų girgždesys &middot; Kvapas: šlapias sniegas, žemė",
+    t7_f: "3 pakopa &middot; Vektorius / Medžiaga",
+    t8_loc: "Vanduo &middot; Perplaukimas",
+    t8_b: "Irklai per dideles bangas link tuščio kranto. Išvykimas laivais į užmarštį; pasilikimas į pražūtį.",
+    t8_s: "Garsas: vanduo į medieną &middot; Kvapas: kojų ir rožių vandens kilimas, mėšlas po lietaus",
+    t8_f: "3 pakopa &middot; Vektorius / Judesys",
+    t9_loc: "Ežeras &middot; 1905",
+    t9_b: "Juodas vanduo kaip veidrodis virš išnykusio kaimo. Išdžiūvęs rašalas metrikuose. Gyventojų skaičius: nulinis.",
+    t9_s: "Tyla: stovintis vanduo &middot; Kvapas: žalios samanos ant smėlio",
+    t9_f: "4 pakopa &middot; Erdvė / Nulis",
+    t10_loc: "Atviras karkasas",
+    t10_b: "Sutepti vyriai sukasi be garso. Ramios šypsenos, nei atsisakančios, nei duodančios. Priešingos apkrovos, susitinkančios mazge, kol niekas nejuda ir lieka nulis triukšmo.",
+    t10_s: "Kvapas: vėstantys dūmai prie vartų &middot; Tyla: sutepta geležis",
+    t10_f: "4 pakopa &middot; Be-Aš / Ištirpusi erdvė",
+    wall_policy: "<strong>Būsena: bandymas (gyva siena).</strong> Fonas pereina iš baltos į juodą, o sintaksės poliškumas apvirsta iš juodos į baltą ties inversijos horizontu (WCAG AAA įskaitomumas kiekvienoje pakopoje). Be gyvų veidų, be vardų be sutikimo; pakeitimai ar pašalinimai atliekami gavus tiesioginį pranešimą.",
+    wall_contact: "Tiesioginis pranešimas &rarr;",
+    foot_log: "The Sea Keeps Giving &rarr;",
+    foot_mech: "Mechanika &rarr;",
     footer_copy: "Vilnius &middot; 2026 &middot; Tekstai ir fotografijos &copy; Mantas Pagalys"
   };
 
@@ -571,6 +799,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
       if (dict[k] !== undefined) el.innerHTML = dict[k];
     });
     syncSoundLabel();
+    updateScrollT();
     langButtons.forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-lang") === currentLang);
     });
