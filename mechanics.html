@@ -364,6 +364,12 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
   .explorable { grid-template-columns: 1fr; }
   .tri-grid { grid-template-columns: 1fr; }
 }
+.st-pill {
+  display: inline-block; font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 2px 8px; line-height: 1.5; vertical-align: middle; margin-bottom: 12px;
+  border: 1px dashed var(--red); color: var(--red); background: rgba(176, 46, 26, 0.045);
+}
 @media (max-width: 860px) {
   .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
   .nav-right { display: contents; }
@@ -412,6 +418,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       <h1 data-i18n="hero_h1">Mechanics &amp; Frame.</h1>
       <p class="eyebrow" data-i18n="hero_eye">Open Parametric Cabin Tool &middot; Zero Libraries</p>
     </div>
+    <p class="st-pill" data-i18n="st_page">Testing &middot; Open Calculation (Physics Checked; 1:1 Build Not Yet Constructed; Not an Engineer Sign-Off)</p>
     <p class="lead" data-i18n="hero_lead">Free interactive plates for a solo hand-built timber hall: adjustable width, length, pitch, and log diameters with live structural checks, clay vs. slaked lime wall physics, a year-round natural harvest calendar, and a basic manual tool list. Click any formula, metric box, or dashed term anywhere on the page for a plain-words explanation.</p>
     <div class="open-actions">
       <a class="btn-dark" id="btn-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="btn_pdf">Download Free 4-Page CAD Guide (PDF)</a>
@@ -1703,6 +1710,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
     hero_h1: "Mechanika ir karkasas.",
     hero_eye: "Atviras parametrinis namelio įrankis &middot; Be bibliotekų",
+    st_page: "Bandymas &middot; Atvira skaičiuoklė (fizika patikrinta; 1:1 namelis dar nepastatytas; ne konstruktoriaus parašas)",
     hero_lead: "Nemokamos interaktyvios plokštelės vieno žmogaus rankomis statomam mediniam nameliui: keičiamas plotis, ilgis, stogo nuolydis ir rąstų skersmenys su gyvais skaičiavimais, molio ir gesintų kalkių rasos taško fizika, sezoniškumo kalendoriumi ir pagrindinių rankinių įrankių sąrašu. Spustelėkite bet kurią formulę, skaitiklį ar pabrauktą terminą paprastam paaiškinimui.",
     btn_pdf: "Atsisiųsti nemokamą 4 psl. CAD vadovą LT (PDF)",
     btn_print: "Spausdinti / išsaugoti savo skaičiavimą",

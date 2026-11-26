@@ -513,6 +513,12 @@ footer.colophon {
   color: #c8c5be;
 }
 
+.st-pill {
+  display: inline-block; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 2px 8px; line-height: 1.5; margin: 0 0 14px;
+  border: 1px solid var(--ink); color: var(--ink);
+}
 @media (max-width: 860px) {
   .nav-inner {
     height: auto;
@@ -585,6 +591,7 @@ footer.colophon {
   <div class="archive-head">
     <a class="back-link" href="index.html" data-i18n="back_index">&larr; Back to index</a>
     <p class="eyebrow" data-i18n="arch_eyebrow">Archive · Plates I–XXIX</p>
+    <p class="st-pill" data-i18n="st_page">Locked &middot; Monochrome Archive I&ndash;XXIX</p>
     <h1 data-i18n="arch_h1">Photographic archive.</h1>
     <p class="lead" data-i18n="arch_lead">Complete twenty-nine-plate series assembled alongside <em>Antinovelė</em> and <em>The Sea Keeps Giving</em>. The fifteen monochrome monograph plates appear first, followed by fourteen extended coastal, road, and colour-toned studies.</p>
     <div class="opening-actions">
@@ -946,6 +953,11 @@ footer.colophon {
         <span class="archive-desc" data-i18n="rel_log">Eight short Lithuanian fragments alongside their English renderings.</span>
         <span class="archive-arrow" aria-hidden="true">↗</span>
       </a>
+      <a class="archive-row" href="memorial.html">
+        <span class="archive-title" data-i18n="rel_mem_t">Memorial</span>
+        <span class="archive-desc" data-i18n="rel_mem">Testing · Living wall of named and unnamed loads (no faces; Postman&rsquo;s Park format).</span>
+        <span class="archive-arrow" aria-hidden="true">↗</span>
+      </a>
       <a class="archive-row" href="arka.html">
         <span class="archive-title">ARKA</span>
         <span class="archive-desc" data-i18n="rel_arka">Proposal and cost model for permanent small municipal homes replacing temporary shelter housing.</span>
@@ -1029,6 +1041,7 @@ footer.colophon {
     nav_contact: "Kontaktai",
     back_index: "&larr; Į pradžią",
     arch_eyebrow: "Archyvas · Plokštelės I–XXIX",
+    st_page: "Fiksuota &middot; Juodai baltas archyvas I&ndash;XXIX",
     arch_h1: "Fotografijos archyvas.",
     arch_lead: "Visos dvidešimt devynios plokštelės, surinktos greta <em>„Antinovelės“</em> ir <em>„The Sea Keeps Giving“</em>. Pirma pateikiama penkiolikos monochrominių kadrų atranka, po jos – keturiolika išplėstinių pajūrio, kelio ir spalvotų studijų.",
     cta_selected: "Atrinktos plokštelės (I–XV)",
@@ -1081,6 +1094,8 @@ footer.colophon {
     rel_craft: "Penkios konstrukcijų plokštelės (I–V) greta dailidės, mūro ir betono darbų.",
     rel_log_t: "The Sea Keeps Giving",
     rel_log: "Aštuoni trumpi lietuviški fragmentai greta jų angliškų vertimų.",
+    rel_mem_t: "Paminklas",
+    rel_mem: "Bandymas · Gyva įvardytų ir bevardžių apkrovų siena (be veidų; „Postman's Park“ formatas).",
     rel_arka: "Pasiūlymas ir skaičiuoklė savivaldybėms dėl nuolatinių mažų būstų vietoj laikino apgyvendinimo.",
     rel_wak: "Detali ataskaita apie mažo burlaivio paruošimą savarankiškam plaukimui per vandenyną.",
     footer_copy: "Vilnius · 2026 · Tekstai ir fotografijos © Mantas Pagalys",

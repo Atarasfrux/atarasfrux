@@ -299,6 +299,12 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
 }
 .colophon-name { font-family: var(--serif-display); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; }
 
+.st-pill {
+  display: inline-block; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 2px 8px; line-height: 1.5; margin: 0 0 14px;
+  border: 1px solid var(--ink); color: var(--ink);
+}
 @media (max-width: 860px) {
   .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
   .nav-right { display: contents; }
@@ -355,6 +361,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
         <h1 data-i18n="hero_h1">Dossier.</h1>
         <p class="eyebrow inline-eye" data-i18n="hero_eye">Vilnius &middot; Europe</p>
       </div>
+      <p class="st-pill" data-i18n="st_page">Locked &middot; Verified Work Record (2006&ndash;2026)</p>
       <p class="lead" data-i18n="hero_lead">Construction practice across Norway, the United Kingdom, and Lithuania: drawings, project management, site supervision, and client coordination. Legal archiving in London, Nordic export documentation, and Linux automation. Click any formula or dashed term for a plain-words explanation.</p>
       <div class="opening-actions">
         <a class="text-link subtle" href="index.html" data-i18n="cta_home">&larr; Writing &amp; Photographs</a>
@@ -894,6 +901,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 3
     nav_writing: "Tekstai", nav_photos: "Fotografija", nav_craft: "Amatas",
     nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
     hero_eye: "Vilnius &middot; Europa", hero_h1: "Byla.",
+    st_page: "Fiksuota &middot; Patikrinta darbo byla (2006&ndash;2026)",
     hero_lead: "Statybinė veikla Norvegijoje, Jungtinėje Karalystėje ir Lietuvoje: brėžiniai, projektų valdymas, priežiūra ir derinimas su užsakovais. Archyvavimas Londone, Šiaurės šalių eksporto dokumentacija ir „Linux“ automatika. Spustelėkite bet kurią formulę ar pabrauktą terminą paprastam paaiškinimui.",
     cta_home: "&larr; Tekstai ir fotografija",
     cta_mech: "Atverti namelio ir mechanikos įrankį &rarr;",

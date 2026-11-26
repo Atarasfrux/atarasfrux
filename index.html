@@ -753,6 +753,61 @@ section.band {
   max-width: 36ch;
 }
 
+.svc-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 26px 0 0;
+  border-top: 1px solid var(--rule);
+  font-size: 0.84rem;
+}
+
+.svc-tbl td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--muted);
+  vertical-align: baseline;
+}
+
+.svc-tbl td:first-child { color: var(--ink); padding-right: 12px; }
+
+.svc-tbl td:last-child {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* Status Distinction: Locked vs Testing vs Draft */
+.st-tag {
+  display: inline-block;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+.st-locked { border: 1px solid var(--ink); color: var(--ink); }
+.st-testing { border: 1px dashed var(--accent); color: var(--accent); background: rgba(140, 58, 43, 0.045); }
+.st-draft { border: 1px dotted var(--rule-strong); color: var(--muted); }
+.st-legend {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+.st-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.rail-st { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.arch-head { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+
 form.inquiry {
   display: grid;
   gap: 20px;
@@ -1008,6 +1063,13 @@ footer.colophon {
       <div class="opening-actions">
         <a class="text-link" href="#writing" data-i18n="cta_writing">Read selected writing</a>
         <a class="text-link subtle" href="#photographs" data-i18n="cta_photos">View twelve plates</a>
+        <a class="text-link subtle" href="mechanics.html" data-i18n="cta_mech">Free cabin CAD &amp; math</a>
+        <a class="text-link subtle" href="arka.html" data-i18n="cta_arka">ARKA cost model</a>
+      </div>
+      <div class="st-legend" aria-label="Page status key" data-i18n="st_legend">
+        <span><em class="st-tag st-locked" style="font-style:normal;">Locked</em> Verified / finished</span>
+        <span><em class="st-tag st-testing" style="font-style:normal;">Testing</em> Active prototype</span>
+        <span><em class="st-tag st-draft" style="font-style:normal;">Draft</em> Unfinished / unbuilt</span>
       </div>
     </div>
 
@@ -1027,6 +1089,7 @@ footer.colophon {
       <span class="rail-num">01</span>
       <h2 id="h-writing" data-i18n="sec_writing">Writing</h2>
       <p class="rail-note" data-i18n="sec_writing_note">Four selections from the active manuscript, correspondence, and bilingual archive.</p>
+      <div class="rail-st"><span class="st-tag st-draft" data-i18n="st_w_1">I&ndash;II Draft</span><span class="st-tag st-locked" data-i18n="st_w_2">III&ndash;IV Locked</span></div>
     </div>
 
     <div>
@@ -1145,7 +1208,7 @@ footer.colophon {
       <div class="biblio">
         <div>
           <h3 data-i18n="bib_1_h">Manuscript</h3>
-          <p data-i18n="bib_1_p"><em>Antinovelė</em> (working title, ~30,000 words, Lithuanian). Extended English and Lithuanian samples available on request.</p>
+          <p data-i18n="bib_1_p"><em>Antinovelė</em> (unfinished, ~30,000 words so far, Lithuanian). Extended English and Lithuanian samples on request.</p>
         </div>
         <div>
           <h3 data-i18n="bib_2_h">Published</h3>
@@ -1164,6 +1227,7 @@ footer.colophon {
       <span class="rail-num">02</span>
       <h2 id="h-photos" data-i18n="sec_photos">Photographs</h2>
       <p class="rail-note" data-i18n="sec_photos_note">Twelve selected plates · Companion monograph</p>
+      <div class="rail-st"><span class="st-tag st-locked" data-i18n="st_photos">Locked &middot; I&ndash;XII</span></div>
     </div>
 
     <div>
@@ -1296,6 +1360,7 @@ footer.colophon {
       <span class="rail-num">03</span>
       <h2 id="h-craft" data-i18n="sec_craft">Craft &amp; Archive</h2>
       <p class="rail-note" data-i18n="sec_craft_note">Built work and independent projects.</p>
+      <div class="rail-st"><span class="st-tag st-locked" data-i18n="st_c_1">Studies Locked</span><span class="st-tag st-testing" data-i18n="st_c_2">Tools Testing</span></div>
     </div>
 
     <div>
@@ -1355,32 +1420,37 @@ footer.colophon {
 
       <div class="archive-list">
         <a class="archive-row" href="dossier.html">
-          <span class="archive-title" data-i18n="arch_dossier_t">Dossier</span>
+          <span class="arch-head"><span class="archive-title" data-i18n="arch_dossier_t">Dossier</span><span class="st-tag st-locked" data-i18n="st_locked_lbl">Locked</span></span>
           <span class="archive-desc" data-i18n="arch_dossier">Construction practice, site supervision, legal archiving, Nordic export documentation, and Linux automation.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
         <a class="archive-row" href="mechanics.html">
-          <span class="archive-title" data-i18n="arch_mech_t">Mechanics &amp; Frame</span>
+          <span class="arch-head"><span class="archive-title" data-i18n="arch_mech_t">Mechanics &amp; Frame</span><span class="st-tag st-testing" data-i18n="st_test_lbl">Testing</span></span>
           <span class="archive-desc" data-i18n="arch_mech">Interactive parametric construction plates: roof thrust, birch dew-point physics, beam bending, buckling, and catenary arch.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
         <a class="archive-row" href="plates.html">
-          <span class="archive-title" data-i18n="arch_plates_t">Plates Archive</span>
+          <span class="arch-head"><span class="archive-title" data-i18n="arch_plates_t">Plates Archive</span><span class="st-tag st-locked" data-i18n="st_locked_lbl2">Locked</span></span>
           <span class="archive-desc" data-i18n="arch_plates">Complete twenty-nine-plate photographic archive, including extended coastal, road, and toned studies (I–XXIX).</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
+        <a class="archive-row" href="memorial.html">
+          <span class="arch-head"><span class="archive-title" data-i18n="arch_mem_t">Memorial</span><span class="st-tag st-testing" data-i18n="st_test_lbl2">Testing</span></span>
+          <span class="archive-desc" data-i18n="arch_mem">Living stone wall of named and unnamed loads, setups, helpers, and opposing forces (no faces; opt-in acoustic sketch).</span>
+          <span class="archive-arrow" aria-hidden="true">↗</span>
+        </a>
         <a class="archive-row" href="arka.html">
-          <span class="archive-title">ARKA</span>
-          <span class="archive-desc" data-i18n="arch_arka">Proposal and cost model for permanent small municipal homes replacing temporary shelter housing.</span>
+          <span class="arch-head"><span class="archive-title">ARKA</span><span class="st-tag st-draft" data-i18n="st_unbuilt_lbl">Unbuilt</span></span>
+          <span class="archive-desc" data-i18n="arch_arka">Proposal · not yet built. Cost model for permanent small municipal homes replacing temporary shelter housing; assumptions labelled openly.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
         <a class="archive-row" href="wak943.html">
-          <span class="archive-title">WAK943</span>
-          <span class="archive-desc" data-i18n="arch_wak">Itemised account of making a small sailing vessel seaworthy for solo passage.</span>
+          <span class="arch-head"><span class="archive-title">WAK943</span><span class="st-tag st-draft" data-i18n="st_prep_lbl">In Prep</span></span>
+          <span class="archive-desc" data-i18n="arch_wak">In preparation. Itemised repair account for making a small sailing vessel seaworthy for solo passage.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
         <a class="archive-row" href="log.html">
-          <span class="archive-title" data-i18n="arch_log_t">The Sea Keeps Giving</span>
+          <span class="arch-head"><span class="archive-title" data-i18n="arch_log_t">The Sea Keeps Giving</span><span class="st-tag st-locked" data-i18n="st_locked_lbl3">Locked</span></span>
           <span class="archive-desc" data-i18n="arch_log">Eight short Lithuanian fragments alongside their English renderings.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
@@ -1392,6 +1462,7 @@ footer.colophon {
     <div class="rail">
       <span class="rail-num">04</span>
       <h2 id="h-contact" data-i18n="sec_contact">Contact</h2>
+      <div class="rail-st"><span class="st-tag st-locked" data-i18n="st_ct_1">Direct Open</span><span class="st-tag st-testing" data-i18n="st_ct_2">Desk Testing</span></div>
     </div>
 
     <div class="contact-grid">
@@ -1404,9 +1475,15 @@ footer.colophon {
         <a class="email-link" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
         <p class="contact-meta" data-i18n="contact_meta">Based in Vilnius, Lithuania. Working in Lithuanian, English (C1), Russian, and Norwegian (A2, in progress).</p>
 
+        <table class="svc-tbl" aria-label="Paid work and commissions">
+          <tr><td data-i18n="svc_1">Carpentry &amp; joinery (timber frames, site work)</td><td data-i18n="svc_rate1">On request</td></tr>
+          <tr><td data-i18n="svc_2">Custom timber &amp; ARKA sizing calculations</td><td data-i18n="svc_rate2">On request</td></tr>
+          <tr><td data-i18n="svc_3">Signed archival pigment prints (edition of 10)</td><td data-i18n="svc_rate3">On request</td></tr>
+        </table>
+
         <div class="desk-host">
           <p class="dh-k" data-i18n="dh_k">no route to host &middot; open desk</p>
-          <p class="dh-lead" data-i18n="dh_p1">No institution, grant, or publisher stands behind this desk. The texts, photographs, cabin calculator, and 4-page CAD guide stay free and unlocked.</p>
+          <p class="dh-lead" data-i18n="dh_p1">No institution, grant, or publisher stands behind this desk. The cabin calculator and 4-page CAD guide stay free to use and adapt; texts and photographs remain &copy; Mantas Pagalys.</p>
           <p data-i18n="dh_p2">If the work holds weight for you, you can hold a small share of the host: funding undisturbed hours to write, draw, and keep the archive open. Zero paywalls, zero tiers.</p>
           <!-- LIBERAPAY_KOFI_SLOT: paste live Liberapay / Ko-fi URLs here once created -->
           <div class="dh-links">
@@ -1507,6 +1584,25 @@ footer.colophon {
     hero_quote: "Laivas nėra nuosavybė. Kaip ir žmogus, kuris juo plaukia.",
     cta_writing: "Skaityti ištraukas",
     cta_photos: "Žiūrėti dvylika plokštelių",
+    cta_mech: "Nemokamas namelio CAD ir fizika",
+    cta_arka: "ARKA sąmatos modelis",
+    st_legend: "<span><em class=\"st-tag st-locked\" style=\"font-style:normal;\">Fiksuota</em> Patikrinta / baigta</span><span><em class=\"st-tag st-testing\" style=\"font-style:normal;\">Bandymas</em> Aktyvus prototipas</span><span><em class=\"st-tag st-draft\" style=\"font-style:normal;\">Juodraštis</em> Nebaigta / nepastatyta</span>",
+    st_w_1: "I&ndash;II Juodraštis",
+    st_w_2: "III&ndash;IV Fiksuota",
+    st_photos: "Fiksuota &middot; I&ndash;XII",
+    st_c_1: "Studijos fiksuotos",
+    st_c_2: "Įrankiai bandomi",
+    st_locked_lbl: "Fiksuota",
+    st_locked_lbl2: "Fiksuota",
+    st_locked_lbl3: "Fiksuota",
+    st_test_lbl: "Bandymas",
+    st_test_lbl2: "Bandymas",
+    st_unbuilt_lbl: "Nepastatyta",
+    st_prep_lbl: "Ruošiama",
+    st_ct_1: "Kontaktai atviri",
+    st_ct_2: "Stalas bandomas",
+    arch_mem_t: "Paminklas",
+    arch_mem: "Gyva įvardytų ir bevardžių apkrovų, pagalbos ir pasipriešinimo siena (be veidų; išjungtas garso eskizas).",
     cap_0: "Be perkėlos",
     cap_1: "Svoris",
     cap_2: "Saitas",
@@ -1581,7 +1677,7 @@ footer.colophon {
       "<p>Netrukus jus visus pakviesiu į tai, ką kuriu. Švęsime gyvenimą kartu.</p>" +
       "<p>Mantas</p>",
     bib_1_h: "Rankraštis",
-    bib_1_p: "<em>Antinovelė</em> (darbinis pavadinimas, ~30 000 žodžių, lietuvių k.). Ilgesnės ištraukos lietuvių ir anglų kalbomis atsiunčiamos pagal užklausą.",
+    bib_1_p: "<em>Antinovelė</em> (nebaigtas, ~30 000 žodžių, lietuvių k.). Ilgesnės ištraukos lietuvių ir anglų kalbomis pagal užklausą.",
     bib_2_h: "Publikacijos",
     bib_2_p: "Trumpoji proza ir tekstai žurnale <em>The Big Issue</em> (Londonas, 2006–2012) ir laikraštyje <em>Širvinta</em> (2009).",
     bib_3_h: "Patirtis",
@@ -1606,15 +1702,21 @@ footer.colophon {
     arch_mech: "Interaktyvios konstrukcijų plokštelės: stogo skėtimas, beržo rasos taškas, sijos lenkimas, klupumas ir arka.",
     arch_plates_t: "Plokštelių archyvas",
     arch_plates: "Visas dvidešimt devynių plokštelių fotografijos archyvas su išplėstinėmis pajūrio, kelio ir tonuotomis studijomis (I–XXIX).",
-    arch_arka: "Pasiūlymas ir skaičiuoklė savivaldybėms dėl nuolatinių mažų būstų vietoj laikino apgyvendinimo.",
-    arch_wak: "Detali ataskaita apie mažo burlaivio paruošimą savarankiškam plaukimui per vandenyną.",
+    arch_arka: "Pasiūlymas · dar nepastatyta. Nuolatinių mažų savivaldybės būstų sąmatos modelis vietoj laikinų nakvynės namų; prielaidos pažymėtos atvirai.",
+    arch_wak: "Ruošiamas. Detali mažo burlaivio paruošimo savarankiškam plaukimui darbų ir išlaidų apskaita.",
     arch_log_t: "The Sea Keeps Giving",
     arch_log: "Aštuoni trumpi lietuviški fragmentai greta jų angliškų vertimų.",
     sec_contact: "Kontaktai",
     contact_lead: "Dėl literatūrinių rezidencijų, leidybos, rankraščio ištraukų, archyvinių atspaudų ar individualių medienos ir ARKA skaičiavimų.",
     contact_meta: "Vilnius, Lietuva. Darbinės kalbos: lietuvių, anglų (C1), rusų, norvegų (A2, tobulinama).",
+    svc_1: "Dailidės ir staliaus darbai (karkasai, objektai)",
+    svc_rate1: "Pagal užklausą",
+    svc_2: "Individualūs medienos ir ARKA skaičiavimai",
+    svc_rate2: "Pagal užklausą",
+    svc_3: "Pasirašyti archyviniai atspaudai (10 vnt. tiražas)",
+    svc_rate3: "Pagal užklausą",
     dh_k: "no route to host &middot; atviras stalas",
-    dh_p1: "Už šio darbo stalo nestovi jokia institucija, fondas ar leidykla. Tekstai, fotografijos, namelio skaičiuoklė ir 4 psl. CAD vadovas lieka nemokami ir atviri.",
+    dh_p1: "Už šio darbo stalo nestovi jokia institucija, fondas ar leidykla. Namelio skaičiuoklė ir 4 psl. CAD vadovas laisvai naudojami ir pritaikomi; tekstai ir fotografijos lieka &copy; Mantas Pagalys.",
     dh_p2: "Jei darbas jums vertingas, galite prisiimti mažą šios erdvės dalį: paremti ramias valandas rašymui, brėžiniams ir atviram archyvui. Nulis mokamų sienų, nulis pakopų.",
     dh_link1: "Paremti ramias darbo valandas (tiesiogiai / Liberapay) &rarr;",
     dh_link2: "Nemokamas namelio įrankis ir CAD PDF &rarr;",
