@@ -514,7 +514,31 @@ footer.colophon {
 }
 
 @media (max-width: 860px) {
-  .nav-links { display: none; }
+  .nav-inner {
+    height: auto;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    gap: 10px 16px;
+  }
+  .nav-right { display: contents; }
+  .brand { order: 1; }
+  .lang-switch { order: 2; }
+  .nav-links {
+    display: flex;
+    order: 3;
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    padding: 2px 0;
+  }
+  section[id] { scroll-margin-top: 104px; }
   section.band {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -545,7 +569,8 @@ footer.colophon {
         <a href="index.html#writing" data-i18n="nav_writing">Writing</a>
         <a href="#selected" data-i18n="nav_selected">Selected</a>
         <a href="#extended" data-i18n="nav_extended">Extended</a>
-        <a href="index.html#craft" data-i18n="nav_craft">Craft</a>
+        <a href="dossier.html" data-i18n="nav_dossier">Dossier</a>
+        <a href="mechanics.html" data-i18n="nav_mech">Mechanics</a>
         <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="lang-switch" role="group" aria-label="Language">
@@ -885,6 +910,7 @@ footer.colophon {
       </div>
 
       <p class="gallery-hint" data-i18n="gallery_hint">Select any plate to view full screen · Arrow keys to navigate</p>
+      <p style="margin:12px 0 0;font-size:0.86rem;color:var(--muted);" data-i18n="print_note">Signed archival pigment prints (numbered edition of 10) available on <a href="index.html#contact" style="border-bottom:1px solid var(--ink);text-decoration:none;">direct inquiry</a>.</p>
     </div>
   </section>
 
@@ -897,7 +923,17 @@ footer.colophon {
     <div class="archive-list">
       <a class="archive-row" href="index.html#writing">
         <span class="archive-title" data-i18n="rel_writing_t">Writing</span>
-        <span class="archive-desc" data-i18n="rel_writing">Selected passages from Antinovelė and bilingual fragments on the main page.</span>
+        <span class="archive-desc" data-i18n="rel_writing">Selected passages from Antinovelė, Letter to Norway, and bilingual fragments on the main page.</span>
+        <span class="archive-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="archive-row" href="dossier.html">
+        <span class="archive-title" data-i18n="rel_dossier_t">Dossier</span>
+        <span class="archive-desc" data-i18n="rel_dossier">Construction practice, site QA, interactive structural checks, and Linux automation.</span>
+        <span class="archive-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="archive-row" href="mechanics.html">
+        <span class="archive-title" data-i18n="rel_mech_t">Mechanics &amp; Frame</span>
+        <span class="archive-desc" data-i18n="rel_mech">Open-source interactive timber cabin sizing tool, clay vs. slaked lime dew-point physics, and free 4-page CAD PDF.</span>
         <span class="archive-arrow" aria-hidden="true">↗</span>
       </a>
       <a class="archive-row" href="index.html#craft">
@@ -988,7 +1024,8 @@ footer.colophon {
     nav_writing: "Tekstai",
     nav_selected: "Atrinktos",
     nav_extended: "Archyvas",
-    nav_craft: "Amatas",
+    nav_dossier: "Byla",
+    nav_mech: "Mechanika",
     nav_contact: "Kontaktai",
     back_index: "&larr; Į pradžią",
     arch_eyebrow: "Archyvas · Plokštelės I–XXIX",
@@ -1032,9 +1069,14 @@ footer.colophon {
     cap_27: "Vėlyvas vaisius",
     cap_28: "Vienas stiebas",
     gallery_hint: "Spustelėkite bet kurį kadrą pilnam vaizdui · Perjungimas rodyklėmis",
+    print_note: "Pasirašyti archyviniai pigmentiniai atspaudai (numeruotas 10 vnt. tiražas) pagal <a href=\"index.html#contact\" style=\"border-bottom:1px solid var(--ink);text-decoration:none;\">tiesioginę užklausą</a>.",
     sec_other: "Susiję darbai",
     rel_writing_t: "Tekstai",
-    rel_writing: "Atrinktos ištraukos iš „Antinovelės“ ir dvikalbiai fragmentai pradiniame puslapyje.",
+    rel_writing: "Atrinktos ištraukos iš „Antinovelės“, laiškas į Norvegiją ir dvikalbiai fragmentai pradiniame puslapyje.",
+    rel_dossier_t: "Byla",
+    rel_dossier: "Statybinė praktika, kokybės kontrolė, interaktyvūs konstrukcijų skaičiavimai ir „Linux“ automatika.",
+    rel_mech_t: "Mechanika ir karkasas",
+    rel_mech: "Atviras interaktyvus namelio skaičiuotuvas, molio ir gesintų kalkių fizika bei nemokamas 4 psl. CAD PDF.",
     rel_craft_t: "Amato studijos",
     rel_craft: "Penkios konstrukcijų plokštelės (I–V) greta dailidės, mūro ir betono darbų.",
     rel_log_t: "The Sea Keeps Giving",

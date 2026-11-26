@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="darkreader-lock">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanics &amp; Frame · Open Parametric Cabin Tool · Mantas Pagalys</title>
+<link rel="canonical" href="https://greifiks.org/mechanics.html">
+<meta name="description" content="Free interactive construction plates for a hand-built timber Skiftesverk hall: adjustable sizing, live materials bill, clay vs. slaked lime Fourier dew-point physics, seasonal material calendar, and 1-person manual tool list.">
+<meta name="author" content="Mantas Pagalys">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mechanics &amp; Frame · Open Parametric Cabin Tool · Mantas Pagalys">
+<meta property="og:description" content="Adjustable true-scale timber hall plates, Fourier &amp; Glaser condensation check (clay vs. slaked lime), seasonal calendar, and free 4-page CAD PDF.">
+<meta property="og:url" content="https://greifiks.org/mechanics.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f5f3ef;
+  --surface: #ece9e2;
+  --ink: #161719;
+  --muted: #55585e;
+  --faint: #7b7e84;
+  --rule: #d5d1c8;
+  --red: #8c3a2b;
+  --blue: #234b6e;
+  --ochre: #9c7224;
+  --ok: #2f5d38;
+  --serif-display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
+  --serif-body: "Newsreader", Charter, "Iowan Old Style", Georgia, serif;
+  --sans: "Jost", system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --max: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; background: var(--paper); }
+
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-weight: 300; line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(18px, 3.8vw, 44px); }
+
+/* Header */
+header.site-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; }
+.brand { text-decoration: none; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap; }
+.nav-right { display: flex; align-items: center; gap: 26px; }
+.nav-links { display: flex; align-items: center; gap: 22px; }
+.nav-links a {
+  text-decoration: none; font-size: 0.74rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  padding: 4px 0; transition: color 0.18s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+.lang-switch { display: inline-flex; border: 1px solid var(--rule); }
+.lang-switch button {
+  border: 0; background: transparent; padding: 5px 10px;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); cursor: pointer;
+}
+.lang-switch button.active { background: var(--ink); color: var(--paper); }
+
+/* Opening */
+.opening { padding: clamp(44px, 6.5vw, 76px) 0 clamp(32px, 4.5vw, 48px); border-bottom: 1px solid var(--ink); }
+.title-lockup { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; }
+.opening h1 {
+  margin: 0; font-family: var(--serif-display); font-weight: 400;
+  font-size: clamp(2.3rem, 4.8vw, 3.8rem); line-height: 1.05; letter-spacing: -0.02em;
+}
+.eyebrow {
+  margin: 0; font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+}
+.eyebrow::before {
+  content: ""; display: inline-block; width: 26px; height: 1px;
+  background: var(--red); vertical-align: middle; margin-right: 11px;
+}
+.lead { margin: 18px 0 0; max-width: 68ch; font-size: 1rem; line-height: 1.7; color: var(--muted); }
+
+.open-actions { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+  padding: 9px 18px; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; cursor: pointer; transition: background 0.18s, border-color 0.18s;
+}
+.btn-dark:hover { background: var(--red); border-color: var(--red); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; border: 1px solid var(--rule); background: #fff; color: var(--ink);
+  padding: 9px 16px; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: pointer; transition: border-color 0.18s, color 0.18s;
+}
+.btn-ghost:hover { border-color: var(--ink); color: var(--red); }
+
+.byrne-legend {
+  display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 22px;
+  padding-top: 14px; border-top: 1px solid var(--rule);
+  font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+.byrne-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.swatch { width: 14px; height: 10px; display: inline-block; border: 1px solid rgba(0, 0, 0, 0.22); }
+
+/* Plate Bands */
+section.plate-band { padding: clamp(40px, 5.5vw, 66px) 0; border-bottom: 1px solid var(--rule); }
+.plate-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 10px 20px; margin-bottom: 16px;
+}
+.plate-kicker {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--red); display: block; margin-bottom: 4px;
+}
+.plate-header h2 {
+  margin: 0; font-family: var(--serif-display); font-weight: 400;
+  font-size: clamp(1.45rem, 2.7vw, 2.05rem); line-height: 1.16;
+}
+
+/* Universal Click-to-Explain UI */
+.formula-strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.term-btn {
+  border: 1px solid var(--rule); background: var(--surface);
+  padding: 5px 10px; cursor: pointer;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: border-color 0.16s, background 0.16s, color 0.16s;
+}
+.term-btn .qmark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 1px solid var(--blue); color: var(--blue);
+  font-size: 0.62rem; font-weight: 600; line-height: 1;
+}
+.term-btn:hover, .term-btn.active { border-color: var(--blue); background: #fff; color: var(--blue); }
+.term-btn.active .qmark { background: var(--blue); color: #fff; }
+
+.inline-term {
+  border: 0; background: none; padding: 0 1px; cursor: pointer;
+  color: inherit; font: inherit; border-bottom: 1px dashed var(--blue);
+  transition: color 0.16s, border-color 0.16s, background 0.16s;
+}
+.inline-term:hover, .inline-term.active { color: var(--blue); border-bottom-color: var(--red); background: rgba(35, 75, 110, 0.07); }
+
+/* Universal Inline Explanation Card (renders right inside/below whatever you clicked!) */
+.x-slot { margin: 0; }
+.x-card {
+  margin: 10px 0 16px; padding: 13px 16px;
+  background: #faf8f4; border: 1px solid var(--rule); border-left: 3px solid var(--blue);
+  font-size: 0.84rem; line-height: 1.58; color: var(--ink);
+}
+.x-card .x-top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 7px;
+}
+.x-card .x-k {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue); font-weight: 600;
+}
+.x-card .x-x {
+  border: 0; background: none; cursor: pointer; font-family: var(--mono);
+  font-size: 0.9rem; color: var(--faint); padding: 0 4px;
+}
+.x-card .x-x:hover { color: var(--ink); }
+.x-card p { margin: 0 0 6px; color: var(--muted); max-width: 82ch; }
+.x-card p:last-child { margin-bottom: 0; }
+.x-card strong { color: var(--ink); font-weight: 500; }
+
+/* Explorable Grid */
+.explorable {
+  display: grid; grid-template-columns: minmax(295px, 0.84fr) minmax(0, 1.32fr);
+  gap: clamp(20px, 3vw, 38px); align-items: start;
+}
+.panel-left { display: flex; flex-direction: column; gap: 14px; }
+
+.proof-text { margin: 0; font-family: var(--serif-body); font-size: 1rem; line-height: 1.66; color: var(--ink); }
+.b-ref {
+  cursor: pointer; padding: 0 3px; border-bottom: 2px solid currentColor;
+  font-weight: 500; transition: background 0.15s ease, color 0.15s ease; white-space: nowrap;
+}
+.b-ref.red { color: var(--red); }
+.b-ref.blue { color: var(--blue); }
+.b-ref.ochre { color: var(--ochre); }
+.b-ref.ink { color: var(--ink); }
+.b-ref:hover, .b-ref.active { background: var(--ink); color: var(--paper); border-bottom-color: var(--ink); }
+
+/* Sliders */
+.controls {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 12px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px 16px;
+}
+.controls.single-col { grid-template-columns: 1fr; }
+.ctrl { display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; align-items: baseline; }
+.ctrl label { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); }
+.ctrl output { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; color: var(--ink); }
+.ctrl input[type="range"] { grid-column: 1 / -1; width: 100%; height: 18px; accent-color: var(--ink); cursor: pointer; margin: 0; }
+
+/* Segmented toggles */
+.seg-label { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: -8px; }
+.seg-group { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--ink); width: 100%; }
+.seg-btn {
+  flex: 1 1 0; border: 0; border-right: 1px solid var(--ink);
+  background: transparent; padding: 8px 8px; cursor: pointer;
+  font-size: 0.66rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink); transition: background 0.15s, color 0.15s;
+}
+.seg-btn:last-child { border-right: 0; }
+.seg-btn.active { background: var(--ink); color: var(--paper); }
+.seg-btn.warn.active { background: var(--red); color: var(--paper); }
+.seg-btn.lime.active { background: var(--blue); color: var(--paper); }
+
+/* Clickable Metric Cards (EVERY metric explains itself on click!) */
+.readouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.metric {
+  border: 1px solid var(--rule); background: #fff; padding: 8px 10px;
+  text-align: left; cursor: pointer; position: relative;
+  transition: border-color 0.16s, background 0.16s;
+}
+.metric:hover, .metric.active { border-color: var(--blue); background: #faf8f4; }
+.metric::after {
+  content: "?"; position: absolute; top: 6px; right: 7px;
+  font-family: var(--mono); font-size: 0.6rem; color: var(--faint);
+  border: 1px solid var(--rule); border-radius: 50%; width: 13px; height: 13px;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.metric:hover::after, .metric.active::after { border-color: var(--blue); color: var(--blue); }
+.metric .m-k { display: block; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); padding-right: 16px; }
+.metric .m-v { display: block; font-family: var(--mono); font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-top: 2px; }
+.metric.ok { border-left: 3px solid var(--ok); }
+.metric.alert { border-left: 3px solid var(--red); background: #fdf6f4; }
+.metric.alert .m-v { color: var(--red); }
+
+.verdict-bar {
+  padding: 10px 12px; font-size: 0.81rem; line-height: 1.5;
+  border-left: 3px solid var(--ok); background: #f0f5f0; color: #1b3a22;
+}
+.verdict-bar.warn { border-left-color: var(--red); background: #faefec; color: #5b1d13; }
+
+/* SVG Canvas */
+.svg-frame { border: 1px solid var(--ink); background: #ffffff; padding: 10px 10px 6px; position: relative; }
+.svg-frame svg { width: 100%; height: auto; display: block; }
+.svg-frame svg.dimmed [data-part] { opacity: 0.2; transition: opacity 0.16s ease; }
+.svg-frame svg.dimmed [data-part].hl { opacity: 1; }
+.svg-cap {
+  margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 14px;
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--faint);
+}
+
+/* Deep-Dive Collapsible Field Drawers */
+.deep-stack { margin-top: 20px; border-top: 1px solid var(--ink); }
+details.deep-drawer { border-bottom: 1px solid var(--rule); background: transparent; }
+details.deep-drawer > summary {
+  list-style: none; cursor: pointer; padding: 16px 4px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+}
+details.deep-drawer > summary::-webkit-details-marker { display: none; }
+details.deep-drawer > summary .sum-left { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+details.deep-drawer > summary .sum-k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+details.deep-drawer > summary h3 { margin: 0; font-family: var(--serif-display); font-weight: 400; font-size: 1.18rem; color: var(--ink); }
+details.deep-drawer > summary .sum-sub { font-size: 0.84rem; color: var(--muted); }
+details.deep-drawer > summary .sum-plus { font-family: var(--mono); font-size: 0.9rem; color: var(--faint); flex-shrink: 0; }
+details.deep-drawer[open] > summary .sum-plus { color: var(--red); }
+.deep-body { padding: 4px 0 24px; }
+
+/* Live Data Tables */
+table.spec-tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; background: #fff; border: 1px solid var(--rule); }
+table.spec-tbl th {
+  text-align: left; padding: 8px 10px; background: var(--surface);
+  font-size: 0.66rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1px solid var(--ink);
+}
+table.spec-tbl td { padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--muted); }
+table.spec-tbl td strong { color: var(--ink); font-weight: 500; }
+table.spec-tbl td.num { font-family: var(--mono); color: var(--ink); font-weight: 500; white-space: nowrap; }
+table.spec-tbl tr:last-child td { border-bottom: 0; }
+.tbl-wrap { overflow-x: auto; }
+
+/* Seasonal Timeline Grid */
+.season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.season-card { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 14px 15px; }
+.season-card.gate { border-top-color: var(--red); }
+.season-card.lime-win { border-top-color: var(--blue); }
+.season-card .s-when { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+.season-card h4 { margin: 4px 0 8px; font-family: var(--serif-display); font-weight: 400; font-size: 1.05rem; color: var(--ink); }
+.season-card p { margin: 0 0 8px; font-size: 0.83rem; line-height: 1.56; color: var(--muted); }
+.season-card .s-why { margin: 0; padding-top: 7px; border-top: 1px solid var(--rule); font-size: 0.76rem; color: var(--ink); }
+
+/* Tool Matrix Grid */
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.tool-card { background: #fff; border: 1px solid var(--rule); padding: 14px 16px; }
+.tool-card h4 { margin: 0 0 8px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
+.tool-card ul { margin: 0; padding-left: 16px; font-size: 0.84rem; color: var(--muted); }
+.tool-card li { margin-bottom: 5px; }
+.tool-card li strong { color: var(--ink); font-weight: 500; }
+
+/* Plate III: 3 Classical Instruments (explanations open RIGHT INSIDE each card!) */
+.tri-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.mini-plate { border: 1px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.mini-head {
+  border-bottom: 1px solid var(--ink); padding: 9px 12px;
+  display: flex; justify-content: space-between; align-items: baseline; background: var(--paper);
+}
+.mini-head h3 { margin: 0; font-family: var(--serif-display); font-weight: 400; font-size: 1.02rem; }
+.mini-head button.mini-q {
+  border: 0; background: none; cursor: pointer;
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
+  color: var(--blue); border-bottom: 1px dashed var(--blue); padding: 0;
+}
+.mini-head button.mini-q:hover, .mini-head button.mini-q.active { color: var(--red); border-bottom-color: var(--red); }
+.mini-body { padding: 8px 10px 6px; flex: 1; }
+.mini-plate .x-slot .x-card { margin: 0; border: 0; border-bottom: 1px solid var(--rule); border-left: 3px solid var(--blue); font-size: 0.78rem; padding: 10px 12px; }
+.mini-ctrl {
+  border-top: 1px solid var(--rule); padding: 10px 12px 12px; background: var(--paper);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.mini-eq { font-family: var(--mono); font-size: 0.72rem; color: var(--ink); display: flex; justify-content: space-between; gap: 8px; }
+
+/* Open Desk Note */
+.open-desk {
+  margin-top: 28px; background: var(--surface); border-left: 2px solid var(--ink);
+  padding: clamp(20px, 3.2vw, 30px); max-width: 78ch;
+}
+.open-desk .od-k { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin: 0 0 8px; }
+.open-desk p { margin: 0 0 12px; font-family: var(--serif-body); font-size: 1.02rem; line-height: 1.65; color: var(--ink); }
+.open-desk p.od-small { font-family: var(--sans); font-size: 0.84rem; color: var(--muted); margin-bottom: 16px; }
+.open-desk .od-links { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+.text-link {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase;
+  padding-bottom: 3px; border-bottom: 1px solid var(--ink);
+}
+.text-link:hover { color: var(--red); border-color: var(--red); }
+
+.method-note { margin-top: 16px; font-size: 0.82rem; color: var(--muted); max-width: 82ch; }
+
+footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 32px 0 52px; }
+.colophon-inner {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 14px 28px; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--muted);
+}
+.colophon-name { font-family: var(--serif-display); font-size: 1.04rem; color: var(--ink); }
+
+@media (max-width: 960px) {
+  .explorable { grid-template-columns: 1fr; }
+  .tri-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
+  .nav-right { display: contents; }
+  .brand { order: 1; }
+  .lang-switch { order: 2; }
+  .nav-links {
+    display: flex; order: 3; flex: 1 0 100%; flex-wrap: wrap;
+    gap: 8px 18px; padding-top: 10px; border-top: 1px solid var(--rule);
+  }
+  .nav-links a { font-size: 0.68rem; letter-spacing: 0.14em; padding: 2px 0; }
+  .controls { grid-template-columns: 1fr; }
+  section[id] { scroll-margin-top: 106px; }
+}
+@media print {
+  header.site-nav, .open-actions, .term-btn, .mini-q { display: none; }
+  body { background: #fff; }
+  details.deep-drawer { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">Mantas Pagalys</a>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#writing" data-i18n="nav_writing">Writing</a>
+        <a href="index.html#photographs" data-i18n="nav_photos">Photographs</a>
+        <a href="index.html#craft" data-i18n="nav_craft">Craft</a>
+        <a href="dossier.html" data-i18n="nav_dossier">Dossier</a>
+        <a href="mechanics.html" class="active" data-i18n="nav_mech">Mechanics</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="lt">LT</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="opening">
+    <div class="title-lockup">
+      <h1 data-i18n="hero_h1">Mechanics &amp; Frame.</h1>
+      <p class="eyebrow" data-i18n="hero_eye">Open Parametric Cabin Tool &middot; Zero Libraries</p>
+    </div>
+    <p class="lead" data-i18n="hero_lead">Free interactive plates for a solo hand-built timber hall: adjustable width, length, pitch, and log diameters with live structural checks, clay vs. slaked lime wall physics, a year-round natural harvest calendar, and a basic manual tool list. Click any formula, metric box, or dashed term anywhere on the page for a plain-words explanation.</p>
+    <div class="open-actions">
+      <a class="btn-dark" id="btn-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="btn_pdf">Download Free 4-Page CAD Guide (PDF)</a>
+      <button type="button" class="btn-ghost" id="btn-print" data-i18n="btn_print">Print / Save Custom Sizing</button>
+      <a class="btn-ghost" href="#field-process" data-i18n="btn_jump_cal">Seasonal Process, Tools &amp; Free Books &darr;</a>
+    </div>
+    <div class="byrne-legend">
+      <span><i class="swatch" style="background:var(--red);"></i><span data-i18n="leg_red">Compression / Thrust / Limit</span></span>
+      <span><i class="swatch" style="background:var(--blue);"></i><span data-i18n="leg_blue">Tension / Airflow / Cold</span></span>
+      <span><i class="swatch" style="background:var(--ochre);"></i><span data-i18n="leg_ochre">Timber / Reed / Fiber Mass</span></span>
+      <span><i class="swatch" style="background:var(--ink);"></i><span data-i18n="leg_ink">Charred Spruce / Ground / Axis</span></span>
+    </div>
+  </div>
+
+  <!-- ==================== PLATE I: LIVE PARAMETRIC TIMBER HALL ==================== -->
+  <section id="frame" class="plate-band">
+    <div class="plate-header">
+      <div>
+        <span class="plate-kicker">PLATE I</span>
+        <h2 data-i18n="p1_h2">Adjustable <button type="button" class="inline-term" data-explain="skiftesverk">Skiftesverk</button> Hall &amp; 45&deg; Reed Roof</h2>
+      </div>
+      <div class="formula-strip">
+        <button type="button" class="term-btn" data-explain="thrust"><span>H = W / (2 tan &theta;)</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="snow"><span>&mu;<sub>1</sub>(&theta;) Snow</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="defl"><span>&delta; = 5qL<sup>4</sup>/(384EI)</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="str_cap"><span>STR 1.01.03</span><i class="qmark">?</i></button>
+      </div>
+    </div>
+
+    <div class="x-slot" data-slot="p1"></div>
+
+    <div class="explorable">
+      <div class="panel-left">
+        <p class="proof-text" id="p1-proof" data-i18n="p1_proof">
+          Roof weight and winter snow bear on <span class="b-ref red" data-hl="roof" data-explain="snow">45&deg; reed thatch &amp; rafters</span>.
+          Paired struts resolve ridge load into horizontal <span class="b-ref blue" data-hl="tie" data-explain="thrust">tie-beam tension H</span> locked by dry birch <button type="button" class="inline-term" data-explain="kusabi">kusabi</button> wedges, while <span class="b-ref ink" data-hl="posts" data-explain="euler_post">spruce posts</span> carry gravity safely well below Euler buckling.
+          Between outer posts, <span class="b-ref ochre" data-hl="walls" data-explain="skiftesverk">horizontal birch logs</span> slide in doweled cleats beneath a moss settling gap.
+          Above clean sand, <span class="b-ref ink" data-hl="floor" data-explain="defl">charred spruce girders</span> on fieldstones keep flex under L/500 so the <button type="button" class="inline-term" data-explain="lehmwickel">Lehmwickel</button> clay floor never cracks.
+        </p>
+
+        <div class="controls">
+          <div class="ctrl"><label for="sl-width" data-i18n="c_width">Frame Width (W)</label><output id="out-width">5.00 m</output><input id="sl-width" type="range" min="3.60" max="6.00" step="0.20" value="5.00"></div>
+          <div class="ctrl"><label for="sl-bays" data-i18n="c_bays">Length Bays (&times;1.50 m)</label><output id="out-bays">4 bays (6.00 m)</output><input id="sl-bays" type="range" min="2" max="6" step="1" value="4"></div>
+          <div class="ctrl"><label for="sl-pitch" data-i18n="c_pitch">Roof Pitch (&theta;)</label><output id="out-pitch">45&deg;</output><input id="sl-pitch" type="range" min="30" max="54" step="1" value="45"></div>
+          <div class="ctrl"><label for="sl-birch" data-i18n="c_birch">Wall Log Diameter (&Oslash;)</label><output id="out-birch">10 cm</output><input id="sl-birch" type="range" min="8" max="18" step="1" value="10"></div>
+          <div class="ctrl"><label for="sl-gird" data-i18n="c_gird">Floor Girder (&Oslash;)</label><output id="out-gird">15 cm</output><input id="sl-gird" type="range" min="12" max="22" step="1" value="15"></div>
+          <div class="ctrl"><label for="sl-post" data-i18n="c_post">Inner Post (&Oslash;)</label><output id="out-post">15 cm</output><input id="sl-post" type="range" min="11" max="22" step="1" value="15"></div>
+        </div>
+
+        <div class="readouts">
+          <button type="button" class="metric" id="m-area-box" data-explain="str_cap">
+            <span class="m-k" data-i18n="mk_area">Footprint (Cap 50 m&sup2;)</span>
+            <span class="m-v" id="m-area">30.0 m&sup2;</span>
+          </button>
+          <button type="button" class="metric" id="m-ridge-box" data-explain="str_cap">
+            <span class="m-k" data-i18n="mk_ridge">Outer Ridge (Cap 5.00 m)</span>
+            <span class="m-v" id="m-ridge">4.82 m</span>
+          </button>
+          <button type="button" class="metric" id="m-snow-box" data-explain="snow">
+            <span class="m-k" data-i18n="mk_snow">Snow + Reed Load</span>
+            <span class="m-v" id="m-snow">1.60 kN/m&sup2;</span>
+          </button>
+          <button type="button" class="metric" data-explain="thrust">
+            <span class="m-k" data-i18n="mk_thrust">Tie Tension H / Bent</span>
+            <span class="m-v" id="m-thrust">1.50 kN</span>
+          </button>
+          <button type="button" class="metric" id="m-defl-box" data-explain="defl">
+            <span class="m-k" data-i18n="mk_defl">Girder Sag &delta; (W/4 span)</span>
+            <span class="m-v" id="m-defl">0.80 mm</span>
+          </button>
+          <button type="button" class="metric" id="m-euler-box" data-explain="euler_post">
+            <span class="m-k" data-i18n="mk_euler">Post Buckling P<sub>cr</sub></span>
+            <span class="m-v" id="m-euler">371 kN</span>
+          </button>
+        </div>
+
+        <div class="verdict-bar" id="p1-verdict"></div>
+      </div>
+
+      <div class="svg-frame">
+        <svg id="svg-cabin" viewBox="0 0 760 492" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive true-scale cross-section of Skiftesverk reed hall"></svg>
+        <div class="svg-cap">
+          <span id="p1-cap-l">TRUE-SCALE SECTION · 5.00 × 6.00 M · ARCHITECTURAL 1.80 M FIGURE</span>
+          <span id="p1-cap-r">STR 1.01.03:2017 GROUP I (&le;50 M&sup2;, &le;5.0 M)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PLATE II: WALL FOURIER + SLAKED LIME VS CLAY ==================== -->
+  <section id="wall-physics" class="plate-band">
+    <div class="plate-header">
+      <div>
+        <span class="plate-kicker">PLATE II</span>
+        <h2 data-i18n="p2_h2">Cabin Correction: <button type="button" class="inline-term" data-explain="fourier">Fourier Thermal Gradient</button> &amp; <button type="button" class="inline-term" data-explain="slaked_lime">Slaked Lime Ca(OH)<sub>2</sub></button></h2>
+      </div>
+      <div class="formula-strip">
+        <button type="button" class="term-btn" data-explain="fourier"><span>U = 1 / (R<sub>si</sub>+&Sigma;d/&lambda;+R<sub>se</sub>)</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="glaser"><span>Glaser 5:1 Vapor</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="slaked_lime"><span>Slaked Lime Ca(OH)<sub>2</sub></span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="birch_cl5"><span>EN 350 Cl.5 Birch</span><i class="qmark">?</i></button>
+      </div>
+    </div>
+
+    <div class="x-slot" data-slot="p2"></div>
+
+    <div class="explorable">
+      <div class="panel-left">
+        <p class="proof-text" data-i18n="p2_proof">
+          Why math corrects intuition: birch (<em>Betula pendula</em>) is <button type="button" class="inline-term" data-explain="birch_cl5">EN 350 Class 5</button>. Placing <span class="b-ref ochre" data-hl="w-typha" data-explain="slaked_lime">insulation</span> <em>inside</em> the <span class="b-ref ink" data-hl="w-birch" data-explain="birch_cl5">100 mm birch</span> chills the wood to <strong>&minus;10&deg;C</strong> behind a tighter outer wood shell. Flipping clay-slip Typha or <strong>slaked-lime Typha</strong> <em>outside</em> the birch keeps the wood warm and dry while venting outward into the <span class="b-ref blue" data-hl="w-cav" data-explain="glaser">30 mm ventilated cavity</span> (zero plastic, zero wind paper).
+        </p>
+
+        <div class="seg-label" data-i18n="lbl_pos">1. Wall Layer Order</div>
+        <div class="seg-group" role="group" aria-label="Wall assembly order">
+          <button type="button" class="seg-btn active" id="btn-wall-ext" data-i18n="btn_ext">Corrected: Exterior</button>
+          <button type="button" class="seg-btn warn" id="btn-wall-int" data-i18n="btn_int">Trap: Interior</button>
+        </div>
+
+        <div class="seg-label" data-i18n="lbl_mat">2. Insulation Binder / Material</div>
+        <div class="seg-group" role="group" aria-label="Insulation material">
+          <button type="button" class="seg-btn active" id="btn-mat-clay" data-i18n="btn_m_clay">Clay + Typha</button>
+          <button type="button" class="seg-btn lime" id="btn-mat-lime" data-i18n="btn_m_lime">Slaked Lime + Typha</button>
+          <button type="button" class="seg-btn warn" id="btn-mat-pure" data-i18n="btn_m_pure">Pure Lime Only</button>
+        </div>
+
+        <div class="controls single-col">
+          <div class="ctrl"><label for="sl-tout" data-i18n="c_tout">Outdoor Winter Temp (T<sub>out</sub>)</label><output id="out-tout">-20&deg;C</output><input id="sl-tout" type="range" min="-30" max="5" step="1" value="-20"></div>
+          <div class="ctrl"><label for="sl-typha" data-i18n="c_typha">Insulation Layer Thickness</label><output id="out-typha">120 mm</output><input id="sl-typha" type="range" min="40" max="200" step="10" value="120"></div>
+          <div class="ctrl"><label for="sl-rh" data-i18n="c_rh">Indoor Relative Humidity</label><output id="out-rh">50%</output><input id="sl-rh" type="range" min="30" max="75" step="5" value="50"></div>
+        </div>
+
+        <div class="readouts">
+          <button type="button" class="metric" id="m-uval-box" data-explain="uval">
+            <span class="m-k" data-i18n="mk_uval">Wall U-Value</span>
+            <span class="m-v" id="m-uval">0.32 W/m&sup2;K</span>
+          </button>
+          <button type="button" class="metric" id="m-btemp-box" data-explain="birch_cl5">
+            <span class="m-k" data-i18n="mk_btemp">Coldest Birch Face</span>
+            <span class="m-v" id="m-btemp">+9.7&deg;C</span>
+          </button>
+          <button type="button" class="metric" data-explain="dewpoint">
+            <span class="m-k" data-i18n="mk_dew">Indoor Dew Point (+20&deg;C)</span>
+            <span class="m-v" id="m-dew">+9.3&deg;C</span>
+          </button>
+          <button type="button" class="metric" id="m-sd-box" data-explain="glaser">
+            <span class="m-k" data-i18n="mk_sd">Vapor Gradient (In : Out)</span>
+            <span class="m-v" id="m-sd">10 : 1 OK</span>
+          </button>
+        </div>
+
+        <div class="verdict-bar" id="p2-verdict"></div>
+      </div>
+
+      <div class="svg-frame">
+        <svg id="svg-wall" viewBox="0 0 760 436" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive Fourier wall thermal gradient and Glaser condensation diagram"></svg>
+        <div class="svg-cap">
+          <span id="p2-cap-l">TRUE-SCALE 272 MM WALL SECTION · FOURIER T(x) + GLASER VAPOR CHECK</span>
+          <span data-i18n="cap_p2_r">ZERO PLASTIC · ZERO WIND PAPER · EN 350 CL.5 BIRCH PROTECTION</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DEEP-LEVEL FIELD PACK: LIVE BILL, SEASONAL PROCESS & SOLO TOOLS ==================== -->
+  <section id="field-process" class="plate-band">
+    <div class="plate-header">
+      <div>
+        <span class="plate-kicker">OPEN FIELD MANUAL</span>
+        <h2 data-i18n="fd_h2">Deeper Reference: Live Cut List, Seasonal Harvest &amp; 1-Person Tools</h2>
+      </div>
+      <div class="formula-strip">
+        <button type="button" class="term-btn" data-explain="kusabi"><span>Kusabi wedges</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="oziai"><span>Ožiai &amp; sod ridge</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="lehmwickel"><span>Lehmwickel floor</span><i class="qmark">?</i></button>
+        <button type="button" class="term-btn" data-explain="neso"><span>Neso &amp; travois</span><i class="qmark">?</i></button>
+      </div>
+    </div>
+
+    <div class="x-slot" data-slot="fd"></div>
+
+    <div class="deep-stack">
+      <details class="deep-drawer" open>
+        <summary>
+          <div class="sum-left">
+            <span class="sum-k">01 &middot; LIVE BILL</span>
+            <h3 data-i18n="d1_h">Dynamic Materials &amp; Timber Cut List</h3>
+            <span class="sum-sub" id="live-bill-tag">5.00 &times; 6.00 m (30.0 m&sup2;) &middot; 45&deg; &middot; Clay-Typha</span>
+          </div>
+          <span class="sum-plus">[ &plusmn; ]</span>
+        </summary>
+        <div class="deep-body">
+          <div class="tbl-wrap">
+            <table class="spec-tbl">
+              <thead>
+                <tr>
+                  <th data-i18n="th_elem">Element</th>
+                  <th data-i18n="th_spec">Species / Spec</th>
+                  <th data-i18n="th_qty">Live Quantity (Auto-Sized)</th>
+                  <th data-i18n="th_rule">Critical Field Rule</th>
+                </tr>
+              </thead>
+              <tbody id="live-bill-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="deep-drawer">
+        <summary>
+          <div class="sum-left">
+            <span class="sum-k">02 &middot; CALENDAR</span>
+            <h3 data-i18n="d2_h">Year-Round Natural Building Process (Material Availability Windows)</h3>
+            <span class="sum-sub" data-i18n="d2_sub">Why missing the winter freeze, spring sap run, or +5&deg;C lime window doubles work</span>
+          </div>
+          <span class="sum-plus">[ &plusmn; ]</span>
+        </summary>
+        <div class="deep-body">
+          <div class="season-grid" data-i18n="season_cards">
+            <div class="season-card gate">
+              <span class="s-when">JAN &ndash; FEB &middot; DEEP FREEZE</span>
+              <h4>1. Reeds, Thin Birch &amp; Snow Haul</h4>
+              <p>Cut standing dead <em>Phragmites</em> water reeds cleanly over frozen ditches and stack in conical stooks. Thin young birch (&Oslash;10&ndash;12 cm) and collect deadwood spruce. <strong>Peel birch bark the same day</strong>, haul heavy poles across snow on a <button type="button" class="inline-term" data-explain="neso">travois sled</button>, carve sliding tenons, and dry birch <button type="button" class="inline-term" data-explain="kusabi">kusabi wedges</button> indoors.</p>
+              <p class="s-why"><strong>Gate #1:</strong> Lowest timber sap + dry dead reeds + near-zero friction hauling on snow.</p>
+            </div>
+            <div class="season-card">
+              <span class="s-when">MARCH &middot; THAW &amp; CHAR</span>
+              <h4>2. Clay Test, Charring &amp; Code Check</h4>
+              <p>Ribbon-test local subsoil clay (&ge;5 cm ribbon without snapping) or choose the <button type="button" class="inline-term" data-explain="slaked_lime">slaked lime</button> route. Debark spruce frame logs once temps cross +2&deg;C. Deep-char (3&ndash;4 mm) every girder, outer sill, lower 40 cm of posts, ridge <button type="button" class="inline-term" data-explain="oziai">o&zcaron;iai</button>, and gable horns.</p>
+              <p class="s-why"><strong>Fire shield:</strong> Deep char sterilizes wood sugars and slows soil-splash fungal attack.</p>
+            </div>
+            <div class="season-card">
+              <span class="s-when">APR &ndash; MAY &middot; PIERS &amp; FRAME</span>
+              <h4>3. Strip Peat, Fieldstones &amp; Solo Bents</h4>
+              <p>Strip organic topsoil to clean mineral sand (stack sods grass-down). Dig 25 cm drip swales. Level flat fieldstones (&plusmn;3 mm), set charred girders &amp; loose subfloor poles, solo-raise bents with ropes &amp; forked pike-poles, fix 45&deg; rafters, and slot birch wall logs under the skeleton to season.</p>
+              <p class="s-why"><strong>Drying shed:</strong> Standing frame keeps birch bays dry while shrinking.</p>
+            </div>
+            <div class="season-card gate">
+              <span class="s-when">LATE MAY &ndash; JUN &middot; SAP WINDOW</span>
+              <h4>4. Birch Bark, Spruce Roots &amp; Thatching</h4>
+              <p>Harvest wide white birch bark strips (50 cm) and pull shallow spruce roots (split &amp; soak). Lash hazel battens every 30 cm, lay 30 cm winter reed thatch stitched with spruce roots (zero wire), then saddle the ridge with 3-layer bark + 12 cm living sods + crossed charred <button type="button" class="inline-term" data-explain="oziai">o&zcaron;iai</button>.</p>
+              <p class="s-why"><strong>Gate #2 (2&ndash;3 weeks):</strong> Birch bark peels cleanly ONLY during peak spring sap flow.</p>
+            </div>
+            <div class="season-card">
+              <span class="s-when">JULY &middot; HOT DRY WIND</span>
+              <h4>5. Woven Reed-Clay Floor (J7)</h4>
+              <p>Secure &Oslash;9 cm conifer subfloor poles with woven hazel rods. Pack 8 cm clay-dipped reed <button type="button" class="inline-term" data-explain="lehmwickel">Lehmwickel</button> pad plus 3.5 cm lean 1:3 sandy clay-ash wear crust, tamp dense, and burnish leather-hard with a wet cobble. Keep crawlspace wide open underneath.</p>
+              <p class="s-why"><strong>Cure gate:</strong> Hot dry July breeze cures earthen floor from both top and underside.</p>
+            </div>
+            <div class="season-card lime-win">
+              <span class="s-when">AUG &ndash; SEP &middot; WALL CLOSE (&ge;+5&deg;C)</span>
+              <h4>6. Exterior Clay-Typha OR Slaked Lime</h4>
+              <p>Confirm birch MC &lt;18% and measure settling drop. Harvest non-flowering <em>Typha</em> leaves/stalks (zero fluff). Dip in thin clay slip <strong>OR <button type="button" class="inline-term" data-explain="slaked_lime">slaked lime Ca(OH)<sub>2</sub></button> milk</strong> and pack 120&ndash;150 mm on the <strong>EXTERIOR</strong> of the warm birch. Mount 30 mm vented cavity (rodent mesh) + boards.</p>
+              <p class="s-why"><strong>Lime frost gate:</strong> Slaked lime MUST cure at &ge;+5&deg;C for 4+ weeks to carbonate into limestone.</p>
+            </div>
+            <div class="season-card">
+              <span class="s-when">OCT &ndash; NOV &middot; WINTERIZE</span>
+              <h4>7. Removable Crawlspace Skirt</h4>
+              <p>Stack saved peat sods and spruce boughs around the pier perimeter for winter floor warmth, then pull open every April for dry summer airflow.</p>
+              <p class="s-why"><strong>Seasonal breathing:</strong> Warm closed under-floor in winter; dry ventilated timbers in summer.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="deep-drawer">
+        <summary>
+          <div class="sum-left">
+            <span class="sum-k">03 &middot; SOLO TOOLS</span>
+            <h3 data-i18n="d3_h">Basic Hand Tools for One Person (No Prices, No Power Required)</h3>
+            <span class="sum-sub" data-i18n="d3_sub">Everything needed to fell, peel, split, join, thatch, and raise alone</span>
+          </div>
+          <span class="sum-plus">[ &plusmn; ]</span>
+        </summary>
+        <div class="deep-body">
+          <div class="tool-grid" data-i18n="tool_cards">
+            <div class="tool-card">
+              <h4>I &middot; Layout &amp; Level</h4>
+              <ul>
+                <li><strong>5 m tape &amp; mason line</strong> (squaring bays &amp; diagonal checks)</li>
+                <li><strong>Spirit level or site-made A-frame level</strong> (bedding pier stones &plusmn;3 mm)</li>
+                <li><strong>Plumb bob &amp; wooden compass</strong> (scribing round logs &amp; vertical posts)</li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>II &middot; Debark &amp; Split</h4>
+              <ul>
+                <li><strong>Drawknife or bark spud</strong> (same-day peeling of ~240 birch poles + wedges)</li>
+                <li><strong>Froe (<em>skeltuvas</em>)</strong> (forged or cut from a used vehicle leaf spring; splits cleats &amp; boards)</li>
+                <li><strong>Site-carved hardwood mallet + 4 fire-hardened splitting wedges</strong></li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>III &middot; Timber Joinery</h4>
+              <ul>
+                <li><strong>Medium felling/limbing axe (~1.2 kg)</strong> (bucking &amp; rough tenon cheeks)</li>
+                <li><strong>Light carpenter hatchet (~400 g)</strong> (one-handed paring of sliding tenons)</li>
+                <li><strong>Bow saw (green &amp; dry blades)</strong> + <strong>20&ndash;25 mm mortise chisel</strong> + <strong>sloyd knife</strong></li>
+                <li><strong>Sharpening stone &amp; bastard file</strong> (3 min daily honing halves build hours)</li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>IV &middot; Harvest, Solo Lift &amp; Lime</h4>
+              <ul>
+                <li><strong>Hand scythe / sickle</strong> (~750 winter reed sheaves) + <strong>spade</strong></li>
+                <li><strong>Site-carved tools:</strong> clay tamper (<em>me&scaron;ka</em>), flat thatching paddle, 45 cm wooden needle, <button type="button" class="inline-term" data-explain="neso">travois sled</button>, 2 forked pike-poles</li>
+                <li><strong>Ropes &amp; ratchet straps</strong> (solo bent-raising &amp; cinching wedge joints)</li>
+                <li><strong>Rubber gloves &amp; eye goggles</strong> (mandatory if mixing caustic slaked lime Ca(OH)<sub>2</sub>)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="deep-drawer">
+        <summary>
+          <div class="sum-left">
+            <span class="sum-k">04 &middot; FREE BOOKS</span>
+            <h3 data-i18n="d4_h">Free Open Books &amp; Primary Technical Manuals</h3>
+            <span class="sum-sub" data-i18n="d4_sub">Verified public-domain treatises, laboratory handbooks, and open university mechanics texts</span>
+          </div>
+          <span class="sum-plus">[ &plusmn; ]</span>
+        </summary>
+        <div class="deep-body">
+          <div class="tool-grid" data-i18n="book_cards">
+            <div class="tool-card">
+              <h4>Timber &amp; Joinery</h4>
+              <ul>
+                <li><strong><a href="https://research.fs.usda.gov/download/treesearch/62200.pdf" target="_blank" rel="noopener">USDA Wood Handbook (FPL-GTR-282, Free PDF)</a></strong> &middot; World standard on wood mechanics, elasticity E, tangential shrinkage, and decay durability.</li>
+                <li><strong><a href="https://archive.org/details/hearth4500929" target="_blank" rel="noopener">George Ellis &middot; Modern Practical Carpentry (1906, Archive.org)</a></strong> &middot; Classic public-domain illustrated treatise on traditional roofs, trusses, floors, and timber joinery.</li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>Nordic Timber, Sod &amp; Lime</h4>
+              <ul>
+                <li><strong><a href="https://www.riksantikvaren.no" target="_blank" rel="noopener">Riksantikvaren (Norwegian Heritage Guides)</a></strong> &middot; Free public conservation sheets on birch-bark sod roofs (<em>torvtak</em>), timber framing, and air-lime mortar (<em>kalkm&oslash;rtel</em>).</li>
+                <li><strong><a href="https://www.byggogbevar.no" target="_blank" rel="noopener">Bygg og Bevar (Nordic Building Craft Portal)</a></strong> &middot; Open technical guides on log walls, traditional joints, and natural finishes.</li>
+                <li><strong><a href="https://historicengland.org.uk/advice/guidance/" target="_blank" rel="noopener">Historic England Technical Guidance Hub</a></strong> &middot; Free conservation advice notes on breathable lime mortars and earth walls.</li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>Cattail (Typha) &amp; Moisture Physics</h4>
+              <ul>
+                <li><strong><a href="https://www.ibp.fraunhofer.de/en/business-units-and-products/product-developments/cattail.html" target="_blank" rel="noopener">Fraunhofer IBP &middot; Cattail (Typha) Building Material</a></strong> &middot; Primary German building-physics research on <em>Typha</em> thermal conductivity (&lambda; 0.048&ndash;0.060), capillary drying, and mold resistance.</li>
+              </ul>
+            </div>
+            <div class="tool-card">
+              <h4>Structural Mechanics &amp; Geometry</h4>
+              <ul>
+                <li><strong><a href="https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Structural_Mechanics_(Wierzbicki)/08%3A_Beam_Bending_Buckling_and_Torsion" target="_blank" rel="noopener">Tomasz Wierzbicki (MIT) &middot; Structural Mechanics (LibreTexts)</a></strong> &middot; Free open textbook covering beam bending, torsion, and elastic stability.</li>
+                <li><strong><a href="https://ocw.mit.edu/courses/2-080j-structural-mechanics-fall-2013/course-notes/MIT2_080JF13_Lecture10.pdf" target="_blank" rel="noopener">MIT OCW 2.080J &middot; Column Buckling Notes (Free PDF)</a></strong> &middot; Complete derivation of Euler buckling modes and boundary conditions.</li>
+                <li><strong><a href="https://www.c82.net/euclid/" target="_blank" rel="noopener">Byrne&rsquo;s Euclid (N. Rougeux)</a></strong> &amp; <strong><a href="https://ciechanow.ski/" target="_blank" rel="noopener">Bartosz Ciechanowski</a></strong> &middot; Visual geometry and interactive mechanics classics.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ==================== PLATE III: THREE LIVE CLASSICAL MECHANICS INSTRUMENTS ==================== -->
+  <section id="classics" class="plate-band">
+    <div class="plate-header">
+      <div>
+        <span class="plate-kicker">PLATE III</span>
+        <h2 data-i18n="p3_h2">Three Live Foundations: Beam, Column, Arch</h2>
+      </div>
+      <span style="font-family:var(--mono);font-size:0.72rem;color:var(--faint);" data-i18n="p3_hint">CLICK ANY &ldquo;EXPLAIN ?&rdquo; LABEL RIGHT ON THE CARD</span>
+    </div>
+
+    <div class="tri-grid">
+      <div class="mini-plate">
+        <div class="mini-head">
+          <h3 data-i18n="m1_h">Beam Bending</h3>
+          <button type="button" class="mini-q" data-explain="beam_m" data-i18n="mini_exp">EXPLAIN ?</button>
+        </div>
+        <div class="x-slot"></div>
+        <div class="mini-body"><svg id="svg-beam" viewBox="0 0 340 245" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div class="mini-ctrl">
+          <div class="ctrl"><label for="sl-bq" data-i18n="cl_bq">Load q</label><output id="out-bq">5.6 kN/m</output><input id="sl-bq" type="range" min="1" max="12" step="0.2" value="5.6"></div>
+          <div class="ctrl"><label for="sl-bl" data-i18n="cl_bl">Span L</label><output id="out-bl">1.25 m</output><input id="sl-bl" type="range" min="1.0" max="3.0" step="0.05" value="1.25"></div>
+          <div class="mini-eq"><span id="eq-bm">M = 1.09 kN&middot;m</span><span id="eq-bd">&delta; = 0.80 mm</span></div>
+        </div>
+      </div>
+
+      <div class="mini-plate">
+        <div class="mini-head">
+          <h3 data-i18n="m2_h">Euler Buckling</h3>
+          <button type="button" class="mini-q" data-explain="euler_k" data-i18n="mini_exp">EXPLAIN ?</button>
+        </div>
+        <div class="x-slot"></div>
+        <div class="mini-body"><svg id="svg-euler" viewBox="0 0 340 245" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div class="mini-ctrl">
+          <div class="seg-group" role="group" aria-label="Euler boundary mode">
+            <button type="button" class="seg-btn" data-k="2.0">K=2.0</button>
+            <button type="button" class="seg-btn active" data-k="1.0">K=1.0</button>
+            <button type="button" class="seg-btn" data-k="0.7">K=0.7</button>
+            <button type="button" class="seg-btn" data-k="0.5">K=0.5</button>
+          </div>
+          <div class="ctrl"><label for="sl-ed" data-i18n="cl_ed">Spruce Post &Oslash;</label><output id="out-ed">15 cm</output><input id="sl-ed" type="range" min="9" max="22" step="1" value="15"></div>
+          <div class="mini-eq"><span id="eq-ep">P_cr = 371 kN</span><span id="eq-es">L = 2.44 m</span></div>
+        </div>
+      </div>
+
+      <div class="mini-plate">
+        <div class="mini-head">
+          <h3 data-i18n="m3_h">Catenary Arch</h3>
+          <button type="button" class="mini-q" data-explain="catenary" data-i18n="mini_exp">EXPLAIN ?</button>
+        </div>
+        <div class="x-slot"></div>
+        <div class="mini-body"><svg id="svg-cat" viewBox="0 0 340 245" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div class="mini-ctrl">
+          <div class="ctrl"><label for="sl-ca" data-i18n="cl_ca">Flatness a</label><output id="out-ca">1.60 m</output><input id="sl-ca" type="range" min="1.00" max="3.20" step="0.05" value="1.60"></div>
+          <div class="mini-eq"><span id="eq-cf">Rise f = 1.65 m</span><span id="eq-ch">H = 1.60 &middot; w</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="open-desk">
+      <p class="od-k" data-i18n="od_k">no route to host &middot; open desk</p>
+      <p data-i18n="od_p1">No institution, grant, or publisher stands behind this desk. This calculator, the 4-page CAD guide, the writing, and the photographs stay 100% free and unlocked.</p>
+      <p class="od-small" data-i18n="od_p2">If these tools or drawings save you a mistake on your own build, take them freely. If you want to hold a small share of the host (funding undisturbed hours to write, draw, and keep the archive open via Liberapay / Ko-fi, zero tiers), or commission custom timber sizing, write directly.</p>
+      <!-- LIBERAPAY_KOFI_SLOT: paste live Liberapay / Ko-fi URLs here once created -->
+      <div class="od-links">
+        <a class="text-link" id="od-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="od_dl">Download 4-page CAD PDF (free)</a>
+        <a class="text-link" href="mailto:pagalysm@gmail.com?subject=Host%20the%20Desk%20%2F%20Custom%20Sizing%20-%20Mantas%20Pagalys" data-i18n="od_mail">Host the desk / custom sizing &rarr;</a>
+        <a class="text-link" href="dossier.html" data-i18n="od_dos">Dossier &rarr;</a>
+      </div>
+    </div>
+
+    <p class="method-note" data-i18n="method_note">
+      Method note: zero external JavaScript libraries, zero WebGL. Every line is calculated directly in plain SVG from LST EN 1991-1-3 (snow), Euler-Bernoulli beam mechanics, analytical buckling eigenmodes, hyperbolic cosine equilibrium, steady-state Fourier conduction, and Glaser vapor pressure. Educational and preliminary sizing reference (not a stamped structural engineer sign-off).
+    </p>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="wrap colophon-inner">
+    <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org/mechanics</div>
+    <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Open Parametric Mechanics &copy; Mantas Pagalys</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var E_SPRUCE = 9.0e9;
+  var currentLang = "en";
+  var wallMode = "ext";
+  var wallMat = "clay";
+
+  /* ==================== UNIVERSAL PLAIN-WORDS EXPLAINER ENGINE (21 EN + LT TOPICS) ==================== */
+  var EXPLAIN = {
+    skiftesverk: {
+      en: ["WHAT IS SKIFTESVERK?",
+        "<p><strong>What it does:</strong> Instead of felling giant old-growth trees for long corner-notched cabin walls, you stand vertical posts every 1.50 m and slide short, thin horizontal poles between them like cards in a wooden slot.</p>" +
+        "<p><strong>Why it matters here:</strong> Lets one person build a solid timber wall from thin &Oslash;10 cm young birch thinnings using hand tools alone, leaving a 10&ndash;12 cm top moss gap so the logs shrink down freely as they dry.</p>" +
+        "<p><strong>Origin:</strong> Medieval Scandinavian &amp; Baltic post-and-plank joinery (Swedish <em>skiftesverk</em>, Norwegian <em>sleppevegg</em>), invented when tall straight old-growth logs became scarce.</p>"],
+      lt: ["KAS YRA SKIFTESVERK?",
+        "<p><strong>Kaip veikia:</strong> Užuot kirtus milžiniškus senus rąstus ilgoms sienoms, kas 1,50 m pastatomi vertikalūs stulpai, o tarp jų lyg kortos į griovelius sukraunami trumpi, ploni horizontalūs rąsteliai.</p>" +
+        "<p><strong>Kodėl tinka čia:</strong> Vienas žmogus rankiniais įrankiais gali suręsti tvirtą sieną iš plonų &Oslash;10 cm jaunuolyno beržų, viršuje palikdamas 10–12 cm samanų tarpą medienos sėdimui.</p>" +
+        "<p><strong>Kilmė:</strong> Viduramžių Skandinavijos ir Baltijos konstrukcija (šved. <em>skiftesverk</em>, norv. <em>sleppevegg</em>), atsiradusi trūkstant ilgų rąstų.</p>"]
+    },
+    thrust: {
+      en: ["ROOF THRUST & TIE TENSION · H = W / (2 tan θ)",
+        "<p><strong>What it does:</strong> Stand a book open like a tent on a smooth table and press down on the peak: the bottom edges try to slide outward. The horizontal tie beam acts like a rope tying both slopes together so the walls never push apart.</p>" +
+        "<p><strong>Every letter:</strong> <strong>H</strong> = pull inside the tie beam (1 kN &approx; 100 kg); <strong>W</strong> = roof + snow weight pressing down on the ridge; <strong>&theta;</strong> = roof steepness. A steeper roof cuts outward thrust sharply.</p>" +
+        "<p><strong>Origin:</strong> Force triangles were formalised by Simon Stevin in 1586; carpenters used the same tie-beam geometry for centuries before trigonometry was written down.</p>"],
+      lt: ["STOGO SKĖTIMAS IR STYGA · H = W / (2 tan θ)",
+        "<p><strong>Kaip veikia:</strong> Pastatykite atverstą knygą kaip palapinę ant stalo ir paspauskite viršūnę: apačia iškart slysta į šonus. Horizontali styga tarsi virvė suriša šlaitus, kad sienos neišsiskėstų.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>H</strong> = tempimo jėga stygoje (1 kN &approx; 100 kg); <strong>W</strong> = stogo ir sniego svoris; <strong>&theta;</strong> = stogo kampas. Statesnis stogas smarkiai sumažina skėtimą.</p>" +
+        "<p><strong>Kilmė:</strong> Jėgų trikampius 1586 m. aprašė Simonas Stevinas; dailidės šia taisykle naudojosi šimtmečiais anksčiau.</p>"]
+    },
+    snow: {
+      en: ["SNOW SHAPE FACTOR μ₁(θ) & 45° REED RULE",
+        "<p><strong>What it does:</strong> Snow piles deep on a flat roof but slides off a steep one. Between 30&deg; and 60&deg;, Eurocode shrinks snow load by <strong>&mu;<sub>1</sub> = 0.8 &times; (60 &minus; &theta;) / 30</strong>. At 45&deg;, the roof holds only 40% of ground snow weight instead of 80%.</p>" +
+        "<p><strong>Why &ge;45&deg; for reed:</strong> Below 45&deg;, rainwater stays inside winter reed stalks instead of running cleanly off the tips, cutting thatch life in half.</p>" +
+        "<p><strong>Origin:</strong> European roof measurements codified in LST EN 1991-1-3 (Širvintos Zone II ground snow = 1.60 kN/m&sup2;).</p>"],
+      lt: ["SNIEGO KOEFICIENTAS μ₁(θ) IR 45° NENDRIŲ TAISYKLĖ",
+        "<p><strong>Kaip veikia:</strong> Ant plokščio stogo sniegas kaupiasi, o nuo stataus nučiuožia. Tarp 30&deg; ir 60&deg; „Eurocode“ mažina sniegą pagal <strong>&mu;<sub>1</sub> = 0,8 &times; (60 &minus; &theta;) / 30</strong>. Prie 45&deg; lieka tik 40% žemės sniego apkrovos.</p>" +
+        "<p><strong>Kodėl nendrėms reikia &ge;45&deg;:</strong> Ant lėkštesnio stogo vanduo užsilaiko stiebuose ir stogas dvigubai greičiau supūva.</p>" +
+        "<p><strong>Kilmė:</strong> Įtvirtinta standarte LST EN 1991-1-3 (Širvintų II zonos sniegas = 1,60 kN/m&sup2;).</p>"]
+    },
+    defl: {
+      en: ["FLOOR GIRDER SAG · δ = 5qL⁴ / (384EI)",
+        "<p><strong>What it does:</strong> Shows how many millimetres a wooden girder bends down in the middle under floor + people weight. Because span <strong>L</strong> is raised to the 4th power, doubling stone spacing makes a floor <strong>16 times bouncier</strong>.</p>" +
+        "<p><strong>Every letter:</strong> <strong>&delta;</strong> = mid-span sag; <strong>q</strong> = weight per metre; <strong>L</strong> = clear span between piers (W/4); <strong>E</strong> = spruce stiffness; <strong>I = &pi;d<sup>4</sup>/64</strong> = round-log stiffness.</p>" +
+        "<p><strong>Why L/500:</strong> Euler &amp; Bernoulli solved the elastic beam curve around 1750. Keeping sag under <strong>L/500</strong> stops a hard burnished clay floor from cracking underfoot.</p>"],
+      lt: ["GRINDŲ SIJOS ĮLINKIS · δ = 5qL⁴ / (384EI)",
+        "<p><strong>Kaip veikia:</strong> Parodo, kiek milimetrų pamato sija įlinksta viduryje. Kadangi tarpatramis <strong>L</strong> keliamas 4-uoju laipsniu, padvigubinus atstumą tarp akmenų grindys tampa <strong>16 kartų minkštesnės</strong>.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>&delta;</strong> = įlinkis; <strong>q</strong> = svoris metrui; <strong>L</strong> = tarpatramis tarp akmenų (W/4); <strong>E</strong> = eglės standumas; <strong>I = &pi;d<sup>4</sup>/64</strong> = apvalaus rąsto standumas.</p>" +
+        "<p><strong>Kodėl L/500:</strong> Apie 1750 m. išsprendė Eileris ir Bernulis. Išlaikant įlinkį &lt; L/500, kietos plūktos molio grindys netrūkinėja.</p>"]
+    },
+    str_cap: {
+      en: ["STR 1.01.03:2017 · GROUP I STATUTORY CAP (≤50 m², ≤5.0 m)",
+        "<p><strong>What it means:</strong> Under Lithuanian building regulation STR 1.01.03:2017, a non-residential Group I farm/auxiliary outbuilding up to <strong>50 m&sup2;</strong> footprint and up to <strong>5.00 m</strong> outer height can be built without a building permit outside protected zones (always verify your plot ID in VTPSI Infostatyba; residential dwellings always require a permit).</p>" +
+        "<p><strong>Watch live:</strong> Drag Width, Bays, or Pitch past the limit and the metric boxes immediately turn crimson to flag where the cap is crossed.</p>"],
+      lt: ["STR 1.01.03:2017 · I GRUPĖS RIBOS (≤50 m², ≤5,0 m)",
+        "<p><strong>Ką reiškia:</strong> Pagal STR 1.01.03:2017, I grupės nesudėtingas negyvenamasis pagalbinis pastatas iki <strong>50 m&sup2;</strong> ploto ir iki <strong>5,00 m</strong> aukščio už saugomų teritorijų ribų statomas be statybos leidimo (sklypą būtina pasitikrinti VTPSI „Infostatyboje“; gyvenamiesiems namams leidimas būtinas visada).</p>" +
+        "<p><strong>Stebėkite gyvai:</strong> Peržengus plotą arba 5,00 m kraigo aukštį, skaitikliai iškart paraudonuoja.</p>"]
+    },
+    euler_post: {
+      en: ["POST BUCKLING · P_cr = π²EI / (KL)²",
+        "<p><strong>What it does:</strong> Press down on a vertical ruler: long before wood fibers crush, a tall thin post bows sideways and snaps. This number shows the buckling force (in kN; 10 kN &approx; 1 tonne) and your safety multiple vs. actual roof weight.</p>" +
+        "<p><strong>Why thickness wins:</strong> For a round log, <strong>I = &pi;d<sup>4</sup>/64</strong>. Increasing a post from &Oslash;12 cm to &Oslash;15 cm more than doubles its buckling resistance!</p>" +
+        "<p><strong>Origin:</strong> Leonhard Euler derived this law in 1757 to predict sideways failure in slender columns.</p>"],
+      lt: ["STULPO KLUPUMAS · P_cr = π²EI / (KL)²",
+        "<p><strong>Kaip veikia:</strong> Paspauskite stačią liniuotę iš viršaus: dar nesugniuždyta ji staiga išlinksta į šoną. Šis skaičius parodo kritinę apkrovą (10 kN &approx; 1 tona) ir saugumo atsargą lyginant su tikru stogo svoriu.</p>" +
+        "<p><strong>Kodėl skersmuo svarbiausias:</strong> Apvaliam rąstui <strong>I = &pi;d<sup>4</sup>/64</strong>. Padidinus stulpą nuo &Oslash;12 cm iki &Oslash;15 cm, atsparumas išlinkimui išauga daugiau nei dvigubai!</p>" +
+        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė 1757 m.</p>"]
+    },
+    fourier: {
+      en: ["FOURIER THERMAL GRADIENT · T(x) & U-VALUE",
+        "<p><strong>What it does:</strong> Hold a metal spoon in hot soup: heat marches smoothly from the hot end to the cold end. The thick black line traces the exact temperature inside every wall layer from +20&deg;C indoors to &minus;20&deg;C outdoors. Good insulation drops the temperature steeply across itself so the wood behind stays warm.</p>" +
+        "<p><strong>Every letter:</strong> <strong>d</strong> = layer thickness (m); <strong>&lambda; (lambda)</strong> = how fast heat slips through (lower = warmer: Typha 0.055, wood 0.15, dense lime/clay 0.80); <strong>R = d/&lambda;</strong> = warmth resistance; <strong>U = 1/R<sub>tot</sub></strong> = total heat leak.</p>" +
+        "<p><strong>Origin:</strong> Joseph Fourier published this law in 1822 while studying how iron bars and the Earth cool down.</p>"],
+      lt: ["FURJĖ ŠILUMOS GRADIENTAS · T(x) IR U VERTĖ",
+        "<p><strong>Kaip veikia:</strong> Įmerkus šaukštą į karštą sriubą, šiluma tolygiai bėga link šalto galo. Juoda kreivė grafike parodo tikslią temperatūrą kiekviename sienos sluoksnyje nuo +20&deg;C viduje iki &minus;20&deg;C lauke. Gera izoliacija „sugeria“ šaltį savyje, kad medis už jos liktų šiltas.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>d</strong> = storis (m); <strong>&lambda; (lambda)</strong> = šilumos laidumas (mažiau = šilčiau: švendrai 0,055, medis 0,15, grynos kalkės 0,80); <strong>R = d/&lambda;</strong> = varža; <strong>U = 1/R<sub>tot</sub></strong> = bendri šilumos nuostoliai.</p>" +
+        "<p><strong>Kilmė:</strong> Žozefas Furjė paskelbė 1822 m., tyrinėdamas metalo strypų ir Žemės aušimą.</p>"]
+    },
+    uval: {
+      en: ["WALL U-VALUE · W/(m²·K)",
+        "<p><strong>What it means:</strong> How many watts of heat escape through 1 square metre of wall for every 1&deg;C difference between inside and outside. <strong>Lower is warmer.</strong></p>" +
+        "<p><strong>Scale intuition:</strong> Bare 100 mm birch log wall = ~1.08 (freezing); 120 mm clay-Typha + birch = <strong>0.32</strong> (cuts heat loss by more than 3 times); 150 mm slaked lime + Typha = <strong>0.33</strong>.</p>"],
+      lt: ["SIENOS U VERTĖ · W/(m²·K)",
+        "<p><strong>Ką reiškia:</strong> Kiek vatų šilumos pabėga pro 1 kvadratinį metrą sienos esant 1&deg;C temperatūrų skirtumui. <strong>Mažesnis skaičius = šiltesnė siena.</strong></p>" +
+        "<p><strong>Palyginimas:</strong> Plika 100 mm beržo siena = ~1,08 (šalta); 120 mm molio-švendrų + beržas = <strong>0,32</strong> (nuostoliai mažesni daugiau nei 3 kartus); 150 mm gesintų kalkių + švendrai = <strong>0,33</strong>.</p>"]
+    },
+    birch_cl5: {
+      en: ["COLDEST BIRCH FACE & EN 350 CLASS 5",
+        "<p><strong>Why birch is fragile if wet:</strong> European standard EN 350 rates natural wood decay resistance from Class 1 (very durable, like oak) down to <strong>Class 5 (not durable: silver birch, <em>Betula pendula</em>)</strong>. Wet birch rots in 1&ndash;3 seasons; bone-dry indoor birch lasts over a century.</p>" +
+        "<p><strong>Why exterior insulation saves it:</strong> Placing insulation outside the birch keeps its coldest face near +10&deg;C instead of &minus;10&deg;C, preventing winter frost condensation directly on the wood.</p>"],
+      lt: ["ŠALČIAUSIA BERŽO PUSĖ IR EN 350 5 KLASĖ",
+        "<p><strong>Kodėl beržas jautrus drėgmei:</strong> Europos standartas EN 350 medienos atsparumą puvimui skirsto nuo 1 klasės (ąžuolas) iki <strong>5 klasės (neatsparus: beržas, <em>Betula pendula</em>)</strong>. Šlapias beržas supūva per 1–3 metus, o visiškai sausas viduje tarnauja šimtmetį.</p>" +
+        "<p><strong>Kodėl gelbsti išorinė izoliacija:</strong> Išorėje esantys švendrai išlaiko beržą apie +10&deg;C šilumoje vietoj &minus;10&deg;C šalčio.</p>"]
+    },
+    dewpoint: {
+      en: ["INDOOR DEW POINT · T_dew(T, RH)",
+        "<p><strong>What it is:</strong> Take a cold soda can out of the fridge on a warm day: invisible water vapor in the air instantly turns into liquid water droplets on the metal. Dew point is the exact surface temperature where that happens.</p>" +
+        "<p><strong>Numbers:</strong> At +20&deg;C and 50% humidity, dew forms on any surface colder than <strong>+9.3&deg;C</strong>. Raise indoor humidity to 70% (drying laundry or cooking without venting) and dew forms already at <strong>+14.4&deg;C</strong>.</p>"],
+      lt: ["VIDAUS RASOS TAŠKAS · T_dew(T, RH)",
+        "<p><strong>Kas tai:</strong> Išėmus šaltą skardinę iš šaldytuvo, nematoma oro drėgmė iškart virsta lašais ant jos paviršiaus. Rasos taškas yra tiksli temperatūra, prie kurios oras pradeda „rasoti“.</p>" +
+        "<p><strong>Skaičiai:</strong> Prie +20&deg;C ir 50% drėgmės rasa susidaro ant bet ko šaltesnio nei <strong>+9,3&deg;C</strong>. Pakilus drėgmei iki 70% (džiovinant drabužius be vėdinimo), rasa krenta jau prie <strong>+14,4&deg;C</strong>.</p>"]
+    },
+    glaser: {
+      en: ["GLASER VAPOR GRADIENT & 5:1 RULE (s_d = μ · d)",
+        "<p><strong>What it does:</strong> Warm indoor air pushes water vapor outward all winter. <strong>s<sub>d</sub></strong> is how hard a layer blocks vapor (equivalent thickness of still air in metres). If an outer layer blocks vapor tighter than the inner layer, moisture piles up inside the wall and freezes.</p>" +
+        "<p><strong>The 5:1 rule:</strong> Outer layers must let vapor escape <strong>at least 5 times easier</strong> than inner layers. Warm 100 mm birch inside (s<sub>d</sub> &approx; 4.0 m) + porous fiber outside (s<sub>d</sub> &approx; 0.4&ndash;0.6 m) dries outward naturally with zero plastic foil.</p>" +
+        "<p><strong>Origin:</strong> Physicist Helmuth Glaser published this vapor-pressure balance in 1958&ndash;1959 (now EN ISO 13788).</p>"],
+      lt: ["GLASERIO GARŲ GRADIENTAS IR 5:1 TAISYKLĖ",
+        "<p><strong>Kaip veikia:</strong> Žiemą šiltas vidaus oras stumia garus į lauką. <strong>s<sub>d</sub></strong> rodo, kaip stipriai sluoksnis stabdo garus. Jei išorinis sluoksnis sandaresnis už vidinį, drėgmė užstringa sienos viduje ir sušąla.</p>" +
+        "<p><strong>5:1 taisyklė:</strong> Išoriniai sluoksniai privalo praleisti garus bent 5 kartus laisviau nei vidiniai. Beržas viduje (s<sub>d</sub> &approx; 4,0 m) + porėti švendrai išorėje (s<sub>d</sub> &approx; 0,4–0,6 m) džiūsta savaime be jokios plėvelės.</p>" +
+        "<p><strong>Kilmė:</strong> Vokiečių fizikas Helmutas Glaseris metodą paskelbė 1958–1959 m. (dabar EN ISO 13788).</p>"]
+    },
+    slaked_lime: {
+      en: ["SLAKED LIME (GESINTOS KALKĖS, Ca(OH)₂) VS. CLAY",
+        "<p><strong>Does slaked lime insulate alone?</strong> <strong>No.</strong> Pure lime paste conducts heat like brick (&lambda; &approx; 0.80). Click <em>Pure Lime Only</em> below and watch the birch freeze to &minus;9.6&deg;C!</p>" +
+        "<p><strong>Does slaked lime work as the binder around Typha / hemp / wood shavings?</strong> <strong>Yes.</strong> The plant fibers trap ~85% still air (&lambda; &approx; 0.070), while Ca(OH)<sub>2</sub> absorbs CO<sub>2</sub> from air and slowly turns back into breathable limestone (CaCO<sub>3</sub>). Its alkalinity (<strong>pH 12.5</strong>) stops mold, rot, and mice next to Class-5 birch.</p>" +
+        "<p><strong>Field rules:</strong> 150 mm lime-Typha (U = 0.33) matches 120 mm clay-Typha (U = 0.32). Apply only above <strong>+5&deg;C</strong> (4+ frost-free weeks), wear rubber gloves &amp; goggles, and never use Portland cement.</p>"],
+      lt: ["GESINTOS KALKĖS Ca(OH)₂ VIETOJE MOLIO",
+        "<p><strong>Ar grynos kalkės šiltina vienos?</strong> <strong>Ne.</strong> Gryna kalkių tešla praleidžia šilumą kaip plyta (&lambda; &approx; 0,80). Spustelėkite <em>Tik grynos kalkės</em> ir pamatysite, kaip beržas sušąla iki &minus;9,6&deg;C!</p>" +
+        "<p><strong>Ar kalkės veikia kaip rišiklis su švendrais / kanapių spaliais / drožlėmis?</strong> <strong>Taip.</strong> Augalinis pluoštas sulaiko ~85% oro (&lambda; &approx; 0,070), o Ca(OH)<sub>2</sub> sugeria CO<sub>2</sub> ir virsta kvėpuojančiu kalkakmeniu (CaCO<sub>3</sub>). Aukštas šarmingumas (<strong>pH 12,5</strong>) saugo beržą nuo pelėsio, puvimo ir graužikų.</p>" +
+        "<p><strong>Sąlygos:</strong> 150 mm kalkių-švendrų (U = 0,33) atitinka 120 mm molio-švendrų (U = 0,32). Dėti tik prie <strong>&ge;+5&deg;C</strong> (4+ sav. be šalnų), su pirštinėmis ir akiniais; niekada nenaudoti portlandcemenčio.</p>"]
+    },
+    kusabi: {
+      en: ["KUSABI · DRY BIRCH LOCKING WEDGES",
+        "<p><strong>What it is:</strong> A traditional Japanese/Nordic wooden wedge driven through a slotted tenon projecting past the post. Because the wedge is dried indoors before assembly, it bites tightly across the grain and resists the 1.50 kN tie-beam pull with zero bolts or steel brackets.</p>" +
+        "<p><strong>Field bonus:</strong> If the spruce frame shrinks slightly after one winter, two taps with a wooden mallet tighten the whole roof frame again.</p>"],
+      lt: ["KUSABI · SAUSI BERŽO FIKSAVIMO PLEIŠTAI",
+        "<p><strong>Kas tai:</strong> Tradicinis medinis pleištas, įkalamas per kyšantį stulpo dyglio plyšį. Kadangi beržo pleištas išdžiovinamas viduje, jis be jokių varžtų patikimai laiko 1,50 kN stygos tempimą.</p>" +
+        "<p><strong>Privalumas:</strong> Jei po pirmos žiemos eglė kiek pasėda, du medinio kūjo smūgiai vėl suveržia visą rėmą.</p>"]
+    },
+    oziai: {
+      en: ["OŽIAI · CROSSED CHARRED RIDGE PINS + BIRCH BARK & SODS",
+        "<p><strong>What it is:</strong> The roof ridge is the hardest line to waterproof without plastic membrane. Instead, 3 overlapping layers of June-peeled white birch bark (naturally waterproof betulin oil) sit under 12 cm living grass sods, weighed down by 14 crossed charred spruce poles (Lithuanian <em>o&zcaron;iai</em>, Norwegian <em>vindskier</em>).</p>"],
+      lt: ["OŽIAI · SUKRYŽIUOTOS DEGINTOS KRAIGO KARTYS, TOŠIS IR VELĖNA",
+        "<p><strong>Kas tai:</strong> Kraigas – sudėtingiausia vieta sandarinti be plėvelės. Čia klojami 3 birželį luptos baltos beržo tošies sluoksniai (natūraliai atsparūs vandeniui), virš jų 12 cm gyva velėna, o viską tvirtai prispaudžia 14 sukryžiuotų apdegintų eglių karčių (<em>ožiai</em>).</p>"]
+    },
+    lehmwickel: {
+      en: ["LEHMWICKEL · ELEVATED WOVEN REED-CLAY FLOOR (J7)",
+        "<p><strong>What it is:</strong> Centuries-old Central European earth-building technique: bundles of winter reeds are dipped in creamy clay slip and packed tightly over peeled spruce subfloor poles, then topped with a 3.5 cm 1:3 sandy clay-ash crust burnished hard with a smooth stone.</p>" +
+        "<p><strong>Why it works:</strong> Insulating, warm underfoot, fireproof, zero plastic foam, and completely breathable from the open summer crawlspace below.</p>"],
+      lt: ["LEHMWICKEL · PAKELTOS PINTOS NENDRIŲ IR MOLIO GRINDYS (J7)",
+        "<p><strong>Kas tai:</strong> Šimtmečių senumo technika: molio tyrelėje mirkyti nendrių pluoštai tankiai suplūkiami ant nužievintų eglių juodgrindžių, o viršus užglaistomas 3,5 cm 1:3 smėlio-molio-pelenų sluoksniu ir užtrinamas lygiu akmeniu.</p>" +
+        "<p><strong>Privalumas:</strong> Šiltos, nedegios, be jokio putplasčio ar plėvelių, kvėpuojančios per atvirą vasaros pogrindį.</p>"]
+    },
+    neso: {
+      en: ["NESO LASHINGS & TRAVOIS WINTER SLED",
+        "<p><strong>Neso:</strong> Young green hazel shoots heated gently over glowing coals and twisted like rope until the wood fibers separate into flexible cords. Once tied wet around roof joints and dried, they shrink tight as iron without nails or wire.</p>" +
+        "<p><strong>Travois:</strong> A simple A-frame sled built from two springy birch poles so one person can drag heavy winter spruce logs over frozen snow with minimal friction.</p>"],
+      lt: ["NESO RYŠIAI IR TRAVOIS ŽIEMOS ROGĖS",
+        "<p><strong>Neso:</strong> Žali lazdyno ūgliai, pašildyti virš žarijų ir susukti kaip virvė, kol medienos pluoštas tampa lankstus. Surišti drėgni ir išdžiūvę, jie susitraukia ir suveržia stogo mazgus be vinių ir vielos.</p>" +
+        "<p><strong>Travois:</strong> Paprastos A formos medinės rogės iš dviejų beržo karčių, leidžiančios vienam žmogui lengvai tempti sunkius rąstus per sniegą.</p>"]
+    },
+    beam_m: {
+      en: ["SIMPLY SUPPORTED BEAM · M = qL² / 8",
+        "<p><strong>What it shows:</strong> Top red parabola is internal bending force (maximum dead-center, zero at the supports). Bottom blue line is how far the Ø15 cm log actually bends down. Drag Span L slightly longer and notice sag explodes as <strong>L<sup>4</sup></strong>.</p>" +
+        "<p><strong>Origin:</strong> Galileo (1638) started beam mechanics; Euler &amp; Bernoulli (c. 1750) completed the elastic equation used on sites today.</p>"],
+      lt: ["DVIEJŲ ATRAMŲ SIJA · M = qL² / 8",
+        "<p><strong>Ką rodo:</strong> Raudona parabolė – lenkimo momentas (didžiausias viduryje, nulis galuose). Mėlyna kreivė – realus Ø15 cm rąsto įlinkis. Šiek tiek pailginus L, įlinkis staigiai auga kaip <strong>L<sup>4</sup></strong>.</p>" +
+        "<p><strong>Kilmė:</strong> Pradėjo Galilėjas (1638 m.), tikslią lygtį užbaigė Eileris ir Bernulis (~1750 m.).</p>"]
+    },
+    euler_k: {
+      en: ["EULER BUCKLING MODES · K = 2.0 / 1.0 / 0.7 / 0.5",
+        "<p><strong>What it shows:</strong> Click the 4 K-buttons to see how holding a column's ends changes its shape and strength. A free flagpole (<strong>K=2.0</strong>) carries <strong>16 times less weight</strong> than the exact same log clamped rigidly at both ends (<strong>K=0.5</strong>)!</p>" +
+        "<p><strong>Origin:</strong> Leonhard Euler derived these exact sine and cosine buckling shapes in 1757.</p>"],
+      lt: ["EILERIO KLUPUMO FORMOS · K = 2.0 / 1.0 / 0.7 / 0.5",
+        "<p><strong>Ką rodo:</strong> Perjunginėkite 4 K mygtukus ir stebėkite, kaip galų įtvirtinimas keičia stulpo jėgą. Laisvas stiebas (<strong>K=2.0</strong>) atlaiko <strong>16 kartų mažiau</strong> nei standžiai įtvirtintas abiejuose galuose (<strong>K=0.5</strong>)!</p>" +
+        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė šias tikslias formas 1757 m.</p>"]
+    },
+    catenary: {
+      en: ["HOOKE CATENARY ARCH · y = a cosh(x/a)",
+        "<p><strong>What it shows:</strong> Blue dashed curve = hanging chain (pure tension). Red curve = inverted arch (pure compression, zero bending). Drag <strong>a</strong> larger to flatten the arch and watch the sideways red push arrow (<strong>H = a&middot;w</strong>) grow stronger.</p>" +
+        "<p><strong>Origin:</strong> Robert Hooke announced this in a 1675 anagram; Antoni Gaud&iacute; hung weighted chain models upside down to design Sagrada Fam&iacute;lia.</p>"],
+      lt: ["GRANDININĖ ARKA · y = a cosh(x/a)",
+        "<p><strong>Ką rodo:</strong> Mėlynas punktyras – kabanti grandinė (grynas tempimas). Raudona linija – apversta arka (grynas gniuždymas be lenkimo). Didinant <strong>a</strong>, arka žemėja, o šoninis skėtimas (<strong>H = a&middot;w</strong>) stiprėja.</p>" +
+        "<p><strong>Kilmė:</strong> Robertas Hukas paskelbė 1675 m.; vėliau pagal kabančias grandinėles Antoni Gaud&iacute; suprojektavo „Sagrada Fam&iacute;lia“.</p>"]
+    }
+  };
+
+  var openKey = null, openSlot = null;
+
+  function closeExplain() {
+    if (openSlot) openSlot.innerHTML = "";
+    Array.prototype.slice.call(document.querySelectorAll("[data-explain].active")).forEach(function (n) { n.classList.remove("active"); });
+    openKey = null;
+    openSlot = null;
+  }
+
+  function showExplain(key, trig) {
+    var entry = EXPLAIN[key];
+    if (!entry) return;
+    // Choose the closest logical inline slot (right inside mini-plate for Plate III, or section's .x-slot for Plates I/II/Manual)
+    var slot = null;
+    var mini = trig.closest(".mini-plate");
+    if (mini) slot = mini.querySelector(".x-slot");
+    if (!slot) {
+      var sec = trig.closest("section");
+      if (sec) slot = sec.querySelector(".x-slot");
+    }
+    if (!slot) return;
+
+    if (openKey === key && openSlot === slot) {
+      closeExplain();
+      return;
+    }
+    closeExplain();
+    var pair = currentLang === "lt" ? entry.lt : entry.en;
+    slot.innerHTML =
+      '<div class="x-card" role="region">' +
+      '<div class="x-top"><span class="x-k">' + pair[0] + '</span><button type="button" class="x-x" aria-label="Close">&times;</button></div>' +
+      pair[1] + '</div>';
+    trig.classList.add("active");
+    openKey = key;
+    openSlot = slot;
+    // Smoothly ensure the explanation card is visible if clicked down inside a long drawer
+    var rect = slot.getBoundingClientRect();
+    if (rect.top < 72 || rect.top > window.innerHeight - 120) {
+      slot.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  /* Universal event delegation -> NEVER loses listeners after EN/LT language swaps or dynamic live-bill rebuilds! */
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".x-x")) { closeExplain(); return; }
+    var trig = e.target.closest("[data-explain]");
+    if (trig) {
+      e.preventDefault();
+      showExplain(trig.getAttribute("data-explain"), trig);
+    }
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeExplain(); });
+
+  /* ==================== SVG HELPERS ==================== */
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function arrow(parent, x1, y1, x2, y2, color, sw, head) {
+    head = head || 6;
+    parent.appendChild(el("line", { x1: x1, y1: y1, x2: x2, y2: y2, stroke: color, "stroke-width": sw || 1.3 }));
+    var ang = Math.atan2(y2 - y1, x2 - x1);
+    var p1x = x2 + head * Math.cos(ang + 2.68), p1y = y2 + head * Math.sin(ang + 2.68);
+    var p2x = x2 + head * Math.cos(ang - 2.68), p2y = y2 + head * Math.sin(ang - 2.68);
+    parent.appendChild(el("polygon", { points: x2 + "," + y2 + " " + p1x.toFixed(1) + "," + p1y.toFixed(1) + " " + p2x.toFixed(1) + "," + p2y.toFixed(1), fill: color }));
+  }
+
+  /* Architectural 1.80 m human figure silhouette */
+  function drawArchitectFigure(parent, X, Y, cxM, z0M) {
+    var g = el("g", { opacity: "0.92" });
+    var h = 1.80;
+    g.appendChild(el("line", { x1: X(cxM + 0.30), y1: Y(z0M), x2: X(cxM + 0.30), y2: Y(z0M + h), stroke: "#9ca3af", "stroke-width": 0.8, "stroke-dasharray": "2 2" }));
+    g.appendChild(el("line", { x1: X(cxM + 0.25), y1: Y(z0M + h), x2: X(cxM + 0.35), y2: Y(z0M + h), stroke: "#9ca3af", "stroke-width": 0.9 }));
+    g.appendChild(el("text", { x: X(cxM + 0.36), y: Y(z0M + 0.96), fill: "#7b7e84", "font-family": "var(--mono)", "font-size": 8.8 }, "1.80 m"));
+    g.appendChild(el("circle", { cx: X(cxM), cy: Y(z0M + 1.69), r: 0.105 * (X(1) - X(0)), fill: "#cbc7be", stroke: "#52555a", "stroke-width": 1.0 }));
+    var rel = [
+      [-0.045, 1.59], [-0.165, 1.51], [-0.225, 1.44], [-0.255, 1.05], [-0.205, 1.03], [-0.165, 1.33],
+      [-0.145, 0.94], [-0.142, 0.44], [-0.135, 0.05], [-0.185, 0.00], [-0.055, 0.00], [-0.045, 0.44],
+      [-0.005, 0.82], [0.015, 0.82], [0.055, 0.44], [0.065, 0.00], [0.195, 0.00], [0.145, 0.05],
+      [0.142, 0.44], [0.145, 0.94], [0.165, 1.33], [0.205, 1.03], [0.255, 1.05], [0.225, 1.44],
+      [0.165, 1.51], [0.045, 1.59]
+    ];
+    var pts = rel.map(function (p) { return X(cxM + p[0]).toFixed(1) + "," + Y(z0M + p[1]).toFixed(1); }).join(" ");
+    g.appendChild(el("polygon", { points: pts, fill: "#cbc7be", stroke: "#52555a", "stroke-width": 1.0, "stroke-linejoin": "round" }));
+    parent.appendChild(g);
+  }
+
+  /* ==================== PLATE I: LIVE ADJUSTABLE SKIFTESVERK HALL ==================== */
+  var svgCabin = document.getElementById("svg-cabin");
+  var slWidth = document.getElementById("sl-width"), slBays = document.getElementById("sl-bays");
+  var slPitch = document.getElementById("sl-pitch"), slBirch = document.getElementById("sl-birch");
+  var slGird = document.getElementById("sl-gird"), slPost = document.getElementById("sl-post");
+  var lastCabin = {};
+
+  function renderCabin() {
+    var W = parseFloat(slWidth.value), nBays = parseInt(slBays.value, 10), L_HALL = nBays * 1.50;
+    var pitchDeg = parseFloat(slPitch.value), dBirchCm = parseFloat(slBirch.value);
+    var dGirdCm = parseFloat(slGird.value), dPostCm = parseFloat(slPost.value);
+
+    document.getElementById("out-width").textContent = W.toFixed(2) + " m";
+    document.getElementById("out-bays").textContent = nBays + (currentLang === "lt" ? " tarpai (" : " bays (") + L_HALL.toFixed(2) + " m)";
+    document.getElementById("out-pitch").textContent = pitchDeg + "°";
+    document.getElementById("out-birch").textContent = dBirchCm + " cm";
+    document.getElementById("out-gird").textContent = dGirdCm + " cm";
+    document.getElementById("out-post").textContent = dPostCm + " cm";
+
+    var rad = pitchDeg * Math.PI / 180, tanP = Math.tan(rad), cosP = Math.cos(rad);
+    var W_HALF = W / 2.0, P_X = W / 4.0, spanM = W / 4.0, OVH = 0.60, VERGE = 0.65;
+    var STONE_Z = 0.30, D_G = dGirdCm / 100.0, D_POST = dPostCm / 100.0;
+    var GIRD_TOP = STONE_Z + D_G, FLOOR_Z = GIRD_TOP + 0.09 + 0.115, EAVE_Z = 1.90;
+    var D_E = 0.13, D_P = 0.13, D_T = 0.13, D_R = 0.13, D_RAF = 0.095, THATCH = 0.30;
+    function roofZ(x) { return EAVE_Z + (W_HALF - Math.abs(x)) * tanP; }
+
+    var ridgeTop = roofZ(0), purlinTop = roofZ(P_X), tieTop = purlinTop - D_P, tieBot = tieTop - D_T;
+    var headroom = tieBot - FLOOR_Z, loftPeak = (ridgeTop - D_R) - (tieTop + 0.06);
+    var outerRidge = ridgeTop + D_RAF + (THATCH + 0.08) / cosP, area = W * L_HALL;
+
+    var mu1 = Math.max(0, 0.8 * (60 - pitchDeg) / 30);
+    var snowLoad = 1.60 * mu1, deadHoriz = 0.68 / cosP, totalRoof = snowLoad + deadHoriz;
+    var W_ridge = totalRoof * (W / 4.0) * 1.50, H_tie = W_ridge / (2 * tanP);
+
+    var I_g = Math.PI * Math.pow(D_G, 4) / 64;
+    var deltaMm = (5 * 5625 * Math.pow(spanM, 4) / (384 * E_SPRUCE * I_g)) * 1000;
+    var lRatio = Math.round((spanM * 1000) / Math.max(deltaMm, 0.01));
+
+    var L_post = Math.max(1.2, tieBot - GIRD_TOP);
+    var I_p = Math.PI * Math.pow(D_POST, 4) / 64;
+    var Pcr_kN = (Math.PI * Math.PI * E_SPRUCE * I_p / Math.pow(L_post, 2)) / 1000;
+    var postLoad_kN = totalRoof * (W / 4.0) * 1.50 + 2.5, eulerSF = Pcr_kN / Math.max(postLoad_kN, 1);
+
+    var clearBay = (EAVE_Z - D_E) - GIRD_TOP, dB = dBirchCm / 100.0;
+    var courses = Math.max(4, Math.floor((clearBay - 0.08) / dB));
+    var gapMm = Math.round((clearBay - courses * dB) * 1000);
+    var shrinkMm = Math.round(courses * dB * 0.045 * 1000);
+
+    var slopeLen = (W_HALF + OVH) / cosP;
+    var roofArea = 2 * (L_HALL + 2 * VERGE) * slopeLen;
+    var roofSheaves = Math.round(roofArea * 10.5), floorSheaves = Math.round(area * 2.35), totalSheaves = roofSheaves + floorSheaves;
+    var nBents = nBays + 1, nPiers = nBents * 5;
+    var totalWallLogs = (2 * nBays * courses) + Math.round(2 * (W / 1.5) * (courses + ((ridgeTop - EAVE_Z) * 0.5 / dB)));
+    var nRafters = Math.ceil((L_HALL + 2 * VERGE) / 0.60) * 2;
+    var wallAreaNet = (2 * L_HALL * (EAVE_Z - GIRD_TOP)) + (2 * W * (EAVE_Z - GIRD_TOP) + W * (ridgeTop - EAVE_Z) * 0.72) - 2.2;
+
+    lastCabin = {
+      W: W, L: L_HALL, nBays: nBays, nBents: nBents, area: area, pitchDeg: pitchDeg,
+      dBirchCm: dBirchCm, dGirdCm: dGirdCm, dPostCm: dPostCm, spanM: spanM,
+      courses: courses, gapMm: gapMm, shrinkMm: shrinkMm, totalWallLogs: totalWallLogs,
+      nPiers: nPiers, nRafters: nRafters, slopeLen: slopeLen, roofSheaves: roofSheaves,
+      floorSheaves: floorSheaves, totalSheaves: totalSheaves, wallAreaNet: wallAreaNet,
+      H_tie: H_tie, deltaMm: deltaMm, lRatio: lRatio, Pcr_kN: Pcr_kN, eulerSF: eulerSF, outerRidge: outerRidge
+    };
+
+    document.getElementById("m-area").textContent = area.toFixed(1) + " m²";
+    document.getElementById("m-ridge").textContent = outerRidge.toFixed(2) + " m";
+    document.getElementById("m-snow").textContent = totalRoof.toFixed(2) + " kN/m²";
+    document.getElementById("m-thrust").textContent = H_tie.toFixed(2) + " kN";
+    document.getElementById("m-defl").textContent = deltaMm.toFixed(2) + " mm (L/" + lRatio + ")";
+    document.getElementById("m-euler").textContent = Pcr_kN.toFixed(0) + " kN (" + Math.round(eulerSF) + "×)";
+
+    var areaOver = area > 50.0, ridgeOver = outerRidge > 5.00, pitchLow = pitchDeg < 45;
+    var clayCrack = lRatio < 500, gapSmall = gapMm < shrinkMm + 20, postWeak = eulerSF < 6;
+
+    document.getElementById("m-area-box").className = "metric " + (areaOver ? "alert" : "ok");
+    document.getElementById("m-ridge-box").className = "metric " + (ridgeOver ? "alert" : "ok");
+    document.getElementById("m-snow-box").className = "metric " + (pitchLow ? "alert" : "");
+    document.getElementById("m-defl-box").className = "metric " + (clayCrack ? "alert" : "ok");
+    document.getElementById("m-euler-box").className = "metric " + (postWeak ? "alert" : "ok");
+
+    var msgs = [];
+    if (areaOver) msgs.push(currentLang === "lt" ? "PLOTAS > 50 m² (" + area.toFixed(1) + " m²): viršija STR I grupės ribą." : "AREA > 50 m² (" + area.toFixed(1) + " m²): exceeds STR Group I cap.");
+    if (ridgeOver) msgs.push(currentLang === "lt" ? "KRAIGAS > 5.00 m (" + outerRidge.toFixed(2) + " m): viršija aukščio ribą." : "RIDGE > 5.00 m (" + outerRidge.toFixed(2) + " m): exceeds statutory height cap.");
+    if (pitchLow) msgs.push(currentLang === "lt" ? "NUOLYDIS < 45°: nendrių stogas sulaiko drėgmę (μ₁=" + mu1.toFixed(2) + ")." : "PITCH < 45°: exposed reed thatch retains rain & rots early (μ₁=" + mu1.toFixed(2) + ").");
+    if (clayCrack) msgs.push(currentLang === "lt" ? "ĮLINKIS L/" + lRatio + " (< L/500): padidinkite sijos Ø arba siaurinkite plotį." : "FLOOR FLEX L/" + lRatio + " (< L/500): increase girder Ø or narrow width for clay floor.");
+    if (gapSmall) msgs.push(currentLang === "lt" ? "MAŽAS SĖDIMO TARPAS (" + gapMm + " mm vs " + shrinkMm + " mm)." : "TIGHT SETTLING GAP (" + gapMm + " mm vs " + shrinkMm + " mm shrinkage).");
+    if (postWeak) msgs.push(currentLang === "lt" ? "MAŽA STULPO KLUPUMO ATSARGA (" + eulerSF.toFixed(1) + "×)." : "LOW POST BUCKLING MARGIN (" + eulerSF.toFixed(1) + "×).");
+
+    var vBar = document.getElementById("p1-verdict");
+    if (msgs.length) {
+      vBar.className = "verdict-bar warn";
+      vBar.textContent = msgs.join(" ");
+    } else {
+      vBar.className = "verdict-bar";
+      vBar.textContent = currentLang === "lt"
+        ? "PATIKRA OK: " + area.toFixed(1) + " m², kraigas " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ stogas sausas, sija L/" + lRatio + ", stulpas " + Math.round(eulerSF) + "× atsarga, " + courses + " beržo eilės + " + gapMm + " mm tarpas."
+        : "ALL CHECKS PASS: " + area.toFixed(1) + " m², ridge " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ reed dry, floor flex L/" + lRatio + ", post " + Math.round(eulerSF) + "× Euler margin, " + courses + " courses + " + gapMm + " mm gap.";
+    }
+
+    document.getElementById("p1-cap-l").textContent =
+      (currentLang === "lt" ? "TIKRAUS MASTELIO PJŪVIS · " : "TRUE-SCALE SECTION · ") +
+      W.toFixed(2) + " × " + L_HALL.toFixed(2) + " M · " +
+      (currentLang === "lt" ? "ARCHITEKTŪRINĖ 1.80 M FIGŪRA" : "ARCHITECTURAL 1.80 M FIGURE");
+
+    /* Sharp Architectural Skiftesverk SVG */
+    clear(svgCabin);
+    var maxH = Math.max(5.45, outerRidge + 0.55);
+    var sc = Math.min(64, 392 / maxH, 540 / (W + 2 * OVH + 1.4));
+    var ox = 380, oy = 436;
+    function X(x) { return ox + x * sc; }
+    function Y(z) { return oy - z * sc; }
+
+    var defs = el("defs", {});
+    var patChar = el("pattern", { id: "patChar", width: "6", height: "6", patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" });
+    patChar.appendChild(el("rect", { width: "6", height: "6", fill: "#202124" }));
+    patChar.appendChild(el("line", { x1: "0", y1: "0", x2: "0", y2: "6", stroke: "#4a4d52", "stroke-width": "1.2" }));
+    defs.appendChild(patChar);
+
+    var patReed = el("pattern", { id: "patReed", width: "9", height: "9", patternUnits: "userSpaceOnUse", patternTransform: "rotate(28)" });
+    patReed.appendChild(el("rect", { width: "9", height: "9", fill: pitchLow ? "#f4d7cf" : "#ead6a7" }));
+    patReed.appendChild(el("line", { x1: "0", y1: "0", x2: "0", y2: "9", stroke: pitchLow ? "#c98577" : "#c7a968", "stroke-width": "0.9" }));
+    defs.appendChild(patReed);
+    svgCabin.appendChild(defs);
+
+    var capColor = ridgeOver ? "#8c3a2b" : "#9ca3af";
+    svgCabin.appendChild(el("line", { x1: 24, y1: Y(5.00), x2: 736, y2: Y(5.00), stroke: capColor, "stroke-width": ridgeOver ? 1.5 : 0.9, "stroke-dasharray": "5 4" }));
+    svgCabin.appendChild(el("text", { x: 32, y: Y(5.00) - 5, fill: capColor, "font-family": "var(--mono)", "font-size": 9.5 }, "5.00 m STR 1.01.03:2017 CAP"));
+
+    var xg = W_HALF + 1.45;
+    var gndPts = [
+      [X(-xg), Y(-0.26)], [X(-xg), Y(0.14)], [X(-W_HALF - 0.92), Y(0.14)],
+      [X(-W_HALF - 0.72), Y(-0.15)], [X(-W_HALF - 0.48), Y(-0.15)], [X(-W_HALF - 0.28), Y(0)],
+      [X(W_HALF + 0.28), Y(0)], [X(W_HALF + 0.48), Y(-0.15)], [X(W_HALF + 0.72), Y(-0.15)],
+      [X(W_HALF + 0.92), Y(0.14)], [X(xg), Y(0.14)], [X(xg), Y(-0.26)]
+    ];
+    svgCabin.appendChild(el("polygon", { points: gndPts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "), fill: "#efe9dc" }));
+    svgCabin.appendChild(el("polyline", { points: gndPts.slice(1, -1).map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "), fill: "none", stroke: "#5c5242", "stroke-width": 1.4 }));
+
+    var gFloor = el("g", { "data-part": "floor" });
+    [-W_HALF, -P_X, 0, P_X, W_HALF].forEach(function (xp) {
+      var stPts = [[X(xp - 0.20), Y(0)], [X(xp - 0.22), Y(STONE_Z * 0.5)], [X(xp - 0.16), Y(STONE_Z)], [X(xp + 0.16), Y(STONE_Z)], [X(xp + 0.22), Y(STONE_Z * 0.5)], [X(xp + 0.20), Y(0)]];
+      gFloor.appendChild(el("polygon", { points: stPts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "), fill: "#c6c3bc", stroke: "#2b2d30", "stroke-width": 1.0 }));
+    });
+    [-1, 1].forEach(function (sg) {
+      gFloor.appendChild(el("polygon", {
+        points: X(sg * (W_HALF + 0.24)).toFixed(1) + "," + Y(0).toFixed(1) + " " + X(sg * (W_HALF + 0.48)).toFixed(1) + "," + Y(0).toFixed(1) + " " + X(sg * (W_HALF + 0.24)).toFixed(1) + "," + Y(GIRD_TOP).toFixed(1),
+        fill: "#8da15b", opacity: "0.45", stroke: "#485923", "stroke-width": 0.85, "stroke-dasharray": "3 2"
+      }));
+    });
+    gFloor.appendChild(el("rect", { x: X(-W_HALF - 0.14), y: Y(GIRD_TOP), width: (W + 0.28) * sc, height: D_G * sc, fill: "url(#patChar)", stroke: "#0d0e10", "stroke-width": 1.0 }));
+    var poleX = -W_HALF + 0.16;
+    while (poleX <= W_HALF - 0.15) {
+      gFloor.appendChild(el("circle", { cx: X(poleX), cy: Y(GIRD_TOP + 0.045), r: 0.045 * sc, fill: "#ede0c4", stroke: "#5a4320", "stroke-width": 0.7 }));
+      poleX += 0.115;
+    }
+    gFloor.appendChild(el("rect", { x: X(-W_HALF + 0.10), y: Y(GIRD_TOP + 0.17), width: (W - 0.20) * sc, height: 0.08 * sc, fill: "#dfc59b", stroke: "#7a5328", "stroke-width": 0.8 }));
+    gFloor.appendChild(el("rect", { x: X(-W_HALF + 0.12), y: Y(FLOOR_Z), width: (W - 0.24) * sc, height: 0.035 * sc, fill: "#c68e66", stroke: "#7c4728", "stroke-width": 0.85 }));
+    var sag = Math.min(9, deltaMm * 1.3);
+    gFloor.appendChild(el("path", {
+      d: "M" + X(-P_X).toFixed(1) + "," + Y(GIRD_TOP - D_G / 2).toFixed(1) + " Q" + X(-P_X / 2).toFixed(1) + "," + (Y(GIRD_TOP - D_G / 2) + sag).toFixed(1) + " " + X(0).toFixed(1) + "," + Y(GIRD_TOP - D_G / 2).toFixed(1),
+      fill: "none", stroke: clayCrack ? "#ff6b57" : "#f5f3ef", "stroke-width": 1.3, "stroke-dasharray": "3 2"
+    }));
+    svgCabin.appendChild(gFloor);
+
+    var gWalls = el("g", { "data-part": "walls" });
+    var insColor = wallMat === "lime" ? "#e8ebdf" : (wallMat === "pure" ? "#d6d9d2" : "#e6d8b5");
+    var insStroke = wallMat === "lime" ? "#234b6e" : "#9c7224";
+    [-1, 1].forEach(function (sg) {
+      var wx = sg * W_HALF;
+      gWalls.appendChild(el("rect", { x: X(wx - 0.08), y: Y(EAVE_Z - D_E), width: 0.16 * sc, height: (EAVE_Z - D_E - GIRD_TOP) * sc, fill: "#d8c298", stroke: "#5a4320", "stroke-width": 0.9 }));
+      gWalls.appendChild(el("rect", { x: X(wx - 0.08), y: Y(GIRD_TOP + 0.38), width: 0.16 * sc, height: 0.38 * sc, fill: "url(#patChar)" }));
+      for (var k = 0; k < courses; k++) {
+        var zb = GIRD_TOP + dB / 2 + k * dB;
+        gWalls.appendChild(el("circle", { cx: X(wx), cy: Y(zb), r: (dB / 2) * sc, fill: "#fbf4e4", stroke: "#8a6220", "stroke-width": 0.95 }));
+        gWalls.appendChild(el("circle", { cx: X(wx), cy: Y(zb), r: (dB / 4.4) * sc, fill: "none", stroke: "#c4a46c", "stroke-width": 0.5 }));
+      }
+      var zGap = GIRD_TOP + courses * dB;
+      gWalls.appendChild(el("rect", { x: X(wx - dB / 2), y: Y(EAVE_Z - D_E), width: dB * sc, height: Math.max(2, (EAVE_Z - D_E - zGap) * sc), fill: "#dce5c8", stroke: "#5c702d", "stroke-width": 0.8, "stroke-dasharray": "2 2" }));
+      var xt = sg > 0 ? (wx + dB / 2) : (wx - dB / 2 - 0.12);
+      gWalls.appendChild(el("rect", { x: X(xt), y: Y(EAVE_Z - D_E), width: 0.12 * sc, height: (EAVE_Z - D_E - GIRD_TOP) * sc, fill: insColor, stroke: insStroke, "stroke-width": 0.9 }));
+      var xc = sg > 0 ? (xt + 0.12) : (xt - 0.03);
+      gWalls.appendChild(el("rect", { x: X(xc), y: Y(EAVE_Z - D_E), width: 0.03 * sc, height: (EAVE_Z - D_E - GIRD_TOP) * sc, fill: "#dce8f2", stroke: "#234b6e", "stroke-width": 0.75, "stroke-dasharray": "2 2" }));
+      var xb = sg > 0 ? (xc + 0.03) : (xc - 0.025);
+      gWalls.appendChild(el("rect", { x: X(xb), y: Y(EAVE_Z - 0.02), width: 0.025 * sc, height: (EAVE_Z - 0.02 - GIRD_TOP) * sc, fill: "#7a634e", stroke: "#161719", "stroke-width": 0.75 }));
+    });
+    svgCabin.appendChild(gWalls);
+
+    var gPosts = el("g", { "data-part": "posts" });
+    [-1, 1].forEach(function (sg) {
+      gPosts.appendChild(el("rect", { x: X(sg * P_X - D_POST / 2), y: Y(tieTop + 0.14), width: D_POST * sc, height: (tieTop + 0.14 - GIRD_TOP) * sc, fill: "#ede0c4", stroke: "#161719", "stroke-width": 1.1 }));
+      gPosts.appendChild(el("rect", { x: X(sg * P_X - D_POST / 2), y: Y(GIRD_TOP + 0.40), width: D_POST * sc, height: 0.40 * sc, fill: "url(#patChar)" }));
+      gPosts.appendChild(el("line", { x1: X(sg * P_X), y1: Y(tieBot - 0.50), x2: X(sg * (P_X - 0.46)), y2: Y(tieBot), stroke: "#5a4320", "stroke-width": 4.2, "stroke-linecap": "round" }));
+      gPosts.appendChild(el("line", { x1: X(sg * P_X), y1: Y(tieBot - 0.50), x2: X(sg * (P_X - 0.46)), y2: Y(tieBot), stroke: "#ede0c4", "stroke-width": 2.4, "stroke-linecap": "round" }));
+      gPosts.appendChild(el("circle", { cx: X(sg * W_HALF), cy: Y(EAVE_Z - D_E / 2), r: (D_E / 2) * sc, fill: "#e8d6b2", stroke: "#161719", "stroke-width": 1.05 }));
+      gPosts.appendChild(el("circle", { cx: X(sg * W_HALF), cy: Y(EAVE_Z - D_E / 2), r: (D_E / 4.2) * sc, fill: "none", stroke: "#8a6d43", "stroke-width": 0.6 }));
+      gPosts.appendChild(el("circle", { cx: X(sg * P_X), cy: Y(purlinTop - D_P / 2), r: (D_P / 2) * sc, fill: "#e8d6b2", stroke: "#161719", "stroke-width": 1.05 }));
+      gPosts.appendChild(el("circle", { cx: X(sg * P_X), cy: Y(purlinTop - D_P / 2), r: (D_P / 4.2) * sc, fill: "none", stroke: "#8a6d43", "stroke-width": 0.6 }));
+    });
+    svgCabin.appendChild(gPosts);
+
+    var gTie = el("g", { "data-part": "tie" });
+    gTie.appendChild(el("rect", { x: X(-P_X - 0.24), y: Y(tieTop), width: (2 * P_X + 0.48) * sc, height: D_T * sc, fill: "#e8eff5", stroke: "#234b6e", "stroke-width": 1.55 }));
+    [-1, 1].forEach(function (sg) {
+      gTie.appendChild(el("rect", { x: X(sg * P_X - 0.08), y: Y(tieTop + 0.05), width: 0.16 * sc, height: 0.04 * sc, fill: "#9c5218", stroke: "#4a2408", "stroke-width": 0.8 }));
+    });
+    gTie.appendChild(el("rect", { x: X(-P_X + 0.15), y: Y(tieTop + 0.065), width: Math.max(0.4, 2 * P_X - 0.30) * sc, height: 0.055 * sc, fill: "#dfcb9d", stroke: "#5a4320", "stroke-width": 0.85 }));
+    if (loftPeak > 0.65) {
+      gTie.appendChild(el("text", { x: X(0), y: Y(tieTop + 0.26), "text-anchor": "middle", fill: "#7c3523", "font-family": "var(--mono)", "font-size": 8.6, "font-weight": 600 }, (currentLang === "lt" ? "PALĖPĖ " : "LOFT ") + loftPeak.toFixed(2) + " m"));
+    }
+    var vecLen = Math.min(64, 20 + H_tie * 16);
+    arrow(gTie, X(0) - 8, Y(tieTop - D_T / 2), X(0) - vecLen, Y(tieTop - D_T / 2), "#234b6e", 1.7, 5.5);
+    arrow(gTie, X(0) + 8, Y(tieTop - D_T / 2), X(0) + vecLen, Y(tieTop - D_T / 2), "#234b6e", 1.7, 5.5);
+    gTie.appendChild(el("text", { x: X(0), y: Y(tieBot) + 14, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10, "font-weight": 600 }, "TENSION  H = " + H_tie.toFixed(2) + " kN"));
+    svgCabin.appendChild(gTie);
+
+    var gRoof = el("g", { "data-part": "roof" });
+    var xt = W_HALF + OVH, rStroke = pitchLow || ridgeOver ? "#8c3a2b" : "#9c7224";
+    [-1, 1].forEach(function (sg) {
+      gRoof.appendChild(el("line", { x1: X(sg * (P_X - 0.12)), y1: Y(tieTop), x2: X(0), y2: Y(ridgeTop - D_R), stroke: "#8c3a2b", "stroke-width": 5.0, "stroke-linecap": "round" }));
+      gRoof.appendChild(el("line", { x1: X(sg * xt), y1: Y(roofZ(xt) + D_RAF / 2), x2: X(0), y2: Y(ridgeTop + D_RAF / 2), stroke: "#161719", "stroke-width": 4.0 }));
+      var zOutEave = roofZ(xt) + D_RAF + THATCH / cosP, zOutRidge = ridgeTop + D_RAF + THATCH / cosP;
+      var pts = [X(sg * xt).toFixed(1) + "," + Y(roofZ(xt) + D_RAF).toFixed(1), X(0).toFixed(1) + "," + Y(ridgeTop + D_RAF).toFixed(1), X(0).toFixed(1) + "," + Y(zOutRidge).toFixed(1), X(sg * xt).toFixed(1) + "," + Y(zOutEave).toFixed(1)].join(" ");
+      gRoof.appendChild(el("polygon", { points: pts, fill: "url(#patReed)", stroke: rStroke, "stroke-width": 1.35 }));
+      for (var st = 1; st <= 9; st++) {
+        var xb = xt - st * 0.34 * cosP;
+        if (xb < 0.16) break;
+        gRoof.appendChild(el("circle", { cx: X(sg * xb), cy: Y(roofZ(xb) + D_RAF + 0.025 / cosP), r: 1.9, fill: "#7a5a2b" }));
+        if (st % 2 === 0) gRoof.appendChild(el("circle", { cx: X(sg * xb), cy: Y(roofZ(xb) + D_RAF + 0.21 / cosP), r: 1.7, fill: "#5a3210" }));
+      }
+    });
+    gRoof.appendChild(el("circle", { cx: X(0), cy: Y(ridgeTop - D_R / 2), r: (D_R / 2) * sc, fill: "#e8d6b2", stroke: "#161719", "stroke-width": 1.1 }));
+    var zRid = ridgeTop + D_RAF + THATCH / cosP;
+    var barkPts = X(-0.42).toFixed(1) + "," + Y(roofZ(0.42) + D_RAF + (THATCH + 0.02) / cosP).toFixed(1) + " " + X(0).toFixed(1) + "," + Y(zRid + 0.02 / cosP).toFixed(1) + " " + X(0.42).toFixed(1) + "," + Y(roofZ(0.42) + D_RAF + (THATCH + 0.02) / cosP).toFixed(1);
+    gRoof.appendChild(el("polyline", { points: barkPts, fill: "none", stroke: "#334155", "stroke-width": 4.4, "stroke-linecap": "round" }));
+    gRoof.appendChild(el("polyline", { points: barkPts, fill: "none", stroke: "#ffffff", "stroke-width": 2.6, "stroke-linecap": "round" }));
+    gRoof.appendChild(el("polyline", {
+      points: X(-0.44).toFixed(1) + "," + Y(roofZ(0.44) + D_RAF + (THATCH + 0.08) / cosP).toFixed(1) + " " + X(0).toFixed(1) + "," + Y(zRid + 0.09 / cosP).toFixed(1) + " " + X(0.44).toFixed(1) + "," + Y(roofZ(0.44) + D_RAF + (THATCH + 0.08) / cosP).toFixed(1),
+      fill: "none", stroke: "#4a6b35", "stroke-width": 6.2, "stroke-linecap": "round"
+    }));
+    [-1, 1].forEach(function (sg) {
+      gRoof.appendChild(el("line", { x1: X(sg * 0.48), y1: Y(roofZ(0.48) + D_RAF + (THATCH + 0.09) / cosP), x2: X(-sg * 0.22), y2: Y(outerRidge + 0.24), stroke: "#161719", "stroke-width": 3.4 }));
+    });
+    for (var sIdx = 0; sIdx < 4; sIdx++) {
+      var sx = 0.42 + sIdx * ((W_HALF - 0.2) / 3.6);
+      if (sx > W_HALF + 0.2) break;
+      var sy = Y(roofZ(sx) + D_RAF + (THATCH + 0.14) / cosP);
+      arrow(gRoof, X(sx), sy - (10 + snowLoad * 18), X(sx), sy - 2, "#8c3a2b", 1.15, 4.8);
+    }
+    svgCabin.appendChild(gRoof);
+
+    drawArchitectFigure(svgCabin, X, Y, Math.min(0.44, P_X * 0.38), FLOOR_Z);
+
+    svgCabin.appendChild(el("line", { x1: 694, y1: Y(0), x2: 694, y2: Y(outerRidge), stroke: ridgeOver ? "#8c3a2b" : "#161719", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("line", { x1: 688, y1: Y(outerRidge), x2: 700, y2: Y(outerRidge), stroke: ridgeOver ? "#8c3a2b" : "#161719", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("line", { x1: 688, y1: Y(0), x2: 700, y2: Y(0), stroke: "#161719", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("text", { x: 687, y: Y(outerRidge * 0.52), "text-anchor": "end", fill: ridgeOver ? "#8c3a2b" : "#161719", "font-family": "var(--mono)", "font-size": 10.5, "font-weight": 600 }, "+" + outerRidge.toFixed(2) + " m"));
+    svgCabin.appendChild(el("text", { x: X(-W_HALF - 0.18), y: Y(EAVE_Z + 0.50), "text-anchor": "end", fill: pitchLow ? "#8c3a2b" : "#161719", "font-family": "var(--mono)", "font-size": 10.5, "font-weight": 600 }, "θ = " + pitchDeg + "°"));
+    svgCabin.appendChild(el("text", { x: X(-P_X - 0.14), y: Y((FLOOR_Z + tieBot) / 2), "text-anchor": "end", fill: "#55585e", "font-family": "var(--mono)", "font-size": 9 }, headroom.toFixed(2) + " m"));
+
+    svgCabin.appendChild(el("line", { x1: X(-W_HALF), y1: Y(0) + 26, x2: X(W_HALF), y2: Y(0) + 26, stroke: "#234b6e", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("line", { x1: X(-W_HALF), y1: Y(0) + 21, x2: X(-W_HALF), y2: Y(0) + 31, stroke: "#234b6e", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("line", { x1: X(W_HALF), y1: Y(0) + 21, x2: X(W_HALF), y2: Y(0) + 31, stroke: "#234b6e", "stroke-width": 0.9 }));
+    svgCabin.appendChild(el("text", { x: X(0), y: Y(0) + 42, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.8, "font-weight": 600 }, W.toFixed(2) + " m frame  ·  4 × " + spanM.toFixed(2) + " m pier spans  ·  " + nBays + " × 1.50 m = " + L_HALL.toFixed(2) + " m length"));
+
+    updateLiveBill();
+  }
+
+  /* ==================== PLATE II: WALL FOURIER + SLAKED LIME VS CLAY ==================== */
+  var svgWall = document.getElementById("svg-wall");
+  var btnExt = document.getElementById("btn-wall-ext"), btnInt = document.getElementById("btn-wall-int");
+  var btnMatClay = document.getElementById("btn-mat-clay"), btnMatLime = document.getElementById("btn-mat-lime"), btnMatPure = document.getElementById("btn-mat-pure");
+  var slTout = document.getElementById("sl-tout"), slTypha = document.getElementById("sl-typha"), slRh = document.getElementById("sl-rh");
+
+  function dewPoint(T, RH) {
+    var a = 17.625, b = 243.04, g = Math.log(RH / 100) + (a * T) / (b + T);
+    return (b * g) / (a - g);
+  }
+  function pSat(T) { return 610.94 * Math.exp((17.625 * T) / (T + 243.04)); }
+
+  function renderWall() {
+    var Tin = 20.0, Tout = parseFloat(slTout.value), dInsMm = parseFloat(slTypha.value), rh = parseFloat(slRh.value);
+    document.getElementById("out-tout").textContent = (Tout > 0 ? "+" : "") + Tout + "°C";
+    document.getElementById("out-typha").textContent = dInsMm + " mm";
+    document.getElementById("out-rh").textContent = rh + "%";
+
+    var Tdew = dewPoint(Tin, rh), dIns = dInsMm / 1000.0;
+    var R_si = 0.13, R_se = 0.13, R_birch = 0.100 / 0.15, sdBirch = 4.0;
+    var matCfg = {
+      clay: { lam: 0.055, mu: 3.3, en: "Clay-Slip Typha", lt: "Švendrai molyje", fill: "#e6d8b5", stroke: "#9c7224" },
+      lime: { lam: 0.070, mu: 5.0, en: "Lime + Typha", lt: "Kalkės + švendrai", fill: "#e8ebdf", stroke: "#234b6e" },
+      pure: { lam: 0.800, mu: 10.0, en: "Pure Lime Paste", lt: "Grynos kalkės", fill: "#d6d9d2", stroke: "#8c3a2b" }
+    }[wallMat];
+
+    var R_ins = dIns / matCfg.lam, sdIns = dIns * matCfg.mu, R_pl = 0.020 / 0.80 + 0.075, sdPl = 0.20;
+    var layers = wallMode === "ext" ? [
+      { id: "w-birch", name: currentLang === "lt" ? "Ø10 beržas (viduje)" : "Ø10 Birch (inside)", w: 100, R: R_birch, sd: sdBirch, fill: "#fbf4e4", stroke: "#9c7224" },
+      { id: "w-typha", name: currentLang === "lt" ? matCfg.lt : matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
+      { id: "w-cav", name: currentLang === "lt" ? "30 mm tarpas" : "30 mm Air", w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
+      { id: "w-board", name: currentLang === "lt" ? "Lentos" : "Boards", w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
+    ] : [
+      { id: "w-pl", name: currentLang === "lt" ? "Molis+pinė" : "Clay+Wattle", w: 35, R: R_pl, sd: sdPl, fill: "#d9b99b", stroke: "#8c3a2b" },
+      { id: "w-typha", name: currentLang === "lt" ? matCfg.lt : matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
+      { id: "w-birch", name: currentLang === "lt" ? "Ø10 beržas (šaltas!)" : "Ø10 Birch (COLD)", w: 100, R: R_birch, sd: sdBirch, fill: "#f4d7cf", stroke: "#8c3a2b" },
+      { id: "w-cav", name: currentLang === "lt" ? "30 mm tarpas" : "30 mm Air", w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
+      { id: "w-board", name: currentLang === "lt" ? "Lentos" : "Boards", w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
+    ];
+
+    var R_tot = R_si + R_se, sdTot = 0, totalMm = 0;
+    layers.forEach(function (L) { R_tot += L.R; sdTot += L.sd; totalMm += L.w; });
+    var U = 1.0 / R_tot;
+
+    var pIn = (rh / 100) * pSat(Tin), pOut = 0.85 * pSat(Tout);
+    var cumR = R_si, cumSd = 0, birchMinT = 99, birchCond = false, birchCritX = 0, birchCritT = 0;
+    layers.forEach(function (L) {
+      var tLeft = Tin - (Tin - Tout) * (cumR / R_tot), pvLeft = pIn - (pIn - pOut) * (cumSd / sdTot);
+      cumR += L.R; cumSd += L.sd;
+      var tRight = L.vent ? Tout : (Tin - (Tin - Tout) * (cumR / R_tot)), pvRight = L.vent ? pOut : (pIn - (pIn - pOut) * (cumSd / sdTot));
+      L.tLeft = tLeft; L.tRight = tRight;
+      if (L.id === "w-birch") {
+        birchMinT = Math.min(tLeft, tRight);
+        birchCritT = wallMode === "ext" ? tRight : tLeft;
+        birchCond = (wallMode === "ext" ? pvRight : pvLeft) >= pSat(birchCritT);
+      }
+    });
+
+    document.getElementById("m-uval").textContent = U.toFixed(2) + " W/m²K";
+    document.getElementById("m-btemp").textContent = (birchMinT > 0 ? "+" : "") + birchMinT.toFixed(1) + "°C";
+    document.getElementById("m-dew").textContent = "+" + Tdew.toFixed(1) + "°C";
+    var ratioVal = wallMode === "ext" ? (sdBirch / Math.max(0.05, sdIns)) : ((sdPl + sdIns) / sdBirch);
+    document.getElementById("m-sd").textContent = wallMode === "ext"
+      ? ratioVal.toFixed(1) + " : 1 " + (ratioVal >= 4.5 ? "OK" : "TIGHT")
+      : "1 : " + (1 / Math.max(0.02, ratioVal)).toFixed(1) + " TRAP";
+
+    document.getElementById("m-uval-box").className = "metric " + (U > 0.50 ? "alert" : "ok");
+    document.getElementById("m-btemp-box").className = "metric " + (birchCond ? "alert" : "ok");
+    document.getElementById("m-sd-box").className = "metric " + ((wallMode === "int" || ratioVal < 4.5) ? "alert" : "ok");
+
+    var v2 = document.getElementById("p2-verdict");
+    if (wallMat === "pure") {
+      v2.className = "verdict-bar warn";
+      v2.textContent = currentLang === "lt"
+        ? "MATEMATINIS ĮRODYMAS: grynos gesintos kalkės be augalinio pluošto (λ = 0,80) NEŠILTINA (U = " + U.toFixed(2) + "). Beržas atšąla iki " + birchMinT.toFixed(1) + "°C -> būtinas pluoštas!"
+        : "MATH PROOF: pure slaked lime without plant fiber (λ = 0.80) does NOT insulate (U = " + U.toFixed(2) + "). Birch drops to " + birchMinT.toFixed(1) + "°C -> always mix lime with cellular Typha/hemp!";
+    } else if (!birchCond && wallMode === "ext") {
+      v2.className = "verdict-bar";
+      v2.textContent = wallMat === "lime"
+        ? (currentLang === "lt"
+            ? "GESINTOS KALKĖS + ŠVENDRAI OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA, pH 12,5 saugo nuo puvimo. Taisyklė: dėti tik prie ≥ +5°C (4+ sav. be šalčio)."
+            : "SLAKED LIME + TYPHA OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY, pH 12.5 resists rot/rodents. Rule: apply only at ≥ +5°C (4+ frost-free weeks).")
+        : (currentLang === "lt"
+            ? "PATAISYTA KONSTRUKCIJA OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA; garai santykiu " + ratioVal.toFixed(1) + ":1 išeina į 30 mm tarpą."
+            : "CORRECTED ASSEMBLY OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY; vapor vents " + ratioVal.toFixed(1) + ":1 outward to the 30 mm cavity.");
+    } else if (wallMode === "ext") {
+      v2.className = "verdict-bar warn";
+      v2.textContent = currentLang === "lt" ? "PER PLONA IZOLIACIJA ARBA DIDELĖ DRĖGMĖ: padidinkite storį (≥120 mm) arba vėdinkite." : "THIN INSULATION OR HIGH HUMIDITY: increase exterior insulation (≥120 mm) or vent humidity.";
+    } else {
+      v2.className = "verdict-bar warn";
+      v2.textContent = currentLang === "lt"
+        ? "KONDENSACIJOS SPĄSTAI: vidinė izoliacija atšaldo beržą iki " + birchMinT.toFixed(1) + "°C (< +" + Tdew.toFixed(1) + "°C) už sandaresnio medžio -> žiemos puvimo rizika."
+        : "CONDENSATION TRAP: interior insulation chills birch to " + birchMinT.toFixed(1) + "°C (below +" + Tdew.toFixed(1) + "°C dew point) behind tighter outer birch -> winter frost & rot.";
+    }
+
+    document.getElementById("p2-cap-l").textContent =
+      (currentLang === "lt" ? "TIKRAUS MASTELIO " : "TRUE-SCALE ") + totalMm + " MM " +
+      (currentLang === "lt" ? "SIENOS PJŪVIS · FURJĖ T(x) + GLASER" : "WALL SECTION · FOURIER T(x) + GLASER CHECK");
+
+    clear(svgWall);
+    var yTop = 76, yBot = 352, Tmax = 26, Tmin = -34;
+    function yT(t) { return yTop + ((Tmax - t) / (Tmax - Tmin)) * (yBot - yTop); }
+    var pxPerMm = 452 / Math.max(255, totalMm), curX = 148;
+
+    svgWall.appendChild(el("line", { x1: 68, y1: yT(0), x2: 684, y2: yT(0), stroke: "#234b6e", "stroke-width": 1.0, "stroke-dasharray": "4 3" }));
+    svgWall.appendChild(el("text", { x: 690, y: yT(0) + 3, fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.8 }, "0°C"));
+    svgWall.appendChild(el("line", { x1: 68, y1: yT(Tdew), x2: 684, y2: yT(Tdew), stroke: "#8c3a2b", "stroke-width": 1.0, "stroke-dasharray": "2 3" }));
+    svgWall.appendChild(el("text", { x: 690, y: yT(Tdew) + 3, fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.2 }, "DEW +" + Tdew.toFixed(0) + "°C"));
+
+    var pts = [[76, yT(Tin)], [curX, yT(Tin - (Tin - Tout) * (R_si / R_tot))]];
+    layers.forEach(function (L) {
+      var lw = L.w * pxPerMm, cx = curX + lw / 2;
+      var gL = el("g", { "data-part": L.id });
+      gL.appendChild(el("rect", { x: curX, y: yTop, width: lw, height: yBot - yTop, fill: L.fill, stroke: L.stroke, "stroke-width": 1.15 }));
+      var topY = yTop - 10, anchor = "middle", tx = cx;
+      if (L.id === "w-pl") { topY = yTop - 28; gL.appendChild(el("line", { x1: cx, y1: yTop - 23, x2: cx, y2: yTop - 2, stroke: "#8c3a2b", "stroke-width": 0.75 })); }
+      else if (L.id === "w-cav") { topY = yTop - 28; gL.appendChild(el("line", { x1: cx, y1: yTop - 23, x2: cx, y2: yTop - 2, stroke: "#234b6e", "stroke-width": 0.75 })); }
+      else if (L.id === "w-board") { topY = yTop - 10; anchor = "start"; tx = curX + 4; }
+      gL.appendChild(el("text", { x: tx, y: topY, "text-anchor": anchor, fill: "#161719", "font-family": "var(--sans)", "font-size": 10, "font-weight": 500 }, L.name));
+
+      var botY = (L.id === "w-cav" || L.id === "w-pl") ? (yBot + 28) : (yBot + 15);
+      if (botY > yBot + 20) gL.appendChild(el("line", { x1: cx, y1: yBot + 2, x2: cx, y2: botY - 10, stroke: "#9ca3af", "stroke-width": 0.7 }));
+      gL.appendChild(el("text", { x: cx, y: botY, "text-anchor": "middle", fill: "#55585e", "font-family": "var(--mono)", "font-size": 9.2 }, L.w + " mm"));
+      if (L.id === "w-cav") arrow(gL, cx, yBot - 22, cx, yTop + 26, "#234b6e", 1.3, 5);
+      if (L.id === "w-birch") birchCritX = wallMode === "ext" ? (curX + lw) : curX;
+      svgWall.appendChild(gL);
+      curX += lw;
+      pts.push([curX, yT(L.tRight)]);
+    });
+    pts.push([680, yT(Tout)]);
+
+    svgWall.appendChild(el("polyline", { points: pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "), fill: "none", stroke: "#161719", "stroke-width": 2.6 }));
+    pts.slice(1, -1).forEach(function (p) { svgWall.appendChild(el("circle", { cx: p[0], cy: p[1], r: 3.4, fill: "#161719" })); });
+
+    var critColor = birchCond ? "#8c3a2b" : "#2f5d38";
+    svgWall.appendChild(el("circle", { cx: birchCritX, cy: yT(birchCritT), r: 5.2, fill: critColor, stroke: "#ffffff", "stroke-width": 1.4 }));
+    svgWall.appendChild(el("text", {
+      x: birchCritX + (wallMode === "ext" ? 9 : -9), y: yT(birchCritT) + (birchCond ? 16 : -10),
+      "text-anchor": wallMode === "ext" ? "start" : "end", fill: critColor, "font-family": "var(--mono)", "font-size": 10.5, "font-weight": 600
+    }, (birchCritT > 0 ? "+" : "") + birchCritT.toFixed(1) + "°C"));
+
+    svgWall.appendChild(el("text", { x: 74, y: yT(Tin) - 10, fill: "#161719", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, "IN +20°C"));
+    svgWall.appendChild(el("text", { x: 628, y: yT(Tout) - 10, fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, "OUT " + (Tout > 0 ? "+" : "") + Tout + "°C"));
+    svgWall.appendChild(el("text", { x: 380, y: 416, "text-anchor": "middle", fill: "#55585e", "font-family": "var(--mono)", "font-size": 9.8 },
+      "λ = " + matCfg.lam.toFixed(3) + " W/(m·K)   ·   q = " + (U * (Tin - Tout)).toFixed(1) + " W/m²   ·   R = " + R_tot.toFixed(2) + "   ·   " + (birchCond ? "GLASER: CONDENSATION" : "GLASER: DRY")));
+
+    updateLiveBill();
+  }
+
+  /* ==================== LIVE DYNAMIC CUT LIST ==================== */
+  function updateLiveBill() {
+    if (!lastCabin.W) return;
+    var c = lastCabin;
+    var dInsM = parseFloat(slTypha.value) / 1000.0;
+    var insVol = c.wallAreaNet * dInsM;
+    var limeBagsLight = Math.ceil(insVol * 65 / 25), limeBagsDense = Math.ceil(insVol * 120 / 25);
+    var subfloorPoles = Math.round(c.nBays * ((c.W - 0.3) / 0.11));
+    var matName = wallMat === "lime"
+      ? (currentLang === "lt" ? "Gesintos kalkės + švendrai" : "Slaked Lime + Typha")
+      : (wallMat === "pure" ? (currentLang === "lt" ? "Grynos kalkės (NETINKA)" : "Pure Lime (FAILS)") : (currentLang === "lt" ? "Molis + švendrai" : "Clay-Slip Typha"));
+
+    document.getElementById("live-bill-tag").textContent = c.W.toFixed(2) + " × " + c.L.toFixed(2) + " m (" + c.area.toFixed(1) + " m²) · " + c.pitchDeg + "° · " + matName;
+
+    var rows = currentLang === "lt" ? [
+      ["<button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> sienų rąsteliai", "Beržas Ø" + c.dBirchCm + " cm (<button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 Cl.5</button>)", "~" + c.totalWallLogs + " vnt × 1.50 m (" + c.courses + " eil./tarp.)", "Nulupti žievę tą pačią dieną; palikti " + c.gapMm + " mm sėdimo tarpą."],
+      ["Pamato akmenys ir sijos", "Lauko akmenys + deginta eglė Ø" + c.dGirdCm + " cm", c.nPiers + " akmenys · " + (c.nBents * 2) + " sijos (" + (c.W / 2 + 0.25).toFixed(2) + " m)", "Apdeginti 3–4 mm; žingsnis " + c.spanM.toFixed(2) + " m (<button type=\"button\" class=\"inline-term\" data-explain=\"defl\">δ=" + c.deltaMm.toFixed(2) + " mm</button>)."],
+      ["Stulpai, stygos, ilginiai", "Eglė Ø" + c.dPostCm + " cm / Ø13 cm", (c.nBents * 2) + " išor. + " + (c.nBents * 2) + " vid. stulpai · " + c.nBents + " stygos", "<button type=\"button\" class=\"inline-term\" data-explain=\"euler_post\">Eilerio atsarga " + Math.round(c.eulerSF) + "×</button>; apačia deginta 40 cm."],
+      ["Gegnės ir stogo karkasas", "Eglė Ø9–12 cm (" + c.pitchDeg + "° nuolydis)", c.nRafters + " gegnės × " + (c.slopeLen + 0.15).toFixed(2) + " m + " + (c.nBents * 2) + " spyriai", "60 cm žingsnis; <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi pleištai</button> laiko H=" + c.H_tie.toFixed(2) + " kN."],
+      ["Juodgrindžių kartys (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">J7</button>)", "Tik nužievinta eglė Ø8–10 cm", "~" + subfloorPoles + " kartys × 1.55 m", "Jokio beržo po molio grindimis; perpinama lazdynu."],
+      ["Žieminės nendrės", "Phragmites australis (Ø25 cm pėdai)", "~" + c.totalSheaves + " pėdų (" + c.roofSheaves + " stogui + " + c.floorSheaves + " grind.)", "Pjauti žiemą ant ledo; prisiuvama eglės šaknimis (be vielos)."],
+      ["Išorinė izoliacija (" + Math.round(dInsM * 1000) + " mm)", "<button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">" + matName + "</button>", "~" + insVol.toFixed(1) + " m³ (" + (wallMat === "lime" ? "~" + limeBagsLight + "–" + limeBagsDense + " maišai × 25 kg CL90" : "~" + (insVol * 0.30).toFixed(1) + " m³ molio") + ")", "Dėti TIK IŠORĖJE už beržo; su kalkėmis ≥+5°C ir su pirštinėmis."],
+      ["Vėdinamas fasadas ir <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">kraigas</button>", "3× tošis, velėna, ~" + Math.round(c.wallAreaNet * 1.1) + " m² lentos", "30 mm tarpas + tinklelis nuo graužikų", "Nulis plastiko ir vėjo popieriaus; tošis lupama gegužę–birželį."]
+    ] : [
+      ["<button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> wall logs", "Debarked birch Ø" + c.dBirchCm + " cm (<button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 Cl.5</button>)", "~" + c.totalWallLogs + " pcs × 1.50 m (" + c.courses + " courses/bay)", "Peel bark same day; leave " + c.gapMm + " mm top settling gap."],
+      ["Pier stones & floor girders", "Fieldstones + charred spruce Ø" + c.dGirdCm + " cm", c.nPiers + " stones · " + (c.nBents * 2) + " girders (" + (c.W / 2 + 0.25).toFixed(2) + " m)", "Deep-char 3–4 mm; " + c.spanM.toFixed(2) + " m span (<button type=\"button\" class=\"inline-term\" data-explain=\"defl\">δ=" + c.deltaMm.toFixed(2) + " mm, L/" + c.lRatio + "</button>)."],
+      ["Posts, ties & purlins", "Spruce Ø" + c.dPostCm + " cm / Ø13 cm beams", (c.nBents * 2) + " outer + " + (c.nBents * 2) + " inner posts · " + c.nBents + " ties", "<button type=\"button\" class=\"inline-term\" data-explain=\"euler_post\">Euler margin " + Math.round(c.eulerSF) + "×</button>; char lower 40 cm."],
+      ["Rafters & roof struts", "Spruce Ø9–12 cm (" + c.pitchDeg + "° pitch)", c.nRafters + " rafters × " + (c.slopeLen + 0.15).toFixed(2) + " m + " + (c.nBents * 2) + " struts", "60 cm spacing; <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi wedges</button> lock H=" + c.H_tie.toFixed(2) + " kN."],
+      ["Subfloor poles (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">J7</button>)", "Peeled conifer ONLY Ø8–10 cm", "~" + subfloorPoles + " poles × 1.55 m", "Never place birch below clay pad; weave hazel rods."],
+      ["Winter water reeds", "Phragmites australis (Ø25 cm sheaves)", "~" + c.totalSheaves + " sheaves (" + c.roofSheaves + " roof + " + c.floorSheaves + " floor)", "Harvest over winter ice; stitch with split spruce roots (zero wire)."],
+      ["Exterior insulation (" + Math.round(dInsM * 1000) + " mm)", "<button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">" + matName + "</button>", "~" + insVol.toFixed(1) + " m³ (" + (wallMat === "lime" ? "~" + limeBagsLight + "–" + limeBagsDense + " × 25 kg CL90 bags" : "~" + (insVol * 0.30).toFixed(1) + " m³ clay slip") + ")", "Pack strictly OUTSIDE warm birch; slaked lime requires ≥+5°C + PPE."],
+      ["Vented cladding & <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">ridge cap</button>", "3-layer birch bark, sods, ~" + Math.round(c.wallAreaNet * 1.1) + " m² boards", "30 mm air cavity + wire rodent mesh", "Zero plastic or wind paper; peel bark during late May–June sap run."]
+    ];
+
+    document.getElementById("live-bill-body").innerHTML = rows.map(function (r) {
+      return "<tr><td><strong>" + r[0] + "</strong></td><td>" + r[1] + "</td><td class=\"num\">" + r[2] + "</td><td>" + r[3] + "</td></tr>";
+    }).join("");
+  }
+
+  /* ==================== PLATE III: THREE LIVE CLASSICS ==================== */
+  var svgBeam = document.getElementById("svg-beam"), slBq = document.getElementById("sl-bq"), slBl = document.getElementById("sl-bl");
+  function renderBeam() {
+    var q = parseFloat(slBq.value), L = parseFloat(slBl.value);
+    document.getElementById("out-bq").textContent = q.toFixed(1) + " kN/m";
+    document.getElementById("out-bl").textContent = L.toFixed(2) + " m";
+    var M = q * L * L / 8, I = Math.PI * Math.pow(0.15, 4) / 64;
+    var dMm = (5 * (q * 1000) * Math.pow(L, 4) / (384 * E_SPRUCE * I)) * 1000;
+    document.getElementById("eq-bm").textContent = "M = " + M.toFixed(2) + " kN·m";
+    document.getElementById("eq-bd").textContent = "δ = " + dMm.toFixed(2) + " mm";
+
+    clear(svgBeam);
+    var x0 = 40, x1 = 300, W = x1 - x0, ah = 14 + q * 2.0;
+    svgBeam.appendChild(el("line", { x1: x0, y1: 58 - ah, x2: x1, y2: 58 - ah, stroke: "#8c3a2b", "stroke-width": 1 }));
+    for (var i = 0; i <= 8; i++) arrow(svgBeam, x0 + i * W / 8, 58 - ah, x0 + i * W / 8, 58, "#8c3a2b", 0.9, 4.5);
+    svgBeam.appendChild(el("rect", { x: x0, y: 60, width: W, height: 6, fill: "#161719" }));
+    var ym = 104, dm = Math.min(58, 12 + M * 4.2);
+    svgBeam.appendChild(el("line", { x1: x0, y1: ym, x2: x1, y2: ym, stroke: "#9ca3af", "stroke-dasharray": "3 2" }));
+    var mPts = []; for (var j = 0; j <= 40; j++) { var u = j / 40; mPts.push((x0 + u * W).toFixed(1) + "," + (ym + 4 * u * (1 - u) * dm).toFixed(1)); }
+    svgBeam.appendChild(el("polyline", { points: mPts.join(" "), fill: "none", stroke: "#8c3a2b", "stroke-width": 1.8 }));
+    svgBeam.appendChild(el("text", { x: 170, y: ym + dm + 13, "text-anchor": "middle", fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.5 }, "M_max = qL²/8 = " + M.toFixed(2)));
+    var yd = 192, dd = Math.min(36, 4 + dMm * 2.2);
+    svgBeam.appendChild(el("line", { x1: x0, y1: yd, x2: x1, y2: yd, stroke: "#9ca3af", "stroke-dasharray": "3 2" }));
+    var dPts = []; for (var k = 0; k <= 40; k++) { var t = k / 40; var w = (t - 2 * t * t * t + t * t * t * t) / (5 / 16); dPts.push((x0 + t * W).toFixed(1) + "," + (yd + w * dd).toFixed(1)); }
+    svgBeam.appendChild(el("polyline", { points: dPts.join(" "), fill: "none", stroke: "#234b6e", "stroke-width": 2.0 }));
+    svgBeam.appendChild(el("text", { x: 170, y: yd + dd + 14, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.5 }, "δ_max = " + dMm.toFixed(2) + " mm (Ø15)"));
+  }
+
+  var svgEuler = document.getElementById("svg-euler"), slEd = document.getElementById("sl-ed"), eulerK = 1.0;
+  function renderEuler() {
+    var dCm = parseFloat(slEd.value);
+    document.getElementById("out-ed").textContent = dCm + " cm";
+    var d = dCm / 100.0, L = 2.44, I = Math.PI * Math.pow(d, 4) / 64;
+    var Pcr = (Math.PI * Math.PI * E_SPRUCE * I / Math.pow(eulerK * L, 2)) / 1000;
+    document.getElementById("eq-ep").textContent = "P_cr = " + Pcr.toFixed(0) + " kN";
+
+    clear(svgEuler);
+    var cx = 170, yT = 44, yB = 212, H = yB - yT, amp = 32;
+    svgEuler.appendChild(el("line", { x1: cx, y1: yT, x2: cx, y2: yB, stroke: "#9ca3af", "stroke-dasharray": "4 3" }));
+    arrow(svgEuler, cx, 12, cx, yT - 3, "#8c3a2b", 1.8, 6);
+    svgEuler.appendChild(el("text", { x: cx + 10, y: 26, fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 10.5, "font-weight": 600 }, "P_cr = " + Pcr.toFixed(0) + " kN"));
+    var pts = [];
+    for (var i = 0; i <= 50; i++) {
+      var t = i / 50, y = yB - t * H, dx = 0;
+      if (eulerK === 2.0) dx = amp * (1 - Math.cos(Math.PI * t / 2));
+      else if (eulerK === 1.0) dx = amp * Math.sin(Math.PI * t);
+      else if (eulerK === 0.7) { var kL = 4.4934; dx = amp * ((Math.sin(kL * (1 - t)) - kL * (1 - t) * Math.cos(kL)) / 1.3649); }
+      else dx = amp * 0.5 * (1 - Math.cos(2 * Math.PI * t));
+      pts.push((cx + dx).toFixed(1) + "," + y.toFixed(1));
+    }
+    svgEuler.appendChild(el("polyline", { points: pts.join(" "), fill: "none", stroke: "#161719", "stroke-width": Math.max(2, dCm * 0.25) }));
+    svgEuler.appendChild(el("line", { x1: cx - 24, y1: yB, x2: cx + 24, y2: yB, stroke: "#161719", "stroke-width": 2 }));
+    svgEuler.appendChild(el("text", { x: cx, y: 234, "text-anchor": "middle", fill: "#55585e", "font-family": "var(--mono)", "font-size": 9.5 }, "K = " + eulerK.toFixed(1) + "  ·  I = πd⁴/64  ·  d = " + dCm + " cm"));
+  }
+
+  var svgCat = document.getElementById("svg-cat"), slCa = document.getElementById("sl-ca");
+  function renderCat() {
+    var a = parseFloat(slCa.value);
+    document.getElementById("out-ca").textContent = a.toFixed(2) + " m";
+    var halfSpan = 2.0, f = a * (Math.cosh(halfSpan / a) - 1);
+    document.getElementById("eq-cf").textContent = "Rise f = " + f.toFixed(2) + " m";
+    document.getElementById("eq-ch").textContent = "H = " + a.toFixed(2) + "·w";
+
+    clear(svgCat);
+    var cx = 170, yMid = 132, sc = 52, yScale = Math.min(34, 94 / Math.max(f, 0.01));
+    svgCat.appendChild(el("line", { x1: 30, y1: yMid, x2: 310, y2: yMid, stroke: "#9ca3af", "stroke-dasharray": "4 3" }));
+    var archPts = [], chainPts = [];
+    for (var i = 0; i <= 60; i++) {
+      var x = -halfSpan + 2 * halfSpan * (i / 60), yC = a * (Math.cosh(x / a) - 1), rise = (f - yC) * yScale;
+      archPts.push((cx + x * sc).toFixed(1) + "," + (yMid - rise).toFixed(1));
+      chainPts.push((cx + x * sc).toFixed(1) + "," + (yMid + rise).toFixed(1));
+    }
+    svgCat.appendChild(el("polyline", { points: archPts.join(" "), fill: "none", stroke: "#8c3a2b", "stroke-width": 2.4 }));
+    svgCat.appendChild(el("polyline", { points: chainPts.join(" "), fill: "none", stroke: "#234b6e", "stroke-width": 1.3, "stroke-dasharray": "4 3" }));
+    var hLen = Math.min(52, 14 + a * 11.5);
+    arrow(svgCat, cx + halfSpan * sc, yMid, cx + halfSpan * sc + hLen, yMid, "#8c3a2b", 1.8, 5.5);
+    svgCat.appendChild(el("text", { x: cx, y: 20, "text-anchor": "middle", fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.5 }, "ARCH (compression, M = 0)"));
+    svgCat.appendChild(el("text", { x: cx, y: 236, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.5 }, "CHAIN (tension)  ·  flatter a -> higher H"));
+  }
+
+  /* Byrne hover highlighting (never conflicts with click-to-explain!) */
+  function wireByrne(containerSelector, svgEl) {
+    Array.prototype.slice.call(document.querySelectorAll(containerSelector + " .b-ref")).forEach(function (tok) {
+      var part = tok.getAttribute("data-hl");
+      tok.addEventListener("mouseenter", function () {
+        svgEl.classList.add("dimmed");
+        var nodes = svgEl.querySelectorAll('[data-part="' + part + '"]');
+        for (var i = 0; i < nodes.length; i++) nodes[i].classList.add("hl");
+      });
+      tok.addEventListener("mouseleave", function () {
+        svgEl.classList.remove("dimmed");
+        var nodes = svgEl.querySelectorAll('[data-part].hl');
+        for (var i = 0; i < nodes.length; i++) nodes[i].classList.remove("hl");
+      });
+    });
+  }
+
+  /* Wire controls */
+  [slWidth, slBays, slPitch, slBirch, slGird, slPost].forEach(function (s) { s.addEventListener("input", renderCabin); });
+  [slTout, slTypha, slRh].forEach(function (s) { s.addEventListener("input", renderWall); });
+  btnExt.addEventListener("click", function () { wallMode = "ext"; btnExt.classList.add("active"); btnInt.classList.remove("active"); renderWall(); });
+  btnInt.addEventListener("click", function () { wallMode = "int"; btnInt.classList.add("active"); btnExt.classList.remove("active"); renderWall(); });
+  function setMat(m, btn) { wallMat = m; [btnMatClay, btnMatLime, btnMatPure].forEach(function (b) { b.classList.toggle("active", b === btn); }); renderWall(); renderCabin(); }
+  btnMatClay.addEventListener("click", function () { setMat("clay", btnMatClay); });
+  btnMatLime.addEventListener("click", function () { setMat("lime", btnMatLime); });
+  btnMatPure.addEventListener("click", function () { setMat("pure", btnMatPure); });
+  [slBq, slBl].forEach(function (s) { s.addEventListener("input", renderBeam); });
+  slEd.addEventListener("input", renderEuler);
+  Array.prototype.slice.call(document.querySelectorAll("[data-k]")).forEach(function (b) {
+    b.addEventListener("click", function () {
+      eulerK = parseFloat(b.getAttribute("data-k"));
+      document.querySelectorAll("[data-k]").forEach(function (x) { x.classList.toggle("active", x === b); });
+      renderEuler();
+    });
+  });
+  slCa.addEventListener("input", renderCat);
+  document.getElementById("btn-print").addEventListener("click", function () { window.print(); });
+
+  /* ==================== FULL EN / LT I18N ==================== */
+  var LT = {
+    page_title: "Mechanika ir karkasas · Atviras parametrinis įrankis · Mantas Pagalys",
+    nav_writing: "Tekstai", nav_photos: "Fotografija", nav_craft: "Amatas",
+    nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
+    hero_h1: "Mechanika ir karkasas.",
+    hero_eye: "Atviras parametrinis namelio įrankis &middot; Be bibliotekų",
+    hero_lead: "Nemokamos interaktyvios plokštelės vieno žmogaus rankomis statomam mediniam nameliui: keičiamas plotis, ilgis, stogo nuolydis ir rąstų skersmenys su gyvais skaičiavimais, molio ir gesintų kalkių rasos taško fizika, sezoniškumo kalendoriumi ir pagrindinių rankinių įrankių sąrašu. Spustelėkite bet kurią formulę, skaitiklį ar pabrauktą terminą paprastam paaiškinimui.",
+    btn_pdf: "Atsisiųsti nemokamą 4 psl. CAD vadovą LT (PDF)",
+    btn_print: "Spausdinti / išsaugoti savo skaičiavimą",
+    btn_jump_cal: "Sezoninis procesas, įrankiai ir nemokamos knygos &darr;",
+    leg_red: "Gniuždymas / Skėtimas / Riba", leg_blue: "Tempimas / Vėdinimas / Šaltis",
+    leg_ochre: "Mediena / Nendrės / Pluoštas", leg_ink: "Deginta eglė / Gruntas / Ašis",
+    p1_h2: "Reguliuojamas <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> karkasas ir 45&deg; nendrių stogas",
+    p1_proof: "Stogo masė ir žiemos sniegas remiasi į <span class=\"b-ref red\" data-hl=\"roof\" data-explain=\"snow\">45&deg; nendrių stogą ir gegnes</span>. Poriniai spyriai perduoda apkrovą į horizontalią <span class=\"b-ref blue\" data-hl=\"tie\" data-explain=\"thrust\">stygos tempimo jėgą H</span>, užfiksuotą sausais beržo <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi</button> pleištais, o <span class=\"b-ref ink\" data-hl=\"posts\" data-explain=\"euler_post\">eglių stulpai</span> dirba su didele Eilerio atsarga. Tarp stulpų <span class=\"b-ref ochre\" data-hl=\"walls\" data-explain=\"skiftesverk\">horizontalūs beržo rąsteliai</span> slenka tašuose po sėdimo tarpu. Virš smėlio <span class=\"b-ref ink\" data-hl=\"floor\" data-explain=\"defl\">degintos eglių sijos</span> išlaiko įlinkį &lt; L/500, kad <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button> molio grindys netrūkinėtų.",
+    c_width: "Karkaso plotis (W)", c_bays: "Ilgio tarpai (&times;1,50 m)", c_pitch: "Stogo nuolydis (&theta;)",
+    c_birch: "Sienos rąstelių (&Oslash;)", c_gird: "Pamato sijų (&Oslash;)", c_post: "Vidinių stulpų (&Oslash;)",
+    mk_area: "Plotas (riba 50 m&sup2;)", mk_ridge: "Kraigas (riba 5,00 m)", mk_snow: "Sniego + nendrių apkrova",
+    mk_thrust: "Stygos tempimas H / rėmui", mk_defl: "Sijos įlinkis &delta; (W/4)", mk_euler: "Stulpo klupumas P<sub>cr</sub>",
+    p2_h2: "Karkaso pataisymas: <button type=\"button\" class=\"inline-term\" data-explain=\"fourier\">Furjė šilumos gradientas</button> ir <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">gesintos kalkės Ca(OH)<sub>2</sub></button>",
+    p2_proof: "Kodėl matematika pataiso intuiciją: beržas priklauso <button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 5 klasei</button>. Dėdami <span class=\"b-ref ochre\" data-hl=\"w-typha\" data-explain=\"slaked_lime\">izoliaciją</span> <em>vidinėje</em> <span class=\"b-ref ink\" data-hl=\"w-birch\" data-explain=\"birch_cl5\">100 mm beržo</span> pusėje, atšaldome medį iki <strong>&minus;10&deg;C</strong>. Perkėlus molio arba <strong>gesintų kalkių švendrus</strong> <em>į išorę</em>, beržas lieka šiltas ir sausas, o garai išeina į <span class=\"b-ref blue\" data-hl=\"w-cav\" data-explain=\"glaser\">30 mm vėdinamą tarpą</span> (be plėvelių).",
+    lbl_pos: "1. Sienos sluoksnių tvarka", btn_ext: "Pataisyta: išorėje", btn_int: "Spąstai: viduje",
+    lbl_mat: "2. Rišiklis ir užpildas", btn_m_clay: "Molis + švendrai", btn_m_lime: "Gesintos kalkės + švendrai", btn_m_pure: "Tik grynos kalkės",
+    c_tout: "Lauko žiemos temperatūra (T_out)", c_typha: "Izoliacijos sluoksnio storis", c_rh: "Vidaus santykinė drėgmė",
+    mk_uval: "Sienos U vertė", mk_btemp: "Šalčiausia beržo pusė", mk_dew: "Vidaus rasos taškas (+20&deg;C)", mk_sd: "Garų santykis (Vidus : Išorė)",
+    cap_p2_r: "NULIS PLASTIKO · NULIS VĖJO POPIERIAUS · BERŽO APSAUGA",
+    fd_h2: "Gilesnis lygmuo: gyva sąmata, sezoninė eiga ir 1 žmogaus įrankiai",
+    d1_h: "Dinaminis medžiagų ir rąstų žiniaraštis",
+    th_elem: "Elementas", th_spec: "Medžiaga / dydis", th_qty: "Gyvas kiekis (pagal slankiklius)", th_rule: "Svarbiausia taisyklė objekte",
+    d2_h: "Metinis statybos procesas pagal gamtinius medžiagų langus",
+    d2_sub: "Kodėl praleidus žiemos įšalą, pavasario sulą ar +5&deg;C kalkių langą darbas dvigubėja",
+    season_cards: "<div class=\"season-card gate\"><span class=\"s-when\">SAUSIS &ndash; VASARIS &middot; ĮŠALAS</span><h4>1. Nendrės, beržas ir gabenimas sniegu</h4><p>Pjaukite sausas žiemines nendres ant užšalusių griovių. Retinkite jaunuolyno beržus (&Oslash;10&ndash;12 cm) ir rinkite eglių sausuolius. <strong>Beržą nužievinkite tą pačią dieną</strong>, rąstus traukite sniegu ant <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois rogių</button>, išpjaukite dyglius ir viduje džiovinkite <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi pleištus</button>.</p><p class=\"s-why\"><strong>1 vartai:</strong> Mažiausiai sulos, sausos nendrės, lengvas tempimas per sniegą.</p></div>" +
+      "<div class=\"season-card\"><span class=\"s-when\">KOVAS &middot; ATODIRVIS IR DEGINIMAS</span><h4>2. Molio testas, deginimas ir teisinė patikra</h4><p>Patikrinkite vietinį molį (&ge;5 cm juostelė) arba pasirinkite <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">gesintas kalkes</button>. Virš +2&deg;C nužievinkite eglės rąstus. Giliai (3–4 mm) apdeginkite pamato sijas, stulpų apačią (40 cm), 14 kraigo <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">ožių</button> ir vėjalenčių ragus.</p><p class=\"s-why\"><strong>Ugnies skydas:</strong> Apanglėjimas apsaugo nuo drėgmės ir grybelių.</p></div>" +
+      "<div class=\"season-card\"><span class=\"s-when\">BALANDIS &ndash; GEGUŽĖ &middot; PAMATAS IR KARKASAS</span><h4>3. Durpės nukasimas, akmenys ir rėmai</h4><p>Nukaskite derlingą sluoksnį iki švaraus smėlio (velėną sukraukite žole žemyn). Iškaskite 25 cm griovelius. Išlyginkite akmenis (&plusmn;3 mm), sudėkite degintas sijas, vieni pakelkite 5 rėmus virvėmis ir šakotomis kartimis, sudėkite gegnes ir sukelkite beržo rąstelius džiūti po stogu.</p><p class=\"s-why\"><strong>Džiovykla:</strong> Karkasas saugo džiūstančius beržus nuo lietaus.</p></div>" +
+      "<div class=\"season-card gate\"><span class=\"s-when\">GEGUŽĖS PAB. &ndash; BIRŽELIS &middot; SULOS LANGAS</span><h4>4. Tošis, eglės šaknys ir nendrių stogas</h4><p>Nulupkite 12 m&sup2; baltos tošies ir ištraukite 250–300 m seklių eglės šaknų. Pririškite lazdyno grebėstus kas 30 cm, uždenkite 30 cm nendrių stogą prisiūdami šaknimis (be vielos), kraigą užbaikite 3 tošies sluoksniais, 12 cm velėna ir 14 degintų <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">ožių</button>.</p><p class=\"s-why\"><strong>2 vartai (2–3 sav.):</strong> Tošis švariai lupasi TIK pavasario sulos metu.</p></div>" +
+      "<div class=\"season-card\"><span class=\"s-when\">LIEPA &middot; KARŠTAS SAUSAS VĖJAS</span><h4>5. Pinta nendrių-molio grindų plokštė (J7)</h4><p>Pritvirtinkite &Oslash;9 cm eglių kartis ir perpinkite lazdynu. Suplūkite 8 cm <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button> sluoksnį + 3,5 cm 1:3 smėlio-molio-pelenų paviršių, užtrinkite šlapiu akmeniu. Pogrindį laikykite visiškai atvirą vėjui.</p><p class=\"s-why\"><strong>Džiūvimo langas:</strong> Grindys turi išdžiūti iš abiejų pusių iki rudens drėgmės.</p></div>" +
+      "<div class=\"season-card lime-win\"><span class=\"s-when\">RUGPJŪTIS &ndash; RUGSĖJIS &middot; SIENŲ UŽDARYMAS (&ge;+5&deg;C)</span><h4>6. Išoriniai molio arba gesintų kalkių švendrai</h4><p>Patikrinkite, ar beržo drėgnumas &lt;18%. Nupjaukite nežydinčius švendrus (be pūkų). Pamirkykite molio tyrelėje <strong>ARBA <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">gesintų kalkių Ca(OH)<sub>2</sub></button> piene</strong> ir sudėkite 120–150 mm <strong>IŠORINĖJE</strong> beržo pusėje. Įrenkite 30 mm vėdinamą tarpą (tinklelis) + lentas.</p><p class=\"s-why\"><strong>Kalkių sąlyga:</strong> Gesintos kalkės privalo kietėti &ge;+5&deg;C temperatūroje bent 4 savaites be šalnų.</p></div>" +
+      "<div class=\"season-card\"><span class=\"s-when\">SPALIS &ndash; LAPKRITIS &middot; ŽIEMOJIMAS</span><h4>7. Nuimamas pogrindžio sijonas</h4><p>Žiemai apdėkite pogrindžio perimetrą išsaugota velėna ir eglišakėmis, o balandį vėl atidarykite vasaros vėdinimui.</p><p class=\"s-why\"><strong>Sezoninis kvėpavimas:</strong> Šiltos grindys žiemą, sausos sijos vasarą.</p></div>",
+    d3_h: "Pagrindiniai rankiniai įrankiai vienam žmogui (be kainų, be elektros)",
+    d3_sub: "Viskas, ko reikia vienam kirsti, žievinti, skelti, sujungti, dengti ir pakelti",
+    tool_cards: "<div class=\"tool-card\"><h4>I &middot; Matavimas ir gulsčiukas</h4><ul><li><strong>5 m ruletė ir mūrininko virvelė</strong> (įstrižainėms ir linijoms)</li><li><strong>Gulsčiukas arba medinis A formos nivelyras</strong> (akmenims &plusmn;3 mm)</li><li><strong>Svambalas ir skriestuvas</strong> (apvalių rąstų žymėjimui)</li></ul></div>" +
+      "<div class=\"tool-card\"><h4>II &middot; Žievinimas ir skėlimas</h4><ul><li><strong>Nužievintojas (skustuvas)</strong> (tos pačios dienos beržų lupimui ir pleištams)</li><li><strong>Skeltuvas (froe)</strong> (galima pasidaryti iš senos lingės; skelia tašus ir lentas)</li><li><strong>Išdrožtas kietmedžio kūjis + 4 apdeginti skėlimo pleištai</strong></li></ul></div>" +
+      "<div class=\"tool-card\"><h4>III &middot; Dailidės mazgai</h4><ul><li><strong>Vidutinis kirvis (~1,2 kg)</strong> (genėjimui ir grubiems dygliams)</li><li><strong>Lengvas dailidės kirvukas (~400 g)</strong> (tiksliam dyglių drožimui viena ranka)</li><li><strong>Lankinis pjūklas (žaliam ir sausam medžiui)</strong> + <strong>20–25 mm kaltas</strong> + <strong>peilis</strong></li><li><strong>Galąstuvas ir dildė</strong> (3 min. galandimo per dieną sutrumpina darbą perpus)</li></ul></div>" +
+      "<div class=\"tool-card\"><h4>IV &middot; Derlius, kėlimas ir kalkės</h4><ul><li><strong>Rankinis dalgis / pjautuvas</strong> (~750 nendrių pėdų) + <strong>kastuvas</strong></li><li><strong>Pasidaryti įrankiai:</strong> molio grūstuvas (<em>meška</em>), nendrių muštuvas, 45 cm medinė adata, <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois rogės</button>, 2 šakotos kartys kėlimui</li><li><strong>Virvės ir tempimo diržai</strong> (vieno žmogaus rėmų kėlimui ir suveržimui)</li><li><strong>Guminės pirštinės ir akiniai</strong> (būtina dirbant su šarminėmis gesintomis kalkėmis)</li></ul></div>",
+    d4_h: "Nemokamos knygos ir pirminiai techniniai vadovai",
+    d4_sub: "Patikrinti viešojo domeno leidiniai, laboratorijų tyrimai ir atviri universitetiniai mechanikos vadovėliai",
+    book_cards: "<div class=\"tool-card\"><h4>Mediena ir dailidės darbai</h4><ul><li><strong><a href=\"https://research.fs.usda.gov/download/treesearch/62200.pdf\" target=\"_blank\" rel=\"noopener\">USDA Wood Handbook (FPL-GTR-282, nemokamas PDF)</a></strong> &middot; Pasaulinis medienos mechanikos, tamprumo modulio E, džiūvimo susitraukimo ir atsparumo žinynas.</li><li><strong><a href=\"https://archive.org/details/hearth4500929\" target=\"_blank\" rel=\"noopener\">George Ellis &middot; Modern Practical Carpentry (1906, Archive.org)</a></strong> &middot; Klasikinis viešojo domeno iliustruotas stogų, santvarų ir medinių mazgų vadovas.</li></ul></div>" +
+      "<div class=\"tool-card\"><h4>Šiaurės tradicija, velėna ir kalkės</h4><ul><li><strong><a href=\"https://www.riksantikvaren.no\" target=\"_blank\" rel=\"noopener\">Riksantikvaren (Norvegijos paveldo vadovai)</a></strong> &middot; Nemokami techniniai lapai apie beržo tošies ir velėnos stogus (<em>torvtak</em>), karkasus ir kalkių skiedinį (<em>kalkm&oslash;rtel</em>).</li><li><strong><a href=\"https://www.byggogbevar.no\" target=\"_blank\" rel=\"noopener\">Bygg og Bevar (Šiaurės statybos amatų portalas)</a></strong> &middot; Atviri tradicinių rąstinių sienų, mazgų ir natūralių paviršių gidai.</li><li><strong><a href=\"https://historicengland.org.uk/advice/guidance/\" target=\"_blank\" rel=\"noopener\">Historic England techninių gairių centras</a></strong> &middot; Nemokami patarimai apie kvėpuojančius kalkių skiedinius ir molio sienas.</li></ul></div>" +
+      "<div class=\"tool-card\"><h4>Švendrai (Typha) ir drėgmės fizika</h4><ul><li><strong><a href=\"https://www.ibp.fraunhofer.de/en/business-units-and-products/product-developments/cattail.html\" target=\"_blank\" rel=\"noopener\">Fraunhofer IBP &middot; Švendrų (Typha) statybinė medžiaga</a></strong> &middot; Vokietijos pastatų fizikos instituto tyrimai apie švendrų šilumos laidumą (&lambda; 0,048&ndash;0,060), kapiliarinį džiūvimą ir atsparumą pelėsiui.</li></ul></div>" +
+      "<div class=\"tool-card\"><h4>Konstrukcijų mechanika ir geometrija</h4><ul><li><strong><a href=\"https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Structural_Mechanics_(Wierzbicki)/08%3A_Beam_Bending_Buckling_and_Torsion\" target=\"_blank\" rel=\"noopener\">Tomasz Wierzbicki (MIT) &middot; Structural Mechanics (LibreTexts)</a></strong> &middot; Nemokamas atviras vadovėlis apie sijų lenkimą ir klupumą.</li><li><strong><a href=\"https://ocw.mit.edu/courses/2-080j-structural-mechanics-fall-2013/course-notes/MIT2_080JF13_Lecture10.pdf\" target=\"_blank\" rel=\"noopener\">MIT OCW 2.080J &middot; Kolonų klupumo konspektas (nemokamas PDF)</a></strong> &middot; Tikslus Eilerio klupumo formų išvedimas.</li><li><strong><a href=\"https://www.c82.net/euclid/\" target=\"_blank\" rel=\"noopener\">Byrne&rsquo;s Euclid (N. Rougeux)</a></strong> ir <strong><a href=\"https://ciechanow.ski/\" target=\"_blank\" rel=\"noopener\">Bartosz Ciechanowski</a></strong> &middot; Vizualiosios geometrijos ir interaktyvios mechanikos klasika.</li></ul></div>",
+    p3_h2: "Trys gyvi pamatai: sija, kolona, arka",
+    p3_hint: "SPUSTELĖKITE „PAAIŠKINTI ?“ TIESIAI ANT KORTELĖS",
+    mini_exp: "PAAIŠKINTI ?",
+    m1_h: "Sijos lenkimas", m2_h: "Eilerio klupumas", m3_h: "Grandininė arka",
+    cl_bq: "Apkrova q", cl_bl: "Tarpatramis L", cl_ed: "Eglės stulpo &Oslash;", cl_ca: "Lėkštumas a",
+    od_k: "no route to host &middot; atviras stalas",
+    od_p1: "Už šio darbo stalo nestovi jokia institucija, fondas ar leidykla. Ši skaičiuoklė, 4 psl. CAD vadovas, tekstai ir fotografijos lieka 100% nemokami ir atviri.",
+    od_p2: "Jei brėžiniai ar fizikos patikra padeda išvengti klaidos jūsų statyboje – naudokitės laisvai. Jei norite prisiimti mažą šios erdvės dalį (paremti ramias valandas rašymui ir brėžiniams per Liberapay / Ko-fi, be pakopų) arba užsakyti individualų skaičiavimą, rašykite tiesiogiai.",
+    od_dl: "Atsisiųsti 4 psl. CAD PDF (LT, nemokamai)",
+    od_mail: "Paremti stalą / individualus skaičiavimas &rarr;",
+    od_dos: "Byla &rarr;",
+    method_note: "Pastaba apie metodą: nulis išorinių JS bibliotekų, nulis WebGL. Kiekviena kreivė skaičiuojama gryname SVG pagal LST EN 1991-1-3 (sniegas), Eilerio-Bernulio sijų teoriją, klupumo formas, hiperbolinį kosinusą, Furjė šilumos laidumą ir Glaserio garų slėgį. Mokomasis ir pirminio skaičiavimo modelis (ne atestuoto konstruktoriaus parašas).",
+    footer_copy: "Vilnius &middot; 2026 &middot; Atvira parametrinė mechanika &copy; Mantas Pagalys"
+  };
+
+  var i18nNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  var EN = { page_title: document.title };
+  i18nNodes.forEach(function (n) { EN[n.getAttribute("data-i18n")] = n.innerHTML; });
+  var langBtns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
+  var pdfLinks = [document.getElementById("btn-pdf-dl"), document.getElementById("od-pdf-dl")];
+
+  function applyLang(lang) {
+    currentLang = lang === "lt" ? "lt" : "en";
+    var dict = currentLang === "lt" ? LT : EN;
+    document.documentElement.lang = currentLang;
+    document.title = dict.page_title || EN.page_title;
+    i18nNodes.forEach(function (n) {
+      var k = n.getAttribute("data-i18n");
+      if (dict[k] !== undefined) n.innerHTML = dict[k];
+    });
+    var pdfHref = currentLang === "lt" ? "assets/skiftesverk_open_field_guide_LT.pdf" : "assets/skiftesverk_open_field_guide.pdf";
+    pdfLinks.forEach(function (a) { if (a) a.href = pdfHref; });
+    langBtns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === currentLang); });
+    closeExplain();
+    wireByrne("#frame", svgCabin);
+    wireByrne("#wall-physics", svgWall);
+    renderCabin();
+    renderWall();
+    try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
+  }
+
+  langBtns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
+
+  renderCabin(); renderWall(); renderBeam(); renderEuler(); renderCat();
+  wireByrne("#frame", svgCabin);
+  wireByrne("#wall-physics", svgWall);
+
+  var saved = null;
+  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
+  if (saved === "lt") applyLang("lt");
+})();
+</script>
+</body>
+</html>

@@ -28,561 +28,300 @@
   --rule: #d8d4cc;
   --rule-strong: #161719;
   --accent: #8c3a2b;
+  --blue: #234b6e;
   --serif-display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
   --serif-body: "Newsreader", Charter, "Iowan Old Style", Georgia, serif;
   --sans: "Jost", system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --max: 1080px;
+  --u: 8px;
+  --plot: #161719;
+  --lead: var(--accent);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; background: var(--paper); }
 
 body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 300;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-weight: 300; line-height: 1.65;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
 
 a { color: inherit; }
 button { font: inherit; color: inherit; }
-
 ::selection { background: var(--ink); color: var(--paper); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.wrap {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
-}
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
 
 /* Header */
 header.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  position: sticky; top: 0; z-index: 20;
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--rule);
 }
-
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 64px;
-}
-
-.brand {
-  text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; }
+.brand { text-decoration: none; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap; }
+.nav-right { display: flex; align-items: center; gap: 26px; }
+.nav-links { display: flex; align-items: center; gap: 22px; }
 .nav-links a {
-  text-decoration: none;
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 4px 0;
-  transition: color 0.2s ease;
+  text-decoration: none; font-size: 0.74rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  padding: 4px 0; transition: color 0.2s ease;
 }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
 
-.nav-links a:hover,
-.nav-links a.active { color: var(--ink); }
-
-.lang-switch {
-  display: inline-flex;
-  border: 1px solid var(--rule);
-}
-
+.lang-switch { display: inline-flex; border: 1px solid var(--rule); }
 .lang-switch button {
-  border: 0;
-  background: transparent;
-  padding: 5px 10px;
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease;
+  border: 0; background: transparent; padding: 5px 10px;
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); cursor: pointer;
 }
-
-.lang-switch button.active {
-  background: var(--ink);
-  color: var(--paper);
-}
+.lang-switch button.active { background: var(--ink); color: var(--paper); }
 
 /* Opening */
 .opening {
   padding: clamp(52px, 7.5vw, 96px) 0 clamp(52px, 7vw, 84px);
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(32px, 5vw, 72px); align-items: start;
 }
-
 .eyebrow {
-  margin: 0 0 22px;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted);
+  margin: 0 0 22px; font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
 }
-
 .eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 28px;
-  height: 1px;
-  background: var(--accent);
-  vertical-align: middle;
-  margin-right: 12px;
+  content: ""; display: inline-block; width: 28px; height: 1px;
+  background: var(--accent); vertical-align: middle; margin-right: 12px;
 }
-
-.title-lockup {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 10px 22px;
-}
-
-.eyebrow.inline-eye {
-  margin: 0;
-}
-
+.title-lockup { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; }
+.eyebrow.inline-eye { margin: 0; }
 .opening h1 {
-  margin: 0;
-  font-family: var(--serif-display);
-  font-weight: 400;
-  font-optical-sizing: none;
-  font-variation-settings: "opsz" 24;
-  font-size: clamp(2.5rem, 5vw, 4.1rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  margin: 0; font-family: var(--serif-display); font-weight: 400;
+  font-optical-sizing: none; font-variation-settings: "opsz" 24;
+  font-size: clamp(2.5rem, 5vw, 4.1rem); line-height: 1.05; letter-spacing: -0.02em;
 }
-
-.lead {
-  margin: 24px 0 0;
-  max-width: 54ch;
-  font-size: 1.02rem;
-  line-height: 1.72;
-  color: var(--muted);
-}
-
-.opening-actions {
-  margin-top: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px;
-}
+.lead { margin: 24px 0 0; max-width: 54ch; font-size: 1.02rem; line-height: 1.72; color: var(--muted); }
+.opening-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 28px; }
 
 .text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--ink);
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font-size: 0.74rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  padding-bottom: 4px; border-bottom: 1px solid var(--ink);
   transition: color 0.2s ease, border-color 0.2s ease;
 }
+.text-link:hover { color: var(--accent); border-color: var(--accent); }
+.text-link.subtle { color: var(--muted); border-color: var(--rule); }
+.text-link.subtle:hover { color: var(--ink); border-color: var(--ink); }
 
-.text-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.text-link.subtle {
-  color: var(--muted);
-  border-color: var(--rule);
-}
-
-.text-link.subtle:hover {
-  color: var(--ink);
-  border-color: var(--ink);
-}
-
-/* Key facts card (right side of opening) */
-.facts-box {
-  margin-top: 12px;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--rule);
-  padding: 20px 0 16px;
-}
-
+.facts-box { margin-top: 12px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 20px 0 16px; }
 .facts-row {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 14px;
-  padding: 8px 0;
-  border-top: 1px solid var(--rule);
-  font-size: 0.86rem;
-  line-height: 1.5;
+  display: grid; grid-template-columns: 92px minmax(0, 1fr);
+  gap: 14px; padding: 8px 0; border-top: 1px solid var(--rule); font-size: 0.86rem; line-height: 1.5;
 }
-
-.facts-row:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.facts-k {
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--faint);
-  padding-top: 2px;
-}
-
-.facts-v {
-  color: var(--ink);
-}
+.facts-row:first-child { border-top: 0; padding-top: 0; }
+.facts-k { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); padding-top: 2px; }
+.facts-v { color: var(--ink); }
 
 /* Editorial Section Layout */
 section.band {
-  padding: clamp(56px, 7.5vw, 96px) 0;
-  border-top: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: 185px minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 56px);
-  align-items: start;
+  padding: clamp(56px, 7.5vw, 96px) 0; border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: 185px minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 56px); align-items: start;
 }
-
-.rail {
-  position: sticky;
-  top: 92px;
-}
-
-.rail-num {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.26em;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
+.rail { position: sticky; top: 92px; }
+.rail-num { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.26em; color: var(--accent); margin-bottom: 10px; }
 .rail h2 {
-  margin: 0;
-  font-family: var(--serif-display);
-  font-weight: 400;
-  font-optical-sizing: none;
-  font-variation-settings: "opsz" 16;
-  font-size: 1.55rem;
-  line-height: 1.15;
+  margin: 0; font-family: var(--serif-display); font-weight: 400;
+  font-optical-sizing: none; font-variation-settings: "opsz" 16; font-size: 1.55rem; line-height: 1.15;
 }
-
-.rail-note {
-  margin: 14px 0 0;
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--faint);
-}
+.rail-note { margin: 14px 0 0; font-size: 0.82rem; line-height: 1.55; color: var(--faint); }
 
 .section-intro {
-  margin: 0 0 34px;
-  max-width: 58ch;
-  font-family: var(--serif-body);
-  font-size: 1.12rem;
-  line-height: 1.68;
-  color: var(--ink);
+  margin: 0 0 calc(4 * var(--u)); max-width: 58ch;
+  font-family: var(--serif-body); font-size: 18px; line-height: calc(4 * var(--u)); color: var(--ink);
 }
 
 /* Structured Dossier Entries */
-.entry-list {
-  border-top: 1px solid var(--rule);
-}
-
+.entry-list { border-top: 1px solid var(--rule); }
 .entry {
-  display: grid;
-  grid-template-columns: 175px minmax(0, 1fr);
-  gap: 24px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--rule);
-  align-items: baseline;
+  display: grid; grid-template-columns: 175px minmax(0, 1fr);
+  gap: calc(3 * var(--u)); padding: calc(3 * var(--u)) 0;
+  border-bottom: 1px solid var(--rule); align-items: baseline;
 }
-
 .entry-meta {
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--faint);
-  line-height: 1.55;
+  font-size: 11px; font-weight: 400; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--faint); line-height: calc(2 * var(--u));
 }
-
-.entry-meta strong {
-  display: block;
-  color: var(--ink);
-  font-weight: 400;
-  margin-bottom: 3px;
-}
-
+.entry-meta strong { display: block; color: var(--ink); font-weight: 400; margin-bottom: 3px; }
 .entry-body h3 {
-  margin: 0 0 8px;
-  font-family: var(--serif-display);
-  font-weight: 400;
-  font-size: 1.14rem;
-  letter-spacing: 0.01em;
-  color: var(--ink);
+  margin: 0 0 var(--u); font-family: var(--serif-display); font-weight: 400;
+  font-size: 18px; line-height: calc(3 * var(--u)); letter-spacing: 0.01em; color: var(--ink);
 }
-
-.entry-body p {
-  margin: 0;
-  font-size: 0.94rem;
-  line-height: 1.68;
-  color: var(--muted);
-  max-width: 60ch;
-}
-
+.entry-body p { margin: 0; font-size: 15px; line-height: calc(3 * var(--u)); color: var(--muted); max-width: 60ch; }
 .entry-body .tags {
-  margin-top: 10px;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
+  margin-top: calc(1.5 * var(--u)); font-size: 11px; line-height: calc(2.4 * var(--u));
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
 }
 
-/* 3-Column Spec Grid (Languages & Credentials) */
+/* Universal Click-to-Explain Term Chips & Inline Cards */
+.x-term {
+  border: 0; background: none; padding: 0 1px; cursor: pointer;
+  color: var(--ink); font: inherit; letter-spacing: inherit; text-transform: inherit;
+  border-bottom: 1px dashed var(--blue); transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.x-term:hover, .x-term.active {
+  color: var(--blue); border-bottom-color: var(--accent); background: rgba(35, 75, 110, 0.07);
+}
+
+.x-card {
+  margin-top: 12px; max-width: 60ch; padding: 13px 16px;
+  background: #faf8f4; border: 1px solid var(--rule); border-left: 3px solid var(--blue);
+  font-size: 13.5px; line-height: 1.58; color: var(--ink);
+}
+.x-card .x-top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 7px;
+}
+.x-card .x-k {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue); font-weight: 600;
+}
+.x-card .x-x {
+  border: 0; background: none; cursor: pointer; font-family: var(--mono);
+  font-size: 14px; color: var(--faint); padding: 0 4px;
+}
+.x-card .x-x:hover { color: var(--ink); }
+.x-card p { margin: 0 0 6px; font-size: 13px; line-height: 1.56; color: var(--muted); }
+.x-card p:last-child { margin-bottom: 0; }
+.x-card strong { color: var(--ink); font-weight: 500; }
+
+/* Inline Collapsible Math Plates */
+.eq-bar {
+  margin-top: calc(2 * var(--u)); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px;
+}
+.eq {
+  padding: 0; border: 0; background: none; cursor: pointer;
+  display: inline-flex; align-items: baseline; gap: calc(1.5 * var(--u)); color: var(--ink); text-align: left;
+}
+.eq math { font-family: var(--serif-body); font-size: 17px; }
+.eq .eq-cue {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint); border-bottom: 1px solid var(--rule); transition: color 0.2s, border-color 0.2s;
+}
+.eq:hover .eq-cue, .eq[aria-expanded="true"] .eq-cue { color: var(--accent); border-color: var(--accent); }
+
+.exp-pill {
+  border: 1px solid var(--rule); background: var(--surface); padding: 3px 9px; cursor: pointer;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue); transition: border-color 0.16s, background 0.16s;
+}
+.exp-pill:hover, .exp-pill.active { border-color: var(--blue); background: #fff; color: var(--accent); }
+
+.plate { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.42s ease; }
+.plate.open { grid-template-rows: 1fr; }
+.plate > div { overflow: hidden; }
+.plate figure { margin: calc(2 * var(--u)) 0 0; padding-top: calc(2 * var(--u)); border-top: 1px solid var(--rule); max-width: 60ch; }
+.plate svg { display: block; width: 100%; height: auto; overflow: visible; }
+.plate svg text { font-family: var(--sans); font-size: 11px; fill: var(--muted); }
+.plate svg .lbl { fill: var(--lead); font-weight: 500; }
+.plate svg .grid line { stroke: var(--rule); stroke-width: 0.6; }
+.plate svg .axis { stroke: var(--ink); stroke-width: 0.85; opacity: 0.6; }
+.plate svg .curve { fill: none; stroke: var(--plot); stroke-width: 1.5; }
+.plate svg .ghost { fill: none; stroke: var(--plot); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.48; }
+.plate svg .limit { stroke: var(--accent); stroke-width: 0.9; stroke-dasharray: 6 4; opacity: 0.8; }
+.plate svg .leader { stroke: var(--lead); stroke-width: 1; fill: none; }
+.plate svg .dot { fill: var(--lead); }
+
+.plate .ctl {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px calc(2 * var(--u));
+  margin-top: var(--u); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--faint); line-height: calc(3 * var(--u));
+}
+.plate input[type="range"] { flex: 1; min-width: 140px; max-width: 240px; accent-color: var(--ink); cursor: pointer; }
+.plate figcaption { margin-top: var(--u); font-family: var(--serif-body); font-size: 14px; line-height: calc(3 * var(--u)); color: var(--muted); }
+.plate figcaption i { color: var(--ink); }
+.plate .read { font-variant-numeric: tabular-nums; color: var(--ink); letter-spacing: 0.06em; }
+.plate .read.warn { color: var(--accent); font-weight: 500; }
+
+/* Press G: show the 8px baseline and 12-column measure */
+body.show-grid::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 99;
+  background: repeating-linear-gradient(to bottom, rgba(140, 58, 43, 0.12) 0 1px, transparent 1px var(--u));
+}
+body.show-grid .wrap {
+  background-image: repeating-linear-gradient(to right, rgba(140, 58, 43, 0.06) 0 calc((100% - 11 * 24px) / 12), transparent 0 calc((100% - 11 * 24px) / 12 + 24px));
+  background-clip: content-box;
+}
+
 .spec-grid {
-  margin-top: 38px;
-  padding-top: 26px;
-  border-top: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  margin-top: 38px; padding-top: 26px; border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px;
 }
+.spec-grid h3 { margin: 0 0 8px; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+.spec-grid p { margin: 0; font-size: 0.88rem; line-height: 1.62; color: var(--muted); }
 
-.spec-grid h3 {
-  margin: 0 0 8px;
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-.spec-grid p {
-  margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.62;
-  color: var(--muted);
-}
-
-/* Archive links */
-.archive-list {
-  margin-top: 40px;
-  border-top: 1px solid var(--rule);
-}
-
+.archive-list { margin-top: 40px; border-top: 1px solid var(--rule); }
 .archive-row {
-  display: grid;
-  grid-template-columns: 165px minmax(0, 1fr) auto;
-  gap: 20px;
-  align-items: baseline;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--rule);
-  text-decoration: none;
-  transition: border-color 0.2s ease;
+  display: grid; grid-template-columns: 165px minmax(0, 1fr) auto;
+  gap: 20px; align-items: baseline; padding: 16px 0;
+  border-bottom: 1px solid var(--rule); text-decoration: none; transition: border-color 0.2s ease;
 }
-
 .archive-row:hover { border-bottom-color: var(--ink); }
+.archive-title { font-family: var(--serif-display); font-size: 1.06rem; letter-spacing: 0.03em; color: var(--ink); }
+.archive-desc { font-size: 0.9rem; color: var(--muted); }
+.archive-arrow { font-size: 0.76rem; color: var(--faint); transition: color 0.2s ease, transform 0.2s ease; }
+.archive-row:hover .archive-arrow { color: var(--accent); transform: translateX(3px); }
 
-.archive-title {
-  font-family: var(--serif-display);
-  font-size: 1.06rem;
-  letter-spacing: 0.03em;
-  color: var(--ink);
-}
-
-.archive-desc {
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.archive-arrow {
-  font-size: 0.76rem;
-  color: var(--faint);
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.archive-row:hover .archive-arrow {
-  color: var(--accent);
-  transform: translateX(3px);
-}
-
-/* Private CV & Inquiry Band */
-.cv-box {
-  background: var(--surface);
-  border-left: 2px solid var(--accent);
-  padding: clamp(24px, 4vw, 36px);
-  max-width: 64ch;
-}
-
-.cv-box p {
-  margin: 0 0 18px;
-  font-family: var(--serif-body);
-  font-size: 1.12rem;
-  line-height: 1.62;
-  color: var(--ink);
-}
-
-.cv-box .cv-note {
-  font-family: var(--sans);
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-
-.cv-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 20px 28px;
-}
+.cv-box { background: var(--surface); border-left: 2px solid var(--accent); padding: clamp(24px, 4vw, 36px); max-width: 64ch; }
+.cv-box p { margin: 0 0 18px; font-family: var(--serif-body); font-size: 1.12rem; line-height: 1.62; color: var(--ink); }
+.cv-box .cv-note { font-family: var(--sans); font-size: 0.88rem; line-height: 1.65; color: var(--muted); margin-bottom: 24px; }
+.cv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
 
 .btn-dark {
-  display: inline-block;
-  text-decoration: none;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  padding: 11px 24px;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  display: inline-block; text-decoration: none; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--paper); padding: 11px 24px;
+  font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
-
-.btn-dark:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-}
+.btn-dark:hover { background: var(--accent); border-color: var(--accent); }
 
 .email-link {
-  display: inline-block;
-  font-size: 0.94rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 1px solid var(--ink);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  display: inline-block; font-size: 0.94rem; letter-spacing: 0.08em; text-decoration: none;
+  padding-bottom: 3px; border-bottom: 1px solid var(--ink); transition: color 0.2s ease, border-color 0.2s ease;
 }
+.email-link:hover { color: var(--accent); border-color: var(--accent); }
 
-.email-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-/* Footer */
-footer.colophon {
-  border-top: 1px solid var(--ink);
-  margin-top: 24px;
-  padding: 36px 0 56px;
-}
-
+footer.colophon { border-top: 1px solid var(--ink); margin-top: 24px; padding: 36px 0 56px; }
 .colophon-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 16px 32px;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  color: var(--muted);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;
+  gap: 16px 32px; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--muted);
 }
+.colophon-name { font-family: var(--serif-display); font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; }
 
-.colophon-name {
-  font-family: var(--serif-display);
-  font-size: 1.05rem;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
-/* Responsive */
 @media (max-width: 860px) {
-  .nav-inner {
-    height: auto;
-    flex-wrap: wrap;
-    padding-top: 12px;
-    padding-bottom: 10px;
-    gap: 10px 16px;
-  }
+  .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
   .nav-right { display: contents; }
   .brand { order: 1; }
   .lang-switch { order: 2; }
   .nav-links {
-    display: flex;
-    order: 3;
-    flex: 1 0 100%;
-    flex-wrap: wrap;
-    gap: 8px 18px;
-    padding-top: 10px;
-    border-top: 1px solid var(--rule);
+    display: flex; order: 3; flex: 1 0 100%; flex-wrap: wrap;
+    gap: 8px 18px; padding-top: 10px; border-top: 1px solid var(--rule);
   }
-  .nav-links a {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    padding: 2px 0;
-  }
+  .nav-links a { font-size: 0.68rem; letter-spacing: 0.14em; padding: 2px 0; }
   section[id] { scroll-margin-top: 104px; }
-  .opening {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  section.band {
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
+  .opening { grid-template-columns: 1fr; gap: 32px; }
+  section.band { grid-template-columns: 1fr; gap: 26px; }
   .rail { position: static; }
-  .entry {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .spec-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-  .archive-row {
-    grid-template-columns: 1fr auto;
-    gap: 6px 16px;
-  }
+  .entry { grid-template-columns: 1fr; gap: 8px; }
+  .spec-grid { grid-template-columns: 1fr; gap: 22px; }
+  .archive-row { grid-template-columns: 1fr auto; gap: 6px 16px; }
   .archive-desc { grid-column: 1 / -1; }
 }
-
 @media print {
-  header.site-nav, .opening-actions, .btn-dark { display: none; }
+  header.site-nav, .opening-actions, .btn-dark, .eq-cue, .ctl, .exp-pill { display: none; }
   body { background: #fff; }
+  .plate { grid-template-rows: 1fr; }
   section.band { padding: 24px 0; break-inside: avoid; }
 }
 </style>
@@ -598,6 +337,7 @@ footer.colophon {
         <a href="index.html#photographs" data-i18n="nav_photos">Photographs</a>
         <a href="index.html#craft" data-i18n="nav_craft">Craft</a>
         <a href="dossier.html" class="active" data-i18n="nav_dossier">Dossier</a>
+        <a href="mechanics.html" data-i18n="nav_mech">Mechanics</a>
         <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="lang-switch" role="group" aria-label="Language">
@@ -615,9 +355,10 @@ footer.colophon {
         <h1 data-i18n="hero_h1">Dossier.</h1>
         <p class="eyebrow inline-eye" data-i18n="hero_eye">Vilnius &middot; Europe</p>
       </div>
-      <p class="lead" data-i18n="hero_lead">Construction practice across Norway, the United Kingdom, and Lithuania: drawings, project management, site supervision, and client coordination. Legal archiving in London, Nordic export documentation, and Linux automation.</p>
+      <p class="lead" data-i18n="hero_lead">Construction practice across Norway, the United Kingdom, and Lithuania: drawings, project management, site supervision, and client coordination. Legal archiving in London, Nordic export documentation, and Linux automation. Click any formula or dashed term for a plain-words explanation.</p>
       <div class="opening-actions">
         <a class="text-link subtle" href="index.html" data-i18n="cta_home">&larr; Writing &amp; Photographs</a>
+        <a class="text-link" href="mechanics.html" data-i18n="cta_mech">Open Cabin &amp; Mechanics Tool &rarr;</a>
       </div>
     </div>
 
@@ -657,7 +398,21 @@ footer.colophon {
           <div class="entry-body">
             <h3 data-i18n="p1_h">Carpentry, Site QA &amp; Project Documentation</h3>
             <p data-i18n="p1_p">Commercial and residential interior fit-out, formwork, ventilation shafts, kitchens, and bespoke joinery across Norwegian contracting firms and independent client commissions. Direct responsibility for site quality checks, HSE compliance, quoting, scheduling, and handover documentation.</p>
-            <p class="tags" data-i18n="p1_tags">TEK17 site practice &middot; QA / HSE &middot; fit-out &amp; formwork &middot; quoting &amp; scheduling</p>
+            <p class="tags" data-i18n="p1_tags"><button type="button" class="x-term" data-explain="tek17">TEK17</button> site practice &middot; <button type="button" class="x-term" data-explain="hse">QA / HSE</button> &middot; fit-out &amp; formwork &middot; quoting &amp; scheduling</p>
+
+            <div class="eq-bar">
+              <button class="eq" type="button" aria-expanded="false" data-plate="pl-beam">
+                <math><msub><mi>&delta;</mi><mtext>max</mtext></msub><mo>=</mo><mfrac><mrow><mn>5</mn><mi>q</mi><msup><mi>L</mi><mn>4</mn></msup></mrow><mrow><mn>384</mn><mi>E</mi><mi>I</mi></mrow></mfrac></math>
+                <span class="eq-cue" data-i18n="eq_beam_cue">Deflection check</span>
+              </button>
+              <button type="button" class="exp-pill" data-explain="beam" data-i18n="exp_what">Explain ?</button>
+            </div>
+            <div class="x-slot"></div>
+            <div class="plate" id="pl-beam"><div><figure>
+              <svg viewBox="0 0 560 184" aria-label="Deflection of a simply supported joist under uniform load"></svg>
+              <div class="ctl"><label for="r-beam" data-i18n="ctl_span">Span</label><input id="r-beam" type="range" min="2" max="5.6" step="0.1" value="4"><span class="read" id="o-beam"></span></div>
+              <figcaption data-i18n="cap_beam">The site check, as a curve. Joist 48&times;198 <button type="button" class="x-term" data-explain="c24">C24</button> (<i>E</i> = 11&nbsp;000 MPa), <i>q</i> = 1.5 kN/m. The dashed red line marks the <button type="button" class="x-term" data-explain="l300">L/300 limit</button> (EN&nbsp;1995 recommends L/300 to L/500).</figcaption>
+            </figure></div></div>
           </div>
         </div>
 
@@ -670,6 +425,7 @@ footer.colophon {
             <h3 data-i18n="p2_h">Independent Groundworks, Joinery &amp; Roofing</h3>
             <p data-i18n="p2_p">Independent groundworks, stonework, and landscaping in the United Kingdom; interior finishing, roof repair, and timber framing in Lithuania and Scotland. Full responsibility from material takeoff and pricing to final delivery.</p>
             <p class="tags" data-i18n="p2_tags">Timber framing &middot; roofing &middot; groundworks &middot; independent contracting</p>
+            <div class="x-slot"></div>
           </div>
         </div>
 
@@ -681,7 +437,21 @@ footer.colophon {
           <div class="entry-body">
             <h3 data-i18n="p3_h">Parametric Timber CAD &amp; Self-Reliant Structures</h3>
             <p data-i18n="p3_p">Metric drawings, technical detail manuals, and material schedules generated via Python scripts into print-ready PDFs.</p>
-            <p class="tags" data-i18n="p3_tags">Parametric SVG/CAD &middot; joinery specs &middot; material bills &middot; LST EN load checks</p>
+            <p class="tags" data-i18n="p3_tags">Parametric SVG/CAD &middot; joinery specs &middot; material bills &middot; <button type="button" class="x-term" data-explain="lsten">LST EN</button> load checks</p>
+
+            <div class="eq-bar">
+              <button class="eq" type="button" aria-expanded="true" data-plate="pl-euler">
+                <math><msub><mi>P</mi><mtext>cr</mtext></msub><mo>=</mo><mfrac><mrow><msup><mi>&pi;</mi><mn>2</mn></msup><mi>E</mi><mi>I</mi></mrow><msup><mrow><mo>(</mo><mi>K</mi><mi>L</mi><mo>)</mo></mrow><mn>2</mn></msup></mfrac></math>
+                <span class="eq-cue" data-i18n="eq_euler_cue">Buckling load</span>
+              </button>
+              <button type="button" class="exp-pill" data-explain="euler" data-i18n="exp_what">Explain ?</button>
+            </div>
+            <div class="x-slot"></div>
+            <div class="plate open" id="pl-euler"><div><figure>
+              <svg viewBox="0 0 560 200" aria-label="Euler critical load against column length"></svg>
+              <div class="ctl"><label for="r-euler" data-i18n="ctl_len">Length</label><input id="r-euler" type="range" min="1.4" max="4" step="0.05" value="2.4"><span class="read" id="o-euler"></span></div>
+              <figcaption data-i18n="cap_euler">Post 98&times;98 <button type="button" class="x-term" data-explain="c24">C24</button>, pinned at both ends (<i>K</i> = 1). Double the length and the load it carries falls to a quarter. <a class="text-link subtle" href="mechanics.html" style="font-size:0.68rem;letter-spacing:0.14em;">Open full cabin plates &rarr;</a></figcaption>
+            </figure></div></div>
           </div>
         </div>
       </div>
@@ -708,7 +478,8 @@ footer.colophon {
           <div class="entry-body">
             <h3 data-i18n="s1_h">Norway &amp; EU Regulatory Change Monitor</h3>
             <p data-i18n="s1_p">FastAPI service ingesting live official legislative updates from Norway (<code>api.lovdata.no</code>) and the European Union (<code>EUR-Lex</code> RSS) into a unified endpoint with isolated source adapters, retries, and end-to-end health checks.</p>
-            <p class="tags" data-i18n="s1_tags">Python &middot; FastAPI &middot; REST / RSS ingestion &middot; fault isolation</p>
+            <p class="tags" data-i18n="s1_tags">Python &middot; <button type="button" class="x-term" data-explain="fastapi">FastAPI &middot; REST / RSS</button> &middot; fault isolation</p>
+            <div class="x-slot"></div>
           </div>
         </div>
 
@@ -720,7 +491,8 @@ footer.colophon {
           <div class="entry-body">
             <h3 data-i18n="s2_h">Linux Administration, Networking &amp; Local Automation</h3>
             <p data-i18n="s2_p">Daily Manjaro / Sway Linux operator maintaining personal automation scripts (mail sync and <code>notmuch</code> indexing, VPN leak protection, disk health monitoring, document linting) alongside an active Git-tracked RHCSA / Linux administration lab portfolio (permissions, ACLs, SUID audits, systemd, networking, SSH, and firewalls).</p>
-            <p class="tags" data-i18n="s2_tags">Linux CLI &middot; Bash &middot; Git &middot; permissions &amp; ACLs &middot; hardware assembly &amp; repair</p>
+            <p class="tags" data-i18n="s2_tags">Linux CLI &middot; Bash &middot; Git &middot; <button type="button" class="x-term" data-explain="linux_sec">ACLs / SUID / systemd</button> &middot; hardware repair</p>
+            <div class="x-slot"></div>
           </div>
         </div>
 
@@ -733,6 +505,7 @@ footer.colophon {
             <h3 data-i18n="s3_h">Scripted Technical Publishing &amp; CAD Generation</h3>
             <p data-i18n="s3_p">Reproducible HTML, SVG, and WeasyPrint PDF pipelines turning verified measurements, regulatory checklists, and structured tables into clean A4 technical documentation without manual layout drift.</p>
             <p class="tags" data-i18n="s3_tags">Python &middot; SVG &middot; HTML/CSS &middot; WeasyPrint &middot; QA verification</p>
+            <div class="x-slot"></div>
           </div>
         </div>
       </div>
@@ -760,6 +533,7 @@ footer.colophon {
             <h3 data-i18n="a1_h">Legal Database Archiving &amp; Multilingual Liaison</h3>
             <p data-i18n="a1_p">Electronic Archivist in the Health &amp; Safety department at an international law firm (Freshfields Bruckhaus Deringer LLP, London): digital database archiving, indexing, and source-accuracy checking. Subsequent support work and interpreting (St Mungo's, London) handling calm communication across Lithuanian, English, and Russian.</p>
             <p class="tags" data-i18n="a1_tags">Database archiving &middot; source verification &middot; interpreting &middot; written procedures</p>
+            <div class="x-slot"></div>
           </div>
         </div>
 
@@ -771,7 +545,21 @@ footer.colophon {
           <div class="entry-body">
             <h3 data-i18n="a2_h">Nordic Building-Export Compliance Research (ARKA)</h3>
             <p data-i18n="a2_p">Independent research into Norwegian building-product documentation obligations (DOK regulation &sect;&sect; 4, 5, 11, 13), NOBB product data structures, FDV / DoP checklists, TEK17 practice, and Baltic modular timber pricing.</p>
-            <p class="tags" data-i18n="a2_tags">DOK &middot; TEK17 &middot; FDV / DoP checklists &middot; NOBB structure</p>
+            <p class="tags" data-i18n="a2_tags"><button type="button" class="x-term" data-explain="dok">DOK</button> &middot; <button type="button" class="x-term" data-explain="tek17">TEK17</button> &middot; <button type="button" class="x-term" data-explain="nobb">NOBB &amp; FDV / DoP</button></p>
+
+            <div class="eq-bar">
+              <button class="eq" type="button" aria-expanded="false" data-plate="pl-cat">
+                <math><mi>y</mi><mo>=</mo><mi>a</mi><mspace width="0.2em"/><mi>cosh</mi><mo>&#x2061;</mo><mfrac><mi>x</mi><mi>a</mi></mfrac></math>
+                <span class="eq-cue" data-i18n="eq_cat_cue">Why ARKA means arch</span>
+              </button>
+              <button type="button" class="exp-pill" data-explain="cat" data-i18n="exp_what">Explain ?</button>
+            </div>
+            <div class="x-slot"></div>
+            <div class="plate" id="pl-cat"><div><figure>
+              <svg viewBox="0 0 560 208" aria-label="A hanging chain and the same curve inverted as an arch"></svg>
+              <div class="ctl"><label for="r-cat" data-i18n="ctl_a">Flatness a</label><input id="r-cat" type="range" min="0.30" max="1.6" step="0.01" value="1"><span class="read" id="o-cat"></span></div>
+              <figcaption data-i18n="cap_cat"><i>Ut pendet continuum flexile, sic stabit contiguum rigidum inversum.</i> As the flexible chain hangs, so, inverted, stands the rigid arch. Robert Hooke, 1676.</figcaption>
+            </figure></div></div>
           </div>
         </div>
       </div>
@@ -792,6 +580,11 @@ footer.colophon {
       </div>
 
       <div class="archive-list">
+        <a class="archive-row" href="mechanics.html">
+          <span class="archive-title" data-i18n="arch_mech_t">Mechanics &amp; Frame</span>
+          <span class="archive-desc" data-i18n="arch_mech">Open-source interactive timber cabin sizing tool, Fourier dew-point correction (clay vs. slaked lime), seasonal calendar, and free 4-page CAD PDF.</span>
+          <span class="archive-arrow" aria-hidden="true">&#8599;</span>
+        </a>
         <a class="archive-row" href="arka.html">
           <span class="archive-title">ARKA</span>
           <span class="archive-desc" data-i18n="arch_arka">Proposal and cost model for permanent small municipal homes replacing temporary shelter housing.</span>
@@ -834,36 +627,287 @@ footer.colophon {
 <footer class="colophon">
   <div class="wrap colophon-inner">
     <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org/dossier</div>
-    <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Dossier &copy; Mantas Pagalys</div>
+    <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Dossier &copy; Mantas Pagalys &middot; Press G for measure grid</div>
   </div>
 </footer>
 
 <script>
 (function () {
+  var currentLang = "en";
+  var NS = "http://www.w3.org/2000/svg";
+
+  /* ==================== UNIVERSAL PLAIN-WORDS EXPLAINER DICTIONARY (EN + LT) ==================== */
+  var EXPLAIN = {
+    beam: {
+      en: ["BEAM BENDING · δ = 5qL⁴ / (384EI)",
+        "<p><strong>What it does:</strong> Tells you how many millimetres a wooden floor joist sags in the middle when people and furniture stand on it. Notice <strong>L<sup>4</sup></strong>: double the distance between supports and the sag grows <strong>16 times worse</strong>.</p>" +
+        "<p><strong>Every letter:</strong> <strong>&delta;</strong> = sag in mm; <strong>q</strong> = weight per metre; <strong>L</strong> = clear span; <strong>E</strong> = wood stiffness; <strong>I</strong> = cross-section shape stiffness (upright planks resist bending far more than flat planks).</p>" +
+        "<p><strong>Origin:</strong> Galileo started beam theory in 1638; Leonhard Euler and Daniel Bernoulli solved the exact curve around 1750, still used inside Eurocode 5 today.</p>"],
+      lt: ["SIJOS LENKIMAS · δ = 5qL⁴ / (384EI)",
+        "<p><strong>Ką ji daro:</strong> Parodo, kiek milimetrų grindų sija įlinksta viduryje. Kadangi <strong>L<sup>4</sup></strong> keliamas ketvirtuoju laipsniu, padvigubinus tarpatramį įlinkis išauga <strong>16 kartų</strong>.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>&delta;</strong> = įlinkis; <strong>q</strong> = apkrova metrui; <strong>L</strong> = tarpatramis; <strong>E</strong> = medienos standumas; <strong>I</strong> = skerspjūvio forma (stačia lenta daug standesnė nei gulsčia).</p>" +
+        "<p><strong>Kilmė:</strong> 1638 m. pradėjo Galilėjas; apie 1750 m. tikslią lygtį užbaigė Eileris ir Bernulis. Ji iki šiol sudaro „Eurocode 5“ pagrindą.</p>"]
+    },
+    euler: {
+      en: ["EULER COLUMN BUCKLING · P_cr = π²EI / (KL)²",
+        "<p><strong>What it does:</strong> Push straight down on an upright plastic ruler: long before the plastic crushes, it suddenly snaps sideways. This formula gives the exact load <strong>P<sub>cr</sub></strong> where a slender post bows out. Double the height and the post becomes <strong>4 times weaker</strong>.</p>" +
+        "<p><strong>Every letter:</strong> <strong>P<sub>cr</sub></strong> = sideways buckling force; <strong>E</strong> = wood stiffness; <strong>I</strong> = cross-section thickness geometry; <strong>L</strong> = post height; <strong>K</strong> = how tightly the top and bottom are fixed (pinned ends = 1.0).</p>" +
+        "<p><strong>Origin:</strong> Leonhard Euler published this calculus solution in 1757 to explain why tall bridge pillars buckle sideways.</p>"],
+      lt: ["EILERIO KLUPUMAS · P_cr = π²EI / (KL)²",
+        "<p><strong>Ką ji daro:</strong> Paspauskite stačią liniuotę iš viršaus: dar nesutrupėjusi ji staiga išlinksta į šoną. Formulė duoda tikslią jėgą <strong>P<sub>cr</sub></strong>, prie kurios stulpas išlinksta. Padvigubinus aukštį, laikomoji galia krenta <strong>4 kartus</strong>.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>P<sub>cr</sub></strong> = kritinė apkrova; <strong>E</strong> = medienos standumas; <strong>I</strong> = skerspjūvio geometrija; <strong>L</strong> = aukštis; <strong>K</strong> = galų įtvirtinimas (šarnyrai = 1,0).</p>" +
+        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė 1757 m., tirdamas lieknus tiltų stulpus.</p>"]
+    },
+    cat: {
+      en: ["HOOKE CATENARY ARCH · y = a cosh(x/a)",
+        "<p><strong>What it does:</strong> Hold a loose chain by both ends. Gravity pulls every link purely in tension (zero bending). Turn that exact shape upside down and every block in the arch pushes into its neighbour in pure compression with zero bending stress.</p>" +
+        "<p><strong>Every letter:</strong> <strong>cosh</strong> (hyperbolic cosine) = the natural curve of a hanging chain (not a parabola); <strong>a</strong> = flatness ratio (larger <em>a</em> = flatter arch = stronger outward push on the walls).</p>" +
+        "<p><strong>Origin:</strong> Robert Hooke hid this principle in a 1675 Latin anagram while advising Christopher Wren on St Paul's Cathedral; Huygens, Leibniz, and Johann Bernoulli solved the exact equation in 1691.</p>"],
+      lt: ["GRANDININĖ ARKA · y = a cosh(x/a)",
+        "<p><strong>Ką ji daro:</strong> Palaikykite laisvą grandinėlę už galų: kiekviena grandis dirba grynu tempimu. Apvertus tą pačią formą aukštyn kojomis, kiekvienas arkos elementas dirba grynu gniuždymu be lenkimo.</p>" +
+        "<p><strong>Kiekviena raidė:</strong> <strong>cosh</strong> (hiperbolinis kosinusas) = tiksli grandinės kreivė (ne parabolė); <strong>a</strong> = lėkštumas (didesnis <em>a</em> = žemesnė arka ir stipresnis skėtimas į šonus).</p>" +
+        "<p><strong>Kilmė:</strong> Robertas Hukas paskelbė 1675 m. lotyniška anagrama (Šv. Pauliaus katedros kupolas); tikslią lygtį 1691 m. išsprendė Heigensas, Leibnicas ir Bernulis.</p>"]
+    },
+    c24: {
+      en: ["C24 STRUCTURAL TIMBER GRADE",
+        "<p><strong>What it means:</strong> Standard European machine-graded softwood (spruce/pine) certified to carry at least 24 MPa bending stress, with mean stiffness <strong>E = 11,000 MPa</strong>. Every structural joist sold in Norway and Lithuania is stamped with this grade.</p>"],
+      lt: ["C24 KONSTRUKCINĖS MEDIENOS KLASĖ",
+        "<p><strong>Ką reiškia:</strong> Standartinė europinė eglės/pušies klasė, atlaikanti 24 MPa lenkimo įtempį, su vidutiniu standumo moduliu <strong>E = 11 000 MPa</strong>. Tokia mediena žymima spaudu Norvegijos ir Lietuvos statybose.</p>"]
+    },
+    l300: {
+      en: ["L/300 SERVICEABILITY LIMIT",
+        "<p><strong>What it means:</strong> A floor does not wait to snap before feeling wrong. If a 3,000 mm (3 m) joist sags more than <strong>3000 / 300 = 10 mm</strong>, floors feel bouncy and plaster cracks. Heavy or brittle finishes (tiles, burnished clay) use stricter limits like L/400 or L/500.</p>"],
+      lt: ["L/300 ĮLINKIO RIBA",
+        "<p><strong>Ką reiškia:</strong> Sija tampa netinkama gerokai anksčiau, nei lūžta. Jei 3 000 mm (3 m) sija įlinksta daugiau nei <strong>3000 / 300 = 10 mm</strong>, grindys jaučiasi minkštos ir trūkinėja apdaila. Plytelėms ar molio grindims taikoma griežtesnė L/500 riba.</p>"]
+    },
+    tek17: {
+      en: ["TEK17 (NORWEGIAN BUILDING TECHNICAL REGULATION)",
+        "<p><strong>What it is:</strong> Norway's binding national building code (<em>Byggteknisk forskrift</em>) covering structural safety, fire exits, room heights (&ge;2.40 m), moisture barriers, insulation, and ventilation. Every legal building in Norway is checked against it.</p>"],
+      lt: ["TEK17 (NORVEGIJOS STATYBOS TECHNINIS REGLAMENTAS)",
+        "<p><strong>Kas tai:</strong> Privalomas Norvegijos statybos teisės aktas (<em>Byggteknisk forskrift</em>), nustatantis konstrukcijų saugą, gaisrinius reikalavimus, patalpų aukštį (&ge;2,40 m), drėgmės apsaugą ir vėdinimą.</p>"]
+    },
+    hse: {
+      en: ["QA / HSE (QUALITY ASSURANCE & SITE SAFETY)",
+        "<p><strong>What it is:</strong> <strong>QA</strong> = checking drawings, dimensions, moisture, and sign-off checklists before closing walls so expensive mistakes are caught early. <strong>HSE</strong> (Norwegian <em>HMS</em>) = Health, Safety &amp; Environment controls keeping crews safe and legally compliant.</p>"],
+      lt: ["QA / HSE (KOKYBĖS KONTROLĖ IR DARBŲ SAUGA)",
+        "<p><strong>Kas tai:</strong> <strong>QA</strong> = brėžinių, matmenų ir paslėptų darbų patikra prieš uždarant sienas. <strong>HSE</strong> (norv. <em>HMS</em>) = sveikatos, darbų saugos ir aplinkosaugos procedūros statybvietėje.</p>"]
+    },
+    lsten: {
+      en: ["LST EN (EUROCODE STANDARDS IN LITHUANIA)",
+        "<p><strong>What it is:</strong> Official European engineering standards adopted into Lithuanian law (e.g. LST EN 1991-1-3 for regional snow zones, LST EN 1995-1-1 for timber structures).</p>"],
+      lt: ["LST EN (EUROKODAI LIETUVOJE)",
+        "<p><strong>Kas tai:</strong> Lietuvoje perimti Europos inžineriniai standartai (pvz., LST EN 1991-1-3 sniego zonoms, LST EN 1995-1-1 medinėms konstrukcijoms).</p>"]
+    },
+    fastapi: {
+      en: ["FASTAPI · REST / RSS LEGISLATIVE MONITOR",
+        "<p><strong>What it is:</strong> A lightweight Python web service that automatically fetches official legal updates from Norway's <code>api.lovdata.no</code> and the EU's <code>EUR-Lex</code> feed into one clean list, so regulation changes are spotted immediately instead of checking websites by hand.</p>"],
+      lt: ["FASTAPI · REST / RSS TEISĖS AKTŲ STEBĖSENA",
+        "<p><strong>Kas tai:</strong> Lengva „Python“ paslauga, kuri pati surenka naujausius Norvegijos (<code>api.lovdata.no</code>) ir ES (<code>EUR-Lex</code>) įstatymų pakeitimus į vieną vietą be rankinio tikrinimo.</p>"]
+    },
+    linux_sec: {
+      en: ["LINUX PERMISSIONS: ACLs, SUID & SYSTEMD",
+        "<p><strong>What it means:</strong> <strong>ACLs</strong> = fine-grained file access rules beyond basic owner/group permissions; <strong>SUID audit</strong> = checking which programs temporarily run with administrator power (a classic security target); <strong>systemd</strong> = the service manager controlling background servers and timers on Linux.</p>"],
+      lt: ["„LINUX“ TEISĖS: ACL, SUID IR SYSTEMD",
+        "<p><strong>Ką reiškia:</strong> <strong>ACL</strong> = tikslios prieigos prie failų taisyklės; <strong>SUID patikra</strong> = kontrolė, kurios programos laikinai veikia administratoriaus teisėmis; <strong>systemd</strong> = „Linux“ tarnybų ir automatinių užduočių valdiklis.</p>"]
+    },
+    dok: {
+      en: ["DOK REGULATION (§§ 4, 5, 11, 13)",
+        "<p><strong>What it is:</strong> Norway's Construction Products Regulation (<em>Byggevareforskriften</em>). It legally forbids selling or installing any Baltic/EU timber module or material in Norway without verified technical documentation (DoP, CE mark, or Norwegian technical approval).</p>"],
+      lt: ["DOK REGLAMENTAS (§§ 4, 5, 11, 13)",
+        "<p><strong>Kas tai:</strong> Norvegijos statybos produktų reglamentas (<em>Byggevareforskriften</em>), draudžiantis parduoti ar montuoti statybos gaminius Norvegijoje be patikrintos techninės dokumentacijos (DoP, CE ar techninio įvertinimo).</p>"]
+    },
+    nobb: {
+      en: ["NOBB & FDV / DoP DOCUMENTATION",
+        "<p><strong>What it is:</strong> <strong>NOBB</strong> is Norway's central database for building-product specs; <strong>DoP</strong> (Declaration of Performance) proves a product meets safety standards; <strong>FDV</strong> (Management, Operation &amp; Maintenance) is the mandatory Norwegian handover manual for the building owner.</p>"],
+      lt: ["NOBB IR FDV / DoP DOKUMENTACIJA",
+        "<p><strong>Kas tai:</strong> <strong>NOBB</strong> – centrinė Norvegijos statybos produktų duomenų bazė; <strong>DoP</strong> – eksploatacinių savybių deklaracija; <strong>FDV</strong> – privalomas pastato priežiūros ir eksploatavimo žinynas savininkui.</p>"]
+    }
+  };
+
+  var openExplainKey = null;
+  var openExplainSlot = null;
+
+  function closeExplain() {
+    if (openExplainSlot) openExplainSlot.innerHTML = "";
+    Array.prototype.slice.call(document.querySelectorAll("[data-explain].active")).forEach(function (el) { el.classList.remove("active"); });
+    openExplainKey = null;
+    openExplainSlot = null;
+  }
+
+  function showExplain(key, triggerEl) {
+    var entry = EXPLAIN[key];
+    if (!entry) return;
+    var container = triggerEl.closest(".entry-body") || triggerEl.parentElement;
+    var slot = container.querySelector(".x-slot");
+    if (!slot) {
+      slot = document.createElement("div");
+      slot.className = "x-slot";
+      container.appendChild(slot);
+    }
+    if (openExplainKey === key && openExplainSlot === slot) {
+      closeExplain();
+      return;
+    }
+    closeExplain();
+    var pair = currentLang === "lt" ? entry.lt : entry.en;
+    slot.innerHTML =
+      '<div class="x-card" role="region">' +
+      '<div class="x-top"><span class="x-k">' + pair[0] + '</span><button type="button" class="x-x" aria-label="Close">&times;</button></div>' +
+      pair[1] + '</div>';
+    triggerEl.classList.add("active");
+    openExplainKey = key;
+    openExplainSlot = slot;
+  }
+
+  /* Universal event delegation: works forever, even after EN <-> LT swaps! */
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".x-x")) { closeExplain(); return; }
+    var trig = e.target.closest("[data-explain]");
+    if (trig) {
+      e.preventDefault();
+      showExplain(trig.getAttribute("data-explain"), trig);
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeExplain();
+    if (e.key.toLowerCase() === "g" && !e.target.closest("input,textarea")) document.body.classList.toggle("show-grid");
+  });
+
+  /* ==================== INTERACTIVE PLATES ==================== */
+  function svgEl(svg, tag, a, txt) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in a) e.setAttribute(k, a[k]);
+    if (txt != null) e.textContent = txt;
+    svg.appendChild(e);
+    return e;
+  }
+  function svgPath(pts) { return "M" + pts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join("L"); }
+  function drawGrid(svg, x0, x1, y0, y1, step) {
+    var g = svgEl(svg, "g", { class: "grid" });
+    for (var x = x0; x <= x1 + 0.1; x += step) svgEl(g, "line", { x1: x, y1: y0, x2: x, y2: y1 });
+    for (var y = y0; y <= y1 + 0.1; y += step) svgEl(g, "line", { x1: x0, y1: y, x2: x1, y2: y });
+  }
+  function fmt(v, d) { return v.toLocaleString("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function drawLeader(svg, px, py, lx, ly, text, anchor) {
+    svgEl(svg, "path", { class: "leader", d: "M" + px.toFixed(1) + " " + py.toFixed(1) + "L" + lx.toFixed(1) + " " + ly.toFixed(1) });
+    svgEl(svg, "circle", { class: "dot", cx: px.toFixed(1), cy: py.toFixed(1), r: 2.8 });
+    svgEl(svg, "text", { class: "lbl", x: (lx + (anchor === "end" ? -5 : 5)).toFixed(1), y: (ly - 4).toFixed(1), "text-anchor": anchor || "start" }, text);
+  }
+
+  function renderBeam() {
+    var svg = document.querySelector("#pl-beam svg");
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var L = parseFloat(document.getElementById("r-beam").value) * 1000;
+    var E = 11000, I = 48 * Math.pow(198, 3) / 12, q = 1.5;
+    var dmax = 5 * q * Math.pow(L, 4) / (384 * E * I), lim = L / 300;
+    var x0 = 40, x1 = 520, y0 = 46;
+    var k = 104 / Math.max(24, dmax * 1.15, lim * 1.25);
+
+    drawGrid(svg, 24, 536, 16, 160, 16);
+    var pts = [];
+    for (var i = 0; i <= 96; i++) {
+      var t = i / 96, x = t * L;
+      var y = q * x * (Math.pow(L, 3) - 2 * L * x * x + Math.pow(x, 3)) / (24 * E * I);
+      pts.push([x0 + t * (x1 - x0), y0 + y * k]);
+    }
+    svgEl(svg, "line", { class: "axis", x1: x0, y1: y0, x2: x1, y2: y0 });
+    svgEl(svg, "path", { class: "curve", d: svgPath(pts) });
+    svgEl(svg, "line", { class: "limit", x1: x0, y1: y0 + lim * k, x2: x1, y2: y0 + lim * k });
+    [x0, x1].forEach(function (x) { svgEl(svg, "path", { class: "curve", d: "M" + x + " " + y0 + "l-7 12h14z" }); });
+    svgEl(svg, "text", { x: x1, y: Math.min(156, y0 + lim * k + 13), "text-anchor": "end", fill: "#8c3a2b" }, "L/300 = " + fmt(lim, 1) + " mm");
+    drawLeader(svg, 280, y0 + dmax * k, 344, 28, "δ = " + fmt(dmax, 1) + " mm", "start");
+    svgEl(svg, "text", { x: 280, y: 174, "text-anchor": "middle" }, "L = " + fmt(L / 1000, 1) + " m");
+    var ok = dmax <= lim;
+    var out = document.getElementById("o-beam");
+    out.className = "read" + (ok ? "" : " warn");
+    out.textContent = currentLang === "lt"
+      ? (ok ? "normoje (" + fmt(dmax, 1) + " mm)" : "per minkšta (" + fmt(dmax, 1) + " mm > L/300)")
+      : (ok ? "within limit (" + fmt(dmax, 1) + " mm)" : "too soft (" + fmt(dmax, 1) + " mm > L/300)");
+  }
+
+  function renderEuler() {
+    var svg = document.querySelector("#pl-euler svg");
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var E = 11000, I = Math.pow(98, 4) / 12;
+    function P(Lm) { return Math.PI * Math.PI * E * I / Math.pow(Lm * 1000, 2) / 1000; }
+    function X(Lm) { return 44 + (Lm - 1) / 3 * 472; }
+    function Y(kN) { return 176 - Math.min(kN, 500) / 500 * 160; }
+
+    drawGrid(svg, 28, 536, 16, 176, 16);
+    svgEl(svg, "line", { class: "axis", x1: 44, y1: 176, x2: 516, y2: 176 });
+    svgEl(svg, "line", { class: "axis", x1: 44, y1: 16, x2: 44, y2: 176 });
+    var pts = [];
+    for (var Lm = 1.32; Lm <= 4.001; Lm += 0.02) pts.push([X(Lm), Y(P(Lm))]);
+    svgEl(svg, "path", { class: "curve", d: svgPath(pts) });
+    [1, 2, 3, 4].forEach(function (m) { svgEl(svg, "text", { x: X(m), y: 192, "text-anchor": "middle" }, m + " m"); });
+    svgEl(svg, "text", { x: 40, y: 21, "text-anchor": "end" }, "500 kN");
+
+    var curL = parseFloat(document.getElementById("r-euler").value);
+    var px = X(curL), py = Y(P(curL));
+    svgEl(svg, "line", { class: "leader", x1: px, y1: py, x2: px, y2: 176 });
+    var flip = px > 370;
+    drawLeader(svg, px, py, flip ? px - 48 : px + 48, Math.max(26, py - 28), "P = " + fmt(P(curL), 0) + " kN", flip ? "end" : "start");
+    document.getElementById("o-euler").textContent = "L = " + fmt(curL, 2) + " m";
+  }
+
+  function renderCat() {
+    var svg = document.querySelector("#pl-cat svg");
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var a = parseFloat(document.getElementById("r-cat").value), s = 1;
+    var h = a * (Math.cosh(s / a) - 1), base = 104;
+    var k = Math.min(216, 86 / Math.max(h, 0.01));
+
+    drawGrid(svg, 24, 536, 8, 200, 16);
+    svgEl(svg, "line", { class: "axis", x1: 40, y1: base, x2: 520, y2: base });
+    var up = [], dn = [];
+    for (var i = 0; i <= 96; i++) {
+      var x = -s + 2 * s * i / 96, y = a * (Math.cosh(x / a) - Math.cosh(s / a));
+      up.push([280 + x * k, base + y * k]);
+      dn.push([280 + x * k, base - y * k]);
+    }
+    svgEl(svg, "path", { class: "curve", d: svgPath(up) });
+    svgEl(svg, "path", { class: "ghost", d: svgPath(dn) });
+    var ay = base - h * k;
+    var ratioLbl = currentLang === "lt" ? "aukštis / tarpatramis = " : "rise / span = ";
+    drawLeader(svg, 280, ay, 356, Math.max(20, ay - 6), ratioLbl + fmt(h / (2 * s), 2), "start");
+    svgEl(svg, "text", { x: 520, y: base + 16, "text-anchor": "end" }, currentLang === "lt" ? "grandinė (tempimas)" : "chain (tension)");
+    svgEl(svg, "text", { x: 520, y: base - 8, "text-anchor": "end" }, currentLang === "lt" ? "arka (gniuždymas)" : "arch (compression)");
+    document.getElementById("o-cat").textContent = "a = " + fmt(a, 2);
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll(".eq")).forEach(function (b) {
+    b.addEventListener("click", function () {
+      var p = document.getElementById(b.getAttribute("data-plate"));
+      var open = !p.classList.contains("open");
+      p.classList.toggle("open", open);
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+
+  document.getElementById("r-beam").addEventListener("input", renderBeam);
+  document.getElementById("r-euler").addEventListener("input", renderEuler);
+  document.getElementById("r-cat").addEventListener("input", renderCat);
+
+  /* ==================== FULL EN / LT I18N ==================== */
   var LT = {
     page_title: "Byla · Mantas Pagalys",
-    nav_writing: "Tekstai",
-    nav_photos: "Fotografija",
-    nav_craft: "Amatas",
-    nav_dossier: "Byla",
-    nav_contact: "Kontaktai",
-    hero_eye: "Vilnius &middot; Europa",
-    hero_h1: "Byla.",
-    hero_lead: "Statybinė veikla Norvegijoje, Jungtinėje Karalystėje ir Lietuvoje: brėžiniai, projektų valdymas, priežiūra ir derinimas su užsakovais. Archyvavimas Londone, Šiaurės šalių eksporto dokumentacija ir „Linux“ automatika.",
+    nav_writing: "Tekstai", nav_photos: "Fotografija", nav_craft: "Amatas",
+    nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
+    hero_eye: "Vilnius &middot; Europa", hero_h1: "Byla.",
+    hero_lead: "Statybinė veikla Norvegijoje, Jungtinėje Karalystėje ir Lietuvoje: brėžiniai, projektų valdymas, priežiūra ir derinimas su užsakovais. Archyvavimas Londone, Šiaurės šalių eksporto dokumentacija ir „Linux“ automatika. Spustelėkite bet kurią formulę ar pabrauktą terminą paprastam paaiškinimui.",
     cta_home: "&larr; Tekstai ir fotografija",
-    f_base_k: "Vieta",
-    f_base_v: "Vilnius, Lietuva (nuotoliniu būdu / Šiaurės šalių kryptis)",
-    f_focus_k: "Kryptis",
-    f_focus_v: "Techninė dokumentacija, kokybės patikra, „Linux“ automatika",
-    f_lang_k: "Kalbos",
-    f_lang_v: "LT (gimtoji) &middot; EN (C1) &middot; RU (laisvai) &middot; NO (A2, tobulinama)",
-    sec_1_h: "Statybos ir praktika",
-    sec_1_note: "15+ metų patirtis Norvegijoje, JK ir Lietuvoje.",
+    cta_mech: "Atverti namelio ir mechanikos įrankį &rarr;",
+    f_base_k: "Vieta", f_base_v: "Vilnius, Lietuva (nuotoliniu būdu / Šiaurės šalių kryptis)",
+    f_focus_k: "Kryptis", f_focus_v: "Techninė dokumentacija, kokybės patikra, „Linux“ automatika",
+    f_lang_k: "Kalbos", f_lang_v: "LT (gimtoji) &middot; EN (C1) &middot; RU (laisvai) &middot; NO (A2, tobulinama)",
+    sec_1_h: "Statybos ir praktika", sec_1_note: "15+ metų patirtis Norvegijoje, JK ir Lietuvoje.",
     sec_1_intro: "Praktinis darbas statybose: dailidės darbai, karkasai, klojiniai ir kokybės kontrolė. Brėžinių skaitymas, darbų patikra ir techninių detalių derinimas su užsakovais.",
     p1_loc: "Oslas, Norvegija",
     p1_h: "Dailidės darbai, kokybės patikra ir projektų dokumentacija",
     p1_p: "Komercinių ir gyvenamųjų patalpų vidaus apdaila, klojiniai, ventiliacijos šachtos, virtuvės ir nestandartiniai baldai Norvegijos rangos įmonėse bei savarankiškuose užsakymuose. Kokybės patikros, darbų sauga (HSE), sąmatos, grafikai ir darbų pridavimo dokumentacija.",
-    p1_tags: "TEK17 praktika &middot; kokybės kontrolė / HSE &middot; apdaila ir klojiniai &middot; sąmatos",
+    p1_tags: "<button type=\"button\" class=\"x-term\" data-explain=\"tek17\">TEK17</button> praktika &middot; <button type=\"button\" class=\"x-term\" data-explain=\"hse\">QA / HSE</button> &middot; apdaila ir klojiniai &middot; sąmatos",
+    eq_beam_cue: "Įlinkio patikra", exp_what: "Paaiškinti ?", ctl_span: "Tarpatramis",
+    cap_beam: "Objekto patikra kaip kreivė. Sija 48&times;198 <button type=\"button\" class=\"x-term\" data-explain=\"c24\">C24</button> (<i>E</i> = 11&nbsp;000 MPa), <i>q</i> = 1,5 kN/m. Punktyrinė raudona linija žymi <button type=\"button\" class=\"x-term\" data-explain=\"l300\">L/300 ribą</button> (EN&nbsp;1995 rekomenduoja L/300 iki L/500).",
     p2_loc: "JK ir Lietuva",
     p2_h: "Savarankiški žemės darbai, staliaus apdaila ir stogai",
     p2_p: "Savarankiški žemės, mūro ir aplinkotvarkos darbai Jungtinėje Karalystėje; vidaus apdaila, stogų taisymas ir karkasų įrengimas Lietuvoje bei Škotijoje. Pilna atsakomybė nuo medžiagų skaičiavimo ir kainodaros iki galutinio rezultato.",
@@ -871,87 +915,76 @@ footer.colophon {
     p3_loc: "Lauko inžinerija",
     p3_h: "Parametriniai medienos CAD brėžiniai ir savarankiškos konstrukcijos",
     p3_p: "Metriniai brėžiniai, techninių detalių vadovai ir medžiagų žiniaraščiai, generuojami „Python“ scenarijais į spaudai paruoštus PDF dokumentus.",
-    p3_tags: "Parametrinis SVG/CAD &middot; mazgų brėžiniai &middot; sąmatos &middot; LST EN skaičiavimai",
-    sec_2_h: "Sistemos ir automatika",
-    sec_2_note: "„Linux“ aplinka, „Python“ įrankiai ir skaidri darbo eiga.",
+    p3_tags: "Parametrinis SVG/CAD &middot; mazgų brėžiniai &middot; sąmatos &middot; <button type=\"button\" class=\"x-term\" data-explain=\"lsten\">LST EN</button> patikros",
+    eq_euler_cue: "Klupumo apkrova", ctl_len: "Aukštis",
+    cap_euler: "Stulpas 98&times;98 <button type=\"button\" class=\"x-term\" data-explain=\"c24\">C24</button>, šarnyriškai atremtas abiejuose galuose (<i>K</i> = 1). Padvigubinus aukštį, laikomoji galia krenta keturis kartus. <a class=\"text-link subtle\" href=\"mechanics.html\" style=\"font-size:0.68rem;letter-spacing:0.14em;\">Atverti pilnas karkaso plokšteles &rarr;</a>",
+    sec_2_h: "Sistemos ir automatika", sec_2_note: "„Linux“ aplinka, „Python“ įrankiai ir skaidri darbo eiga.",
     sec_2_intro: "Kasdienis darbas „Linux“ terminale naudojant skaidrius, vietinius įrankius. Skriptavimas taikomas praktiškai: teisės aktų stebėsenai, techninių dokumentų generavimui ir rutininių procesų automatizavimui.",
-    s1_loc: "Python / FastAPI",
-    s1_h: "Norvegijos ir ES teisės aktų pakeitimų stebėsena",
+    s1_loc: "Python / FastAPI", s1_h: "Norvegijos ir ES teisės aktų pakeitimų stebėsena",
     s1_p: "„FastAPI“ prototipas, apjungiantis oficialius Norvegijos (<code>api.lovdata.no</code>) ir ES (<code>EUR-Lex</code> RSS) teisės aktų atnaujinimus į vieną srautą su izoliuotais šaltinių adapteriais, pakartotiniais bandymais ir būsenos patikra.",
-    s1_tags: "Python &middot; FastAPI &middot; REST / RSS srautai &middot; klaidų izoliavimas",
-    s2_loc: "Linux ir sauga",
-    s2_date: "Tęstinis",
+    s1_tags: "Python &middot; <button type=\"button\" class=\"x-term\" data-explain=\"fastapi\">FastAPI &middot; REST / RSS</button> &middot; klaidų izoliavimas",
+    s2_loc: "Linux ir sauga", s2_date: "Tęstinis",
     s2_h: "„Linux“ administravimas, tinklai ir vietinė automatika",
     s2_p: "Kasdienis „Manjaro“ / „Sway“ naudotojas, prižiūrintis asmeninius automatizavimo skriptus (pašto sinchronizavimas ir <code>notmuch</code> indeksavimas, VPN apsauga nuo nutekėjimo, disko stebėsena) bei aktyvų „Git“ pagrįstą RHCSA / „Linux“ laboratorinių darbų aplanką (teisės, ACL, SUID patikros, systemd, tinklai, SSH, ugniasienės).",
-    s2_tags: "Linux CLI &middot; Bash &middot; Git &middot; teisės ir ACL &middot; kompiuterių surinkimas ir remontas",
-    s3_loc: "Dokumentų srautai",
-    s3_h: "Automatizuota techninė leidyba ir brėžinių generavimas",
+    s2_tags: "Linux CLI &middot; Bash &middot; Git &middot; <button type=\"button\" class=\"x-term\" data-explain=\"linux_sec\">ACL / SUID / systemd</button> &middot; technikos remontas",
+    s3_loc: "Dokumentų srautai", s3_h: "Automatizuota techninė leidyba ir brėžinių generavimas",
     s3_p: "Atkartojamos HTML, SVG ir „WeasyPrint“ PDF darbo eigų sistemos, paverčiančios tikslius matavimus, teisinių patikrų sąrašus ir lenteles į švarią A4 techninę dokumentaciją.",
     s3_tags: "Python &middot; SVG &middot; HTML/CSS &middot; WeasyPrint &middot; kokybės tikrinimas",
-    sec_3_h: "Archyvas ir kalbos",
-    sec_3_note: "Tikrinimas pagal pirminius šaltinius ir tarpvalstybinė patirtis.",
+    sec_3_h: "Archyvas ir kalbos", sec_3_note: "Tikrinimas pagal pirminius šaltinius ir tarpvalstybinė patirtis.",
     sec_3_intro: "Darbo principas: aiškiai atskirti tai, kas parašyta teisės akte ar specifikacijoje, nuo interpretacijos, ir palaikyti tikslią dokumentų tvarką tarp skirtingų šalių.",
-    a1_loc: "Londonas, JK",
-    a1_h: "Teisinių duomenų bazių archyvavimas ir daugiakalbis bendravimas",
+    a1_loc: "Londonas, JK", a1_h: "Teisinių duomenų bazių archyvavimas ir daugiakalbis bendravimas",
     a1_p: "Elektroninis archyvaras tarptautinės teisės įmonės („Freshfields Bruckhaus Deringer LLP“, Londonas) Sveikatos ir saugos skyriuje: skaitmeninis archyvavimas, indeksavimas ir duomenų tikrinimas pagal šaltinius. Vėliau socialinio darbuotojo ir vertėjo darbas („St Mungo's“, Londonas) lietuvių, anglų ir rusų kalbomis.",
     a1_tags: "Duomenų bazių archyvavimas &middot; tikrinimas pagal šaltinį &middot; vertimas &middot; procedūros",
-    a2_loc: "NO &ndash; LT kryptis",
-    a2_h: "Statybos produktų eksporto į Norvegiją tyrimas (ARKA)",
+    a2_loc: "NO &ndash; LT kryptis", a2_h: "Statybos produktų eksporto į Norvegiją tyrimas (ARKA)",
     a2_p: "Savarankiškas tyrimas apie Norvegijos statybos produktų dokumentacijos prievoles (DOK reglamento &sect;&sect; 4, 5, 11, 13), NOBB duomenų struktūras, FDV / DoP patikros sąrašus, TEK17 praktiką ir Baltijos modulinių namų kainodarą.",
-    a2_tags: "DOK &middot; TEK17 &middot; FDV / DoP sąrašai &middot; NOBB struktūra",
-    sp1_h: "Kalbos",
-    sp1_p: "Lietuvių (gimtoji). Anglų (C1, IELTS). Rusų (laisvai). Norvegų (A2, nuosekliai tobulinama iki B1/B2). Prancūzų ir lenkų (pradmenys).",
-    sp2_h: "Išsilavinimas",
-    sp2_p: "Vilniaus universitetas, lietuvių filologija su gretutinėmis prancūzų filologijos studijomis (2012&ndash;2016, baigti 2 kursai). IELTS Academic C1 (2016).",
-    sp3_h: "Darbų sauga ir mokymai",
-    sp3_p: "Statybų darbų saugos (HSE) mokymai Norvegijoje ir Jungtinėje Karalystėje (2010&ndash;2024). Aiškios rašytinės procedūros ir nuosekli kokybės patikra.",
+    a2_tags: "<button type=\"button\" class=\"x-term\" data-explain=\"dok\">DOK</button> &middot; <button type=\"button\" class=\"x-term\" data-explain=\"tek17\">TEK17</button> &middot; <button type=\"button\" class=\"x-term\" data-explain=\"nobb\">NOBB ir FDV / DoP</button>",
+    eq_cat_cue: "Kodėl ARKA reiškia arką", ctl_a: "Lėkštumas a",
+    cap_cat: "<i>Ut pendet continuum flexile, sic stabit contiguum rigidum inversum.</i> Kaip kabo lanksti grandinė, taip apversta stovi standi arka. Robertas Hukas, 1676 m.",
+    sp1_h: "Kalbos", sp1_p: "Lietuvių (gimtoji). Anglų (C1, IELTS). Rusų (laisvai). Norvegų (A2, nuosekliai tobulinama iki B1/B2). Prancūzų ir lenkų (pradmenys).",
+    sp2_h: "Išsilavinimas", sp2_p: "Vilniaus universitetas, lietuvių filologija su gretutinėmis prancūzų filologijos studijomis (2012&ndash;2016, baigti 2 kursai). IELTS Academic C1 (2016).",
+    sp3_h: "Darbų sauga ir mokymai", sp3_p: "Statybų darbų saugos (HSE) mokymai Norvegijoje ir Jungtinėje Karalystėje (2010&ndash;2024). Aiškios rašytinės procedūros ir nuosekli kokybės patikra.",
+    arch_mech_t: "Mechanika ir karkasas",
+    arch_mech: "Atviras interaktyvus medinio namelio skaičiuotuvas, Furjė rasos taško patikra (molis ir gesintos kalkės), sezoniškumo kalendorius ir nemokamas 4 psl. CAD PDF.",
     arch_arka: "Pasiūlymas ir skaičiuoklė savivaldybėms dėl nuolatinių mažų būstų vietoj laikino apgyvendinimo.",
     arch_wak: "Detali techninė ataskaita apie mažo burlaivio paruošimą savarankiškam plaukimui.",
-    arch_plates_t: "Fotografijų archyvas",
-    arch_plates: "Dvidešimt devyni monochrominiai fotografijos kadrai ir lauko studijos (I&ndash;XXIX).",
-    sec_4_h: "Privatus CV",
-    sec_4_note: "Tik tiesioginiu susirašinėjimu.",
+    arch_plates_t: "Fotografijų archyvas", arch_plates: "Dvidešimt devyni monochrominiai fotografijos kadrai ir lauko studijos (I&ndash;XXIX).",
+    sec_4_h: "Privatus CV", sec_4_note: "Tik tiesioginiu susirašinėjimu.",
     cv_lead: "Pilnas datuotas gyvenimo aprašymas (darboviečių istorija, tiesioginis telefono numeris ir konkrečiai pozicijai pritaikyta versija) viešai neskelbiamas ir atsiunčiamas privačiu PDF failu pagal užklausą.",
     cv_note: "Atviras pasiūlymams dėl techninės dokumentacijos, kokybės kontrolės, eksporto į Norvegiją koordinavimo bei praktinio „Linux“ / sistemų palaikymo (nuotoliniu būdu arba Vilniuje).",
-    cv_btn: "Prašyti privataus CV (PDF)",
-    cv_form: "Kontaktų forma &rarr;",
-    footer_copy: "Vilnius &middot; 2026 &middot; Byla &copy; Mantas Pagalys"
+    cv_btn: "Prašyti privataus CV (PDF)", cv_form: "Kontaktų forma &rarr;",
+    footer_copy: "Vilnius &middot; 2026 &middot; Byla &copy; Mantas Pagalys &middot; Spauskite G tinkleliui"
   };
 
   var i18nNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
   var EN = { page_title: document.title };
-  i18nNodes.forEach(function (el) {
-    EN[el.getAttribute("data-i18n")] = el.innerHTML;
-  });
-
+  i18nNodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
   var langButtons = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
   var cvBtn = document.getElementById("cv-mail-btn");
 
   function applyLang(lang) {
-    var current = lang === "lt" ? "lt" : "en";
-    var dict = current === "lt" ? LT : EN;
-    document.documentElement.lang = current;
+    currentLang = lang === "lt" ? "lt" : "en";
+    var dict = currentLang === "lt" ? LT : EN;
+    document.documentElement.lang = currentLang;
     document.title = dict.page_title || EN.page_title;
     i18nNodes.forEach(function (el) {
       var k = el.getAttribute("data-i18n");
       if (dict[k] !== undefined) el.innerHTML = dict[k];
     });
     if (cvBtn) {
-      cvBtn.href = current === "lt"
+      cvBtn.href = currentLang === "lt"
         ? "mailto:pagalysm@gmail.com?subject=Privataus%20CV%20u%C5%BEklausa%20-%20Mantas%20Pagalys"
         : "mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys";
     }
-    langButtons.forEach(function (btn) {
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === current);
-    });
-    try { localStorage.setItem("greifiks-lang", current); } catch (e) {}
+    langButtons.forEach(function (btn) { btn.classList.toggle("active", btn.getAttribute("data-lang") === currentLang); });
+    closeExplain();
+    renderBeam();
+    renderEuler();
+    renderCat();
+    try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
   }
 
-  langButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      applyLang(btn.getAttribute("data-lang"));
-    });
-  });
+  langButtons.forEach(function (btn) { btn.addEventListener("click", function () { applyLang(btn.getAttribute("data-lang")); }); });
+  renderBeam(); renderEuler(); renderCat();
 
   var saved = null;
   try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}

@@ -426,6 +426,86 @@ section.band {
   font-weight: 500;
 }
 
+.orig-fold {
+  margin: 0 0 26px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 11px 0;
+}
+
+.orig-fold > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.orig-fold > summary::-webkit-details-marker { display: none; }
+.orig-fold > summary:hover { color: var(--ink); }
+
+.orig-fold .orig-body {
+  margin-top: 18px;
+  padding-left: 18px;
+  border-left: 1px solid var(--accent);
+}
+
+.orig-fold .orig-body p {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.72;
+  color: var(--muted);
+  margin: 0 0 1.05em;
+}
+
+.orig-fold .orig-body p:last-child { margin-bottom: 0; }
+
+.print-note {
+  margin: 12px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.desk-host {
+  margin-top: 30px;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--rule);
+  max-width: 42ch;
+}
+
+.desk-host .dh-k {
+  margin: 0 0 8px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.desk-host p {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.desk-host p.dh-lead {
+  font-family: var(--serif-body);
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.desk-host .dh-links {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+
 .fragment-item {
   padding: 24px 0;
   border-top: 1px solid var(--rule);
@@ -905,6 +985,7 @@ footer.colophon {
         <a href="#photographs" data-i18n="nav_photos">Photographs</a>
         <a href="#craft" data-i18n="nav_craft">Craft</a>
         <a href="dossier.html" data-i18n="nav_dossier">Dossier</a>
+        <a href="mechanics.html" data-i18n="nav_mech">Mechanics</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="lang-switch" role="group" aria-label="Language">
@@ -920,7 +1001,7 @@ footer.colophon {
     <div>
       <p class="eyebrow" data-i18n="hero_loc">Vilnius · Europe</p>
       <h1 data-i18n="hero_h1">Writing, photographs, craft.</h1>
-      <p class="lead" data-i18n="hero_lead">Lithuanian writer, photographer, and carpenter (b. 1981). Currently completing <em>Antinovelė</em>, a short documentary-grotesque novel on rural memory, physical work, and Europe’s margins.</p>
+      <p class="lead" data-i18n="hero_lead">Lithuanian writer, photographer, and carpenter (b. 1981). One desk across prose, monochrome plates, timber mechanics, and small housing: <em>Antinovelė</em> records what happens when shelters and borders return <em>no route to host</em>; <em>WAK943</em>, <em>ARKA</em>, and the <em>Skiftesverk</em> plates test what one person can still calculate, repair, and build by hand.</p>
       <blockquote class="epigraph">
         <p data-i18n="hero_quote">A vessel, not a possession. So is the man sailing it.</p>
       </blockquote>
@@ -945,7 +1026,7 @@ footer.colophon {
     <div class="rail">
       <span class="rail-num">01</span>
       <h2 id="h-writing" data-i18n="sec_writing">Writing</h2>
-      <p class="rail-note" data-i18n="sec_writing_note">Three selections from the active manuscript and bilingual archive.</p>
+      <p class="rail-note" data-i18n="sec_writing_note">Four selections from the active manuscript, correspondence, and bilingual archive.</p>
     </div>
 
     <div>
@@ -953,6 +1034,7 @@ footer.colophon {
         <button type="button" class="writing-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" data-tab="1" data-i18n="tab_1">I · The Lake &amp; Fifty Kilometres</button>
         <button type="button" class="writing-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" data-tab="2" data-i18n="tab_2">II &middot; <code class="cmd">eval-no route to host</code></button>
         <button type="button" class="writing-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" data-tab="3" data-i18n="tab_3">III · Three Fragments</button>
+        <button type="button" class="writing-tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" data-tab="4" data-i18n="tab_4">IV · Letter to Norway</button>
       </div>
 
       <article id="panel-1" class="reading-panel" role="tabpanel" aria-labelledby="tab-1">
@@ -967,14 +1049,26 @@ footer.colophon {
       <article id="panel-2" class="reading-panel" role="tabpanel" aria-labelledby="tab-2" hidden>
         <p class="piece-meta" data-i18n="meta_2">From Antinovelė · Work in progress (2026)</p>
         <div class="prose" data-i18n="prose_2">
-          <p>In a winter homeless shelter, between charity dinners, he reads <em>Pranic Nourishment – Nutrition for the New Millennium</em>, a book about transitioning from solid food to living on prana.</p>
+          <p>In a winter homeless shelter, between charity dinners, you read <em>Pranic Nourishment – Nutrition for the New Millennium</em>, a book about transitioning from solid food to living on prana.</p>
           <p>In a holistic colon-hydrotherapy clinic, Gregorian chant plays. Outside the window the wind bends tall trees; right in the windowpane, blue glass dolphins hang motionless.</p>
           <p class="asterism">* * *</p>
-          <p>Praise be to Jesus Christ. Professional carpenter and joiner. Four to five hours of daily work in exchange for a simple room.</p>
-          <p class="dispatch"><strong>550 Unknown user.</strong></p>
-          <p class="dispatch">Since it is currently <strong>off-season, our house is undergoing renovation</strong>. Unfortunately, we currently have no space to accommodate you. Thank you for your understanding.</p>
-          <p class="dispatch">This week with the community <strong>we are on retreat</strong>. We will reply next week. In prayer.</p>
-          <p class="dispatch">Unfortunately, we cannot accept any guests at this time, as <strong>the little guesthouse is fully booked practically until mid-December</strong>. Have a nice day.</p>
+          <p>Head pressed against thick stone walls and blackened gates with an iron handle roughly braided by a blacksmith a century ago, you hammer like a Thai fighter through bricks until you feel bone cracks in your hands. Behind them in the dark: mute, invisible, vacuum-breathing atoms of the guards. Walls over three metres, from back when Gutenberg chased hens between wooden tables in his father’s furrier-tavern among unwashed bearded men.</p>
+          <p>A tiny cell. A little window deep in the wall. Wooden bed, small chair, sink, slop bucket. You remember Van Gogh’s painting. Where is that miniature pinhole in the wall, who is standing there in the secret corridor? That ache of absence, or arthritis, you no longer know what is yours, who you are, what is experience, in whose solemnity. You kneel, aloud, as if recording into a hidden microphone, like in the cell with the Syrian next to you in for weapons, not 3 kilos of coke, in the cell with you <em>fardi masaker</em>. With your own voice you out-pray yourself until the public-order guards announce evening roll-call over the loudspeaker.</p>
+          <p class="asterism">* * *</p>
+          <p>In the kitchenette where you burned a pot, political science students with national interests find a few minutes for oratorical practice: argument is treason.</p>
+          <p>Don’t cry, artificial intelligence tells me, speak so it shows what is happening instead of naming emotions. Some part of you screams at the bottom of the well: wake up, open your eyes, look at the screen and fill yourself.</p>
+          <p class="asterism">* * *</p>
+          <p>A large windowless room, flat white light. Healthy, calm men. Smiling. You ask for the drug. They keep smiling. Neither refusing nor giving. Ecological and economical, exactly what is needed.</p>
+          <p>Next time, a man with a knife. You walk toward him. Nobody there. The knife was chemistry, the man was chemistry, the fear yours. Pain will not save you. There is a species that never comes to fruition, reconciled to the fate other species assign them.</p>
+          <p>You drank what the forest people drink. Ate what grows on dung after rain. Knelt on a carpet smelling of feet and rosewater. Dreamed ahead without asking.</p>
+          <p class="asterism">* * *</p>
+          <p>Still dark. You fold the blanket corners in. No note.</p>
+          <p>By the gate the student is smoking. Where will you go. Ten years you dreamed only of yourself. Now you want to dream far.</p>
+          <p>You cannot return to us, two-year deportation, they kept apologising. The gate does not creak, oiled, from afar walked through the night the Dreamer.</p>
+          <p class="asterism">* * *</p>
+          <p>Glory to the Uncorrupted Sum.<br>Resp.: Zero margin of error.<br>Professional carpenter and joiner. Four to five hours of daily work in exchange for a simple room.</p>
+          <p class="dispatch">Four untouched replies.</p>
+          <p>And let there be zero noise.</p>
         </div>
       </article>
 
@@ -999,6 +1093,55 @@ footer.colophon {
         </p>
       </article>
 
+      <article id="panel-4" class="reading-panel" role="tabpanel" aria-labelledby="tab-4" hidden>
+        <p class="piece-meta" data-i18n="meta_4">Public letter to friends in Norway · 8 November (Norwegian original + translation)</p>
+        <details class="orig-fold">
+          <summary><span data-i18n="orig_no_lbl">Read Norwegian original · Norsk original</span><span>+</span></summary>
+          <div class="orig-body" lang="nb">
+            <p>Mange av dere skriver til meg. Dette er det som skjedde.</p>
+            <p>Først: Har jeg gjort deg urett, beklager jeg.</p>
+            <p>8. november ble jeg utvist fra Norge og sendt til Litauen.</p>
+            <p>Jeg sonet dommen min. Jeg møtte selv til soning. Jeg dyttet én mann og presset ham mot en vegg. Jeg drepte ikke. Jeg stjal ikke. Jeg ranet ikke. Jeg prøvde å unngå alt dette så godt jeg kunne.</p>
+            <p>Det finnes en vold loven knapt ser: å bli krenket med ord, vist forakt og behandlet dårlig av en som tror du ikke kan ta igjen eller stå på ditt. Den kjenner jeg godt. Jeg sier det som et faktum, ikke som et forsvar.</p>
+            <p>Papirene kom mens jeg satt i fengsel. De ble lest opp av en litauisk tolk jeg ikke hadde bedt om og knapt forsto. Ingen kunne forklare forskjellen på fristen på 72 timer og klagefristen på tre uker. De ansatte visste ikke hva UDI-papirene mine betydde. Ringekortet ga bare opptattsignal. Cellekameraten min, selv advokat, gjentok at hans beste og sterkeste advokat tok seg av saken. Jeg trodde på ham for lenge.</p>
+            <p>Siste dag ble jeg stoppet i porten og satt inn i en varebil. Flere ganger fikk jeg høre at vi skulle til Trondheim. Vi kom til Trandum. Rundt åtte politifolk sto oppstilt ved døren.</p>
+            <p>Tre dager på internatet. To timer til å skrive hvorfor jeg burde få bli. Avslag samme kveld.</p>
+            <p>Tre menn fulgte meg til Vilnius. Lederen deres behandlet meg med den største respekt. Han bød på kaffe. Ved avskjeden sa han stille, på engelsk: «You are not wrong.» Det er jeg takknemlig for å ha hørt, selv om han kan ha grunn til å benekte det.</p>
+            <p>Saken advokaten min skulle sende inn, ble aldri sendt inn.</p>
+            <p>Jeg har klaget. Vedtaket behandler meg som en trussel mot grunnleggende samfunnshensyn. For meg er tanken grotesk. UDI tok ikke hensyn til behandlingen jeg var i, eller til livet jeg hadde bygget i Norge. Sjansene er små. Det vet jeg.</p>
+            <p>Jeg klandrer ingen. Jeg er takknemlig for alt.</p>
+            <p>Jeg har det bra. Her i Litauen jobber jeg mot nye mål: fullføre universitetet, bli paramedisiner, bli bedre i norsk, komme tilbake. Jeg er invitert til å snakke for arkitektstudenter. Det løfter meg, og jeg er takknemlig. Arbeidet med sosiale boliger fortsetter.</p>
+            <p>Materielle ting betyr ingenting for meg. Jeg er stolt av å komme tilbake som den jeg er. Det jeg savner, er vennene mine.</p>
+            <p>Ville jeg tilbake i dag, var det av tre grunner: å klemme hver og en av dere, å reise fritt og snakke for studenter, å møte menneskene jeg skriver med om boligene.</p>
+            <p>Jeg holder vennene mine høyt: måtene vi møttes på, tiden vi hadde sammen.</p>
+            <p>Til alle jeg møtte i Norge: Det er en ære å kjenne dere. Vennligheten deres, klokskapen, og at dere tok meg imot som en av deres egne.</p>
+            <p>Snart inviterer jeg dere alle til det jeg skaper. Vi skal feire livet sammen.</p>
+            <p>Mantas</p>
+          </div>
+        </details>
+        <div class="prose" data-i18n="prose_4">
+          <p>Many of you are writing to me. This is what happened.</p>
+          <p>First: if I have wronged you, I am sorry.</p>
+          <p>On 8 November I was deported from Norway and sent to Lithuania.</p>
+          <p>I served my sentence. I reported to serve it myself. I pushed one man and pressed him against a wall. I did not kill. I did not steal. I did not rob. I tried to avoid all of this as well as I could.</p>
+          <p>There is a violence the law barely sees: being degraded with words, shown contempt, and treated badly by someone who believes you cannot answer back or stand your ground. I know it well. I state it as fact, not defence.</p>
+          <p>The papers arrived while I was in prison. They were read aloud by a Lithuanian interpreter I had not asked for and barely understood. No one could explain the difference between the 72-hour deadline and the three-week appeal deadline. The staff did not know what my UDI papers meant. The phone card gave only a busy signal. My cellmate, himself a lawyer, kept repeating that his best and strongest lawyer was handling the case. I believed him too long.</p>
+          <p>On the last day I was stopped at the gate and placed in a van. Several times I was told we were going to Trondheim. We arrived at Trandum. About eight police officers stood lined up by the door.</p>
+          <p>Three days in the detention centre. Two hours to write why I should be allowed to stay. Refusal the same evening.</p>
+          <p>Three men escorted me to Vilnius. Their leader treated me with the utmost respect. He offered coffee. At parting he said quietly, in English: “You are not wrong.” I am grateful to have heard that, even if he may have reason to deny it.</p>
+          <p>The filing my lawyer was supposed to submit was never submitted.</p>
+          <p>I have appealed. The decision treats me as a threat to fundamental societal interests. To me the idea is grotesque. UDI took no account of the treatment I was in, nor of the life I had built in Norway. The chances are small. I know that.</p>
+          <p>I blame no one. I am grateful for everything.</p>
+          <p>I am well. Here in Lithuania I am working toward new goals: finishing university, becoming a paramedic, improving my Norwegian, returning. I have been invited to speak to architecture students. That lifts me, and I am grateful. The work on social housing continues.</p>
+          <p>Material things mean nothing to me. I am proud to return as I am. What I miss are my friends.</p>
+          <p>If I wanted to go back today, it would be for three reasons: to hug each one of you, to travel freely and speak to students, to meet the people I write to about the housing.</p>
+          <p>I hold my friends high: the ways we met, the time we had together.</p>
+          <p>To everyone I met in Norway: it is an honour to know you. Your kindness, your wisdom, and that you welcomed me as one of your own.</p>
+          <p>Soon I will invite you all to what I am building. We will celebrate life together.</p>
+          <p>Mantas</p>
+        </div>
+      </article>
+
       <div class="biblio">
         <div>
           <h3 data-i18n="bib_1_h">Manuscript</h3>
@@ -1010,7 +1153,7 @@ footer.colophon {
         </div>
         <div>
           <h3 data-i18n="bib_3_h">Background</h3>
-          <p data-i18n="bib_3_p">Directing (LMTA, 2001–2004), Lithuanian Philology (Vilnius University, 2012–2013), Assistant Director at <em>Menų Spaustuvė</em>.</p>
+          <p data-i18n="bib_3_p">Directing (LMTA, 2001–2004), Lithuanian Philology (Vilnius University, 2012–2016, 2 years completed), Assistant Director at <em>Menų Spaustuvė</em>.</p>
         </div>
       </div>
     </div>
@@ -1049,11 +1192,11 @@ footer.colophon {
 
         <figure class="plate-card offset">
           <button type="button" class="plate-trigger" data-plate="3" aria-label="Inspect Plate IV">
-            <img src="assets/plates_book/05-tied.webp" width="1500" height="1125" loading="lazy" alt="Four ancient tree trunks rising from tangled exposed hillside roots with white ribbons knotted into the branches">
+            <img src="assets/plates_book/13-witness.webp" width="927" height="708" loading="lazy" alt="Seagull staring dead-center on weathered wooden planks beside a tiny sparrow and cigarette butt with a ghostly lone rower on black water behind">
           </button>
           <figcaption class="plate-caption">
             <span class="plate-num">IV</span>
-            <span data-i18n="cap_3">Tied</span>
+            <span data-i18n="cap_3">Witness</span>
           </figcaption>
         </figure>
 
@@ -1089,11 +1232,11 @@ footer.colophon {
 
         <figure class="plate-card offset">
           <button type="button" class="plate-trigger" data-plate="7" aria-label="Inspect Plate VIII">
-            <img src="assets/plates_book/21-third-hour.webp" width="758" height="1011" loading="lazy" alt="Falling snow caught in streetlamp light while a line of motion-blurred lamps curves along an empty snowy track into dark woods">
+            <img src="assets/plates_book/15-afterwards.webp" width="598" height="1011" loading="lazy" alt="Bronze monument seen from behind facing a steel construction crane beneath a swirling flock of dark winter birds at dawn">
           </button>
           <figcaption class="plate-caption">
             <span class="plate-num">VIII</span>
-            <span data-i18n="cap_7">Third Hour</span>
+            <span data-i18n="cap_7">Afterwards</span>
           </figcaption>
         </figure>
 
@@ -1109,11 +1252,11 @@ footer.colophon {
 
         <figure class="plate-card wide">
           <button type="button" class="plate-trigger" data-plate="9" aria-label="Inspect Plate X">
-            <img src="assets/plates_book/17-the-pass.webp" width="899" height="575" loading="lazy" alt="Snow-patched northern mountain gorge with twin wooden utility poles perched on the right ridge leading into a dark pass">
+            <img src="assets/plates_book/04-the-page.webp" width="758" height="966" loading="lazy" alt="Low-angle silhouette of a poet in a trenchcoat and glasses holding a handwritten page against a dark clouded sky">
           </button>
           <figcaption class="plate-caption">
             <span class="plate-num">X</span>
-            <span data-i18n="cap_9">The Pass</span>
+            <span data-i18n="cap_9">The Page</span>
           </figcaption>
         </figure>
 
@@ -1139,7 +1282,10 @@ footer.colophon {
       </div>
 
       <div class="gallery-foot">
-        <p class="gallery-hint" data-i18n="gallery_hint">Select any plate to view full screen · Arrow keys to navigate</p>
+        <div>
+          <p class="gallery-hint" data-i18n="gallery_hint">Select any plate to view full screen · Arrow keys to navigate</p>
+          <p class="print-note" data-i18n="print_note">Signed archival pigment prints (numbered edition of 10) available on <a class="inline-link" href="#contact">direct inquiry</a>.</p>
+        </div>
         <a class="text-link" href="plates.html" data-i18n="link_plates_archive">Full photographic archive (I–XXIX) ↗</a>
       </div>
     </div>
@@ -1153,7 +1299,7 @@ footer.colophon {
     </div>
 
     <div>
-      <p class="section-intro" data-i18n="craft_intro">Alongside writing: twenty years of carpentry, joinery, stonework, and landscape care across London (Hampstead Heath), St Andrews, Norway, and Lithuania.</p>
+      <p class="section-intro" data-i18n="craft_intro">Alongside writing: 15+ years of carpentry, joinery, stonework, and landscape care across London (Hampstead Heath), St Andrews, Norway, and Lithuania.</p>
 
       <div class="craft-grid">
         <figure class="plate-card">
@@ -1213,6 +1359,11 @@ footer.colophon {
           <span class="archive-desc" data-i18n="arch_dossier">Construction practice, site supervision, legal archiving, Nordic export documentation, and Linux automation.</span>
           <span class="archive-arrow" aria-hidden="true">↗</span>
         </a>
+        <a class="archive-row" href="mechanics.html">
+          <span class="archive-title" data-i18n="arch_mech_t">Mechanics &amp; Frame</span>
+          <span class="archive-desc" data-i18n="arch_mech">Interactive parametric construction plates: roof thrust, birch dew-point physics, beam bending, buckling, and catenary arch.</span>
+          <span class="archive-arrow" aria-hidden="true">↗</span>
+        </a>
         <a class="archive-row" href="plates.html">
           <span class="archive-title" data-i18n="arch_plates_t">Plates Archive</span>
           <span class="archive-desc" data-i18n="arch_plates">Complete twenty-nine-plate photographic archive, including extended coastal, road, and toned studies (I–XXIX).</span>
@@ -1246,12 +1397,23 @@ footer.colophon {
     <div class="contact-grid">
       <div>
         <figure class="author-portrait">
-          <img src="assets/plates_book/author-bark.webp" width="745" height="950" loading="lazy" alt="Monochrome portrait of Mantas Pagalys against dark tree bark">
+          <img src="assets/plates_book/author-portrait-bw.webp" width="600" height="800" loading="lazy" alt="Monochrome portrait of Mantas Pagalys">
           <figcaption>Mantas Pagalys</figcaption>
         </figure>
-        <p class="contact-lead" data-i18n="contact_lead">For literary residencies, publishing inquiries, full manuscript samples, or craft commissions.</p>
+        <p class="contact-lead" data-i18n="contact_lead">For literary residencies, publishing inquiries, full manuscript samples, archival prints, or custom timber &amp; ARKA calculations.</p>
         <a class="email-link" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
-        <p class="contact-meta" data-i18n="contact_meta">Based in Vilnius, Lithuania. Working in Lithuanian, English, Russian, and Norwegian.</p>
+        <p class="contact-meta" data-i18n="contact_meta">Based in Vilnius, Lithuania. Working in Lithuanian, English (C1), Russian, and Norwegian (A2, in progress).</p>
+
+        <div class="desk-host">
+          <p class="dh-k" data-i18n="dh_k">no route to host &middot; open desk</p>
+          <p class="dh-lead" data-i18n="dh_p1">No institution, grant, or publisher stands behind this desk. The texts, photographs, cabin calculator, and 4-page CAD guide stay free and unlocked.</p>
+          <p data-i18n="dh_p2">If the work holds weight for you, you can hold a small share of the host: funding undisturbed hours to write, draw, and keep the archive open. Zero paywalls, zero tiers.</p>
+          <!-- LIBERAPAY_KOFI_SLOT: paste live Liberapay / Ko-fi URLs here once created -->
+          <div class="dh-links">
+            <a class="text-link subtle" href="mailto:pagalysm@gmail.com?subject=Host%20the%20Desk%20-%20Mantas%20Pagalys" data-i18n="dh_link1">Host undisturbed hours (direct / Liberapay ready) &rarr;</a>
+            <a class="text-link subtle" href="mechanics.html" data-i18n="dh_link2">Free cabin tool &amp; CAD PDF &rarr;</a>
+          </div>
+        </div>
       </div>
 
       <form class="inquiry" action="https://formspree.io/f/mykqqzjg" method="POST">
@@ -1259,8 +1421,10 @@ footer.colophon {
           <span data-i18n="f_topic">Subject</span>
           <select name="topic">
             <option value="Writing / Residencies" data-i18n="opt_writing">Writing &amp; Residencies</option>
-            <option value="Craft / Commissions" data-i18n="opt_craft">Craft &amp; Commissions</option>
+            <option value="Craft / Custom Cabin Sizing" data-i18n="opt_craft">Craft &amp; Custom Cabin Sizing</option>
+            <option value="Archival Prints (Ed. of 10)" data-i18n="opt_prints">Archival Prints (Ed. of 10)</option>
             <option value="ARKA / Projects" data-i18n="opt_arka">ARKA / Projects</option>
+            <option value="Host / Support the Desk" data-i18n="opt_host">Host / Support the Desk</option>
             <option value="Other" data-i18n="opt_other">Other</option>
           </select>
         </label>
@@ -1313,13 +1477,13 @@ footer.colophon {
     { src: "assets/plates_book/01-no-crossing.webp", numeral: "I / XII", key: "cap_0" },
     { src: "assets/plates_book/02-weight.webp", numeral: "II / XII", key: "cap_1" },
     { src: "assets/plates_book/03-restraint.webp", numeral: "III / XII", key: "cap_2" },
-    { src: "assets/plates_book/05-tied.webp", numeral: "IV / XII", key: "cap_3" },
+    { src: "assets/plates_book/13-witness.webp", numeral: "IV / XII", key: "cap_3" },
     { src: "assets/plates_book/06-heat.webp", numeral: "V / XII", key: "cap_4" },
     { src: "assets/plates_book/07-low-visibility.webp", numeral: "VI / XII", key: "cap_5" },
     { src: "assets/plates_book/10-the-cast.webp", numeral: "VII / XII", key: "cap_6" },
-    { src: "assets/plates_book/21-third-hour.webp", numeral: "VIII / XII", key: "cap_7" },
+    { src: "assets/plates_book/15-afterwards.webp", numeral: "VIII / XII", key: "cap_7" },
     { src: "assets/plates_book/16-wire.webp", numeral: "IX / XII", key: "cap_8" },
-    { src: "assets/plates_book/17-the-pass.webp", numeral: "X / XII", key: "cap_9" },
+    { src: "assets/plates_book/04-the-page.webp", numeral: "X / XII", key: "cap_9" },
     { src: "assets/plates_book/19-in-passing.webp", numeral: "XI / XII", key: "cap_10" },
     { src: "assets/plates_book/20-passage.webp", numeral: "XII / XII", key: "cap_11" },
     { src: "assets/plates_book/craft-01-open-frame.webp", numeral: "CRAFT · I / V", key: "craft_cap_1" },
@@ -1335,65 +1499,102 @@ footer.colophon {
     nav_photos: "Fotografija",
     nav_craft: "Amatas",
     nav_dossier: "Byla",
+    nav_mech: "Mechanika",
     nav_contact: "Kontaktai",
     hero_loc: "Vilnius · Europa",
     hero_h1: "Tekstai, fotografija, amatas.",
-    hero_lead: "Lietuvių rašytojas, fotografas ir dailidė (g. 1981 m.). Šiuo metu rašo <em>„Antinovelę“</em> – trumpą dokumentinę-groteskinę knygą apie kaimo atmintį, fizinį darbą ir Europos paribius.",
+    hero_lead: "Lietuvių rašytojas, fotografas ir dailidė (g. 1981 m.). Vienas stalas tekstams, juodai baltoms plokštelėms, medienos mechanikai ir mažo būsto modeliams: <em>„Antinovelė“</em> fiksuoja, kas nutinka, kai prieglaudos ir sienos grąžina <em>no route to host</em>; <em>WAK943</em>, <em>ARKA</em> ir <em>Skiftesverk</em> brėžiniai tikrina, ką vienas žmogus dar gali apskaičiuoti, sutaisyti ir pastatyti rankomis.",
     hero_quote: "Laivas nėra nuosavybė. Kaip ir žmogus, kuris juo plaukia.",
     cta_writing: "Skaityti ištraukas",
     cta_photos: "Žiūrėti dvylika plokštelių",
     cap_0: "Be perkėlos",
     cap_1: "Svoris",
     cap_2: "Saitas",
-    cap_3: "Pririšta",
+    cap_3: "Liudytojas",
     cap_4: "Karštis",
     cap_5: "Nulinis matomumas",
     cap_6: "Metimas",
-    cap_7: "Trečia valanda",
+    cap_7: "Po visko",
     cap_8: "Laidas",
-    cap_9: "Perėja",
+    cap_9: "Lapas",
     cap_10: "Praeinant",
     cap_11: "Perplaukimas",
     sec_writing: "Tekstai",
-    sec_writing_note: "Trys atrinkti tekstai iš rašomo rankraščio ir archyvo.",
+    sec_writing_note: "Keturi atrinkti tekstai iš rašomo rankraščio, laiškų ir archyvo.",
     tab_1: "I · Ežeras ir penkiasdešimt kilometrų",
     tab_2: "II &middot; <code class=\"cmd\">eval-no route to host</code>",
     tab_3: "III · Trys fragmentai",
+    tab_4: "IV · Laiškas į Norvegiją",
     meta_1: "Iš „Antinovelės“ · Rašomas rankraštis (2026)",
     meta_2: "Iš „Antinovelės“ · Rašomas rankraštis (2026)",
     meta_3: "Atrinktos eilutės · Lietuviškas originalas",
+    meta_4: "Viešas laiškas draugams Norvegijoje · Lapkričio 8 d. (originalas norvegų k. + vertimas)",
+    orig_no_lbl: "Skaityti originalą norvegų kalba · Norsk original",
     prose_1:
       "<p>Kaimas žemėlapyje, bet kaimo nėra, tik vietoje vieškelio išasfaltuotas keliukas per mišką į vieną naują sodybą, per visą ežero ilgį irstosi jaunas vyras su „Helly Hansen“ striuke ir slidininko kepure, kaip iš „Lego“ figūrų sudėliotas spalvingas žaislas, gyventojų cenzas cariniuose bažnytiniuose metrikuose 1905. Gyventojų skaičius nulinis.</p>" +
       "<p>Faksimilės bažnytinėse knygose, su metrikais susipažinau, kunigo parašas. Vanduo juodas kaip veidrodis, po vandeniu, sako, paskendęs varpas, kiti kalba, kad vokiečių tankas su visa įgula bandė pervažiuoti ir nugarmėjo po karo.</p>" +
       "<p>Miškais per žalias samanas ir šernų takais, valanda po valandos žingsniuoja giminės kraštais, per želstančius ūkininkų laukus ir smėlėtus vieškelius, Gaidelių Dvarelį apeidamas, šernų brastomis sekdamas per upelius link sostinės, legenda sako, ir Mažvydas su ryšuliuku taip ėjęs iš Žemaitijos – kažko susikikena keliauninkas pagalvojęs, džiovindamas batus ir keisdamas kojines ant 13 dydžio pėdos, per penkiasdešimt kilometrų registruoja, kad tikrai tas vienas ar du centimetrai prideda žingsnių tiek, kad žemėlapyje priskaičiuotos 9 valandos trumpėja link pusvalandžio.</p>",
     prose_2:
-      "<p>Žiemos benamių prieglaudoje, tarp labdaros vakarienių, jis skaito knygą „Pranic Nourishment – Nutrition for the New Millennium“ apie tai, kaip pereiti nuo kieto maisto prie gyvenimo iš pranos.</p>" +
+      "<p>Žiemos benamių prieglaudoje, tarp labdaros vakarienių, skaitai knygą „Pranic Nourishment – Nutrition for the New Millennium“ apie tai, kaip pereiti nuo kieto maisto prie gyvenimo iš pranos.</p>" +
       "<p>Holistinėje žarnyno valymo klinikoje groja grigališkas choralas. Už lango vėjas lanksto aukštus medžius, o pačiame lange nejudėdami kabo mėlyni stikliniai delfinai.</p>" +
       "<p class=\"asterism\">* * *</p>" +
-      "<p>Garbė Jėzui Kristui. Profesionalus dailidė ir stalius. Keturių penkių valandų darbas kasdien mainais už paprastą kambarį.</p>" +
-      "<p class=\"dispatch\"><strong>550 Unknown user.</strong></p>" +
-      "<p class=\"dispatch\">Kadangi šiuo metu <strong>ne sezono metu, mūsų name vyksta renovacija</strong>. Deja, šiuo metu neturime vietos Jums apgyvendinti. Dėkojame už supratingumą.</p>" +
-      "<p class=\"dispatch\">Šią savaitę su bendruomene <strong>esame rekolekcijose</strong>. Atsakysime kitą savaitę. Maldoje.</p>" +
-      "<p class=\"dispatch\">Deja, šiuo metu negalime priimti jokių svečių, kadangi <strong>viešbutėlis pilnai rezervuotas praktiškai iki gruodžio vidurio</strong>. Gražios dienos.</p>",
+      "<p>Įrėmęs galvą į storas akmenines sienas ir pajuodusius vartus su kalvio prieš šimtmetį grubiai pinta geležine rankena, beldi kaip tailandietis per plytas, kol rankose jauti kaulų trūkius. Už jų tamsoje nebylūs, nematomi, vakuumu dvelkiantys sargų atomai. Sienos virš trijų metrų, iš tada, kai Gutenbergas tėvo kailialupio smuklėje vaikė vištas tarp medinių stalų su nesipraususiais barzdyliais.</p>" +
+      "<p>Celė mažytė. Langelis giliai sienoje. Medinė lova, kėdutė, kriauklė, kibiras nuotekoms. Prisimeni Van Gogo paveikslą. Kur yra toji miniatiūrinė sienos skylutė, slaptame koridoriuje kas ten stovi? Tas nebuvimo maudulys, ar artritas, nebežinai, kas tavo, kas tu, kas patyrimas, kieno rimty. Klaupiesi, balsu, kaip įsirašinėdamas į slaptą mikrofoną, kaip celėj su siru, kuris šalia už ginklus, bet ne 3 kilogramus kokso, kameroje su tavim <em>fardi masaker</em>. Balsu savo save permeldi, kol viešosios tvarkos sargai per garsiakalbį skelbia vakarinę rikiuotę.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Virtuvėlėje, kur sudeginai puodą, politikos mokslų studentai su tautiniais interesais randa kelias minutes oratorinei praktikai: ginčas yra išdavystė.</p>" +
+      "<p>Nereikia verkti, sako man dirbtinis intelektas, kalbėk taip, kad matytųsi, kas vyksta, vietoje to, kad vardintum emocijas. Kažkuri dalis tavęs šaukia šulinio dugne: pabusk, atsimerk, žiūrėk į ekraną ir prisipildyk.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Didelė patalpa be langų, lygi balta šviesa. Sveiki, ramūs vyrai. Šypsosi. Prašai vaisto. Šypsosi toliau. Nei atsisako, nei duoda. Ekologiška ir ekonomiška, būtent tai, ko reikia.</p>" +
+      "<p>Kitą kartą stovi vyras su peiliu. Eini prie jo. Ten nieko nėra. Peilis buvo chemija, vyras buvo chemija, baimė tavo. Skausmas tavęs neišgelbės. Yra tokia rūšis, kurie neišsipildo, jie susitaikę su savo likimu, kurį jiems primeta kitos rūšys.</p>" +
+      "<p>Gėrei, ką geria miško žmonės. Valgei tai, kas auga ant mėšlo po lietaus. Klūpėjai ant kilimo, kvepiančio kojomis ir rožių vandeniu. Sapnavai į priekį, nieko neatsiklausęs.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Dar tamsu. Antklodę sulankstai kampais į vidų. Raštelio nepalieki.</p>" +
+      "<p>Prie vartų rūko studentas. Kur eisi. Dešimt metų sapnavai tik apie save. Dabar nori sapnuoti toli.</p>" +
+      "<p>Pas mus negalėsi sugrįžti, deportacija dviem metams, jie atsiprašinėjo. Vartai negirgžda, sutepti, iš toli ėjo naktimi Sapnuotojas.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Garbė Nesuteptajai Sumai.<br>Ats.: Nulinė paklaida.<br>Profesionalus dailidė ir stalius. Keturių penkių valandų darbas kasdien mainais už paprastą kambarį.</p>" +
+      "<p class=\"dispatch\">Ketvertas nepaliestų atsakymų.</p>" +
+      "<p>Ir tebūnie nulis triukšmo.</p>",
     prose_3:
       "<div class=\"fragment-item\"><p class=\"fragment-text\">Paskui laivais į už Atlanto. Išdrąskė gyvenimus, tie, kas liko, pražuvo, tie kas išvažiavo, pamiršo.</p></div>" +
       "<div class=\"fragment-item\"><p class=\"fragment-text\">Kuo viskas baigiasi, jeigu ne tuo, kad išsilaipini krante kur apsnigtas tavo laivas. Grįžti į tą kitą pasaulį, kuriame viskas neaišku ir atsitiktinumas, nėra tavo šeimos, nėra tavo genties.</p></div>" +
       "<div class=\"fragment-item\"><p class=\"fragment-text\">Mirtis nebus nugalėta, po didele tuopa pasiklojęs, užmigo budriai, naktimis staiga pakeldamas galvą.</p></div>",
     link_log: "Visi aštuoni fragmentai: The Sea Keeps Giving",
+    prose_4:
+      "<p>Daugelis jūsų man rašote. Štai kas nutiko.</p>" +
+      "<p>Pirmiausia: jei ką nors nuskriaudžiau, atsiprašau.</p>" +
+      "<p>Lapkričio 8 d. buvau išsiųstas iš Norvegijos į Lietuvą.</p>" +
+      "<p>Bausmę atlikau. Pats atvykau jos atlikti. Pastūmiau vieną vyrą ir prispaudžiau jį prie sienos. Nenužudžiau. Nevogiau. Neplėšiau. Stengiausi viso to išvengti kiek tik galėjau.</p>" +
+      "<p>Egzistuoja smurtas, kurio įstatymas beveik nemato: būti žeminamam žodžiais, patirti panieką ir prastą elgesį iš žmogaus, kuris tiki, kad negali atsikirsti ar apginti savo pozicijos. Jį gerai pažįstu. Sakau tai kaip faktą, ne kaip pasiteisinimą.</p>" +
+      "<p>Dokumentai atėjo man būnant kalėjime. Juos perskaitė lietuvių kalbos vertėjas, kurio neprašiau ir kurį vos supratau. Niekas negalėjo paaiškinti skirtumo tarp 72 valandų termino ir trijų savaičių apskundimo termino. Darbuotojai nežinojo, ką reiškia mano UDI dokumentai. Skambučių kortelė tik pypsėjo užimta. Kameros kaimynas, pats teisininkas, kartojo, kad byla rūpinasi jo geriausias ir stipriausias advokatas. Tikėjau juo per ilgai.</p>" +
+      "<p>Paskutinę dieną mane sustabdė prie vartų ir įsodino į furgoną. Kelis kartus man sakė, kad važiuojame į Trondheimą. Atvykome į Trandumą. Prie durų išsirikiavę stovėjo apie aštuonis policijos pareigūnus.</p>" +
+      "<p>Trys dienos sulaikymo centre. Dvi valandos parašyti, kodėl turėčiau likti. Neigiamas atsakymas tą patį vakarą.</p>" +
+      "<p>Trys vyrai palydėjo mane į Vilnių. Jų vadovas elgėsi su manimi su didžiausia pagarba. Pasiūlė kavos. Atsisveikindamas tyliai, angliškai pasakė: „You are not wrong.“ Esu dėkingas, kad tai išgirdau, net jei jis turėtų priežastį to neigti.</p>" +
+      "<p>Dokumentas, kurį turėjo pateikti mano advokatas, niekada nebuvo pateiktas.</p>" +
+      "<p>Pateikiau skundą. Sprendimas laiko mane grėsme pamatiniams visuomenės interesams. Man ši mintis groteskiška. UDI neatsižvelgė nei į gydymą, kurį lankiau, nei į gyvenimą, kurį buvau susikūręs Norvegijoje. Šansai maži. Tą žinau.</p>" +
+      "<p>Niekam nepriekaištauju. Esu dėkingas už viską.</p>" +
+      "<p>Man viskas gerai. Čia, Lietuvoje, dirbu ties naujais tikslais: pabaigti universitetą, tapti paramediku, patobulinti norvegų kalbą, sugrįžti. Esu pakviestas kalbėti architektūros studentams. Tai mane pakylėja ir esu už tai dėkingas. Darbas dėl socialinių būstų tęsiasi.</p>" +
+      "<p>Materialūs dalykai man nieko nereiškia. Didžiuojuosi grįždamas toks, koks esu. Ko pasiilgstu – tai savo draugų.</p>" +
+      "<p>Jei šiandien norėčiau sugrįžti, dėl trijų priežasčių: apkabinti kiekvieną iš jūsų, laisvai keliauti ir kalbėti studentams, susitikti su žmonėmis, su kuriais susirašinėju dėl būstų.</p>" +
+      "<p>Labai branginu savo draugus: kaip mes susitikome, laiką, kurį praleidome kartu.</p>" +
+      "<p>Visiems, kuriuos sutikau Norvegijoje: garbė jus pažinti. Jūsų gerumas, išmintis ir tai, kad priėmėte mane kaip savą.</p>" +
+      "<p>Netrukus jus visus pakviesiu į tai, ką kuriu. Švęsime gyvenimą kartu.</p>" +
+      "<p>Mantas</p>",
     bib_1_h: "Rankraštis",
     bib_1_p: "<em>Antinovelė</em> (darbinis pavadinimas, ~30 000 žodžių, lietuvių k.). Ilgesnės ištraukos lietuvių ir anglų kalbomis atsiunčiamos pagal užklausą.",
     bib_2_h: "Publikacijos",
     bib_2_p: "Trumpoji proza ir tekstai žurnale <em>The Big Issue</em> (Londonas, 2006–2012) ir laikraštyje <em>Širvinta</em> (2009).",
     bib_3_h: "Patirtis",
-    bib_3_p: "Režisūros studijos (LMTA, 2001–2004), lietuvių filologija (Vilniaus universitetas, 2012–2013), režisieriaus asistentas <em>Menų spaustuvėje</em>.",
+    bib_3_p: "Režisūros studijos (LMTA, 2001–2004), lietuvių filologija (Vilniaus universitetas, 2012–2016, baigti 2 kursai), režisieriaus asistentas <em>Menų spaustuvėje</em>.",
     sec_photos: "Fotografija",
     sec_photos_note: "Dvylika atrinktų plokštelių · Knygos studijos",
     photos_intro: "Dvylika plokštelių (I–XII). Visos dvidešimt devynios saugomos <a class=\"inline-link\" href=\"plates.html\">archyve</a>.",
     gallery_hint: "Spustelėkite bet kurį kadrą pilnam vaizdui · Perjungimas rodyklėmis",
+    print_note: "Pasirašyti archyviniai pigmentiniai atspaudai (numeruotas 10 vnt. tiražas) pagal <a class=\"inline-link\" href=\"#contact\">tiesioginę užklausą</a>.",
     link_plates_archive: "Visas fotografijų archyvas (I–XXIX) ↗",
     sec_craft: "Amatas ir archyvas",
     sec_craft_note: "Atlikti darbai ir savarankiški projektai.",
-    craft_intro: "Greta rašymo: dvidešimt metų dailidės, staliaus, mūro ir kraštovaizdžio priežiūros darbų Londone („Hampstead Heath“), Sent Endriuse, Norvegijoje ir Lietuvoje.",
+    craft_intro: "Greta rašymo: daugiau nei penkiolika metų dailidės, staliaus, mūro ir kraštovaizdžio priežiūros darbų Londone („Hampstead Heath“), Sent Endriuse, Norvegijoje ir Lietuvoje.",
     craft_cap_1: "Atviras karkasas",
     craft_cap_2: "Linija",
     craft_cap_3: "Nulis",
@@ -1401,6 +1602,8 @@ footer.colophon {
     craft_cap_5: "Lankas",
     arch_dossier_t: "Byla",
     arch_dossier: "Statybinė veikla, priežiūra, teisinis archyvavimas Londone, Šiaurės šalių eksporto dokumentacija ir „Linux“ automatika.",
+    arch_mech_t: "Mechanika ir karkasas",
+    arch_mech: "Interaktyvios konstrukcijų plokštelės: stogo skėtimas, beržo rasos taškas, sijos lenkimas, klupumas ir arka.",
     arch_plates_t: "Plokštelių archyvas",
     arch_plates: "Visas dvidešimt devynių plokštelių fotografijos archyvas su išplėstinėmis pajūrio, kelio ir tonuotomis studijomis (I–XXIX).",
     arch_arka: "Pasiūlymas ir skaičiuoklė savivaldybėms dėl nuolatinių mažų būstų vietoj laikino apgyvendinimo.",
@@ -1408,12 +1611,19 @@ footer.colophon {
     arch_log_t: "The Sea Keeps Giving",
     arch_log: "Aštuoni trumpi lietuviški fragmentai greta jų angliškų vertimų.",
     sec_contact: "Kontaktai",
-    contact_lead: "Dėl literatūrinių rezidencijų, leidybos, ilgesnių rankraščio ištraukų ar amato užsakymų.",
-    contact_meta: "Vilnius, Lietuva. Darbinės kalbos: lietuvių, anglų, rusų, norvegų.",
+    contact_lead: "Dėl literatūrinių rezidencijų, leidybos, rankraščio ištraukų, archyvinių atspaudų ar individualių medienos ir ARKA skaičiavimų.",
+    contact_meta: "Vilnius, Lietuva. Darbinės kalbos: lietuvių, anglų (C1), rusų, norvegų (A2, tobulinama).",
+    dh_k: "no route to host &middot; atviras stalas",
+    dh_p1: "Už šio darbo stalo nestovi jokia institucija, fondas ar leidykla. Tekstai, fotografijos, namelio skaičiuoklė ir 4 psl. CAD vadovas lieka nemokami ir atviri.",
+    dh_p2: "Jei darbas jums vertingas, galite prisiimti mažą šios erdvės dalį: paremti ramias valandas rašymui, brėžiniams ir atviram archyvui. Nulis mokamų sienų, nulis pakopų.",
+    dh_link1: "Paremti ramias darbo valandas (tiesiogiai / Liberapay) &rarr;",
+    dh_link2: "Nemokamas namelio įrankis ir CAD PDF &rarr;",
     f_topic: "Tema",
     opt_writing: "Tekstai ir rezidencijos",
-    opt_craft: "Amatas ir darbai",
+    opt_craft: "Amatas ir individualūs namelio skaičiavimai",
+    opt_prints: "Archyviniai atspaudai (10 vnt. tiražas)",
     opt_arka: "ARKA / Projektai",
+    opt_host: "Parama darbo stalui (Host)",
     opt_other: "Kita",
     f_name: "Vardas",
     f_email: "El. paštas",
