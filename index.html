@@ -99,7 +99,7 @@ html.still canvas { display: none; }
   window.greifiksI18n({
     lt: { nav_index: "Rodyklė", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Forma", c2_m: "Mechanika ir karkasas",
       c3_t: "Rašalas", c3_m: "Antinovelė &middot; Fragmentai", c4_t: "Objektyvas", c4_s1: "Kadrai", c4_s2: "Filmas",
-      c5_t: "Saugykla", c5_m: "ARKA", c6_t: "Parama", c6_m: "Žinutė &middot; Parama" },
+      c5_t: "Saugykla", c5_m: "ARKA", c6_t: "Atliepk", c6_m: "Žinutė &middot; Parama" },
     pt: { nav_index: "Índice", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Forma", c2_m: "Mecânica &amp; Estrutura",
       c3_t: "Tinta", c3_m: "Antinovel&#279; &middot; Fragmentos", c4_t: "Lente", c4_s1: "Fotos", c4_s2: "Filme",
       c5_t: "Cofre", c5_m: "ARKA", c6_t: "Apoio", c6_m: "Mensagem &middot; Apoio" },
@@ -125,18 +125,21 @@ html.still canvas { display: none; }
   }
   document.documentElement.classList.add("live");
 
-  /* ---------- fabric: wave field + gravity well ---------- */
+  /* ---------- fabric: GPU WebGL2 Catmull-Rom liquid renderer (with 2D fallback) + wave field ---------- */
   var root = document.documentElement;
-  var fab = document.getElementById("fabric"), fctx = fab.getContext("2d");
+  var fab = document.getElementById("fabric"), fctx = null, gl = null, glProg = null, glTex = null, glU = null, glVao = null;
   var ink = document.getElementById("ink"), ictx = ink.getContext("2d");
   var src = document.createElement("canvas"), sctx = src.getContext("2d");
   var main = document.getElementById("idx");
-  var C = 3;                       // adaptive css px per simulation cell (~160k cells target)
-  var W, H, cur, prev, nxt, ren, sponge, img, dpr, vw, vh;
+  var C = 5;                       // adaptive css px per simulation cell (hardware-scaled)
+  var W, H, cur, prev, nxt, ren, sponge, img, u32, dpr, vw, vh;
   var mx = -1, my = -1, lx = -1, ly = -1, wx = 0, wy = 0, held = false;
   var depth = 0, depthT = 0, boost = 0, touchUntil = 0;
   var energy = 0, vel = 0, hold = 0, hovered = null, focusIn = false;
   var groups = [], t0 = performance.now(), lastNow = 0, stepAcc = 0, rafId = 0, lastEntR = 0;
+  var warmFrames = 0, inkDirty = false, dL = 0, dT = 0, dR = 0, dB = 0;
+  var lowTier = (navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  var perfSlow = 0, perfScaled = false;
 
   /* 3D liquid optics: upper-left studio raking key light + half-vector */
   var Lx = -0.40, Ly = -0.60, Lz = 0.69, lLen = Math.sqrt(Lx * Lx + Ly * Ly + Lz * Lz);
@@ -144,27 +147,133 @@ html.still canvas { display: none; }
   Hx /= hLen; Hy /= hLen; Hz /= hLen;
   var invOneMinusHz = 1 / (1 - Hz);
 
-  function wake() { if (!rafId) { lastNow = 0; rafId = requestAnimationFrame(frame); } }
+  function initGL() {
+    try {
+      var ctx = fab.getContext("webgl2", { alpha: false, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: false, powerPreference: "low-power" });
+      if (!ctx) return false;
+      var vsSrc = "#version 300 es\nout vec2 v_uv;\nvoid main(){vec2 p=vec2(gl_VertexID==1?3.0:-1.0,gl_VertexID==2?3.0:-1.0);v_uv=vec2(0.5*(p.x+1.0),0.5*(1.0-p.y));gl_Position=vec4(p,0.0,1.0);}";
+      /* Ultra-light 4-tap R16F hardware-bilinear shader with C2 quintic UV filter (9x less GPU work than 4x4 bicubic) */
+      var fsSrc = [
+        "#version 300 es",
+        "precision highp float;",
+        "uniform sampler2D u_h;",
+        "uniform vec2 u_grid;",
+        "uniform vec4 u_well;",
+        "uniform vec4 u_hv;",
+        "uniform float u_light;",
+        "in vec2 v_uv;",
+        "out vec4 outCol;",
+        "void main(){",
+        "  vec2 px = 1.0 / u_grid;",
+        "  vec2 p = v_uv * u_grid - 0.5;",
+        "  vec2 fp = fract(p);",
+        "  vec2 qf = fp * fp * fp * (fp * (fp * 6.0 - 15.0) + 10.0);",
+        "  vec2 uv = (floor(p) + qf + 0.5) * px;",
+        "  float hL = texture(u_h, uv - vec2(px.x, 0.0)).r;",
+        "  float hR = texture(u_h, uv + vec2(px.x, 0.0)).r;",
+        "  float hU = texture(u_h, uv - vec2(0.0, px.y)).r;",
+        "  float hD = texture(u_h, uv + vec2(0.0, px.y)).r;",
+        "  float h = 0.25 * (hL + hR + hU + hD);",
+        "  float gx = hR - hL;",
+        "  float gy = hD - hU;",
+        "  float D = u_well.z, R = u_well.w;",
+        "  if (D > 0.001) {",
+        "    vec2 d = v_uv * u_grid - u_well.xy;",
+        "    float r2 = dot(d, d), R2 = R * R;",
+        "    if (r2 < R2 * 22.0) {",
+        "      float q2 = r2 + R2, q = sqrt(q2), fac = 2.0 * D * R / (q * q2);",
+        "      gx += fac * d.x; gy += fac * d.y; h -= D * R / q;",
+        "    }",
+        "  }",
+        "  vec3 n = normalize(vec3(-gx * 3.2, -gy * 3.2, 1.0));",
+        "  float Hz = u_hv.z, inv1 = u_hv.w;",
+        "  float ndh = dot(n, u_hv.xyz);",
+        "  float rim = max(0.0, 1.0 - n.z);",
+        "  float rimP = rim * 0.36 + sqrt(rim) * 0.64;",
+        "  if (u_light < 0.5) {",
+        "    float su = max(0.0, (ndh - Hz) * inv1);",
+        "    float ndh2 = -n.x * u_hv.x - n.y * u_hv.y + n.z * Hz;",
+        "    float su2 = max(0.0, (ndh2 - Hz) * inv1);",
+        "    float raw = su * su * 460.0 + su * 165.0 + su2 * su2 * 32.0 + rimP * 135.0;",
+        "    float v = (246.0 * raw / (165.0 + raw)) / 255.0;",
+        "    outCol = vec4(v * 0.92, v * 0.96, v, 1.0);",
+        "  } else {",
+        "    float sd = max(0.0, (Hz - ndh) * inv1);",
+        "    float suL = max(0.0, (ndh - Hz) * inv1);",
+        "    float sdP = sd * (0.90 * sqrt(sd) + 0.10 * sd);",
+        "    float raw = sdP * 280.0 + rimP * 130.0;",
+        "    float v = clamp((255.0 - (205.0 * raw / (155.0 + raw)) + suL * suL * 24.0 + h * 5.0) / 255.0, 0.0, 1.0);",
+        "    outCol = vec4(v, v * 0.997, v * 0.988, 1.0);",
+        "  }",
+        "}"
+      ].join("\n");
+      function sh(type, srcText) {
+        var s = ctx.createShader(type); ctx.shaderSource(s, srcText); ctx.compileShader(s);
+        if (!ctx.getShaderParameter(s, ctx.COMPILE_STATUS)) { ctx.deleteShader(s); return null; }
+        return s;
+      }
+      var vs = sh(ctx.VERTEX_SHADER, vsSrc), fs = sh(ctx.FRAGMENT_SHADER, fsSrc);
+      if (!vs || !fs) return false;
+      var pr = ctx.createProgram(); ctx.attachShader(pr, vs); ctx.attachShader(pr, fs); ctx.linkProgram(pr);
+      if (!ctx.getProgramParameter(pr, ctx.LINK_STATUS)) return false;
+      ctx.useProgram(pr);
+      glVao = ctx.createVertexArray(); ctx.bindVertexArray(glVao);
+      glTex = ctx.createTexture(); ctx.activeTexture(ctx.TEXTURE0); ctx.bindTexture(ctx.TEXTURE_2D, glTex);
+      ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MIN_FILTER, ctx.LINEAR);
+      ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MAG_FILTER, ctx.LINEAR);
+      ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_S, ctx.CLAMP_TO_EDGE);
+      ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_T, ctx.CLAMP_TO_EDGE);
+      ctx.uniform1i(ctx.getUniformLocation(pr, "u_h"), 0);
+      ctx.uniform4f(ctx.getUniformLocation(pr, "u_hv"), Hx, Hy, Hz, invOneMinusHz);
+      glU = {
+        grid: ctx.getUniformLocation(pr, "u_grid"),
+        well: ctx.getUniformLocation(pr, "u_well"),
+        light: ctx.getUniformLocation(pr, "u_light")
+      };
+      gl = ctx; glProg = pr;
+      return true;
+    } catch (e) { return false; }
+  }
+  if (!initGL()) {
+    var nf = fab.cloneNode(false); fab.parentNode.replaceChild(nf, fab); fab = nf;
+    fctx = fab.getContext("2d", { alpha: false }) || fab.getContext("2d");
+  }
+
+  /* Precomputed 256-entry 32-bit RGBA palettes for 2D fallback (endian-safe) */
+  var isLE = new Uint8Array(new Uint32Array([1]).buffer)[0] === 1;
+  function packRGBA(r, g, b) {
+    return isLE ? ((255 << 24) | (b << 16) | (g << 8) | r) >>> 0 : ((r << 24) | (g << 16) | (b << 8) | 255) >>> 0;
+  }
+  var palDark = new Uint32Array(256), palLight = new Uint32Array(256);
+  for (var pv = 0; pv < 256; pv++) {
+    palDark[pv] = packRGBA((pv * 0.92) | 0, (pv * 0.96) | 0, pv);
+    palLight[pv] = packRGBA(pv, (pv * 0.997) | 0, (pv * 0.988) | 0);
+  }
+
+  function wake() { if (!rafId) { lastNow = 0; warmFrames = 0; rafId = requestAnimationFrame(frame); } }
 
   function fillFlat() {
     var light = root.getAttribute("data-theme") === "light";
-    var data = img.data;
-    for (var p = 0; p < data.length; p += 4) {
-      data[p] = light ? 255 : 0; data[p + 1] = light ? 254 : 0; data[p + 2] = light ? 251 : 0; data[p + 3] = 255;
+    if (gl) {
+      gl.clearColor(light ? 1 : 0, light ? 0.997 : 0, light ? 0.988 : 0, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    } else if (fctx) {
+      u32.fill(light ? palLight[255] : palDark[0]);
+      fctx.putImageData(img, 0, 0);
     }
-    fctx.putImageData(img, 0, 0);
-    ictx.clearRect(0, 0, ink.width, ink.height);
+    if (inkDirty) { ictx.clearRect(dL, dT, dR - dL, dB - dT); inkDirty = false; }
   }
 
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function resize(extraStep) {
+    dpr = Math.min(window.devicePixelRatio || 1, lowTier ? 1.5 : 2);
     vw = window.innerWidth; vh = window.innerHeight;
-    C = Math.max(3, Math.round(Math.sqrt(vw * vh / 160000)));
+    var targetCells = lowTier ? 52000 : 88000;
+    C = Math.max(lowTier ? 6 : 5, Math.round(Math.sqrt(vw * vh / targetCells))) + (extraStep || 0);
     W = Math.ceil(vw / C) + 2; H = Math.ceil(vh / C) + 2;
     cur = new Float32Array(W * H); prev = new Float32Array(W * H); nxt = new Float32Array(W * H); ren = new Float32Array(W * H);
-    /* Absorbing viscous sponge margin (16 cells) so outgoing ripples exit smoothly with zero box-wall reflection */
+    /* Absorbing viscous sponge margin so outgoing ripples exit smoothly with zero box-wall reflection */
     sponge = new Float32Array(W * H);
-    var M = 16;
+    var M = Math.max(10, Math.round(64 / C));
     for (var y = 0; y < H; y++) {
       var dy = y < H - 1 - y ? y : H - 1 - y;
       for (var x = 0; x < W; x++) {
@@ -173,11 +282,21 @@ html.still canvas { display: none; }
         sponge[y * W + x] = ed < M ? 0.85 + 0.15 * (ed / M) * (ed / M) : 1;
       }
     }
-    fab.width = W; fab.height = H; img = fctx.createImageData(W, H);
+    if (gl) {
+      /* Render fluid at 1x CSS pixel resolution (crisp liquid lighting, 2.25x less GPU fill-rate & VRAM) */
+      fab.width = vw; fab.height = vh;
+      gl.viewport(0, 0, fab.width, fab.height);
+      gl.bindTexture(gl.TEXTURE_2D, glTex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.R16F, W, H, 0, gl.RED, gl.FLOAT, ren);
+      gl.uniform2f(glU.grid, W, H);
+    } else {
+      fab.width = W; fab.height = H; img = fctx.createImageData(W, H);
+      u32 = new Uint32Array(img.data.buffer);
+    }
     ink.width = src.width = Math.round(vw * dpr); ink.height = src.height = Math.round(vh * dpr);
+    inkDirty = false; dL = 0; dT = 0; dR = ink.width; dB = ink.height;
     drawSrc();
     fillFlat();
-    wake();
   }
 
   function cssVar(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
@@ -215,17 +334,18 @@ html.still canvas { display: none; }
   }
   window.__tarRedraw = function () { drawSrc(); wake(); };
 
-  /* Smooth C2 cosine-squared viscous press (zero jagged grid ringing or sudden splash) */
+  /* Smooth C2 cosine-squared viscous press (CSS-pixel consistent across any adaptive grid C) */
   function poke(x, y, amt, rad) {
-    var cx = x / C, cy = y / C, r0 = Math.ceil(rad);
+    var r = Math.max(3, rad * (4 / C));
+    var cx = x / C, cy = y / C, r0 = Math.ceil(r);
     var ix0 = Math.round(cx), iy0 = Math.round(cy);
     for (var j = -r0; j <= r0; j++) {
       var Y = iy0 + j; if (Y < 1 || Y >= H - 1) continue;
       var dy = Y - cy;
       for (var i = -r0; i <= r0; i++) {
         var X = ix0 + i; if (X < 1 || X >= W - 1) continue;
-        var dx = X - cx, d = Math.sqrt(dx * dx + dy * dy); if (d >= rad) continue;
-        var w = 0.5 * (1 + Math.cos(Math.PI * d / rad)), dv = amt * w * w;
+        var dx = X - cx, d = Math.sqrt(dx * dx + dy * dy); if (d >= r) continue;
+        var w = 0.5 * (1 + Math.cos(Math.PI * d / r)), dv = amt * w * w;
         var idx = Y * W + X;
         cur[idx] -= dv;
         prev[idx] -= dv * 0.78;
@@ -338,8 +458,7 @@ html.still canvas { display: none; }
   });
   new MutationObserver(function () { requestAnimationFrame(function () { drawSrc(); fillFlat(); wake(); }); })
     .observe(root, { attributes: true, attributeFilter: ["data-theme"] });
-  window.addEventListener("resize", resize);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { drawSrc(); wake(); });
+  window.addEventListener("resize", function () { resize(perfScaled ? 1 : 0); });
 
   var STEP = 1000 / 60;
   /* 9-point isotropic Mehrstellen Laplacian + Kelvin-Voigt viscosity + absorbing sponge boundary */
@@ -373,12 +492,90 @@ html.still canvas { display: none; }
     var tmp = prev; prev = cur; cur = nxt; nxt = tmp;
   }
 
+  function shadeField(D, R, gcx, gcy, light) {
+    var R2 = R * R, wellR2 = R2 * 20, DR2 = 2 * D * R, DR = D * R;
+    var pal = light ? palLight : palDark;
+    var flatPx = light ? palLight[255] : palDark[0];
+    var y, x, i;
+    for (y = 0; y < H; y++) {
+      var dy = y - gcy, dy2 = dy * dy;
+      var inWellY = D > 0.001 && dy2 < wellR2;
+      var yu0 = y > 0 ? y - 1 : 0, yd0 = y < H - 1 ? y + 1 : H - 1;
+      var row = y * W, rowU = yu0 * W, rowD = yd0 * W;
+      for (x = 0; x < W; x++) {
+        var xl0 = x > 0 ? x - 1 : 0, xr0 = x < W - 1 ? x + 1 : W - 1;
+        i = row + x;
+        var gx = 0.5 * (ren[row + xr0] - ren[row + xl0])
+               + 0.25 * (ren[rowU + xr0] - ren[rowU + xl0] + ren[rowD + xr0] - ren[rowD + xl0]);
+        var gy = 0.5 * (ren[rowD + x] - ren[rowU + x])
+               + 0.25 * (ren[rowD + xl0] - ren[rowU + xl0] + ren[rowD + xr0] - ren[rowU + xr0]);
+        var h = ren[i];
+        if (inWellY) {
+          var dx = x - gcx, r2 = dx * dx + dy2;
+          if (r2 < wellR2) {
+            var q2 = r2 + R2, q = Math.sqrt(q2), f = DR2 / (q * q2);
+            gx += f * dx; gy += f * dy; h -= DR / q;
+          }
+        }
+        /* Fast flat-pixel exit: zero sqrt/lighting on calm tar */
+        if (gx > -0.0012 && gx < 0.0012 && gy > -0.0012 && gy < 0.0012 && (!light || (h > -0.04 && h < 0.04))) {
+          u32[i] = flatPx;
+          continue;
+        }
+        var sx = -gx * 3.2, sy = -gy * 3.2;
+        var invL = 1 / Math.sqrt(1 + sx * sx + sy * sy);
+        var nx = sx * invL, ny = sy * invL, nz = invL;
+        var ndh = nx * Hx + ny * Hy + nz * Hz;
+        var rim = 1 - nz, rimP = rim * 0.36 + Math.sqrt(rim) * 0.64, raw, v;
+        if (!light) {
+          var su = ndh > Hz ? (ndh - Hz) * invOneMinusHz : 0;
+          var ndh2 = -nx * Hx - ny * Hy + nz * Hz;
+          var su2 = ndh2 > Hz ? (ndh2 - Hz) * invOneMinusHz : 0;
+          raw = su * su * 460 + su * 165 + su2 * su2 * 32 + rimP * 135;
+          v = (246 * raw / (165 + raw)) | 0;
+          u32[i] = pal[v > 255 ? 255 : v];
+        } else {
+          var sd = ndh < Hz ? (Hz - ndh) * invOneMinusHz : 0;
+          var suL = ndh > Hz ? (ndh - Hz) * invOneMinusHz : 0;
+          var sdP = sd > 0 ? sd * (0.90 * Math.sqrt(sd) + 0.10 * sd) : 0;
+          raw = sdP * 280 + rimP * 130;
+          v = (255 - (205 * raw / (155 + raw)) + suL * suL * 24 + h * 5) | 0;
+          u32[i] = pal[v < 0 ? 0 : (v > 255 ? 255 : v)];
+        }
+      }
+    }
+  }
+
+  function renderFabric(D, R, gcx, gcy, light) {
+    if (gl) {
+      gl.bindTexture(gl.TEXTURE_2D, glTex);
+      gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, W, H, gl.RED, gl.FLOAT, ren);
+      gl.uniform4f(glU.well, gcx, gcy, D, R);
+      gl.uniform1f(glU.light, light ? 1 : 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    } else if (fctx) {
+      shadeField(D, R, gcx, gcy, light);
+      fctx.putImageData(img, 0, 0);
+    }
+  }
+
   function frame(now) {
     rafId = 0;
-    var dt = lastNow ? Math.min(50, Math.max(0, now - lastNow)) : STEP;
+    var rawDt = lastNow ? Math.max(0, now - lastNow) : STEP;
+    /* Automatic slow-device governor: if sustained frame time > 26 ms (<38 fps), step grid down once */
+    if (!perfScaled && warmFrames > 10 && lastNow) {
+      if (rawDt > 26) {
+        if (++perfSlow >= 18) { perfScaled = true; resize(1); wake(); return; }
+      } else if (perfSlow > 0) perfSlow--;
+    }
+    /* Snap 60Hz VSync jitter (54–66 Hz) to exact 1.00 step -> zero periodic 0-step/2-step beat judder */
+    if (rawDt > 15.0 && rawDt < 18.4) rawDt = STEP;
+    /* Warm-start ramp: strictly 1 physics step for first 4 frames after wake (zero catch-up judder) */
+    var dt = warmFrames < 4 ? Math.min(STEP, rawDt || STEP) : Math.min(34, rawDt);
+    warmFrames++;
     lastNow = now;
-    stepAcc = Math.min(stepAcc + dt, STEP * 2.5);
-    var t = (now - t0) / 1000, i, x, y, maxWave = 0;
+    stepAcc = Math.min(stepAcc + dt, STEP * 2.2);
+    var t = (now - t0) / 1000, i, maxWave = 0;
     var E = ent(), ep = E ? Math.min(1, (now - E.t0) / E.dur) : -1;
     /* Smooth tail settle across ep 0.78..1.00 so waves glide organically to literal zero before reset */
     var tail = ep > 0.78 ? (ep - 0.78) / 0.22 : 0;
@@ -416,60 +613,21 @@ html.still canvas { display: none; }
     var kDt = dt / STEP;
     wx += (mx - wx) * Math.min(1, 0.055 * kDt); wy += (my - wy) * Math.min(1, 0.055 * kDt);
     depth += (depthT - depth) * Math.min(1, 0.032 * kDt); boost *= Math.pow(0.965, kDt);
-    var D = depth * (1.35 + (held ? 0.55 : 0) + boost * 0.85), R = 24 + (held ? 5 : 0) + boost * 6;
-    var gcx = wx / C, gcy = wy / C, R2 = R * R;
+    var D = depth * (1.35 + (held ? 0.55 : 0) + boost * 0.85), R = (96 / C) + (held ? 20 / C : 0) + boost * (24 / C);
+    var gcx = wx / C, gcy = wy / C;
 
-    /* 3. 3x3 isotropic Sobel surface normals + physically-based glossy black/white liquid shading */
-    var data = img.data, p = 0;
-    for (y = 0; y < H; y++) {
-      var dy2 = (y - gcy) * (y - gcy);
-      var yu0 = y > 0 ? y - 1 : 0, yd0 = y < H - 1 ? y + 1 : H - 1;
-      var row = y * W, rowU = yu0 * W, rowD = yd0 * W;
-      for (x = 0; x < W; x++, p += 4) {
-        var xl0 = x > 0 ? x - 1 : 0, xr0 = x < W - 1 ? x + 1 : W - 1;
-        i = row + x;
-        var gx = 0.5 * (ren[row + xr0] - ren[row + xl0])
-               + 0.25 * (ren[rowU + xr0] - ren[rowU + xl0] + ren[rowD + xr0] - ren[rowD + xl0]);
-        var gy = 0.5 * (ren[rowD + x] - ren[rowU + x])
-               + 0.25 * (ren[rowD + xl0] - ren[rowU + xl0] + ren[rowD + xr0] - ren[rowU + xr0]);
-        var h = ren[i];
-        if (D > 0.001) {
-          var dx = x - gcx, r2 = dx * dx + dy2, q = Math.sqrt(r2 + R2);
-          var f = D * R / (q * q * q);
-          gx += 2 * f * dx; gy += 2 * f * (y - gcy); h -= D * R / q;
-        }
-        var sx = -gx * 3.2, sy = -gy * 3.2;
-        var invL = 1 / Math.sqrt(1 + sx * sx + sy * sy);
-        var nx = sx * invL, ny = sy * invL, nz = invL;
-        var ndh = nx * Hx + ny * Hy + nz * Hz;
-        var rim = 1 - nz, raw, v;
-        if (!light) {
-          var su = ndh > Hz ? (ndh - Hz) * invOneMinusHz : 0;
-          var ndh2 = -nx * Hx - ny * Hy + nz * Hz;
-          var su2 = ndh2 > Hz ? (ndh2 - Hz) * invOneMinusHz : 0;
-          raw = su * su * 460 + su * 165 + su2 * su2 * 32 + Math.pow(rim, 0.7) * 135;
-          v = 246 * raw / (165 + raw);
-          data[p] = v * 0.92; data[p + 1] = v * 0.96; data[p + 2] = v; data[p + 3] = 255;
-        } else {
-          var sd = ndh < Hz ? (Hz - ndh) * invOneMinusHz : 0;
-          var suL = ndh > Hz ? (ndh - Hz) * invOneMinusHz : 0;
-          raw = Math.pow(sd, 1.55) * 280 + Math.pow(rim, 0.72) * 130;
-          v = 255 - (205 * raw / (155 + raw)) + suL * suL * 24 + h * 5;
-          if (v < 0) v = 0; else if (v > 255) v = 255;
-          data[p] = v; data[p + 1] = v * 0.997; data[p + 2] = v * 0.988; data[p + 3] = 255;
-        }
-      }
-    }
-    fctx.putImageData(img, 0, 0);
+    /* 3. GPU WebGL2 4-tap R16F liquid shader (or fast 2D fallback) */
+    renderFabric(D, R, gcx, gcy, light);
 
     /* 4. islands: wave-resonant emergence and exact mirror-symmetric fade / entropy submersion */
     energy *= Math.pow(0.988, kDt); vel *= Math.pow(0.91, kDt);
     var global = focusIn ? 1 : Math.min(1, energy);
     var reach = 175 + boost * 65;
     var dist = pinned ? vel * 0.28 : vel;
-    var w = ink.width, S = Math.max(2, Math.round(3 * dpr));
+    var w = ink.width, ih = ink.height, S = Math.max(2, Math.round(3 * dpr));
     var any = false;
-    ictx.clearRect(0, 0, w, ink.height);
+    if (inkDirty) { ictx.clearRect(dL, dT, dR - dL, dB - dT); inkDirty = false; }
+    var nL = w, nT = ih, nR = 0, nB = 0;
     for (var g = 0; g < groups.length; g++) {
       var G = groups[g], tg;
       if (E) {
@@ -504,29 +662,43 @@ html.still canvas { display: none; }
       var nearNow = E || mx < 0 ? 0 : depth * Math.max(0, 1 - Math.hypot(Math.max(G.l - wx, 0, wx - G.r), Math.max(G.t - wy, 0, wy - G.b)) / reach);
       var rise = e * e * 38 * dpr + Math.sin(t * 1.0 + G.seed) * 1.1 * dpr * v;
       var pull = (E || mx < 0 ? 0 : (wx - G.cx) * 0.04 * nearNow) * dpr;
-      var top = Math.max(0, Math.floor(G.t * dpr / S) * S), bot = Math.min(ink.height, G.b * dpr);
+      var top = Math.max(0, Math.floor(G.t * dpr / S) * S), bot = Math.min(ih, G.b * dpr);
       var pad = 12 * dpr, sx0 = Math.max(0, G.l * dpr - pad), sw = Math.min(w, G.r * dpr + pad) - sx0;
       var gxc = Math.max(1, Math.min(W - 2, (G.cx / C) | 0));
-      for (var sy = top; sy < bot; sy += S) {
-        var n = (Math.sin(sy * 12.9898 + G.seed) * 43758.5453) % 1; if (n < 0) n += 1;
-        if (n > v * 1.25) continue;
-        var gyr = Math.max(1, Math.min(H - 2, (sy / dpr / C) | 0));
-        var wi = gyr * W + gxc;
-        var wave = ren[wi];
-        var wslope = Math.abs(ren[wi + 1] - ren[wi - 1]) + Math.abs(ren[wi + W] - ren[wi - W]);
-        var gd = Math.min(1, Math.max(dist, nearNow * 0.10, tr * 0.42, wslope * 0.55));
-        var hh = Math.max(1, S * (1 - gd * 0.58));
-        var gw = sw + w * gd * 0.036;
-        var ox = pull + (gd * (Math.sin(sy * 0.02 / dpr + t * 2.2) * 20 + Math.sin(sy * 0.11 / dpr - t * 4.5) * 7) + wave * 4.8) * dpr;
-        var oy = rise - wave * 5.2 * dpr;
-        ictx.globalAlpha = v;
-        ictx.drawImage(src, sx0, sy, sw, S, sx0 + ox, sy + oy, sw, hh);
-        if (gd > 0.06) {
-          ictx.globalAlpha = v * gd * 0.34;
-          ictx.drawImage(src, sx0, sy, sw, S, sx0 - (gw - sw) / 2 + ox * 1.8, sy + oy, gw, hh);
+      var dPadX = 64 * dpr, dPadY = 56 * dpr;
+      if (sx0 - dPadX < nL) nL = Math.max(0, Math.floor(sx0 - dPadX));
+      if (top - dPadY < nT) nT = Math.max(0, Math.floor(top - dPadY));
+      if (sx0 + sw + dPadX > nR) nR = Math.min(w, Math.ceil(sx0 + sw + dPadX));
+      if (bot + dPadY > nB) nB = Math.min(ih, Math.ceil(bot + dPadY));
+      /* Single-blit fast path when chapter is fully surfaced and resting on calm tar */
+      var midWi = Math.max(1, Math.min(H - 2, (G.cy / C) | 0)) * W + gxc;
+      var calmLocal = maxWave < 0.015 || (Math.abs(ren[midWi]) < 0.015 && Math.abs(ren[midWi + 1] - ren[midWi - 1]) + Math.abs(ren[midWi + W] - ren[midWi - W]) < 0.02);
+      if (v > 0.992 && dist < 0.015 && nearNow < 0.02 && calmLocal) {
+        ictx.globalAlpha = 1;
+        ictx.drawImage(src, sx0, top, sw, bot - top, sx0, top + rise, sw, bot - top);
+      } else {
+        for (var sy = top; sy < bot; sy += S) {
+          var n = (Math.sin(sy * 12.9898 + G.seed) * 43758.5453) % 1; if (n < 0) n += 1;
+          if (n > v * 1.25) continue;
+          var gyr = Math.max(1, Math.min(H - 2, (sy / dpr / C) | 0));
+          var wi = gyr * W + gxc;
+          var wave = ren[wi];
+          var wslope = Math.abs(ren[wi + 1] - ren[wi - 1]) + Math.abs(ren[wi + W] - ren[wi - W]);
+          var gd = Math.min(1, Math.max(dist, nearNow * 0.10, tr * 0.42, wslope * 0.55));
+          var hh = Math.max(1, S * (1 - gd * 0.58));
+          var gw = sw + w * gd * 0.036;
+          var ox = pull + (gd * (Math.sin(sy * 0.02 / dpr + t * 2.2) * 20 + Math.sin(sy * 0.11 / dpr - t * 4.5) * 7) + wave * 4.8) * dpr;
+          var oy = rise - wave * 5.2 * dpr;
+          ictx.globalAlpha = v;
+          ictx.drawImage(src, sx0, sy, sw, S, sx0 + ox, sy + oy, sw, hh);
+          if (gd > 0.06) {
+            ictx.globalAlpha = v * gd * 0.34;
+            ictx.drawImage(src, sx0, sy, sw, S, sx0 - (gw - sw) / 2 + ox * 1.8, sy + oy, gw, hh);
+          }
         }
       }
     }
+    if (any) { inkDirty = true; dL = nL; dT = nT; dR = nR; dB = nB; }
     ictx.globalAlpha = 1;
 
     /* true mathematical equilibrium sleep: zero CPU when flat and quiet, zero change to any visible frame */
@@ -538,8 +710,42 @@ html.still canvas { display: none; }
   }
 
   resize();
-  /* one silent concentric drop beneath the black surface on entry */
-  setTimeout(function () { if (!ent() && mx < 0 && !pinned) { poke(vw / 2, vh / 2, 1.25, 7); lift(vw / 2, vh / 2, 0.25, 13); } }, 600);
+  /* Pre-warm JIT silently while surface is flat black, wait for fonts + settled compositor, then drop entry breath */
+  var booted = false;
+  function launchBreath() {
+    if (booted) return;
+    booted = true;
+    drawSrc();
+    if (!ent() && mx < 0 && !pinned) {
+      /* Silent JIT + GPU shader pipeline warmup while screen is flat black */
+      var isLight = root.getAttribute("data-theme") === "light";
+      var mid = (H >> 1) * W + (W >> 1);
+      cur[mid] = -0.6;
+      for (var wk = 0; wk < 3; wk++) {
+        stepWave(0.989, 0.999, -1, 0);
+        for (var wi0 = 0; wi0 < cur.length; wi0++) ren[wi0] = cur[wi0];
+        if (!gl) shadeField(1, 24, W * 0.5, H * 0.5, isLight);
+      }
+      cur.fill(0); prev.fill(0); nxt.fill(0); ren.fill(0);
+      /* Warm GPU shader program on zero field (paints pure flat black/white while compiling driver pipeline) */
+      if (gl) renderFabric(0, 24, W * 0.5, H * 0.5, isLight);
+      fillFlat();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          if (!ent() && mx < 0 && !pinned) {
+            poke(vw / 2, vh / 2, 1.25, 7);
+            lift(vw / 2, vh / 2, 0.25, 13);
+          }
+        });
+      });
+    }
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { if (booted) drawSrc(); else setTimeout(launchBreath, 120); });
+    setTimeout(launchBreath, 550);
+  } else {
+    setTimeout(launchBreath, 300);
+  }
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
