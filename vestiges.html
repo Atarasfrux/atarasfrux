@@ -6,6 +6,7 @@
 <title>Vestiges de ce qui s’est tu · Mantas Pagalys</title>
 <meta name="description" content="Vestiges de ce qui s'est tu (02:10).">
 <meta property="og:type" content="video.other">
+<meta property="og:site_name" content="greifiks.org">
 <meta property="og:title" content="Vestiges de ce qui s’est tu">
 <meta property="og:description" content="Amar · Renée Vincent · Mantas Pagalys · 02:10">
 <meta property="og:url" content="https://greifiks.org/vestiges.html">
@@ -15,6 +16,10 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Hands on the keys of a Kawai piano">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vestiges de ce qui s’est tu">
+<meta name="twitter:description" content="Amar · Renée Vincent · Mantas Pagalys · 02:10">
+<meta name="twitter:image" content="https://greifiks.org/assets/og/vestiges.jpg">
+<meta name="twitter:image:alt" content="Hands on the keys of a Kawai piano">
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noarchive">
 <link rel="canonical" href="https://greifiks.org/vestiges.html">
@@ -23,10 +28,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=10"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/theme.js?v=11"></script>
+<script src="assets/entropy.js?v=11"></script>
 <style>
 .page-head h1 { font-style: italic; }
 
@@ -219,13 +224,6 @@
           <button type="button" data-theme-set="light">Light</button>
           <button type="button" data-theme-set="dark" class="active">Dark</button>
         </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
-        </div>
       </div>
     </div>
   </div>
@@ -318,10 +316,14 @@
   }
 
   function isFullscreen() {
-    return !!(document.fullscreenElement || document.webkitFullscreenElement);
+    return !!(document.fullscreenElement || document.webkitFullscreenElement || stageWrap.classList.contains("fs-pseudo"));
   }
 
   function toggleFullscreen() {
+    if (stageWrap.classList.contains("fs-pseudo")) {
+      if (window.greifiksExitFs) window.greifiksExitFs();
+      return;
+    }
     if (isFullscreen()) {
       var ex = document.exitFullscreen || document.webkitExitFullscreen;
       if (ex) { try { ex.call(document); } catch (e) {} }
@@ -387,6 +389,7 @@
       return;
     }
     streamStarted = true;
+    if (window.greifiksTrack) window.greifiksTrack("play/vestiges", "Play: Vestiges");
     setStatus(currentLang === "lt" ? "Kraunama..." : (currentLang === "no" ? "Laster..." : (currentLang === "pt" ? "Carregando..." : "Loading...")));
 
     var MSE = window.MediaSource || window.ManagedMediaSource;
@@ -398,7 +401,7 @@
       video.play().then(function () { setStatus(""); }).catch(function () {});
       return;
     }
-    if (!canMSE) { setStatus("Unsupported browser."); streamStarted = false; return; }
+    if (!canMSE) { setStatus(currentLang === "lt" ? "Nepalaikoma naršyklė." : (currentLang === "no" ? "Nettleseren støttes ikke." : (currentLang === "pt" ? "Navegador não compatível." : "Unsupported browser."))); streamStarted = false; return; }
 
     fetch(MANIFEST).then(function (r) {
       if (!r.ok) throw new Error(r.status);
@@ -430,11 +433,11 @@
               try { sb.appendBuffer(buf); }
               catch (err) {
                 if (err && err.name === "QuotaExceededError") setTimeout(doAppend, 600);
-                else setStatus("Stream error.");
+                else setStatus(currentLang === "lt" ? "Srauto klaida." : (currentLang === "no" ? "Strømfeil." : (currentLang === "pt" ? "Erro no fluxo." : "Stream error.")));
               }
             }
             doAppend();
-          }).catch(function () { setStatus("Stream interrupted."); });
+          }).catch(function () { setStatus(currentLang === "lt" ? "Srautas nutrūko." : (currentLang === "no" ? "Strømmen ble avbrutt." : (currentLang === "pt" ? "Fluxo interrompido." : "Stream interrupted."))); });
         }
 
         sb.addEventListener("updateend", function () {
@@ -449,7 +452,7 @@
         });
         appendNext();
       }, { once: true });
-    }).catch(function () { streamStarted = false; setStatus("Stream unavailable."); });
+    }).catch(function () { streamStarted = false; setStatus(currentLang === "lt" ? "Srautas nepasiekiamas." : (currentLang === "no" ? "Strøm utilgjengelig." : (currentLang === "pt" ? "Fluxo indisponível." : "Stream unavailable."))); });
   }
 
   function togglePlay() {
@@ -466,6 +469,7 @@
   btnFs.addEventListener("click", toggleFullscreen);
   document.addEventListener("fullscreenchange", syncLabels);
   document.addEventListener("webkitfullscreenchange", syncLabels);
+  document.addEventListener("greifiks-fs-change", syncLabels);
 
   scrub.addEventListener("click", function (e) {
     if (!streamStarted) return;
@@ -522,31 +526,10 @@
     policy_txt: "Visningskopi (02:10). Ikke til videredistribusjon. <a href=\"link.html\">Direkte melding</a> ved spørsmål om kreditering eller fjerning."
   };
 
-  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
-  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
-  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
-
-  function applyLang(lang) {
-    currentLang = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = currentLang === "lt" ? LT : (currentLang === "no" ? NO : (currentLang === "pt" ? PT : EN));
-    document.documentElement.lang = currentLang === "no" ? "nb" : currentLang;
-    document.title = dict.page_title || EN.page_title;
-    nodes.forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
-    });
-    syncLabels();
-    arkaLinks.forEach(function (a) { a.href = currentLang === "no" ? "arka_no.html" : "arka.html"; });
-    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === currentLang); });
-    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
-    try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
-  }
-  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+  if (window.greifiksI18n) window.greifiksI18n({
+    lt: LT, no: NO, pt: PT,
+    onChange: function (l) { currentLang = l; syncLabels(); }
+  });
   updateProgress();
 })();
 </script>

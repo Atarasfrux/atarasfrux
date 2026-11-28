@@ -1,4 +1,4 @@
-/* greifiks.org — Zero-Flash Theme Controller (Dark Default + Light/Dark Switch) */
+/* greifiks.org — Zero-Flash Theme & Automatic Timezone-First i18n Controller */
 (function () {
   var KEY = "greifiks-theme";
   var root = document.documentElement;
@@ -36,17 +36,30 @@
 
   window.greifiksSyncTheme = syncThemeBtn;
 
-  /* Language: a visitor's own choice (clicking LT/EN/NO/PT) wins; otherwise the country of the
-     device's time zone decides, then the browser's language, then English. Nothing leaves the browser. */
+  /* Pure automatic language: device time zone decides first, then browser language, then English.
+     Silent URL override (?lang=lt|en|no|pt) exists strictly for direct preview without UI selectors. */
   var TZ = {
-    "Europe/Vilnius": "lt", "Europe/Oslo": "no", "Arctic/Longyearbyen": "no",
-    "Europe/Lisbon": "pt", "Atlantic/Azores": "pt", "Atlantic/Madeira": "pt", "Africa/Luanda": "pt", "Africa/Maputo": "pt",
-    "America/Sao_Paulo": "pt", "America/Fortaleza": "pt", "America/Recife": "pt", "America/Bahia": "pt", "America/Belem": "pt",
-    "America/Maceio": "pt", "America/Araguaina": "pt", "America/Santarem": "pt", "America/Manaus": "pt", "America/Cuiaba": "pt",
-    "America/Campo_Grande": "pt", "America/Porto_Velho": "pt", "America/Boa_Vista": "pt", "America/Rio_Branco": "pt",
-    "America/Eirunepe": "pt", "America/Noronha": "pt"
+    "Europe/Vilnius": "lt",
+    "Europe/Oslo": "no", "Arctic/Longyearbyen": "no", "Atlantic/Jan_Mayen": "no",
+    "Europe/Lisbon": "pt", "Portugal": "pt", "Atlantic/Azores": "pt", "Atlantic/Madeira": "pt",
+    "Atlantic/Cape_Verde": "pt", "Africa/Luanda": "pt", "Africa/Maputo": "pt",
+    "Africa/Bissau": "pt", "Africa/Sao_Tome": "pt", "Asia/Dili": "pt",
+    "America/Sao_Paulo": "pt", "America/Fortaleza": "pt", "America/Recife": "pt", "America/Bahia": "pt",
+    "America/Belem": "pt", "America/Maceio": "pt", "America/Araguaina": "pt", "America/Santarem": "pt",
+    "America/Manaus": "pt", "America/Cuiaba": "pt", "America/Campo_Grande": "pt", "America/Porto_Velho": "pt",
+    "America/Boa_Vista": "pt", "America/Rio_Branco": "pt", "America/Eirunepe": "pt", "America/Noronha": "pt",
+    "Brazil/East": "pt", "Brazil/West": "pt", "Brazil/DeNoronha": "pt", "Brazil/Acre": "pt"
   };
+
   function autoLang() {
+    try {
+      var q = new URLSearchParams(window.location.search).get("lang");
+      if (q) {
+        q = q.toLowerCase();
+        if (q === "nb" || q === "nn") q = "no";
+        if (/^(lt|en|no|pt)$/.test(q)) return q;
+      }
+    } catch (e) {}
     try { var z = Intl.DateTimeFormat().resolvedOptions().timeZone; if (TZ[z]) return TZ[z]; } catch (e) {}
     var ls = navigator.languages || [navigator.language || ""];
     for (var i = 0; i < ls.length; i++) {
@@ -58,17 +71,43 @@
     }
     return "en";
   }
-  window.greifiksLang = function () {
+
+  window.greifiksLang = autoLang;
+
+  /* Silent, cookie-free custom event helper for GoatCounter (no-op if blocked or offline) */
+  window.greifiksTrack = function (path, title) {
     try {
-      var m = localStorage.getItem("greifiks-lang");
-      if (localStorage.getItem("greifiks-lang-manual") === "1" && /^(lt|en|no|pt)$/.test(m)) return m;
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({ path: String(path).replace(/^\/+/, ""), title: title || path, event: true });
+      }
     } catch (e) {}
-    return autoLang();
   };
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest && e.target.closest("[data-lang]");
-    if (b) try { localStorage.setItem("greifiks-lang-manual", "1"); } catch (er) {}
-  }, true);
+
+  /* Unified automatic i18n wiring shared across all pages */
+  window.greifiksI18n = function (cfg) {
+    cfg = cfg || {};
+    var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+    var EN = { page_title: document.title };
+    nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
+    var dicts = { en: EN, lt: cfg.lt || EN, no: cfg.no || EN, pt: cfg.pt || EN };
+
+    function apply(lang) {
+      var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
+      var d = dicts[l];
+      root.lang = l === "no" ? "nb" : l;
+      if (d.page_title || EN.page_title) document.title = d.page_title || EN.page_title;
+      nodes.forEach(function (el) {
+        var k = el.getAttribute("data-i18n");
+        el.innerHTML = d[k] !== undefined ? d[k] : EN[k];
+      });
+      syncThemeBtn();
+      if (cfg.onChange) cfg.onChange(l);
+    }
+
+    apply(autoLang());
+    return apply;
+  };
+
   window.addEventListener("pageshow", applySaved);
   window.addEventListener("storage", function (ev) {
     if (ev.key === KEY) applySaved();

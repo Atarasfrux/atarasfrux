@@ -11,10 +11,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=10"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/theme.js?v=11"></script>
+<script src="assets/entropy.js?v=11"></script>
 <style>
 body.link-page {
   display: flex;
@@ -77,8 +77,16 @@ body.link-page .page-head {
   justify-self: start;
   margin-top: 4px;
 }
+.support-row {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 24px;
+}
 .support-note {
-  margin: 22px 0 0;
+  margin: 0;
   font-size: 0.84rem;
   color: var(--muted);
 }
@@ -111,13 +119,6 @@ body.link-page footer.colophon {
           <button type="button" data-theme-set="light">Light</button>
           <button type="button" data-theme-set="dark" class="active">Dark</button>
         </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
-        </div>
       </div>
     </div>
   </div>
@@ -129,7 +130,7 @@ body.link-page footer.colophon {
   </div>
 
   <section class="form-sheet" aria-label="Direct message">
-    <form class="msg-form" action="https://formspree.io/f/mykqqzjg" method="POST">
+    <form class="msg-form" id="back-form" action="https://formspree.io/f/mykqqzjg" method="POST">
       <label>
         <span data-i18n="f_name">Name</span>
         <input type="text" name="name" autocomplete="name" required>
@@ -145,7 +146,10 @@ body.link-page footer.colophon {
       <button type="submit" class="btn-ink" data-i18n="f_send">Send</button>
     </form>
   </section>
-  <p class="support-note" data-i18n="support_note">Everything here is open. For prints, work, or direct support, write above.</p>
+  <div class="support-row">
+    <p class="support-note" data-i18n="support_note">Everything here is open. Write above for prints or work, or support directly.</p>
+    <a class="text-link" id="support-link" href="https://revolut.me/mantas3vq" target="_blank" rel="noopener noreferrer" data-i18n="support_cta">Direct support &middot; Revolut &nearr;</a>
+  </div>
 </main>
 
 <footer class="colophon">
@@ -156,68 +160,58 @@ body.link-page footer.colophon {
 
 <script>
 (function () {
-  var LT = {
-    page_title: "Parama · Mantas Pagalys",
-    nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
-    nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Parama",
-    h1: "Parama",
-    f_name: "Vardas",
-    f_email: "El. paštas",
-    f_msg: "Žinutė",
-    f_send: "Siųsti",
-    support_note: "Visa medžiaga čia atvira. Dėl atspaudų, darbų ar tiesioginės paramos rašykite aukščiau."
-  };
-  var PT = {
-  "page_title": "Apoio · Mantas Pagalys",
-  "nav_index": "Índice",
-  "nav_dossier": "Bio",
-  "nav_mech": "Forma",
-  "nav_writing": "Tinta",
-  "nav_images": "Lente",
-  "nav_archive": "Cofre",
-  "nav_link": "Apoio",
-  "h1": "Apoio",
-  "f_name": "Nome",
-  "f_email": "E-mail",
-  "f_msg": "Mensagem",
-  "f_send": "Enviar",
-  "support_note": "Tudo aqui é aberto. Para impressões, trabalho ou apoio direto, escreva acima."
-};
-  var NO = {
-    page_title: "Støtte · Mantas Pagalys",
-    nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
-    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
-    h1: "Støtte",
-    f_name: "Navn",
-    f_email: "E-post",
-    f_msg: "Melding",
-    f_send: "Send",
-    support_note: "Alt her er åpent. For trykk, oppdrag eller direkte støtte, skriv over."
-  };
+  window.greifiksI18n({
+    lt: {
+      page_title: "Parama · Mantas Pagalys",
+      nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
+      nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Parama",
+      h1: "Parama", f_name: "Vardas", f_email: "El. paštas", f_msg: "Žinutė", f_send: "Siųsti",
+      support_note: "Visa medžiaga čia atvira. Dėl atspaudų ar darbų rašykite aukščiau arba paremkite tiesiogiai.",
+      support_cta: "Tiesioginė parama &middot; Revolut &nearr;"
+    },
+    pt: {
+      page_title: "Apoio · Mantas Pagalys",
+      nav_index: "Índice", nav_dossier: "Bio", nav_mech: "Forma",
+      nav_writing: "Tinta", nav_images: "Lente", nav_archive: "Cofre", nav_link: "Apoio",
+      h1: "Apoio", f_name: "Nome", f_email: "E-mail", f_msg: "Mensagem", f_send: "Enviar",
+      support_note: "Tudo aqui é aberto. Escreva acima para impressões ou trabalho, ou apoie diretamente.",
+      support_cta: "Apoio direto &middot; Revolut &nearr;"
+    },
+    no: {
+      page_title: "Støtte · Mantas Pagalys",
+      nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
+      nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
+      h1: "Støtte", f_name: "Navn", f_email: "E-post", f_msg: "Melding", f_send: "Send",
+      support_note: "Alt her er åpent. Skriv ovenfor for trykk eller oppdrag, eller støtt direkte.",
+      support_cta: "Direkte støtte &middot; Revolut &nearr;"
+    }
+  });
 
-  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
-  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
+  var sup = document.getElementById("support-link");
+  if (sup) sup.addEventListener("click", function () {
+    if (window.greifiksTrack) window.greifiksTrack("support/revolut", "Support: Revolut");
+  });
 
-  function applyLang(lang) {
-    var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
-    document.documentElement.lang = l === "no" ? "nb" : l;
-    document.title = dict.page_title || EN.page_title;
-    nodes.forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
-    });
-    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
-    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
-    try { localStorage.setItem("greifiks-lang", l); } catch (e) {}
-  }
-
-  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+  /* Silent session draft memory: if entropy sweeps the page away, returning restores unfinished words */
+  var KEY = "greifiks-draft", form = document.getElementById("back-form");
+  if (!form) return;
+  var fields = ["name", "email", "message"];
+  try {
+    var raw = sessionStorage.getItem(KEY);
+    if (raw) {
+      var saved = JSON.parse(raw);
+      fields.forEach(function (n) { if (saved[n] && form.elements[n]) form.elements[n].value = saved[n]; });
+    }
+  } catch (e) {}
+  form.addEventListener("input", function () {
+    var out = {};
+    fields.forEach(function (n) { if (form.elements[n]) out[n] = form.elements[n].value; });
+    try { sessionStorage.setItem(KEY, JSON.stringify(out)); } catch (e) {}
+  });
+  form.addEventListener("submit", function () {
+    if (window.greifiksTrack) window.greifiksTrack("contact/sent", "Back message sent");
+    try { sessionStorage.removeItem(KEY); } catch (e) {}
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

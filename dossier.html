@@ -11,10 +11,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=10"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/theme.js?v=11"></script>
+<script src="assets/entropy.js?v=11"></script>
 <style>
 main.wrap {
   width: min(820px, 100%);
@@ -171,58 +171,6 @@ code {
   gap: 14px 20px;
 }
 
-details.msg-drawer {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
-}
-details.msg-drawer summary {
-  list-style: none;
-  cursor: pointer;
-  display: inline-block;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border-bottom: 1px solid var(--rule-strong);
-  padding-bottom: 2px;
-}
-details.msg-drawer summary::-webkit-details-marker { display: none; }
-details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); }
-.msg-form {
-  margin-top: 18px;
-  display: grid;
-  gap: 12px;
-  max-width: 440px;
-}
-.msg-form label {
-  display: grid;
-  gap: 4px;
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.msg-form input,
-.msg-form textarea {
-  width: 100%;
-  font: inherit;
-  font-family: var(--sans);
-  font-size: 0.92rem;
-  padding: 9px 10px;
-  background: var(--surface);
-  color: var(--ink);
-  border: 1px solid var(--rule-strong);
-}
-.msg-form input:focus,
-.msg-form textarea:focus {
-  outline: none;
-  border-color: var(--ink);
-}
-.msg-form button { justify-self: start; }
-
 @media (max-width: 780px) {
   .entry { grid-template-columns: 1fr; gap: 6px; }
   .craft-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -252,13 +200,6 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
         <div class="theme-switch" role="group" aria-label="Theme">
           <button type="button" data-theme-set="light">Light</button>
           <button type="button" data-theme-set="dark" class="active">Dark</button>
-        </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
         </div>
       </div>
     </div>
@@ -395,26 +336,9 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
         <div class="cv-actions">
           <a class="btn-ink" id="cv-mail-btn" href="mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys" data-i18n="cv_btn">Request CV (PDF)</a>
           <a class="text-link" href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
+          <a class="text-link" href="link.html" data-i18n="msg_link">Direct message &rarr;</a>
         </div>
       </div>
-      <details class="msg-drawer">
-        <summary data-i18n="msg_open">Direct message</summary>
-        <form class="msg-form" action="https://formspree.io/f/mykqqzjg" method="POST">
-          <label>
-            <span data-i18n="f_name">Name</span>
-            <input type="text" name="name" autocomplete="name" required>
-          </label>
-          <label>
-            <span data-i18n="f_email">Email</span>
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
-          <label>
-            <span data-i18n="f_msg">Message</span>
-            <textarea name="message" rows="3" required></textarea>
-          </label>
-          <button type="submit" class="btn-ink" data-i18n="f_send">Send</button>
-        </form>
-      </details>
     </section>
   </div>
 </main>
@@ -473,11 +397,7 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
     sec_4: "04 &middot; Kontaktai ir privatus CV",
     cv_lead: "Pilnas datuotas gyvenimo aprašymas (darboviečių istorija, telefono numeris) viešai neskelbiamas ir atsiunčiamas PDF failu pagal užklausą.",
     cv_btn: "Prašyti CV (PDF)",
-    msg_open: "Tiesioginė žinutė",
-    f_name: "Vardas",
-    f_email: "El. paštas",
-    f_msg: "Žinutė",
-    f_send: "Siųsti"
+    msg_link: "Tiesioginė žinutė &rarr;"
   };
 
   var PT = {
@@ -538,11 +458,7 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
   "sec_4": "04 &middot; Contato &amp; CV privado",
   "cv_lead": "O Curriculum Vitae completo e datado (histórico de empregadores, telefone, registro por função) fica fora da internet e é enviado em PDF mediante solicitação direta.",
   "cv_btn": "Solicitar CV (PDF)",
-  "msg_open": "Mensagem direta",
-  "f_name": "Nome",
-  "f_email": "E-mail",
-  "f_msg": "Mensagem",
-  "f_send": "Enviar"
+  "msg_link": "Mensagem direta &rarr;"
 };
 
   var NO = {
@@ -561,7 +477,7 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
     p2_p: "Grunn-, stein- og utomhusarbeid i London (Hampstead Heath) og St Andrews; innvendig ferdigstillelse, takreparasjon og trekonstruksjoner i Litauen og Skottland. Mengdeberegning, prising og utførelse.",
     p2_tags: "Trekonstruksjoner &middot; tak &middot; mur og stein &middot; selvstendig utførelse",
     p3_loc: "Feltkonstruksjon",
-    p3_h: "Parametrisk treverk-CAD og selvhjulpne konstruksjoner",
+    p3_h: "Parametrisk treverk-CAD og selvforsynte konstruksjoner",
     p3_p: "Metriske tegninger, detaljmanualer og materialoversikter generert med Python til trykkeklar A4 PDF. Interaktive beregningsplater i <a href=\"mechanics.html\">Mekanikk og rammeverk</a>.",
     p3_tags: "Parametrisk SVG/CAD &middot; knutepunkter &middot; mengdeberegning &middot; LST EN-kontroll",
     cf_1: "Åpen ramme", cf_2: "Linjen", cf_3: "Nullpunkt", cf_4: "Rutenett", cf_5: "Bue",
@@ -579,63 +495,34 @@ details.msg-drawer summary:hover { color: var(--ink); border-color: var(--ink); 
     sec_3: "03 &middot; Arkiv og etterlevelse",
     a1_loc: "London, Storbritannia",
     a1_h: "Juridisk databasearkivering og flerspråklig saksarbeid",
-    a1_p: "Elektronisk arkivar i HMS-avdelingen hos Freshfields Bruckhaus Deringer LLP (London): digital arkivering, indeksering og kildekontroll. Senere sosialarbeider og tolk hos St Mungo's (London) på litauisk, engelsk og russisk.",
-    a1_tags: "Databasearkivering &middot; kildekontroll &middot; tolking &middot; prosedyre",
-    a2_loc: "NO&ndash;LT korridor",
+    a1_p: "Elektronisk arkivar i HMS-avdelingen hos Freshfields Bruckhaus Deringer LLP (London): digital arkivering, indeksering og kildekontroll. Senere støttearbeid og tolking hos St Mungo's (London) på litauisk, engelsk og russisk.",
+    a1_tags: "Databasearkivering &middot; kildekontroll &middot; tolking &middot; skriftlige prosedyrer",
+    a2_loc: "NO&ndash;LT-korridoren",
     a2_h: "Eksport- og dokumentasjonsstudie for norske byggevarer (ARKA)",
     a2_p: "Studie av norske dokumentasjonskrav for byggevarer (DOK &sect;&sect; 4, 5, 11, 13), NOBB-strukturer, FDV / DoP-sjekklister, TEK17-praksis og baltisk modulprising. Modell publisert i <a href=\"arka_no.html\">ARKA</a>.",
     sp1_h: "Språk", sp1_p: "Litauisk (morsmål). Engelsk (C1, IELTS). Russisk (flytende). Norsk (A2, under utvikling mot B1/B2). Fransk og polsk (grunnleggende).",
     sp2_h: "Utdanning", sp2_p: "Vilnius universitet, litauisk filologi med fransk støttefag (2012&ndash;2016, 2 år). LMTA regi (2001&ndash;2004). IELTS Academic C1 (2016).",
-    sp3_h: "HMS og tilgjengelighet", sp3_p: "HMS-opplæring innen bygg i Norge og Storbritannia (2010&ndash;2024). Tilgjengelig for teknisk dokumentasjon, kvalitetskontroll, treberegning og Linux-drift.",
+    sp3_h: "HMS og tilgjengelighet", sp3_p: "HMS-opplæring innen bygg i Norge og Storbritannia (2010&ndash;2024). Tilgjengelig for teknisk dokumentasjon, kvalitetskontroll, dimensjonering av treverk og Linux-drift.",
     sec_4: "04 &middot; Kontakt og privat CV",
     cv_lead: "Fullstendig datert CV (arbeidsgivere, telefonnummer og referanser) holdes utenfor nettet og sendes som PDF på direkte forespørsel.",
     cv_btn: "Be om CV (PDF)",
-    msg_open: "Direkte melding",
-    f_name: "Navn",
-    f_email: "E-post",
-    f_msg: "Melding",
-    f_send: "Send"
+    msg_link: "Direkte melding &rarr;"
   };
 
-  if (window.location.hash === "#contact") {
-    var dr = document.querySelector(".msg-drawer");
-    if (dr) dr.open = true;
-  }
-
-  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
-  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
   var cvBtn = document.getElementById("cv-mail-btn");
-  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
-
-  function applyLang(lang) {
-    var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
-    document.documentElement.lang = l === "no" ? "nb" : l;
-    document.title = dict.page_title || EN.page_title;
-    nodes.forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
-    });
-    if (cvBtn) {
-      cvBtn.href = l === "lt"
-        ? "mailto:pagalysm@gmail.com?subject=Privataus%20CV%20u%C5%BEklausa%20-%20Mantas%20Pagalys"
-        : (l === "no"
-          ? "mailto:pagalysm@gmail.com?subject=Privat%20CV-foresp%C3%B8rsel%20-%20Mantas%20Pagalys"
-          : l === "pt"
-          ? "mailto:pagalysm@gmail.com?subject=Pedido%20de%20CV%20privado%20-%20Mantas%20Pagalys"
-          : "mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys");
-    }
-    arkaLinks.forEach(function (a) { a.href = l === "no" ? "arka_no.html" : "arka.html"; });
-    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
-    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
-    try { localStorage.setItem("greifiks-lang", l); } catch (e) {}
-  }
-  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+  if (cvBtn) cvBtn.addEventListener("click", function () {
+    if (window.greifiksTrack) window.greifiksTrack("request/cv", "Request CV");
+  });
+  var cvHref = {
+    lt: "mailto:pagalysm@gmail.com?subject=Privataus%20CV%20u%C5%BEklausa%20-%20Mantas%20Pagalys",
+    no: "mailto:pagalysm@gmail.com?subject=Privat%20CV-foresp%C3%B8rsel%20-%20Mantas%20Pagalys",
+    pt: "mailto:pagalysm@gmail.com?subject=Pedido%20de%20CV%20privado%20-%20Mantas%20Pagalys",
+    en: "mailto:pagalysm@gmail.com?subject=Private%20CV%20Request%20-%20Mantas%20Pagalys"
+  };
+  if (window.greifiksI18n) window.greifiksI18n({
+    lt: LT, no: NO, pt: PT,
+    onChange: function (l) { if (cvBtn) cvBtn.href = cvHref[l] || cvHref.en; }
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

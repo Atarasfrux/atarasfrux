@@ -18,9 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=10"></script>
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/theme.js?v=11"></script>
+<script src="assets/entropy.js?v=11"></script>
 <style>
 :root {
   --paper: #090a0c;
@@ -374,15 +374,6 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
   border: 1px dashed var(--red); color: var(--red); background: rgba(176, 46, 26, 0.045);
 }
 @media (max-width: 860px) {
-  .nav-inner { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; gap: 10px 16px; }
-  .nav-right { display: contents; }
-  .brand { order: 1; }
-  .lang-switch { order: 2; }
-  .nav-links {
-    display: flex; order: 3; flex: 1 0 100%; flex-wrap: wrap;
-    gap: 8px 18px; padding-top: 10px; border-top: 1px solid var(--rule);
-  }
-  .nav-links a { font-size: 0.68rem; letter-spacing: 0.14em; padding: 2px 0; }
   .controls { grid-template-columns: 1fr; }
   section[id] { scroll-margin-top: 106px; }
 }
@@ -415,13 +406,6 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         <div class="theme-switch" role="group" aria-label="Theme">
           <button type="button" data-theme-set="light">Light</button>
           <button type="button" data-theme-set="dark" class="active">Dark</button>
-        </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
         </div>
       </div>
     </div>
@@ -870,8 +854,9 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
   var currentLang = "en";
   var wallMode = "ext";
   var wallMat = "clay";
+  function L4(en, lt, no, pt) { return currentLang === "lt" ? lt : (currentLang === "no" ? no : (currentLang === "pt" ? pt : en)); }
 
-  /* ==================== UNIVERSAL PLAIN-WORDS EXPLAINER ENGINE (21 EN + LT TOPICS) ==================== */
+  /* ==================== UNIVERSAL PLAIN-WORDS EXPLAINER ENGINE (19 EN / LT / NO / PT TOPICS) ==================== */
   var EXPLAIN = {
     skiftesverk: {
       en: ["WHAT IS SKIFTESVERK?",
@@ -881,7 +866,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["KAS YRA SKIFTESVERK?",
         "<p><strong>Kaip veikia:</strong> Užuot kirtus milžiniškus senus rąstus ilgoms sienoms, kas 1,50 m pastatomi vertikalūs stulpai, o tarp jų lyg kortos į griovelius sukraunami trumpi, ploni horizontalūs rąsteliai.</p>" +
         "<p><strong>Kodėl tinka čia:</strong> Vienas žmogus rankiniais įrankiais gali suręsti tvirtą sieną iš plonų &Oslash;10 cm jaunuolyno beržų, viršuje palikdamas 10–12 cm samanų tarpą medienos sėdimui.</p>" +
-        "<p><strong>Kilmė:</strong> Viduramžių Skandinavijos ir Baltijos konstrukcija (šved. <em>skiftesverk</em>, norv. <em>sleppevegg</em>), atsiradusi trūkstant ilgų rąstų.</p>"]
+        "<p><strong>Kilmė:</strong> Viduramžių Skandinavijos ir Baltijos konstrukcija (šved. <em>skiftesverk</em>, norv. <em>sleppevegg</em>), atsiradusi trūkstant ilgų rąstų.</p>"],
+      no: ["HVA ER SKIFTESVERK (SLEPPEVEGG)?",
+        "<p><strong>Hvordan det virker:</strong> I stedet for å felle store, gamle trær til lange laftevegger, setter man opp loddrette stolper hver 1,50 m og skyver korte, tynne liggende stokker ned mellom dem i sporlister.</p>" +
+        "<p><strong>Hvorfor det passer her:</strong> Lar én person bygge en massiv trevegg av tynne &Oslash;10 cm bjørkestokker med håndverktøy alene, med en 10&ndash;12 cm mosefylt setningsspalte øverst slik at tømmeret krymper fritt under tørking.</p>" +
+        "<p><strong>Opprinnelse:</strong> Middelaldersk skandinavisk og baltisk stolpe-og-plank-teknikk (svensk <em>skiftesverk</em>, norsk <em>sleppevegg</em>), utviklet da rettvokst stortømmer ble mangelvare.</p>"],
+      pt: ["O QUE É SKIFTESVERK?",
+        "<p><strong>Como funciona:</strong> Em vez de derrubar árvores antigas enormes para paredes longas encaixadas nos cantos, erguem-se pilares verticais a cada 1,50 m e deslizam-se toras horizontais curtas e finas entre eles em canaletas, como cartas num trilho de madeira.</p>" +
+        "<p><strong>Por que importa aqui:</strong> Permite que uma pessoa construa uma parede maciça de madeira com bétulas finas de desbaste (&Oslash;10 cm) usando apenas ferramentas manuais, deixando uma folga de 10&ndash;12 cm com musgo no topo para a madeira assentar livremente ao secar.</p>" +
+        "<p><strong>Origem:</strong> Carpintaria medieval escandinava e báltica de pilares e pranchas (sueco <em>skiftesverk</em>, norueguês <em>sleppevegg</em>), criada quando toras longas e retas ficaram escassas.</p>"]
     },
     thrust: {
       en: ["ROOF THRUST & TIE TENSION · H = W / (2 tan θ)",
@@ -891,7 +884,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["STOGO SKĖTIMAS IR STYGA · H = W / (2 tan θ)",
         "<p><strong>Kaip veikia:</strong> Pastatykite atverstą knygą kaip palapinę ant stalo ir paspauskite viršūnę: apačia iškart slysta į šonus. Horizontali styga tarsi virvė suriša šlaitus, kad sienos neišsiskėstų.</p>" +
         "<p><strong>Kiekviena raidė:</strong> <strong>H</strong> = tempimo jėga stygoje (1 kN &approx; 100 kg); <strong>W</strong> = stogo ir sniego svoris; <strong>&theta;</strong> = stogo kampas. Statesnis stogas smarkiai sumažina skėtimą.</p>" +
-        "<p><strong>Kilmė:</strong> Jėgų trikampius 1586 m. aprašė Simonas Stevinas; dailidės šia taisykle naudojosi šimtmečiais anksčiau.</p>"]
+        "<p><strong>Kilmė:</strong> Jėgų trikampius 1586 m. aprašė Simonas Stevinas; dailidės šia taisykle naudojosi šimtmečiais anksčiau.</p>"],
+      no: ["SIDETRYKK OG STREKK I BINDBJELKE · H = W / (2 tan θ)",
+        "<p><strong>Hvordan det virker:</strong> Sett en åpen bok som et telt på et glatt bord og trykk ned på mønet: bunnkantene vil skli utover. Den horisontale bindbjelken virker som et tau som holder begge takflatene sammen så veggene ikke presses fra hverandre.</p>" +
+        "<p><strong>Hver bokstav:</strong> <strong>H</strong> = strekkraft i bindbjelken (1 kN &approx; 100 kg); <strong>W</strong> = tak- og snøvekt som trykker ned på mønet; <strong>&theta;</strong> = takvinkel. Brattere tak reduserer sidetrykket kraftig.</p>" +
+        "<p><strong>Opprinnelse:</strong> Krafttrekanter ble formulert av Simon Stevin i 1586; tømrere brukte den samme geometrien i århundrer før trigonometrien ble skrevet ned.</p>"],
+      pt: ["EMPUXO DO TELHADO E TRAÇÃO NO TIRANTE · H = W / (2 tan θ)",
+        "<p><strong>Como funciona:</strong> Apoie um livro aberto como uma barraca sobre uma mesa lisa e pressione o topo: as bordas inferiores tentam escorregar para fora. O tirante horizontal age como uma corda prendendo as duas águas para que as paredes nunca se abram.</p>" +
+        "<p><strong>Cada letra:</strong> <strong>H</strong> = tração dentro do tirante (1 kN &approx; 100 kg); <strong>W</strong> = peso da cobertura + neve pressionando a cumeeira; <strong>&theta;</strong> = inclinação do telhado. Um telhado mais íngreme reduz fortemente o empuxo lateral.</p>" +
+        "<p><strong>Origem:</strong> Os triângulos de forças foram formalizados por Simon Stevin em 1586; carpinteiros já usavam essa geometria de tirantes séculos antes de a trigonometria ser escrita.</p>"]
     },
     snow: {
       en: ["SNOW SHAPE FACTOR μ₁(θ) & 45° REED RULE",
@@ -901,7 +902,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["SNIEGO KOEFICIENTAS μ₁(θ) IR 45° NENDRIŲ TAISYKLĖ",
         "<p><strong>Kaip veikia:</strong> Ant plokščio stogo sniegas kaupiasi, o nuo stataus nučiuožia. Tarp 30&deg; ir 60&deg; „Eurocode“ mažina sniegą pagal <strong>&mu;<sub>1</sub> = 0,8 &times; (60 &minus; &theta;) / 30</strong>. Prie 45&deg; lieka tik 40% žemės sniego apkrovos.</p>" +
         "<p><strong>Kodėl nendrėms reikia &ge;45&deg;:</strong> Ant lėkštesnio stogo vanduo užsilaiko stiebuose ir stogas dvigubai greičiau supūva.</p>" +
-        "<p><strong>Kilmė:</strong> Įtvirtinta standarte LST EN 1991-1-3 (Širvintų II zonos sniegas = 1,60 kN/m&sup2;).</p>"]
+        "<p><strong>Kilmė:</strong> Įtvirtinta standarte LST EN 1991-1-3 (Širvintų II zonos sniegas = 1,60 kN/m&sup2;).</p>"],
+      no: ["SNØFORMFAKTOR μ₁(θ) OG 45°-REGELEN FOR TAKRØR",
+        "<p><strong>Hvordan det virker:</strong> Snø legger seg dypt på flate tak, men sklir av bratte. Mellom 30&deg; og 60&deg; reduserer Eurokode snølasten med <strong>&mu;<sub>1</sub> = 0,8 &times; (60 &minus; &theta;) / 30</strong>. Ved 45&deg; bærer taket bare 40 % av bakkesnølasten i stedet for 80 %.</p>" +
+        "<p><strong>Hvorfor &ge;45&deg; for takrør:</strong> Under 45&deg; blir regnvann stående inne i vintertakrørene i stedet for å renne rent av tuppene, noe som halverer levetiden.</p>" +
+        "<p><strong>Opprinnelse:</strong> Europeiske takmålinger fastsatt i LST EN 1991-1-3 (Širvintos sone II bakkesnø = 1,60 kN/m&sup2;).</p>"],
+      pt: ["COEFICIENTE DE NEVE μ₁(θ) E REGRA DOS 45° PARA JUNCO",
+        "<p><strong>Como funciona:</strong> A neve se acumula em telhados planos, mas escorrega nos íngremes. Entre 30&deg; e 60&deg;, o Eurocódigo reduz a carga de neve por <strong>&mu;<sub>1</sub> = 0,8 &times; (60 &minus; &theta;) / 30</strong>. A 45&deg;, o telhado retém apenas 40% da carga de neve no solo em vez de 80%.</p>" +
+        "<p><strong>Por que &ge;45&deg; para junco:</strong> Abaixo de 45&deg;, a água da chuva fica retida nos talos em vez de escorrer limpa pelas pontas, cortando pela metade a vida útil do colmo.</p>" +
+        "<p><strong>Origem:</strong> Medições europeias codificadas na LST EN 1991-1-3 (neve no solo em Širvintos, Zona II = 1,60 kN/m&sup2;).</p>"]
     },
     defl: {
       en: ["FLOOR GIRDER SAG · δ = 5qL⁴ / (384EI)",
@@ -911,7 +920,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["GRINDŲ SIJOS ĮLINKIS · δ = 5qL⁴ / (384EI)",
         "<p><strong>Kaip veikia:</strong> Parodo, kiek milimetrų pamato sija įlinksta viduryje. Kadangi tarpatramis <strong>L</strong> keliamas 4-uoju laipsniu, padvigubinus atstumą tarp akmenų grindys tampa <strong>16 kartų minkštesnės</strong>.</p>" +
         "<p><strong>Kiekviena raidė:</strong> <strong>&delta;</strong> = įlinkis; <strong>q</strong> = svoris metrui; <strong>L</strong> = tarpatramis tarp akmenų (W/4); <strong>E</strong> = eglės standumas; <strong>I = &pi;d<sup>4</sup>/64</strong> = apvalaus rąsto standumas.</p>" +
-        "<p><strong>Kodėl L/500:</strong> Apie 1750 m. išsprendė Eileris ir Bernulis. Išlaikant įlinkį &lt; L/500, kietos plūktos molio grindys netrūkinėja.</p>"]
+        "<p><strong>Kodėl L/500:</strong> Apie 1750 m. išsprendė Eileris ir Bernulis. Išlaikant įlinkį &lt; L/500, kietos plūktos molio grindys netrūkinėja.</p>"],
+      no: ["NEDBØYNING I GULVBJELKE · δ = 5qL⁴ / (384EI)",
+        "<p><strong>Hvordan det virker:</strong> Viser hvor mange millimeter en trebjelke bøyer seg ned på midten under vekten av gulv og folk. Fordi spennvidden <strong>L</strong> opphøyes i 4. potens, gir dobbel avstand mellom pilarsteinene <strong>16 ganger mer svikt</strong>.</p>" +
+        "<p><strong>Hver bokstav:</strong> <strong>&delta;</strong> = nedbøyning på midten; <strong>q</strong> = last per meter; <strong>L</strong> = fritt spenn mellom steiner (W/4); <strong>E</strong> = granas stivhet; <strong>I = &pi;d<sup>4</sup>/64</strong> = rundstokks stivhet.</p>" +
+        "<p><strong>Hvorfor L/500:</strong> Euler og Bernoulli løste den elastiske bjelkelinjen ca. 1750. Å holde nedbøyningen under <strong>L/500</strong> hindrer at et hardpolert leiregulv sprekker.</p>"],
+      pt: ["FLECHA DA VIGA DO PISO · δ = 5qL⁴ / (384EI)",
+        "<p><strong>Como funciona:</strong> Mostra quantos milímetros uma viga de madeira enverga no meio sob o peso do piso e das pessoas. Como o vão <strong>L</strong> é elevado à 4ª potência, dobrar o espaçamento entre as pedras deixa o piso <strong>16 vezes mais flexível</strong>.</p>" +
+        "<p><strong>Cada letra:</strong> <strong>&delta;</strong> = flecha no meio do vão; <strong>q</strong> = carga por metro; <strong>L</strong> = vão livre entre apoios (W/4); <strong>E</strong> = rigidez do espruce; <strong>I = &pi;d<sup>4</sup>/64</strong> = inércia da tora roliça.</p>" +
+        "<p><strong>Por que L/500:</strong> Euler e Bernoulli resolveram a linha elástica por volta de 1750. Manter a flecha abaixo de <strong>L/500</strong> impede que um piso duro de argila brunida rache sob os pés.</p>"]
     },
     str_cap: {
       en: ["STR 1.01.03:2017 · GROUP I STATUTORY CAP (≤50 m², ≤5.0 m)",
@@ -919,7 +936,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Watch live:</strong> Drag Width, Bays, or Pitch past the limit and the metric boxes immediately turn crimson to flag where the cap is crossed.</p>"],
       lt: ["STR 1.01.03:2017 · I GRUPĖS RIBOS (≤50 m², ≤5,0 m)",
         "<p><strong>Ką reiškia:</strong> Pagal STR 1.01.03:2017, I grupės nesudėtingas negyvenamasis pagalbinis pastatas iki <strong>50 m&sup2;</strong> ploto ir iki <strong>5,00 m</strong> aukščio už saugomų teritorijų ribų statomas be statybos leidimo (sklypą būtina pasitikrinti VTPSI „Infostatyboje“; gyvenamiesiems namams leidimas būtinas visada).</p>" +
-        "<p><strong>Stebėkite gyvai:</strong> Peržengus plotą arba 5,00 m kraigo aukštį, skaitikliai iškart paraudonuoja.</p>"]
+        "<p><strong>Stebėkite gyvai:</strong> Peržengus plotą arba 5,00 m kraigo aukštį, skaitikliai iškart paraudonuoja.</p>"],
+      no: ["STR 1.01.03:2017 · LOVFESTET GRENSE GRUPPE I (≤50 m², ≤5,0 m)",
+        "<p><strong>Hva det betyr:</strong> Etter litauisk byggeforskrift STR 1.01.03:2017 kan et enkelt, ikke-beboelig uthus/driftsbygg i gruppe I opptil <strong>50 m&sup2;</strong> grunnflate og <strong>5,00 m</strong> ytterhøyde oppføres uten byggetillatelse utenfor vernesoner (sjekk alltid eiendommen i VTPSI Infostatyba; bolighus krever alltid tillatelse).</p>" +
+        "<p><strong>Se direkte:</strong> Dra bredde, lengdefag eller takvinkel forbi grensen, så skifter målefeltene straks til rødt der grensen overskrides.</p>"],
+      pt: ["STR 1.01.03:2017 · LIMITE LEGAL DO GRUPO I (≤50 m², ≤5,0 m)",
+        "<p><strong>O que significa:</strong> Pela norma construtiva lituana STR 1.01.03:2017, um anexo rural ou auxiliar não residencial do Grupo I com até <strong>50 m&sup2;</strong> de área e até <strong>5,00 m</strong> de altura externa pode ser construído sem alvará fora de zonas protegidas (verifique sempre o lote no VTPSI Infostatyba; residências sempre exigem alvará).</p>" +
+        "<p><strong>Veja ao vivo:</strong> Arraste largura, vãos ou inclinação além do limite e os quadros ficam imediatamente vermelhos onde a cota é ultrapassada.</p>"]
     },
     euler_post: {
       en: ["POST BUCKLING · P_cr = π²EI / (KL)²",
@@ -929,7 +952,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["STULPO KLUPUMAS · P_cr = π²EI / (KL)²",
         "<p><strong>Kaip veikia:</strong> Paspauskite stačią liniuotę iš viršaus: dar nesugniuždyta ji staiga išlinksta į šoną. Šis skaičius parodo kritinę apkrovą (10 kN &approx; 1 tona) ir saugumo atsargą lyginant su tikru stogo svoriu.</p>" +
         "<p><strong>Kodėl skersmuo svarbiausias:</strong> Apvaliam rąstui <strong>I = &pi;d<sup>4</sup>/64</strong>. Padidinus stulpą nuo &Oslash;12 cm iki &Oslash;15 cm, atsparumas išlinkimui išauga daugiau nei dvigubai!</p>" +
-        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė 1757 m.</p>"]
+        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė 1757 m.</p>"],
+      no: ["STOLPEKNEKKING · P_cr = π²EI / (KL)²",
+        "<p><strong>Hvordan det virker:</strong> Trykk ned på en stående linjal: lenge før trefibrene knuses, bøyer en slank stolpe seg ut til siden og knekker. Tallet viser kritisk knekklast (i kN; 10 kN &approx; 1 tonn) og sikkerhetsfaktoren mot faktisk takvekt.</p>" +
+        "<p><strong>Hvorfor tykkelse vinner:</strong> For en rundstokk er <strong>I = &pi;d<sup>4</sup>/64</strong>. Å øke stolpen fra &Oslash;12 cm til &Oslash;15 cm mer enn dobler knekkstyrken!</p>" +
+        "<p><strong>Opprinnelse:</strong> Leonhard Euler utledet denne loven i 1757 for å forutsi sideveis svikt i slanke søyler.</p>"],
+      pt: ["FLAMBAGEM DO PILAR · P_cr = π²EI / (KL)²",
+        "<p><strong>Como funciona:</strong> Pressione para baixo uma régua em pé: muito antes de as fibras da madeira esmagarem, um pilar fino enverga para o lado e rompe. O valor mostra a carga crítica (em kN; 10 kN &approx; 1 tonelada) e a margem de segurança frente ao peso real do telhado.</p>" +
+        "<p><strong>Por que o diâmetro decide:</strong> Para uma tora roliça, <strong>I = &pi;d<sup>4</sup>/64</strong>. Passar o pilar de &Oslash;12 cm para &Oslash;15 cm mais que dobra sua resistência à flambagem!</p>" +
+        "<p><strong>Origem:</strong> Leonhard Euler derivou esta lei em 1757 para prever a instabilidade lateral de colunas esbeltas.</p>"]
     },
     fourier: {
       en: ["FOURIER THERMAL GRADIENT · T(x) & U-VALUE",
@@ -939,7 +970,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["FURJĖ ŠILUMOS GRADIENTAS · T(x) IR U VERTĖ",
         "<p><strong>Kaip veikia:</strong> Įmerkus šaukštą į karštą sriubą, šiluma tolygiai bėga link šalto galo. Juoda kreivė grafike parodo tikslią temperatūrą kiekviename sienos sluoksnyje nuo +20&deg;C viduje iki &minus;20&deg;C lauke. Gera izoliacija „sugeria“ šaltį savyje, kad medis už jos liktų šiltas.</p>" +
         "<p><strong>Kiekviena raidė:</strong> <strong>d</strong> = storis (m); <strong>&lambda; (lambda)</strong> = šilumos laidumas (mažiau = šilčiau: švendrai 0,055, medis 0,15, grynos kalkės 0,80); <strong>R = d/&lambda;</strong> = varža; <strong>U = 1/R<sub>tot</sub></strong> = bendri šilumos nuostoliai.</p>" +
-        "<p><strong>Kilmė:</strong> Žozefas Furjė paskelbė 1822 m., tyrinėdamas metalo strypų ir Žemės aušimą.</p>"]
+        "<p><strong>Kilmė:</strong> Žozefas Furjė paskelbė 1822 m., tyrinėdamas metalo strypų ir Žemės aušimą.</p>"],
+      no: ["FOURIER-TEMPERATURGRADIENT · T(x) OG U-VERDI",
+        "<p><strong>Hvordan det virker:</strong> Hold en metallskje i varm suppe: varmen vandrer jevnt mot den kalde enden. Den tykke svarte linjen viser nøyaktig temperatur gjennom hvert vegglag fra +20&deg;C inne til &minus;20&deg;C ute. God isolasjon tar det største temperaturfallet i seg selv slik at treet bak holder seg varmt.</p>" +
+        "<p><strong>Hver bokstav:</strong> <strong>d</strong> = lagtykkelse (m); <strong>&lambda; (lambda)</strong> = varmeledningsevne (lavere = varmere: dunkjevle 0,055, tre 0,15, tett kalk/leire 0,80); <strong>R = d/&lambda;</strong> = varmemotstand; <strong>U = 1/R<sub>tot</sub></strong> = samlet varmetap.</p>" +
+        "<p><strong>Opprinnelse:</strong> Joseph Fourier publiserte denne loven i 1822 da han studerte avkjøling i jernstenger og jordskorpen.</p>"],
+      pt: ["GRADIENTE TÉRMICO DE FOURIER · T(x) E VALOR U",
+        "<p><strong>Como funciona:</strong> Segure uma colher de metal numa sopa quente: o calor avança continuamente para a ponta fria. A linha preta grossa traça a temperatura exata dentro de cada camada da parede, de +20&deg;C no interior até &minus;20&deg;C no exterior. Um bom isolamento concentra a queda de temperatura em si mesmo para que a madeira atrás permaneça quente.</p>" +
+        "<p><strong>Cada letra:</strong> <strong>d</strong> = espessura da camada (m); <strong>&lambda; (lambda)</strong> = condutividade térmica (menor = mais quente: taboa 0,055, madeira 0,15, cal/argila densa 0,80); <strong>R = d/&lambda;</strong> = resistência térmica; <strong>U = 1/R<sub>tot</sub></strong> = perda total de calor.</p>" +
+        "<p><strong>Origem:</strong> Joseph Fourier publicou esta lei em 1822 ao estudar o resfriamento de barras de ferro e da Terra.</p>"]
     },
     uval: {
       en: ["WALL U-VALUE · W/(m²·K)",
@@ -947,7 +986,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Scale intuition:</strong> Bare 100 mm birch log wall = ~1.08 (freezing); 120 mm clay-Typha + birch = <strong>0.32</strong> (cuts heat loss by more than 3 times); 150 mm slaked lime + Typha = <strong>0.33</strong>.</p>"],
       lt: ["SIENOS U VERTĖ · W/(m²·K)",
         "<p><strong>Ką reiškia:</strong> Kiek vatų šilumos pabėga pro 1 kvadratinį metrą sienos esant 1&deg;C temperatūrų skirtumui. <strong>Mažesnis skaičius = šiltesnė siena.</strong></p>" +
-        "<p><strong>Palyginimas:</strong> Plika 100 mm beržo siena = ~1,08 (šalta); 120 mm molio-švendrų + beržas = <strong>0,32</strong> (nuostoliai mažesni daugiau nei 3 kartus); 150 mm gesintų kalkių + švendrai = <strong>0,33</strong>.</p>"]
+        "<p><strong>Palyginimas:</strong> Plika 100 mm beržo siena = ~1,08 (šalta); 120 mm molio-švendrų + beržas = <strong>0,32</strong> (nuostoliai mažesni daugiau nei 3 kartus); 150 mm gesintų kalkių + švendrai = <strong>0,33</strong>.</p>"],
+      no: ["VEGGENS U-VERDI · W/(m²·K)",
+        "<p><strong>Hva det betyr:</strong> Hvor mange watt varme som slipper ut gjennom 1 kvadratmeter vegg per 1&deg;C forskjell mellom inne og ute. <strong>Lavere tall er varmere.</strong></p>" +
+        "<p><strong>Størrelsesorden:</strong> Bar 100 mm bjørkevegg = ~1,08 (iskald); 120 mm leire-dunkjevle + bjørk = <strong>0,32</strong> (kutter varmetapet til under en tredjedel); 150 mm lesket kalk + dunkjevle = <strong>0,33</strong>.</p>"],
+      pt: ["VALOR U DA PAREDE · W/(m²·K)",
+        "<p><strong>O que significa:</strong> Quantos watts de calor escapam por 1 metro quadrado de parede para cada 1&deg;C de diferença entre dentro e fora. <strong>Quanto menor, mais quente.</strong></p>" +
+        "<p><strong>Noção de escala:</strong> Parede nua de 100 mm de bétula = ~1,08 (gelada); 120 mm de argila + taboa + bétula = <strong>0,32</strong> (reduz a perda de calor em mais de 3 vezes); 150 mm de cal hidratada + taboa = <strong>0,33</strong>.</p>"]
     },
     birch_cl5: {
       en: ["COLDEST BIRCH FACE & EN 350 CLASS 5",
@@ -955,7 +1000,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Why exterior insulation saves it:</strong> Placing insulation outside the birch keeps its coldest face near +10&deg;C instead of &minus;10&deg;C, preventing winter frost condensation directly on the wood.</p>"],
       lt: ["ŠALČIAUSIA BERŽO PUSĖ IR EN 350 5 KLASĖ",
         "<p><strong>Kodėl beržas jautrus drėgmei:</strong> Europos standartas EN 350 medienos atsparumą puvimui skirsto nuo 1 klasės (ąžuolas) iki <strong>5 klasės (neatsparus: beržas, <em>Betula pendula</em>)</strong>. Šlapias beržas supūva per 1–3 metus, o visiškai sausas viduje tarnauja šimtmetį.</p>" +
-        "<p><strong>Kodėl gelbsti išorinė izoliacija:</strong> Išorėje esantys švendrai išlaiko beržą apie +10&deg;C šilumoje vietoj &minus;10&deg;C šalčio.</p>"]
+        "<p><strong>Kodėl gelbsti išorinė izoliacija:</strong> Išorėje esantys švendrai išlaiko beržą apie +10&deg;C šilumoje vietoj &minus;10&deg;C šalčio.</p>"],
+      no: ["KALDESTE BJØRKESIDE OG EN 350 KLASSE 5",
+        "<p><strong>Hvorfor bjørk råtner raskt når den blir våt:</strong> Europeisk standard EN 350 graderer naturlig råtebestandighet fra klasse 1 (svært holdbar, som eik) ned til <strong>klasse 5 (ikke holdbar: hengebjørk, <em>Betula pendula</em>)</strong>. Våt bjørk råtner på 1&ndash;3 sesonger; knusktørr bjørk innendørs varer over hundre år.</p>" +
+        "<p><strong>Hvorfor utvendig isolasjon redder den:</strong> Isolasjon utenpå bjørken holder kaldeste flate nær +10&deg;C i stedet for &minus;10&deg;C, og hindrer vinterkondens rett på treet.</p>"],
+      pt: ["FACE MAIS FRIA DA BÉTULA E EN 350 CLASSE 5",
+        "<p><strong>Por que a bétula é frágil se molhar:</strong> A norma europeia EN 350 classifica a durabilidade natural da madeira da Classe 1 (muito durável, como o carvalho) até a <strong>Classe 5 (não durável: bétula, <em>Betula pendula</em>)</strong>. Bétula úmida apodrece em 1&ndash;3 estações; bétula seca no interior dura mais de um século.</p>" +
+        "<p><strong>Por que o isolamento externo a protege:</strong> Colocar o isolamento por fora mantém a face mais fria da bétula perto de +10&deg;C em vez de &minus;10&deg;C, evitando condensação de inverno direto na madeira.</p>"]
     },
     dewpoint: {
       en: ["INDOOR DEW POINT · T_dew(T, RH)",
@@ -963,7 +1014,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Numbers:</strong> At +20&deg;C and 50% humidity, dew forms on any surface colder than <strong>+9.3&deg;C</strong>. Raise indoor humidity to 70% (drying laundry or cooking without venting) and dew forms already at <strong>+14.4&deg;C</strong>.</p>"],
       lt: ["VIDAUS RASOS TAŠKAS · T_dew(T, RH)",
         "<p><strong>Kas tai:</strong> Išėmus šaltą skardinę iš šaldytuvo, nematoma oro drėgmė iškart virsta lašais ant jos paviršiaus. Rasos taškas yra tiksli temperatūra, prie kurios oras pradeda „rasoti“.</p>" +
-        "<p><strong>Skaičiai:</strong> Prie +20&deg;C ir 50% drėgmės rasa susidaro ant bet ko šaltesnio nei <strong>+9,3&deg;C</strong>. Pakilus drėgmei iki 70% (džiovinant drabužius be vėdinimo), rasa krenta jau prie <strong>+14,4&deg;C</strong>.</p>"]
+        "<p><strong>Skaičiai:</strong> Prie +20&deg;C ir 50% drėgmės rasa susidaro ant bet ko šaltesnio nei <strong>+9,3&deg;C</strong>. Pakilus drėgmei iki 70% (džiovinant drabužius be vėdinimo), rasa krenta jau prie <strong>+14,4&deg;C</strong>.</p>"],
+      no: ["INNVENDIG DUGGPUNKT · T_dew(T, RH)",
+        "<p><strong>Hva det er:</strong> Ta en kald brusboks ut av kjøleskapet på en varm dag: usynlig vanndamp i luften blir straks til vanndråper på metallet. Duggpunktet er den nøyaktige overflatetemperaturen der dette skjer.</p>" +
+        "<p><strong>Tall:</strong> Ved +20&deg;C og 50 % luftfuktighet dannes kondens på alt kaldere enn <strong>+9,3&deg;C</strong>. Stiger fuktigheten til 70 % (klestørk eller matlaging uten lufting), faller duggen allerede ved <strong>+14,4&deg;C</strong>.</p>"],
+      pt: ["PONTO DE ORVALHO INTERNO · T_dew(T, RH)",
+        "<p><strong>O que é:</strong> Tire uma lata gelada da geladeira num dia quente: o vapor invisível do ar vira gotículas de água no metal na mesma hora. O ponto de orvalho é a temperatura exata de superfície em que isso acontece.</p>" +
+        "<p><strong>Números:</strong> A +20&deg;C e 50% de umidade, forma-se condensação em qualquer superfície mais fria que <strong>+9,3&deg;C</strong>. Se a umidade subir para 70% (secar roupa ou cozinhar sem ventilar), já condensa a <strong>+14,4&deg;C</strong>.</p>"]
     },
     glaser: {
       en: ["GLASER VAPOR GRADIENT & 5:1 RULE (s_d = μ · d)",
@@ -973,7 +1030,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["GLASERIO GARŲ GRADIENTAS IR 5:1 TAISYKLĖ",
         "<p><strong>Kaip veikia:</strong> Žiemą šiltas vidaus oras stumia garus į lauką. <strong>s<sub>d</sub></strong> rodo, kaip stipriai sluoksnis stabdo garus. Jei išorinis sluoksnis sandaresnis už vidinį, drėgmė užstringa sienos viduje ir sušąla.</p>" +
         "<p><strong>5:1 taisyklė:</strong> Išoriniai sluoksniai privalo praleisti garus bent 5 kartus laisviau nei vidiniai. Beržas viduje (s<sub>d</sub> &approx; 4,0 m) + porėti švendrai išorėje (s<sub>d</sub> &approx; 0,4–0,6 m) džiūsta savaime be jokios plėvelės.</p>" +
-        "<p><strong>Kilmė:</strong> Vokiečių fizikas Helmutas Glaseris metodą paskelbė 1958–1959 m. (dabar EN ISO 13788).</p>"]
+        "<p><strong>Kilmė:</strong> Vokiečių fizikas Helmutas Glaseris metodą paskelbė 1958–1959 m. (dabar EN ISO 13788).</p>"],
+      no: ["GLASERS DAMPGRADIENT OG 5:1-REGELEN (s_d = μ · d)",
+        "<p><strong>Hvordan det virker:</strong> Varm inneluft presser vanndamp utover hele vinteren. <strong>s<sub>d</sub></strong> måler hvor sterkt et lag bremser damp (tilsvarende meter stillestående luft). Hvis ytterlaget er tettere enn innerlaget, hoper fukten seg opp inne i veggen og fryser.</p>" +
+        "<p><strong>5:1-regelen:</strong> Ytre lag må slippe damp ut <strong>minst 5 ganger lettere</strong> enn indre lag. Varm 100 mm bjørk innerst (s<sub>d</sub> &approx; 4,0 m) + porøs fiber ytterst (s<sub>d</sub> &approx; 0,4&ndash;0,6 m) tørker naturlig utover uten plastfolie.</p>" +
+        "<p><strong>Opprinnelse:</strong> Fysikeren Helmuth Glaser publiserte denne damptrykksmetoden i 1958&ndash;1959 (nå EN ISO 13788).</p>"],
+      pt: ["GRADIENTE DE VAPOR DE GLASER E REGRA 5:1 (s_d = μ · d)",
+        "<p><strong>Como funciona:</strong> O ar quente interno empurra vapor de água para fora durante todo o inverno. <strong>s<sub>d</sub></strong> mede quanto uma camada freia o vapor (espessura equivalente de ar parado em metros). Se uma camada externa for mais fechada que a interna, a umidade se acumula na parede e congela.</p>" +
+        "<p><strong>A regra 5:1:</strong> As camadas externas devem deixar o vapor sair <strong>pelo menos 5 vezes mais fácil</strong> que as internas. Bétula quente de 100 mm por dentro (s<sub>d</sub> &approx; 4,0 m) + fibra porosa por fora (s<sub>d</sub> &approx; 0,4&ndash;0,6 m) secam naturalmente para fora sem nenhum filme plástico.</p>" +
+        "<p><strong>Origem:</strong> O físico Helmuth Glaser publicou este balanço de pressão de vapor em 1958&ndash;1959 (hoje EN ISO 13788).</p>"]
     },
     slaked_lime: {
       en: ["SLAKED LIME (GESINTOS KALKĖS, Ca(OH)₂) VS. CLAY",
@@ -983,7 +1048,15 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       lt: ["GESINTOS KALKĖS Ca(OH)₂ VIETOJE MOLIO",
         "<p><strong>Ar grynos kalkės šiltina vienos?</strong> <strong>Ne.</strong> Gryna kalkių tešla praleidžia šilumą kaip plyta (&lambda; &approx; 0,80). Spustelėkite <em>Tik grynos kalkės</em> ir pamatysite, kaip beržas sušąla iki &minus;9,6&deg;C!</p>" +
         "<p><strong>Ar kalkės veikia kaip rišiklis su švendrais / kanapių spaliais / drožlėmis?</strong> <strong>Taip.</strong> Augalinis pluoštas sulaiko ~85% oro (&lambda; &approx; 0,070), o Ca(OH)<sub>2</sub> sugeria CO<sub>2</sub> ir virsta kvėpuojančiu kalkakmeniu (CaCO<sub>3</sub>). Aukštas šarmingumas (<strong>pH 12,5</strong>) saugo beržą nuo pelėsio, puvimo ir graužikų.</p>" +
-        "<p><strong>Sąlygos:</strong> 150 mm kalkių-švendrų (U = 0,33) atitinka 120 mm molio-švendrų (U = 0,32). Dėti tik prie <strong>&ge;+5&deg;C</strong> (4+ sav. be šalnų), su pirštinėmis ir akiniais; niekada nenaudoti portlandcemenčio.</p>"]
+        "<p><strong>Sąlygos:</strong> 150 mm kalkių-švendrų (U = 0,33) atitinka 120 mm molio-švendrų (U = 0,32). Dėti tik prie <strong>&ge;+5&deg;C</strong> (4+ sav. be šalnų), su pirštinėmis ir akiniais; niekada nenaudoti portlandcemenčio.</p>"],
+      no: ["LESKET KALK Ca(OH)₂ KONTRA LEIRE",
+        "<p><strong>Isolerer ren lesket kalk alene?</strong> <strong>Nei.</strong> Ren kalkmasse leder varme som tegl (&lambda; &approx; 0,80). Klikk <em>Kun ren kalk</em> nedenfor og se bjørken fryse til &minus;9,6&deg;C!</p>" +
+        "<p><strong>Virker lesket kalk som bindemiddel rundt dunkjevle / hamp / flis?</strong> <strong>Ja.</strong> Plantefibrene binder ~85 % stillestående luft (&lambda; &approx; 0,070), mens Ca(OH)<sub>2</sub> tar opp CO<sub>2</sub> fra luften og herder tilbake til pustende kalkstein (CaCO<sub>3</sub>). Høy alkalitet (<strong>pH 12,5</strong>) hindrer mugg, råte og gnagere mot klasse 5-bjørk.</p>" +
+        "<p><strong>Feltregler:</strong> 150 mm kalk-dunkjevle (U = 0,33) tilsvarer 120 mm leire-dunkjevle (U = 0,32). Brukes kun over <strong>+5&deg;C</strong> (4+ frostfrie uker), med gummihansker og vernebriller; bruk aldri portlandsement.</p>"],
+      pt: ["CAL HIDRATADA Ca(OH)₂ VS. ARGILA",
+        "<p><strong>A cal hidratada isola sozinha?</strong> <strong>Não.</strong> Pasta pura de cal conduz calor como tijolo (&lambda; &approx; 0,80). Clique em <em>Só cal pura</em> abaixo e veja a bétula gelar até &minus;9,6&deg;C!</p>" +
+        "<p><strong>A cal funciona como aglomerante com taboa / cânhamo / maravalha?</strong> <strong>Sim.</strong> As fibras vegetais aprisionam ~85% de ar parado (&lambda; &approx; 0,070), enquanto o Ca(OH)<sub>2</sub> absorve CO<sub>2</sub> do ar e volta lentamente a calcário respirável (CaCO<sub>3</sub>). Sua alcalinidade (<strong>pH 12,5</strong>) bloqueia mofo, apodrecimento e roedores junto à bétula Classe 5.</p>" +
+        "<p><strong>Regras em campo:</strong> 150 mm de cal + taboa (U = 0,33) equivalem a 120 mm de argila + taboa (U = 0,32). Aplique somente acima de <strong>+5&deg;C</strong> (4+ semanas sem geada), use luvas de borracha e óculos, e nunca use cimento Portland.</p>"]
     },
     kusabi: {
       en: ["KUSABI · DRY BIRCH LOCKING WEDGES",
@@ -991,13 +1064,23 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Field bonus:</strong> If the spruce frame shrinks slightly after one winter, two taps with a wooden mallet tighten the whole roof frame again.</p>"],
       lt: ["KUSABI · SAUSI BERŽO FIKSAVIMO PLEIŠTAI",
         "<p><strong>Kas tai:</strong> Tradicinis medinis pleištas, įkalamas per kyšantį stulpo dyglio plyšį. Kadangi beržo pleištas išdžiovinamas viduje, jis be jokių varžtų patikimai laiko 1,50 kN stygos tempimą.</p>" +
-        "<p><strong>Privalumas:</strong> Jei po pirmos žiemos eglė kiek pasėda, du medinio kūjo smūgiai vėl suveržia visą rėmą.</p>"]
+        "<p><strong>Privalumas:</strong> Jei po pirmos žiemos eglė kiek pasėda, du medinio kūjo smūgiai vėl suveržia visą rėmą.</p>"],
+      no: ["KUSABI · TØRRE LÅSEKILER AV BJØRK",
+        "<p><strong>Hva det er:</strong> En tradisjonell japansk/nordisk trekile som drives gjennom en slisset tapp som stikker forbi stolpen. Fordi kilen er tørket innendørs før montering, biter den fast på tvers av fibrene og tar 1,50 kN strekk i bindbjelken uten bolter eller stålbeslag.</p>" +
+        "<p><strong>Fordel i felt:</strong> Hvis granrammen krymper litt etter én vinter, strammer to slag med treklubben hele takrammen igjen.</p>"],
+      pt: ["KUSABI · CUNHAS DE TRAVAMENTO EM BÉTULA SECA",
+        "<p><strong>O que é:</strong> Uma cunha tradicional japonesa/nórdica de madeira batida através de uma espiga rasgada que atravessa o pilar. Por ser seca em local fechado antes da montagem, ela morde firme contra as fibras e resiste à tração de 1,50 kN do tirante sem parafusos nem chapas de aço.</p>" +
+        "<p><strong>Vantagem em obra:</strong> Se a estrutura de espruce encolher um pouco após o primeiro inverno, duas batidas com um maço de madeira reapertam todo o pórtico.</p>"]
     },
     oziai: {
       en: ["OŽIAI · CROSSED CHARRED RIDGE PINS + BIRCH BARK & SODS",
-        "<p><strong>What it is:</strong> The roof ridge is the hardest line to waterproof without plastic membrane. Instead, 3 overlapping layers of June-peeled white birch bark (naturally waterproof betulin oil) sit under 12 cm living grass sods, weighed down by 14 crossed charred spruce poles (Lithuanian <em>o&zcaron;iai</em>, Norwegian <em>vindskier</em>).</p>"],
+        "<p><strong>What it is:</strong> The roof ridge is the hardest line to waterproof without plastic membrane. Instead, 3 overlapping layers of June-peeled white birch bark (naturally waterproof betulin oil) sit under 12 cm living grass sods, weighed down by 14 crossed charred spruce poles (Lithuanian <em>o&zcaron;iai</em>).</p>"],
       lt: ["OŽIAI · SUKRYŽIUOTOS DEGINTOS KRAIGO KARTYS, TOŠIS IR VELĖNA",
-        "<p><strong>Kas tai:</strong> Kraigas – sudėtingiausia vieta sandarinti be plėvelės. Čia klojami 3 birželį luptos baltos beržo tošies sluoksniai (natūraliai atsparūs vandeniui), virš jų 12 cm gyva velėna, o viską tvirtai prispaudžia 14 sukryžiuotų apdegintų eglių karčių (<em>ožiai</em>).</p>"]
+        "<p><strong>Kas tai:</strong> Kraigas – sudėtingiausia vieta sandarinti be plėvelės. Čia klojami 3 birželį luptos baltos beržo tošies sluoksniai (natūraliai atsparūs vandeniui), virš jų 12 cm gyva velėna, o viską tvirtai prispaudžia 14 sukryžiuotų apdegintų eglių karčių (<em>ožiai</em>).</p>"],
+      no: ["OŽIAI · KRYSSEDE FORKULLEDE MØNESTAURER + NEVER OG TORV",
+        "<p><strong>Hva det er:</strong> Mønet er den vanskeligste linjen å tette uten plastmembran. I stedet legges 3 overlappende lag junihøstet bjørkenever (naturlig vanntett av betulinolje) under 12 cm levende gresstorv, holdt nede av 14 kryssede, forkullede granstaurer (litauisk <em>o&zcaron;iai</em>, tradisjonelle kryssede mønestaurer).</p>"],
+      pt: ["OŽIAI · ESTACAS CRUZADAS CARBONIZADAS NA CUMEEIRA + CASCA E TORRÕES",
+        "<p><strong>O que é:</strong> A cumeeira é a linha mais difícil de impermeabilizar sem manta plástica. No lugar disso, 3 camadas sobrepostas de casca branca de bétula colhida em junho (naturalmente impermeável pelo óleo de betulina) ficam sob 12 cm de torrões vivos de grama, presos pelo peso de 14 varas cruzadas de espruce carbonizado (lituano <em>o&zcaron;iai</em>).</p>"]
     },
     lehmwickel: {
       en: ["LEHMWICKEL · ELEVATED WOVEN REED-CLAY FLOOR (J7)",
@@ -1005,7 +1088,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Why it works:</strong> Insulating, warm underfoot, fireproof, zero plastic foam, and completely breathable from the open summer crawlspace below.</p>"],
       lt: ["LEHMWICKEL · PAKELTOS PINTOS NENDRIŲ IR MOLIO GRINDYS (J7)",
         "<p><strong>Kas tai:</strong> Šimtmečių senumo technika: molio tyrelėje mirkyti nendrių pluoštai tankiai suplūkiami ant nužievintų eglių juodgrindžių, o viršus užglaistomas 3,5 cm 1:3 smėlio-molio-pelenų sluoksniu ir užtrinamas lygiu akmeniu.</p>" +
-        "<p><strong>Privalumas:</strong> Šiltos, nedegios, be jokio putplasčio ar plėvelių, kvėpuojančios per atvirą vasaros pogrindį.</p>"]
+        "<p><strong>Privalumas:</strong> Šiltos, nedegios, be jokio putplasčio ar plėvelių, kvėpuojančios per atvirą vasaros pogrindį.</p>"],
+      no: ["LEHMWICKEL · HEVET FLETTET TAKRØR- OG LEIREGULV (J7)",
+        "<p><strong>Hva det er:</strong> Århundregammel sentraleuropeisk jordbyggeteknikk: bunter av vintertakrør dyppes i kremet leirslam og pakkes tett over barkede undergulvsstokker av gran, og dekkes med en 3,5 cm sliteskorpe av sandleire og aske (1:3) polert hard med en glatt stein.</p>" +
+        "<p><strong>Hvorfor det virker:</strong> Isolerende, lunt under føttene, ubrennbart, uten plastskum, og helt pustende mot det åpne sommerluftede rommet under.</p>"],
+      pt: ["LEHMWICKEL · PISO ELEVADO TRANÇADO DE JUNCO E ARGILA (J7)",
+        "<p><strong>O que é:</strong> Técnica centro-europeia secular de construção em terra: feixes de junco de inverno são mergulhados em barbotina cremosa de argila e compactados sobre toras descascadas de espruce, recebendo depois uma crosta de 3,5 cm de argila arenosa e cinza (1:3) brunida com uma pedra lisa.</p>" +
+        "<p><strong>Por que funciona:</strong> Isolante, quente aos pés, incombustível, sem espuma plástica e totalmente respirável pelo vão ventilado aberto no verão.</p>"]
     },
     neso: {
       en: ["NESO LASHINGS & TRAVOIS WINTER SLED",
@@ -1013,7 +1102,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Travois:</strong> A simple A-frame sled built from two springy birch poles so one person can drag heavy winter spruce logs over frozen snow with minimal friction.</p>"],
       lt: ["NESO RYŠIAI IR TRAVOIS ŽIEMOS ROGĖS",
         "<p><strong>Neso:</strong> Žali lazdyno ūgliai, pašildyti virš žarijų ir susukti kaip virvė, kol medienos pluoštas tampa lankstus. Surišti drėgni ir išdžiūvę, jie susitraukia ir suveržia stogo mazgus be vinių ir vielos.</p>" +
-        "<p><strong>Travois:</strong> Paprastos A formos medinės rogės iš dviejų beržo karčių, leidžiančios vienam žmogui lengvai tempti sunkius rąstus per sniegą.</p>"]
+        "<p><strong>Travois:</strong> Paprastos A formos medinės rogės iš dviejų beržo karčių, leidžiančios vienam žmogui lengvai tempti sunkius rąstus per sniegą.</p>"],
+      no: ["NESO-SURRINGER OG TRAVOIS-VINTERSLEDE",
+        "<p><strong>Neso:</strong> Unge, grønne hasselskudd som varmes forsiktig over glør og vris som tau til trefibrene skiller seg i smidige strenger. Når de bindes våte rundt takledd og tørker, krymper de stramt som jern uten spiker eller ståltråd.</p>" +
+        "<p><strong>Travois:</strong> En enkel A-formet slede av to spenstige bjørkestenger så én person kan dra tunge vinterstokker av gran over frossen snø med minimal friksjon.</p>"],
+      pt: ["AMARRILHOS NESO E TRENÓ DE INVERNO TRAVOIS",
+        "<p><strong>Neso:</strong> Brotos verdes jovens de aveleira aquecidos devagar sobre brasas e torcidos como corda até que as fibras se separem em tiras flexíveis. Amarrados úmidos nos encontros do telhado, encolhem ao secar e apertam como ferro sem pregos nem arame.</p>" +
+        "<p><strong>Travois:</strong> Um trenó simples em forma de A feito de duas varas flexíveis de bétula para que uma pessoa arraste toras pesadas de espruce sobre a neve congelada com mínimo atrito.</p>"]
     },
     beam_m: {
       en: ["SIMPLY SUPPORTED BEAM · M = qL² / 8",
@@ -1021,7 +1116,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Origin:</strong> Galileo (1638) started beam mechanics; Euler &amp; Bernoulli (c. 1750) completed the elastic equation used on sites today.</p>"],
       lt: ["DVIEJŲ ATRAMŲ SIJA · M = qL² / 8",
         "<p><strong>Ką rodo:</strong> Raudona parabolė – lenkimo momentas (didžiausias viduryje, nulis galuose). Mėlyna kreivė – realus Ø15 cm rąsto įlinkis. Šiek tiek pailginus L, įlinkis staigiai auga kaip <strong>L<sup>4</sup></strong>.</p>" +
-        "<p><strong>Kilmė:</strong> Pradėjo Galilėjas (1638 m.), tikslią lygtį užbaigė Eileris ir Bernulis (~1750 m.).</p>"]
+        "<p><strong>Kilmė:</strong> Pradėjo Galilėjas (1638 m.), tikslią lygtį užbaigė Eileris ir Bernulis (~1750 m.).</p>"],
+      no: ["FRITT OPPLAGT BJELKE · M = qL² / 8",
+        "<p><strong>Hva det viser:</strong> Øverste røde parabel er bøyemomentet (størst midt på, null ved opplagrene). Nederste blå linje er hvor langt Ø15 cm-stokken faktisk bøyer seg ned. Dra spennvidden L litt lengre og se nedbøyningen skyte fart som <strong>L<sup>4</sup></strong>.</p>" +
+        "<p><strong>Opprinnelse:</strong> Galilei (1638) innledet bjelkemekanikken; Euler og Bernoulli (ca. 1750) fullførte den elastiske ligningen som brukes i dag.</p>"],
+      pt: ["VIGA BIAPOIADA · M = qL² / 8",
+        "<p><strong>O que mostra:</strong> A parábola vermelha superior é o momento fletor interno (máximo bem no centro, zero nos apoios). A linha azul inferior mostra o quanto a tora de Ø15 cm realmente enverga. Aumente um pouco o vão L e veja a flecha disparar como <strong>L<sup>4</sup></strong>.</p>" +
+        "<p><strong>Origem:</strong> Galileu (1638) iniciou a mecânica das vigas; Euler e Bernoulli (c. 1750) completaram a equação elástica usada até hoje.</p>"]
     },
     euler_k: {
       en: ["EULER BUCKLING MODES · K = 2.0 / 1.0 / 0.7 / 0.5",
@@ -1029,7 +1130,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Origin:</strong> Leonhard Euler derived these exact sine and cosine buckling shapes in 1757.</p>"],
       lt: ["EILERIO KLUPUMO FORMOS · K = 2.0 / 1.0 / 0.7 / 0.5",
         "<p><strong>Ką rodo:</strong> Perjunginėkite 4 K mygtukus ir stebėkite, kaip galų įtvirtinimas keičia stulpo jėgą. Laisvas stiebas (<strong>K=2.0</strong>) atlaiko <strong>16 kartų mažiau</strong> nei standžiai įtvirtintas abiejuose galuose (<strong>K=0.5</strong>)!</p>" +
-        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė šias tikslias formas 1757 m.</p>"]
+        "<p><strong>Kilmė:</strong> Leonhardas Eileris išvedė šias tikslias formas 1757 m.</p>"],
+      no: ["EULERS KNEKKFORMER · K = 2.0 / 1.0 / 0.7 / 0.5",
+        "<p><strong>Hva det viser:</strong> Klikk på de 4 K-knappene for å se hvordan innspenning av endene endrer både form og bæreevne. En fri flaggstang (<strong>K=2.0</strong>) bærer <strong>16 ganger mindre last</strong> enn nøyaktig samme stokk stivt innspent i begge ender (<strong>K=0.5</strong>)!</p>" +
+        "<p><strong>Opprinnelse:</strong> Leonhard Euler utledet disse eksakte sinus- og cosinusformene i 1757.</p>"],
+      pt: ["MODOS DE FLAMBAGEM DE EULER · K = 2.0 / 1.0 / 0.7 / 0.5",
+        "<p><strong>O que mostra:</strong> Clique nos 4 botões K para ver como a fixação das extremidades muda a forma e a resistência da coluna. Um mastro livre no topo (<strong>K=2.0</strong>) suporta <strong>16 vezes menos peso</strong> que a mesmíssima tora engastada rigidamente nas duas pontas (<strong>K=0.5</strong>)!</p>" +
+        "<p><strong>Origem:</strong> Leonhard Euler derivou estas formas exatas de seno e cosseno em 1757.</p>"]
     },
     catenary: {
       en: ["HOOKE CATENARY ARCH · y = a cosh(x/a)",
@@ -1037,7 +1144,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
         "<p><strong>Origin:</strong> Robert Hooke announced this in a 1675 anagram; Antoni Gaud&iacute; hung weighted chain models upside down to design Sagrada Fam&iacute;lia.</p>"],
       lt: ["GRANDININĖ ARKA · y = a cosh(x/a)",
         "<p><strong>Ką rodo:</strong> Mėlynas punktyras – kabanti grandinė (grynas tempimas). Raudona linija – apversta arka (grynas gniuždymas be lenkimo). Didinant <strong>a</strong>, arka žemėja, o šoninis skėtimas (<strong>H = a&middot;w</strong>) stiprėja.</p>" +
-        "<p><strong>Kilmė:</strong> Robertas Hukas paskelbė 1675 m.; vėliau pagal kabančias grandinėles Antoni Gaud&iacute; suprojektavo „Sagrada Fam&iacute;lia“.</p>"]
+        "<p><strong>Kilmė:</strong> Robertas Hukas paskelbė 1675 m.; vėliau pagal kabančias grandinėles Antoni Gaud&iacute; suprojektavo „Sagrada Fam&iacute;lia“.</p>"],
+      no: ["HOOKES KJEDELINJEBUE · y = a cosh(x/a)",
+        "<p><strong>Hva det viser:</strong> Blå stiplet kurve = hengende kjede (rent strekk). Rød kurve = speilvendt bue (rent trykk, null bøyning). Dra <strong>a</strong> større for å gjøre buen flatere og se den røde sidetrykkpilen (<strong>H = a&middot;w</strong>) vokse.</p>" +
+        "<p><strong>Opprinnelse:</strong> Robert Hooke kunngjorde prinsippet i et anagram i 1675; Antoni Gaud&iacute; hang vektede kjedemodeller opp ned da han formet Sagrada Fam&iacute;lia.</p>"],
+      pt: ["ARCO EM CATENÁRIA DE HOOKE · y = a cosh(x/a)",
+        "<p><strong>O que mostra:</strong> Curva azul tracejada = corrente pendurada (tração pura). Curva vermelha = arco invertido (compressão pura, flexão zero). Aumente <strong>a</strong> para achatar o arco e veja a seta vermelha de empuxo lateral (<strong>H = a&middot;w</strong>) crescer.</p>" +
+        "<p><strong>Origem:</strong> Robert Hooke anunciou o princípio num anagrama em 1675; Antoni Gaud&iacute; pendurou modelos de correntes com pesos de cabeça para baixo ao projetar a Sagrada Fam&iacute;lia.</p>"]
     }
   };
 
@@ -1068,7 +1181,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       return;
     }
     closeExplain();
-    var pair = currentLang === "lt" ? entry.lt : entry.en;
+    var pair = entry[currentLang] || entry.en;
     slot.innerHTML =
       '<div class="x-card" role="region">' +
       '<div class="x-top"><span class="x-k">' + pair[0] + '</span><button type="button" class="x-x" aria-label="Close">&times;</button></div>' +
@@ -1144,7 +1257,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     var dGirdCm = parseFloat(slGird.value), dPostCm = parseFloat(slPost.value);
 
     document.getElementById("out-width").textContent = W.toFixed(2) + " m";
-    document.getElementById("out-bays").textContent = nBays + (currentLang === "lt" ? " tarpai (" : " bays (") + L_HALL.toFixed(2) + " m)";
+    document.getElementById("out-bays").textContent = nBays + L4(" bays (", " tarpai (", " fag (", " vãos (") + L_HALL.toFixed(2) + " m)";
     document.getElementById("out-pitch").textContent = pitchDeg + "°";
     document.getElementById("out-birch").textContent = dBirchCm + " cm";
     document.getElementById("out-gird").textContent = dGirdCm + " cm";
@@ -1213,12 +1326,42 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     document.getElementById("m-euler-box").className = "metric " + (postWeak ? "alert" : "ok");
 
     var msgs = [];
-    if (areaOver) msgs.push(currentLang === "lt" ? "PLOTAS > 50 m² (" + area.toFixed(1) + " m²): viršija STR I grupės ribą." : "AREA > 50 m² (" + area.toFixed(1) + " m²): exceeds STR Group I cap.");
-    if (ridgeOver) msgs.push(currentLang === "lt" ? "KRAIGAS > 5.00 m (" + outerRidge.toFixed(2) + " m): viršija aukščio ribą." : "RIDGE > 5.00 m (" + outerRidge.toFixed(2) + " m): exceeds statutory height cap.");
-    if (pitchLow) msgs.push(currentLang === "lt" ? "NUOLYDIS < 45°: nendrių stogas sulaiko drėgmę (μ₁=" + mu1.toFixed(2) + ")." : "PITCH < 45°: exposed reed thatch retains rain & rots early (μ₁=" + mu1.toFixed(2) + ").");
-    if (clayCrack) msgs.push(currentLang === "lt" ? "ĮLINKIS L/" + lRatio + " (< L/500): padidinkite sijos Ø arba siaurinkite plotį." : "FLOOR FLEX L/" + lRatio + " (< L/500): increase girder Ø or narrow width for clay floor.");
-    if (gapSmall) msgs.push(currentLang === "lt" ? "MAŽAS SĖDIMO TARPAS (" + gapMm + " mm vs " + shrinkMm + " mm)." : "TIGHT SETTLING GAP (" + gapMm + " mm vs " + shrinkMm + " mm shrinkage).");
-    if (postWeak) msgs.push(currentLang === "lt" ? "MAŽA STULPO KLUPUMO ATSARGA (" + eulerSF.toFixed(1) + "×)." : "LOW POST BUCKLING MARGIN (" + eulerSF.toFixed(1) + "×).");
+    if (areaOver) msgs.push(L4(
+      "AREA > 50 m² (" + area.toFixed(1) + " m²): exceeds STR Group I cap.",
+      "PLOTAS > 50 m² (" + area.toFixed(1) + " m²): viršija STR I grupės ribą.",
+      "AREAL > 50 m² (" + area.toFixed(1) + " m²): overskrider STR gruppe I-grensen.",
+      "ÁREA > 50 m² (" + area.toFixed(1) + " m²): excede o limite do Grupo I STR."
+    ));
+    if (ridgeOver) msgs.push(L4(
+      "RIDGE > 5.00 m (" + outerRidge.toFixed(2) + " m): exceeds statutory height cap.",
+      "KRAIGAS > 5.00 m (" + outerRidge.toFixed(2) + " m): viršija aukščio ribą.",
+      "MØNE > 5.00 m (" + outerRidge.toFixed(2) + " m): overskrider lovfestet høydegrense.",
+      "CUMEEIRA > 5.00 m (" + outerRidge.toFixed(2) + " m): excede o limite legal de altura."
+    ));
+    if (pitchLow) msgs.push(L4(
+      "PITCH < 45°: exposed reed thatch retains rain & rots early (μ₁=" + mu1.toFixed(2) + ").",
+      "NUOLYDIS < 45°: nendrių stogas sulaiko drėgmę (μ₁=" + mu1.toFixed(2) + ").",
+      "TAKVINKEL < 45°: takrør holder på regnvann og råtner tidlig (μ₁=" + mu1.toFixed(2) + ").",
+      "INCLINAÇÃO < 45°: o colmo de junco retém chuva e apodrece cedo (μ₁=" + mu1.toFixed(2) + ")."
+    ));
+    if (clayCrack) msgs.push(L4(
+      "FLOOR FLEX L/" + lRatio + " (< L/500): increase girder Ø or narrow width for clay floor.",
+      "ĮLINKIS L/" + lRatio + " (< L/500): padidinkite sijos Ø arba siaurinkite plotį.",
+      "NEDBØYNING L/" + lRatio + " (< L/500): øk bjelke-Ø eller reduser bredden for leiregulv.",
+      "FLECHA L/" + lRatio + " (< L/500): aumente o Ø da viga ou reduza a largura para o piso de argila."
+    ));
+    if (gapSmall) msgs.push(L4(
+      "TIGHT SETTLING GAP (" + gapMm + " mm vs " + shrinkMm + " mm shrinkage).",
+      "MAŽAS SĖDIMO TARPAS (" + gapMm + " mm vs " + shrinkMm + " mm).",
+      "TRANG SETNINGSSPALTE (" + gapMm + " mm mot " + shrinkMm + " mm krymping).",
+      "FOLGA DE ASSENTAMENTO CURTA (" + gapMm + " mm vs " + shrinkMm + " mm de retração)."
+    ));
+    if (postWeak) msgs.push(L4(
+      "LOW POST BUCKLING MARGIN (" + eulerSF.toFixed(1) + "×).",
+      "MAŽA STULPO KLUPUMO ATSARGA (" + eulerSF.toFixed(1) + "×).",
+      "LAV KNEKKINGSMARGIN PÅ STOLPE (" + eulerSF.toFixed(1) + "×).",
+      "MARGEM BAIXA DE FLAMBAGEM NO PILAR (" + eulerSF.toFixed(1) + "×)."
+    ));
 
     var vBar = document.getElementById("p1-verdict");
     if (msgs.length) {
@@ -1226,15 +1369,18 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       vBar.textContent = msgs.join(" ");
     } else {
       vBar.className = "verdict-bar";
-      vBar.textContent = currentLang === "lt"
-        ? "PATIKRA OK: " + area.toFixed(1) + " m², kraigas " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ stogas sausas, sija L/" + lRatio + ", stulpas " + Math.round(eulerSF) + "× atsarga, " + courses + " beržo eilės + " + gapMm + " mm tarpas."
-        : "ALL CHECKS PASS: " + area.toFixed(1) + " m², ridge " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ reed dry, floor flex L/" + lRatio + ", post " + Math.round(eulerSF) + "× Euler margin, " + courses + " courses + " + gapMm + " mm gap.";
+      vBar.textContent = L4(
+        "ALL CHECKS PASS: " + area.toFixed(1) + " m², ridge " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ reed dry, floor flex L/" + lRatio + ", post " + Math.round(eulerSF) + "× Euler margin, " + courses + " courses + " + gapMm + " mm gap.",
+        "PATIKRA OK: " + area.toFixed(1) + " m², kraigas " + outerRidge.toFixed(2) + " m (<5.0 m), 45°+ stogas sausas, sija L/" + lRatio + ", stulpas " + Math.round(eulerSF) + "× atsarga, " + courses + " beržo eilės + " + gapMm + " mm tarpas.",
+        "ALLE KRAV OK: " + area.toFixed(1) + " m², møne " + outerRidge.toFixed(2) + " m (<5,0 m), 45°+ takrør tørt, gulv L/" + lRatio + ", stolpe " + Math.round(eulerSF) + "× Euler-margin, " + courses + " omfar + " + gapMm + " mm spalte.",
+        "TUDO APROVADO: " + area.toFixed(1) + " m², cumeeira " + outerRidge.toFixed(2) + " m (<5,0 m), junco 45°+ seco, piso L/" + lRatio + ", pilar " + Math.round(eulerSF) + "× margem de Euler, " + courses + " fiadas + folga de " + gapMm + " mm."
+      );
     }
 
     document.getElementById("p1-cap-l").textContent =
-      (currentLang === "lt" ? "TIKRAUS MASTELIO PJŪVIS · " : "TRUE-SCALE SECTION · ") +
+      L4("TRUE-SCALE SECTION · ", "TIKRAUS MASTELIO PJŪVIS · ", "SNITT I SANN MÅLESTOKK · ", "CORTE EM ESCALA REAL · ") +
       W.toFixed(2) + " × " + L_HALL.toFixed(2) + " M · " +
-      (currentLang === "lt" ? "ARCHITEKTŪRINĖ 1.80 M FIGŪRA" : "ARCHITECTURAL 1.80 M FIGURE");
+      L4("ARCHITECTURAL 1.80 M FIGURE", "ARCHITEKTŪRINĖ 1.80 M FIGŪRA", "ARKITEKTONISK 1,80 M FIGUR", "FIGURA HUMANA DE 1,80 M");
 
     /* Sharp Architectural Skiftesverk SVG */
     clear(svgCabin);
@@ -1339,12 +1485,12 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     });
     gTie.appendChild(el("rect", { x: X(-P_X + 0.15), y: Y(tieTop + 0.065), width: Math.max(0.4, 2 * P_X - 0.30) * sc, height: 0.055 * sc, fill: "#dfcb9d", stroke: "#5a4320", "stroke-width": 0.85 }));
     if (loftPeak > 0.65) {
-      gTie.appendChild(el("text", { x: X(0), y: Y(tieTop + 0.26), "text-anchor": "middle", fill: "#7c3523", "font-family": "var(--mono)", "font-size": 8.6, "font-weight": 600 }, (currentLang === "lt" ? "PALĖPĖ " : "LOFT ") + loftPeak.toFixed(2) + " m"));
+      gTie.appendChild(el("text", { x: X(0), y: Y(tieTop + 0.26), "text-anchor": "middle", fill: "#7c3523", "font-family": "var(--mono)", "font-size": 8.6, "font-weight": 600 }, L4("LOFT ", "PALĖPĖ ", "HEMS ", "SÓTÃO ") + loftPeak.toFixed(2) + " m"));
     }
     var vecLen = Math.min(64, 20 + H_tie * 16);
     arrow(gTie, X(0) - 8, Y(tieTop - D_T / 2), X(0) - vecLen, Y(tieTop - D_T / 2), "#234b6e", 1.7, 5.5);
     arrow(gTie, X(0) + 8, Y(tieTop - D_T / 2), X(0) + vecLen, Y(tieTop - D_T / 2), "#234b6e", 1.7, 5.5);
-    gTie.appendChild(el("text", { x: X(0), y: Y(tieBot) + 14, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10, "font-weight": 600 }, "TENSION  H = " + H_tie.toFixed(2) + " kN"));
+    gTie.appendChild(el("text", { x: X(0), y: Y(tieBot) + 14, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10, "font-weight": 600 }, L4("TENSION  H = ", "TEMPIMAS  H = ", "STREKK  H = ", "TRAÇÃO  H = ") + H_tie.toFixed(2) + " kN"));
     svgCabin.appendChild(gTie);
 
     var gRoof = el("g", { "data-part": "roof" });
@@ -1394,7 +1540,10 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     svgCabin.appendChild(el("line", { x1: X(-W_HALF), y1: Y(0) + 26, x2: X(W_HALF), y2: Y(0) + 26, stroke: "#234b6e", "stroke-width": 0.9 }));
     svgCabin.appendChild(el("line", { x1: X(-W_HALF), y1: Y(0) + 21, x2: X(-W_HALF), y2: Y(0) + 31, stroke: "#234b6e", "stroke-width": 0.9 }));
     svgCabin.appendChild(el("line", { x1: X(W_HALF), y1: Y(0) + 21, x2: X(W_HALF), y2: Y(0) + 31, stroke: "#234b6e", "stroke-width": 0.9 }));
-    svgCabin.appendChild(el("text", { x: X(0), y: Y(0) + 42, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.8, "font-weight": 600 }, W.toFixed(2) + " m frame  ·  4 × " + spanM.toFixed(2) + " m pier spans  ·  " + nBays + " × 1.50 m = " + L_HALL.toFixed(2) + " m length"));
+    svgCabin.appendChild(el("text", { x: X(0), y: Y(0) + 42, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.8, "font-weight": 600 },
+      W.toFixed(2) + L4(" m frame  ·  4 × ", " m karkasas  ·  4 × ", " m ramme  ·  4 × ", " m pórtico  ·  4 × ") + spanM.toFixed(2) +
+      L4(" m pier spans  ·  ", " m tarpatramiai  ·  ", " m pilarspenn  ·  ", " m vãos  ·  ") + nBays + " × 1.50 m = " + L_HALL.toFixed(2) +
+      L4(" m length", " m ilgis", " m lengde", " m compr.")));
 
     updateLiveBill();
   }
@@ -1420,23 +1569,23 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     var Tdew = dewPoint(Tin, rh), dIns = dInsMm / 1000.0;
     var R_si = 0.13, R_se = 0.13, R_birch = 0.100 / 0.15, sdBirch = 4.0;
     var matCfg = {
-      clay: { lam: 0.055, mu: 3.3, en: "Clay-Slip Typha", lt: "Švendrai molyje", fill: "#e6d8b5", stroke: "#9c7224" },
-      lime: { lam: 0.070, mu: 5.0, en: "Lime + Typha", lt: "Kalkės + švendrai", fill: "#e8ebdf", stroke: "#234b6e" },
-      pure: { lam: 0.800, mu: 10.0, en: "Pure Lime Paste", lt: "Grynos kalkės", fill: "#d6d9d2", stroke: "#8c3a2b" }
+      clay: { lam: 0.055, mu: 3.3, en: "Clay-Slip Typha", lt: "Švendrai molyje", no: "Leire + dunkjevle", pt: "Argila + taboa", fill: "#e6d8b5", stroke: "#9c7224" },
+      lime: { lam: 0.070, mu: 5.0, en: "Lime + Typha", lt: "Kalkės + švendrai", no: "Kalk + dunkjevle", pt: "Cal + taboa", fill: "#e8ebdf", stroke: "#234b6e" },
+      pure: { lam: 0.800, mu: 10.0, en: "Pure Lime Paste", lt: "Grynos kalkės", no: "Ren kalkmasse", pt: "Só cal pura", fill: "#d6d9d2", stroke: "#8c3a2b" }
     }[wallMat];
 
     var R_ins = dIns / matCfg.lam, sdIns = dIns * matCfg.mu, R_pl = 0.020 / 0.80 + 0.075, sdPl = 0.20;
     var layers = wallMode === "ext" ? [
-      { id: "w-birch", name: currentLang === "lt" ? "Ø10 beržas (viduje)" : "Ø10 Birch (inside)", w: 100, R: R_birch, sd: sdBirch, fill: "#fbf4e4", stroke: "#9c7224" },
-      { id: "w-typha", name: currentLang === "lt" ? matCfg.lt : matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
-      { id: "w-cav", name: currentLang === "lt" ? "30 mm tarpas" : "30 mm Air", w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
-      { id: "w-board", name: currentLang === "lt" ? "Lentos" : "Boards", w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
+      { id: "w-birch", name: L4("Ø10 Birch (inside)", "Ø10 beržas (viduje)", "Ø10 bjørk (inne)", "Ø10 bétula (dentro)"), w: 100, R: R_birch, sd: sdBirch, fill: "#fbf4e4", stroke: "#9c7224" },
+      { id: "w-typha", name: matCfg[currentLang] || matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
+      { id: "w-cav", name: L4("30 mm Air", "30 mm tarpas", "30 mm luft", "30 mm ar"), w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
+      { id: "w-board", name: L4("Boards", "Lentos", "Kledning", "Tábuas"), w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
     ] : [
-      { id: "w-pl", name: currentLang === "lt" ? "Molis+pinė" : "Clay+Wattle", w: 35, R: R_pl, sd: sdPl, fill: "#d9b99b", stroke: "#8c3a2b" },
-      { id: "w-typha", name: currentLang === "lt" ? matCfg.lt : matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
-      { id: "w-birch", name: currentLang === "lt" ? "Ø10 beržas (šaltas!)" : "Ø10 Birch (COLD)", w: 100, R: R_birch, sd: sdBirch, fill: "#f4d7cf", stroke: "#8c3a2b" },
-      { id: "w-cav", name: currentLang === "lt" ? "30 mm tarpas" : "30 mm Air", w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
-      { id: "w-board", name: currentLang === "lt" ? "Lentos" : "Boards", w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
+      { id: "w-pl", name: L4("Clay+Wattle", "Molis+pinė", "Leire+flett", "Argila+pau"), w: 35, R: R_pl, sd: sdPl, fill: "#d9b99b", stroke: "#8c3a2b" },
+      { id: "w-typha", name: matCfg[currentLang] || matCfg.en, w: dInsMm, R: R_ins, sd: sdIns, fill: matCfg.fill, stroke: matCfg.stroke },
+      { id: "w-birch", name: L4("Ø10 Birch (COLD)", "Ø10 beržas (šaltas!)", "Ø10 bjørk (KALD!)", "Ø10 bétula (FRIA!)"), w: 100, R: R_birch, sd: sdBirch, fill: "#f4d7cf", stroke: "#8c3a2b" },
+      { id: "w-cav", name: L4("30 mm Air", "30 mm tarpas", "30 mm luft", "30 mm ar"), w: 30, R: 0, sd: 0, fill: "#dce8f2", stroke: "#234b6e", vent: true },
+      { id: "w-board", name: L4("Boards", "Lentos", "Kledning", "Tábuas"), w: 22, R: 0, sd: 0, fill: "#7a634e", stroke: "#161719", vent: true }
     ];
 
     var R_tot = R_si + R_se, sdTot = 0, totalMm = 0;
@@ -1462,8 +1611,8 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     document.getElementById("m-dew").textContent = "+" + Tdew.toFixed(1) + "°C";
     var ratioVal = wallMode === "ext" ? (sdBirch / Math.max(0.05, sdIns)) : ((sdPl + sdIns) / sdBirch);
     document.getElementById("m-sd").textContent = wallMode === "ext"
-      ? ratioVal.toFixed(1) + " : 1 " + (ratioVal >= 4.5 ? "OK" : "TIGHT")
-      : "1 : " + (1 / Math.max(0.02, ratioVal)).toFixed(1) + " TRAP";
+      ? ratioVal.toFixed(1) + " : 1 " + (ratioVal >= 4.5 ? "OK" : L4("TIGHT", "ANKŠTA", "TETT", "JUSTO"))
+      : "1 : " + (1 / Math.max(0.02, ratioVal)).toFixed(1) + " " + L4("TRAP", "SPĄSTAI", "FELLE", "ARMADILHA");
 
     document.getElementById("m-uval-box").className = "metric " + (U > 0.50 ? "alert" : "ok");
     document.getElementById("m-btemp-box").className = "metric " + (birchCond ? "alert" : "ok");
@@ -1472,31 +1621,48 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     var v2 = document.getElementById("p2-verdict");
     if (wallMat === "pure") {
       v2.className = "verdict-bar warn";
-      v2.textContent = currentLang === "lt"
-        ? "MATEMATINIS ĮRODYMAS: grynos gesintos kalkės be augalinio pluošto (λ = 0,80) NEŠILTINA (U = " + U.toFixed(2) + "). Beržas atšąla iki " + birchMinT.toFixed(1) + "°C -> būtinas pluoštas!"
-        : "MATH PROOF: pure slaked lime without plant fiber (λ = 0.80) does NOT insulate (U = " + U.toFixed(2) + "). Birch drops to " + birchMinT.toFixed(1) + "°C -> always mix lime with cellular Typha/hemp!";
+      v2.textContent = L4(
+        "MATH PROOF: pure slaked lime without plant fiber (λ = 0.80) does NOT insulate (U = " + U.toFixed(2) + "). Birch drops to " + birchMinT.toFixed(1) + "°C -> always mix lime with cellular Typha/hemp!",
+        "MATEMATINIS ĮRODYMAS: grynos gesintos kalkės be augalinio pluošto (λ = 0,80) NEŠILTINA (U = " + U.toFixed(2) + "). Beržas atšąla iki " + birchMinT.toFixed(1) + "°C -> būtinas pluoštas!",
+        "MATEMATISK BEVIS: ren lesket kalk uten plantefiber (λ = 0,80) ISOLERER IKKE (U = " + U.toFixed(2) + "). Bjørken faller til " + birchMinT.toFixed(1) + "°C -> bland alltid kalk med dunkjevle eller hamp!",
+        "PROVA MATEMÁTICA: cal hidratada pura sem fibra vegetal (λ = 0,80) NÃO isola (U = " + U.toFixed(2) + "). A bétula cai para " + birchMinT.toFixed(1) + "°C -> misture sempre a cal com taboa ou cânhamo!"
+      );
     } else if (!birchCond && wallMode === "ext") {
       v2.className = "verdict-bar";
       v2.textContent = wallMat === "lime"
-        ? (currentLang === "lt"
-            ? "GESINTOS KALKĖS + ŠVENDRAI OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA, pH 12,5 saugo nuo puvimo. Taisyklė: dėti tik prie ≥ +5°C (4+ sav. be šalčio)."
-            : "SLAKED LIME + TYPHA OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY, pH 12.5 resists rot/rodents. Rule: apply only at ≥ +5°C (4+ frost-free weeks).")
-        : (currentLang === "lt"
-            ? "PATAISYTA KONSTRUKCIJA OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA; garai santykiu " + ratioVal.toFixed(1) + ":1 išeina į 30 mm tarpą."
-            : "CORRECTED ASSEMBLY OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY; vapor vents " + ratioVal.toFixed(1) + ":1 outward to the 30 mm cavity.");
+        ? L4(
+            "SLAKED LIME + TYPHA OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY, pH 12.5 resists rot/rodents. Rule: apply only at ≥ +5°C (4+ frost-free weeks).",
+            "GESINTOS KALKĖS + ŠVENDRAI OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA, pH 12,5 saugo nuo puvimo. Taisyklė: dėti tik prie ≥ +5°C (4+ sav. be šalčio).",
+            "LESKET KALK + DUNKJEVLE OK (U = " + U.toFixed(2) + "): bjørken holder seg varm (" + birchMinT.toFixed(1) + "°C), Glaser = TØRR, pH 12,5 hindrer råte/gnagere. Regel: legg kun ved ≥ +5°C (4+ frostfrie uker).",
+            "CAL HIDRATADA + TABOA OK (U = " + U.toFixed(2) + "): a bétula fica quente (" + birchMinT.toFixed(1) + "°C), Glaser = SECO, pH 12,5 protege contra fungos e roedores. Regra: aplicar só a ≥ +5°C (4+ semanas sem geada)."
+          )
+        : L4(
+            "CORRECTED ASSEMBLY OK (U = " + U.toFixed(2) + "): birch stays warm (" + birchMinT.toFixed(1) + "°C), Glaser = DRY; vapor vents " + ratioVal.toFixed(1) + ":1 outward to the 30 mm cavity.",
+            "PATAISYTA KONSTRUKCIJA OK (U = " + U.toFixed(2) + "): beržas šiltas (" + birchMinT.toFixed(1) + "°C), Glaser = SAUSA; garai santykiu " + ratioVal.toFixed(1) + ":1 išeina į 30 mm tarpą.",
+            "KORRIGERT VEGG OK (U = " + U.toFixed(2) + "): bjørken holder seg varm (" + birchMinT.toFixed(1) + "°C), Glaser = TØRR; damp lufter " + ratioVal.toFixed(1) + ":1 ut i 30 mm luftespalte.",
+            "MONTAGEM CORRIGIDA OK (U = " + U.toFixed(2) + "): a bétula fica quente (" + birchMinT.toFixed(1) + "°C), Glaser = SECO; o vapor sai na razão " + ratioVal.toFixed(1) + ":1 para a câmara de 30 mm."
+          );
     } else if (wallMode === "ext") {
       v2.className = "verdict-bar warn";
-      v2.textContent = currentLang === "lt" ? "PER PLONA IZOLIACIJA ARBA DIDELĖ DRĖGMĖ: padidinkite storį (≥120 mm) arba vėdinkite." : "THIN INSULATION OR HIGH HUMIDITY: increase exterior insulation (≥120 mm) or vent humidity.";
+      v2.textContent = L4(
+        "THIN INSULATION OR HIGH HUMIDITY: increase exterior insulation (≥120 mm) or vent humidity.",
+        "PER PLONA IZOLIACIJA ARBA DIDELĖ DRĖGMĖ: padidinkite storį (≥120 mm) arba vėdinkite.",
+        "FOR TYNN ISOLASJON ELLER HØY FUKTIGHET: øk utvendig isolasjon (≥120 mm) eller luft bedre.",
+        "ISOLAMENTO FINO OU UMIDADE ALTA: aumente o isolamento externo (≥120 mm) ou ventile o ambiente."
+      );
     } else {
       v2.className = "verdict-bar warn";
-      v2.textContent = currentLang === "lt"
-        ? "KONDENSACIJOS SPĄSTAI: vidinė izoliacija atšaldo beržą iki " + birchMinT.toFixed(1) + "°C (< +" + Tdew.toFixed(1) + "°C) už sandaresnio medžio -> žiemos puvimo rizika."
-        : "CONDENSATION TRAP: interior insulation chills birch to " + birchMinT.toFixed(1) + "°C (below +" + Tdew.toFixed(1) + "°C dew point) behind tighter outer birch -> winter frost & rot.";
+      v2.textContent = L4(
+        "CONDENSATION TRAP: interior insulation chills birch to " + birchMinT.toFixed(1) + "°C (below +" + Tdew.toFixed(1) + "°C dew point) behind tighter outer birch -> winter frost & rot.",
+        "KONDENSACIJOS SPĄSTAI: vidinė izoliacija atšaldo beržą iki " + birchMinT.toFixed(1) + "°C (< +" + Tdew.toFixed(1) + "°C) už sandaresnio medžio -> žiemos puvimo rizika.",
+        "KONDENSFELLE: innvendig isolasjon kjøler bjørken ned til " + birchMinT.toFixed(1) + "°C (under +" + Tdew.toFixed(1) + "°C duggpunkt) bak tettere yttertre -> vinterfrost og råte.",
+        "ARMADILHA DE CONDENSAÇÃO: o isolamento interno esfria a bétula a " + birchMinT.toFixed(1) + "°C (abaixo do ponto de orvalho de +" + Tdew.toFixed(1) + "°C) atrás da madeira externa mais fechada -> geada e apodrecimento."
+      );
     }
 
     document.getElementById("p2-cap-l").textContent =
-      (currentLang === "lt" ? "TIKRAUS MASTELIO " : "TRUE-SCALE ") + totalMm + " MM " +
-      (currentLang === "lt" ? "SIENOS PJŪVIS · FURJĖ T(x) + GLASER" : "WALL SECTION · FOURIER T(x) + GLASER CHECK");
+      L4("TRUE-SCALE ", "TIKRAUS MASTELIO ", "SANN MÅLESTOKK ", "ESCALA REAL ") + totalMm + " MM " +
+      L4("WALL SECTION · FOURIER T(x) + GLASER CHECK", "SIENOS PJŪVIS · FURJĖ T(x) + GLASER", "VEGGSNITT · FOURIER T(x) + GLASER", "CORTE DE PAREDE · FOURIER T(x) + GLASER");
 
     clear(svgWall);
     var yTop = 76, yBot = 352, Tmax = 26, Tmin = -34;
@@ -1506,7 +1672,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     svgWall.appendChild(el("line", { x1: 68, y1: yT(0), x2: 684, y2: yT(0), stroke: "#234b6e", "stroke-width": 1.0, "stroke-dasharray": "4 3" }));
     svgWall.appendChild(el("text", { x: 690, y: yT(0) + 3, fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.8 }, "0°C"));
     svgWall.appendChild(el("line", { x1: 68, y1: yT(Tdew), x2: 684, y2: yT(Tdew), stroke: "#8c3a2b", "stroke-width": 1.0, "stroke-dasharray": "2 3" }));
-    svgWall.appendChild(el("text", { x: 690, y: yT(Tdew) + 3, fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.2 }, "DEW +" + Tdew.toFixed(0) + "°C"));
+    svgWall.appendChild(el("text", { x: 690, y: yT(Tdew) + 3, fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.2 }, L4("DEW +", "RASA +", "DUGG +", "ORV +") + Tdew.toFixed(0) + "°C"));
 
     var pts = [[76, yT(Tin)], [curX, yT(Tin - (Tin - Tout) * (R_si / R_tot))]];
     layers.forEach(function (L) {
@@ -1540,10 +1706,11 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       "text-anchor": wallMode === "ext" ? "start" : "end", fill: critColor, "font-family": "var(--mono)", "font-size": 10.5, "font-weight": 600
     }, (birchCritT > 0 ? "+" : "") + birchCritT.toFixed(1) + "°C"));
 
-    svgWall.appendChild(el("text", { x: 74, y: yT(Tin) - 10, fill: "#161719", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, "IN +20°C"));
-    svgWall.appendChild(el("text", { x: 628, y: yT(Tout) - 10, fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, "OUT " + (Tout > 0 ? "+" : "") + Tout + "°C"));
+    svgWall.appendChild(el("text", { x: 74, y: yT(Tin) - 10, fill: "#161719", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, L4("IN +20°C", "VIDUS +20°C", "INNE +20°C", "INT +20°C")));
+    svgWall.appendChild(el("text", { x: 628, y: yT(Tout) - 10, fill: "#234b6e", "font-family": "var(--mono)", "font-size": 10.2, "font-weight": 600 }, L4("OUT ", "LAUKAS ", "UTE ", "EXT ") + (Tout > 0 ? "+" : "") + Tout + "°C"));
     svgWall.appendChild(el("text", { x: 380, y: 416, "text-anchor": "middle", fill: "#55585e", "font-family": "var(--mono)", "font-size": 9.8 },
-      "λ = " + matCfg.lam.toFixed(3) + " W/(m·K)   ·   q = " + (U * (Tin - Tout)).toFixed(1) + " W/m²   ·   R = " + R_tot.toFixed(2) + "   ·   " + (birchCond ? "GLASER: CONDENSATION" : "GLASER: DRY")));
+      "λ = " + matCfg.lam.toFixed(3) + " W/(m·K)   ·   q = " + (U * (Tin - Tout)).toFixed(1) + " W/m²   ·   R = " + R_tot.toFixed(2) + "   ·   " +
+      (birchCond ? L4("GLASER: CONDENSATION", "GLASER: KONDENSACIJA", "GLASER: KONDENS", "GLASER: CONDENSAÇÃO") : L4("GLASER: DRY", "GLASER: SAUSA", "GLASER: TØRR", "GLASER: SECO"))));
 
     updateLiveBill();
   }
@@ -1557,8 +1724,10 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     var limeBagsLight = Math.ceil(insVol * 65 / 25), limeBagsDense = Math.ceil(insVol * 120 / 25);
     var subfloorPoles = Math.round(c.nBays * ((c.W - 0.3) / 0.11));
     var matName = wallMat === "lime"
-      ? (currentLang === "lt" ? "Gesintos kalkės + švendrai" : "Slaked Lime + Typha")
-      : (wallMat === "pure" ? (currentLang === "lt" ? "Grynos kalkės (NETINKA)" : "Pure Lime (FAILS)") : (currentLang === "lt" ? "Molis + švendrai" : "Clay-Slip Typha"));
+      ? L4("Slaked Lime + Typha", "Gesintos kalkės + švendrai", "Lesket kalk + dunkjevle", "Cal hidratada + taboa")
+      : (wallMat === "pure"
+          ? L4("Pure Lime (FAILS)", "Grynos kalkės (NETINKA)", "Ren kalk (FEILER)", "Só cal pura (FALHA)")
+          : L4("Clay-Slip Typha", "Molis + švendrai", "Leire + dunkjevle", "Argila + taboa"));
 
     document.getElementById("live-bill-tag").textContent = c.W.toFixed(2) + " × " + c.L.toFixed(2) + " m (" + c.area.toFixed(1) + " m²) · " + c.pitchDeg + "° · " + matName;
 
@@ -1571,6 +1740,24 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       ["Žieminės nendrės", "Phragmites australis (Ø25 cm pėdai)", "~" + c.totalSheaves + " pėdų (" + c.roofSheaves + " stogui + " + c.floorSheaves + " grind.)", "Pjauti žiemą ant ledo; prisiuvama eglės šaknimis (be vielos)."],
       ["Išorinė izoliacija (" + Math.round(dInsM * 1000) + " mm)", "<button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">" + matName + "</button>", "~" + insVol.toFixed(1) + " m³ (" + (wallMat === "lime" ? "~" + limeBagsLight + "–" + limeBagsDense + " maišai × 25 kg CL90" : "~" + (insVol * 0.30).toFixed(1) + " m³ molio") + ")", "Dėti TIK IŠORĖJE už beržo; su kalkėmis ≥+5°C ir su pirštinėmis."],
       ["Vėdinamas fasadas ir <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">kraigas</button>", "3× tošis, velėna, ~" + Math.round(c.wallAreaNet * 1.1) + " m² lentos", "30 mm tarpas + tinklelis nuo graužikų", "Nulis plastiko ir vėjo popieriaus; tošis lupama gegužę–birželį."]
+    ] : currentLang === "no" ? [
+      ["<button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> veggstokker", "Barket bjørk Ø" + c.dBirchCm + " cm (<button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 kl. 5</button>)", "~" + c.totalWallLogs + " stk × 1,50 m (" + c.courses + " omfar/fag)", "Bark samme dag; la det være " + c.gapMm + " mm setningsspalte øverst."],
+      ["Pilarsteiner og gulvbjelker", "Feltstein + forkullet gran Ø" + c.dGirdCm + " cm", c.nPiers + " steiner · " + (c.nBents * 2) + " bjelker (" + (c.W / 2 + 0.25).toFixed(2) + " m)", "Dypforkull 3–4 mm; " + c.spanM.toFixed(2) + " m spenn (<button type=\"button\" class=\"inline-term\" data-explain=\"defl\">δ=" + c.deltaMm.toFixed(2) + " mm, L/" + c.lRatio + "</button>)."],
+      ["Stolper, bindbjelker og åser", "Gran Ø" + c.dPostCm + " cm / Ø13 cm bjelker", (c.nBents * 2) + " ytre + " + (c.nBents * 2) + " indre stolper · " + c.nBents + " bindbjelker", "<button type=\"button\" class=\"inline-term\" data-explain=\"euler_post\">Euler-margin " + Math.round(c.eulerSF) + "×</button>; forkull nederste 40 cm."],
+      ["Sperrer og skråstivere", "Gran Ø9–12 cm (" + c.pitchDeg + "° takvinkel)", c.nRafters + " sperrer × " + (c.slopeLen + 0.15).toFixed(2) + " m + " + (c.nBents * 2) + " stivere", "60 cm avstand; <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi-kiler</button> låser H=" + c.H_tie.toFixed(2) + " kN."],
+      ["Undergulvsstokker (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">J7</button>)", "Kun barket bartre Ø8–10 cm", "~" + subfloorPoles + " stokker × 1,55 m", "Aldri bjørk under leiregulv; flett med hasselkvister."],
+      ["Vintertakrør", "Phragmites australis (Ø25 cm nek)", "~" + c.totalSheaves + " nek (" + c.roofSheaves + " tak + " + c.floorSheaves + " gulv)", "Skjær på vinteris; sy med kløyvde granrøtter (null ståltråd)."],
+      ["Utvendig isolasjon (" + Math.round(dInsM * 1000) + " mm)", "<button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">" + matName + "</button>", "~" + insVol.toFixed(1) + " m³ (" + (wallMat === "lime" ? "~" + limeBagsLight + "–" + limeBagsDense + " sekker × 25 kg CL90" : "~" + (insVol * 0.30).toFixed(1) + " m³ leirslam") + ")", "Pakk KUN på utsiden av varm bjørk; lesket kalk krever ≥+5°C + verneutstyr."],
+      ["Luftekledning og <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">mønedekke</button>", "3 lag never, torv, ~" + Math.round(c.wallAreaNet * 1.1) + " m² bord", "30 mm luftespalte + gnagernett", "Null plast eller vindpapir; ta never under vårsevjen i mai–juni."]
+    ] : currentLang === "pt" ? [
+      ["Toras de parede <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button>", "Bétula descascada Ø" + c.dBirchCm + " cm (<button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 Cl.5</button>)", "~" + c.totalWallLogs + " pç × 1,50 m (" + c.courses + " fiadas/vão)", "Descascar no mesmo dia; deixar " + c.gapMm + " mm de folga no topo."],
+      ["Pedras de apoio e vigas do piso", "Pedras de campo + espruce carbonizado Ø" + c.dGirdCm + " cm", c.nPiers + " pedras · " + (c.nBents * 2) + " vigas (" + (c.W / 2 + 0.25).toFixed(2) + " m)", "Carbonizar 3–4 mm; vão de " + c.spanM.toFixed(2) + " m (<button type=\"button\" class=\"inline-term\" data-explain=\"defl\">δ=" + c.deltaMm.toFixed(2) + " mm, L/" + c.lRatio + "</button>)."],
+      ["Pilares, tirantes e terças", "Espruce Ø" + c.dPostCm + " cm / vigas Ø13 cm", (c.nBents * 2) + " pilares ext. + " + (c.nBents * 2) + " int. · " + c.nBents + " tirantes", "<button type=\"button\" class=\"inline-term\" data-explain=\"euler_post\">Margem de Euler " + Math.round(c.eulerSF) + "×</button>; carbonizar os 40 cm inferiores."],
+      ["Caibros e escoras do telhado", "Espruce Ø9–12 cm (inclinação " + c.pitchDeg + "°)", c.nRafters + " caibros × " + (c.slopeLen + 0.15).toFixed(2) + " m + " + (c.nBents * 2) + " escoras", "Passo de 60 cm; <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">cunhas kusabi</button> travam H=" + c.H_tie.toFixed(2) + " kN."],
+      ["Toras do contrapiso (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">J7</button>)", "SOMENTE conífera descascada Ø8–10 cm", "~" + subfloorPoles + " toras × 1,55 m", "Nunca colocar bétula sob o piso de argila; trançar com varas de aveleira."],
+      ["Junco de inverno", "Phragmites australis (feixes Ø25 cm)", "~" + c.totalSheaves + " feixes (" + c.roofSheaves + " telhado + " + c.floorSheaves + " piso)", "Colher sobre o gelo no inverno; costurar com raízes de espruce rachadas (zero arame)."],
+      ["Isolamento externo (" + Math.round(dInsM * 1000) + " mm)", "<button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">" + matName + "</button>", "~" + insVol.toFixed(1) + " m³ (" + (wallMat === "lime" ? "~" + limeBagsLight + "–" + limeBagsDense + " sacos × 25 kg CL90" : "~" + (insVol * 0.30).toFixed(1) + " m³ de barbotina") + ")", "Compactar ESTRITAMENTE por fora da bétula; cal exige ≥+5°C e EPI."],
+      ["Fachada ventilada e <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">cumeeira</button>", "3 camadas de casca, torrões, ~" + Math.round(c.wallAreaNet * 1.1) + " m² tábuas", "Câmara de 30 mm + tela contra roedores", "Zero plástico ou papel corta-vento; retirar casca na subida da seiva (maio–junho)."]
     ] : [
       ["<button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> wall logs", "Debarked birch Ø" + c.dBirchCm + " cm (<button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 Cl.5</button>)", "~" + c.totalWallLogs + " pcs × 1.50 m (" + c.courses + " courses/bay)", "Peel bark same day; leave " + c.gapMm + " mm top settling gap."],
       ["Pier stones & floor girders", "Fieldstones + charred spruce Ø" + c.dGirdCm + " cm", c.nPiers + " stones · " + (c.nBents * 2) + " girders (" + (c.W / 2 + 0.25).toFixed(2) + " m)", "Deep-char 3–4 mm; " + c.spanM.toFixed(2) + " m span (<button type=\"button\" class=\"inline-term\" data-explain=\"defl\">δ=" + c.deltaMm.toFixed(2) + " mm, L/" + c.lRatio + "</button>)."],
@@ -1647,7 +1834,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     var a = parseFloat(slCa.value);
     document.getElementById("out-ca").textContent = a.toFixed(2) + " m";
     var halfSpan = 2.0, f = a * (Math.cosh(halfSpan / a) - 1);
-    document.getElementById("eq-cf").textContent = "Rise f = " + f.toFixed(2) + " m";
+    document.getElementById("eq-cf").textContent = L4("Rise f = ", "Aukštis f = ", "Pilhøyde f = ", "Flecha f = ") + f.toFixed(2) + " m";
     document.getElementById("eq-ch").textContent = "H = " + a.toFixed(2) + "·w";
 
     clear(svgCat);
@@ -1663,8 +1850,8 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     svgCat.appendChild(el("polyline", { points: chainPts.join(" "), fill: "none", stroke: "#234b6e", "stroke-width": 1.3, "stroke-dasharray": "4 3" }));
     var hLen = Math.min(52, 14 + a * 11.5);
     arrow(svgCat, cx + halfSpan * sc, yMid, cx + halfSpan * sc + hLen, yMid, "#8c3a2b", 1.8, 5.5);
-    svgCat.appendChild(el("text", { x: cx, y: 20, "text-anchor": "middle", fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.5 }, "ARCH (compression, M = 0)"));
-    svgCat.appendChild(el("text", { x: cx, y: 236, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.5 }, "CHAIN (tension)  ·  flatter a -> higher H"));
+    svgCat.appendChild(el("text", { x: cx, y: 20, "text-anchor": "middle", fill: "#8c3a2b", "font-family": "var(--mono)", "font-size": 9.5 }, L4("ARCH (compression, M = 0)", "ARKA (gniuždymas, M = 0)", "BUE (trykk, M = 0)", "ARCO (compressão, M = 0)")));
+    svgCat.appendChild(el("text", { x: cx, y: 236, "text-anchor": "middle", fill: "#234b6e", "font-family": "var(--mono)", "font-size": 9.5 }, L4("CHAIN (tension)  ·  flatter a -> higher H", "GRANDINĖ (tempimas)  ·  didesnis a -> didesnis H", "KJEDE (strekk)  ·  flatere a -> høyere H", "CORRENTE (tração)  ·  maior a -> maior H")));
   }
 
   /* Byrne hover highlighting (never conflicts with click-to-explain!) */
@@ -1684,25 +1871,85 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     });
   }
 
-  /* Wire controls */
-  [slWidth, slBays, slPitch, slBirch, slGird, slPost].forEach(function (s) { s.addEventListener("input", renderCabin); });
-  [slTout, slTypha, slRh].forEach(function (s) { s.addEventListener("input", renderWall); });
-  btnExt.addEventListener("click", function () { wallMode = "ext"; btnExt.classList.add("active"); btnInt.classList.remove("active"); renderWall(); });
-  btnInt.addEventListener("click", function () { wallMode = "int"; btnInt.classList.add("active"); btnExt.classList.remove("active"); renderWall(); });
-  function setMat(m, btn) { wallMat = m; [btnMatClay, btnMatLime, btnMatPure].forEach(function (b) { b.classList.toggle("active", b === btn); }); renderWall(); renderCabin(); }
+  /* Wire controls + compact live-state URL hash (only non-default params, zero Back-button spam) */
+  var STATE_SLIDERS = [
+    ["w", slWidth], ["b", slBays], ["p", slPitch], ["d", slBirch], ["g", slGird], ["o", slPost],
+    ["to", slTout], ["th", slTypha], ["rh", slRh], ["bq", slBq], ["bl", slBl], ["ed", slEd], ["ca", slCa]
+  ];
+  var STATE_DEF = { wm: "ext", mt: "clay", ek: "1" };
+  STATE_SLIDERS.forEach(function (pair) { STATE_DEF[pair[0]] = String(parseFloat(pair[1].defaultValue || pair[1].value)); });
+
+  function saveUrlState() {
+    var parts = [];
+    STATE_SLIDERS.forEach(function (pair) {
+      var v = String(parseFloat(pair[1].value));
+      if (v !== STATE_DEF[pair[0]]) parts.push(pair[0] + "=" + v);
+    });
+    if (wallMode !== STATE_DEF.wm) parts.push("wm=" + wallMode);
+    if (wallMat !== STATE_DEF.mt) parts.push("mt=" + wallMat);
+    if (String(eulerK) !== STATE_DEF.ek) parts.push("ek=" + eulerK);
+    try {
+      var base = location.pathname + location.search;
+      history.replaceState(null, "", parts.length ? base + "#" + parts.join("&") : base);
+    } catch (e) {}
+  }
+
+  function loadUrlState() {
+    var raw = (location.hash || "").replace(/^#/, "");
+    if (!raw || raw.indexOf("=") === -1) return false;
+    var map = {};
+    raw.split("&").forEach(function (kv) {
+      var eq = kv.indexOf("=");
+      if (eq > 0) map[kv.slice(0, eq)] = decodeURIComponent(kv.slice(eq + 1));
+    });
+    STATE_SLIDERS.forEach(function (pair) {
+      var k = pair[0], el = pair[1];
+      if (!(k in map)) return;
+      var v = parseFloat(map[k]);
+      if (!isFinite(v)) return;
+      var mn = parseFloat(el.min), mx = parseFloat(el.max);
+      if (isFinite(mn) && v < mn) v = mn;
+      if (isFinite(mx) && v > mx) v = mx;
+      el.value = String(v);
+    });
+    if (map.wm === "ext" || map.wm === "int") {
+      wallMode = map.wm;
+      btnExt.classList.toggle("active", wallMode === "ext");
+      btnInt.classList.toggle("active", wallMode === "int");
+    }
+    if (map.mt === "clay" || map.mt === "lime" || map.mt === "pure") {
+      wallMat = map.mt;
+      btnMatClay.classList.toggle("active", wallMat === "clay");
+      btnMatLime.classList.toggle("active", wallMat === "lime");
+      btnMatPure.classList.toggle("active", wallMat === "pure");
+    }
+    if (map.ek === "2" || map.ek === "2.0" || map.ek === "1" || map.ek === "1.0" || map.ek === "0.7" || map.ek === "0.5") {
+      eulerK = parseFloat(map.ek);
+      document.querySelectorAll("[data-k]").forEach(function (x) { x.classList.toggle("active", parseFloat(x.getAttribute("data-k")) === eulerK); });
+    }
+    return true;
+  }
+
+  [slWidth, slBays, slPitch, slBirch, slGird, slPost].forEach(function (s) { s.addEventListener("input", function () { renderCabin(); saveUrlState(); }); });
+  [slTout, slTypha, slRh].forEach(function (s) { s.addEventListener("input", function () { renderWall(); saveUrlState(); }); });
+  btnExt.addEventListener("click", function () { wallMode = "ext"; btnExt.classList.add("active"); btnInt.classList.remove("active"); renderWall(); saveUrlState(); });
+  btnInt.addEventListener("click", function () { wallMode = "int"; btnInt.classList.add("active"); btnExt.classList.remove("active"); renderWall(); saveUrlState(); });
+  function setMat(m, btn) { wallMat = m; [btnMatClay, btnMatLime, btnMatPure].forEach(function (b) { b.classList.toggle("active", b === btn); }); renderWall(); renderCabin(); saveUrlState(); }
   btnMatClay.addEventListener("click", function () { setMat("clay", btnMatClay); });
   btnMatLime.addEventListener("click", function () { setMat("lime", btnMatLime); });
   btnMatPure.addEventListener("click", function () { setMat("pure", btnMatPure); });
-  [slBq, slBl].forEach(function (s) { s.addEventListener("input", renderBeam); });
-  slEd.addEventListener("input", renderEuler);
+  [slBq, slBl].forEach(function (s) { s.addEventListener("input", function () { renderBeam(); saveUrlState(); }); });
+  slEd.addEventListener("input", function () { renderEuler(); saveUrlState(); });
   Array.prototype.slice.call(document.querySelectorAll("[data-k]")).forEach(function (b) {
     b.addEventListener("click", function () {
       eulerK = parseFloat(b.getAttribute("data-k"));
       document.querySelectorAll("[data-k]").forEach(function (x) { x.classList.toggle("active", x === b); });
-      renderEuler();
+      renderEuler(); saveUrlState();
     });
   });
-  slCa.addEventListener("input", renderCat);
+  slCa.addEventListener("input", function () { renderCat(); saveUrlState(); });
+  window.addEventListener("hashchange", function () { if (loadUrlState()) { renderCabin(); renderWall(); renderBeam(); renderEuler(); renderCat(); } });
+  loadUrlState();
   document.getElementById("btn-print").addEventListener("click", function () { window.print(); });
 
   /* ==================== FULL EN / LT I18N ==================== */
@@ -1782,13 +2029,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
   "leg_ink": "Espruce carbonizado / Solo / Eixo",
   "p1_h2": "Galpão <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> ajustável &amp; cobertura de junco a 45&deg;",
   "c_width": "Largura do pórtico (W)",
-  "c_bays": "Vãos no comprimento (&times;1.50 m)",
+  "c_bays": "Vãos no comprimento (&times;1,50 m)",
   "c_pitch": "Inclinação do telhado (&theta;)",
   "c_birch": "Diâmetro das toras da parede (&Oslash;)",
   "c_gird": "Viga mestra do piso (&Oslash;)",
   "c_post": "Pilar interno (&Oslash;)",
   "mk_area": "Área de implantação (limite 50 m&sup2;)",
-  "mk_ridge": "Cumeeira externa (limite 5.00 m)",
+  "mk_ridge": "Cumeeira externa (limite 5,00 m)",
   "mk_snow": "Carga de neve + junco",
   "mk_thrust": "Tração no tirante H / pórtico",
   "mk_defl": "Flecha da viga &delta; (vão W/4)",
@@ -1832,9 +2079,9 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
   "d2_sub": "Por que perder o congelamento do inverno, a subida da seiva na primavera ou a janela da cal acima de +5&deg;C dobra o trabalho",
   "d3_sub": "Tudo o que é preciso para derrubar, descascar, rachar, encaixar, cobrir e erguer sozinho",
   "d4_sub": "Tratados verificados em domínio público, manuais de laboratório e textos universitários abertos de mecânica",
-  "p1_proof": "O peso da cobertura e a neve do inverno apoiam-se no <span class=\"b-ref red\" data-hl=\"roof\" data-explain=\"snow\">colmo de junco a 45&deg; e nos caibros</span>. Escoras em pares transformam a carga da cumeeira em <span class=\"b-ref blue\" data-hl=\"tie\" data-explain=\"thrust\">tração horizontal H no tirante</span>, travada por cunhas <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi</button> de bétula seca, enquanto os <span class=\"b-ref ink\" data-hl=\"posts\" data-explain=\"euler_post\">pilares de abeto</span> suportam o peso com folga, bem abaixo da flambagem de Euler. Entre os pilares externos, <span class=\"b-ref ochre\" data-hl=\"walls\" data-explain=\"skiftesverk\">toras horizontais de bétula</span> deslizam em réguas cavilhadas sob uma folga de assentamento vedada com musgo. Sobre areia limpa, <span class=\"b-ref ink\" data-hl=\"floor\" data-explain=\"defl\">vigas de abeto carbonizadas</span> apoiadas em pedras mantêm a flecha abaixo de L/500, para que o piso de argila <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button> nunca trinque.",
+  "p1_proof": "O peso da cobertura e a neve do inverno apoiam-se no <span class=\"b-ref red\" data-hl=\"roof\" data-explain=\"snow\">colmo de junco a 45&deg; e nos caibros</span>. Escoras em pares transformam a carga da cumeeira em <span class=\"b-ref blue\" data-hl=\"tie\" data-explain=\"thrust\">tração horizontal H no tirante</span>, travada por cunhas <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi</button> de bétula seca, enquanto os <span class=\"b-ref ink\" data-hl=\"posts\" data-explain=\"euler_post\">pilares de espruce</span> suportam o peso com folga, bem abaixo da flambagem de Euler. Entre os pilares externos, <span class=\"b-ref ochre\" data-hl=\"walls\" data-explain=\"skiftesverk\">toras horizontais de bétula</span> deslizam em réguas cavilhadas sob uma folga de assentamento vedada com musgo. Sobre areia limpa, <span class=\"b-ref ink\" data-hl=\"floor\" data-explain=\"defl\">vigas de espruce carbonizadas</span> apoiadas em pedras mantêm a flecha abaixo de L/500, para que o piso de argila <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button> nunca trinque.",
   "p2_proof": "Por que a matemática corrige a intuição: a bétula (<em>Betula pendula</em>) é <button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 Classe 5</button>. Colocar o <span class=\"b-ref ochre\" data-hl=\"w-typha\" data-explain=\"slaked_lime\">isolamento</span> <em>por dentro</em> dos <span class=\"b-ref ink\" data-hl=\"w-birch\" data-explain=\"birch_cl5\">100 mm de bétula</span> resfria a madeira a <strong>&minus;10&deg;C</strong> atrás de uma casca externa mais fechada. Passar a taboa com barbotina de argila ou a <strong>taboa com cal hidratada</strong> para <em>fora</em> da bétula mantém a madeira quente e seca, ventilando para fora na <span class=\"b-ref blue\" data-hl=\"w-cav\" data-explain=\"glaser\">câmara ventilada de 30 mm</span> (zero plástico, zero papel corta-vento).",
-  "season_cards": "<div class=\"season-card gate\"><span class=\"s-when\">JAN &ndash; FEV &middot; CONGELAMENTO</span><h4>1. Junco, bétula fina e transporte na neve</h4><p>Corte o junco <em>Phragmites</em> seco e em pé sobre valas congeladas e empilhe em medas cônicas. Desbaste bétulas jovens (&Oslash;10&ndash;12 cm) e recolha abeto seco. <strong>Descasque a bétula no mesmo dia</strong>, arraste as toras pesadas sobre a neve num <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">trenó travois</button>, entalhe as espigas deslizantes e seque as <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">cunhas kusabi</button> de bétula em local fechado.</p><p class=\"s-why\"><strong>Janela 1:</strong> Mínimo de seiva na madeira + junco seco + arraste quase sem atrito na neve.</p></div><div class=\"season-card\"><span class=\"s-when\">MARÇO &middot; DEGELO E CARBONIZAÇÃO</span><h4>2. Teste de argila, carbonização e verificação de normas</h4><p>Faça o teste da fita na argila do subsolo local (fita de &ge;5 cm sem partir) ou escolha a rota da <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">cal hidratada</button>. Descasque as toras de abeto da estrutura quando a temperatura passar de +2&deg;C. Carbonize fundo (3&ndash;4 mm) todas as vigas, a soleira externa, os 40 cm inferiores dos pilares, os <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> da cumeeira e os chifres da empena.</p><p class=\"s-why\"><strong>Escudo de fogo:</strong> A carbonização profunda esteriliza os açúcares da madeira e retarda o ataque de fungos pelos respingos do solo.</p></div><div class=\"season-card\"><span class=\"s-when\">ABR &ndash; MAIO &middot; APOIOS E ESTRUTURA</span><h4>3. Retirar a turfa, assentar pedras e erguer os pórticos sozinho</h4><p>Retire a camada orgânica até a areia mineral limpa (empilhe os torrões com a grama para baixo). Abra valetas de gotejamento de 25 cm. Nivele pedras chatas (&plusmn;3 mm), assente as vigas carbonizadas e as toras soltas do contrapiso, erga os pórticos sozinho com cordas e varas bifurcadas, fixe os caibros a 45&deg; e encaixe as toras de bétula das paredes sob o esqueleto para secarem.</p><p class=\"s-why\"><strong>Galpão de secagem:</strong> A estrutura erguida mantém os vãos de bétula secos enquanto encolhem.</p></div><div class=\"season-card gate\"><span class=\"s-when\">FIM DE MAIO &ndash; JUN &middot; JANELA DA SEIVA</span><h4>4. Casca de bétula, raízes de abeto e cobertura</h4><p>Colha largas tiras de casca branca de bétula (50 cm) e arranque raízes rasas de abeto (rache e deixe de molho). Amarre ripas de aveleira a cada 30 cm, aplique 30 cm de colmo de junco de inverno costurado com raízes de abeto (zero arame) e cubra a cumeeira com 3 camadas de casca + 12 cm de torrões vivos + <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> carbonizados cruzados.</p><p class=\"s-why\"><strong>Janela 2 (2&ndash;3 semanas):</strong> A casca de bétula só se solta limpa no pico da seiva da primavera.</p></div><div class=\"season-card\"><span class=\"s-when\">JULHO &middot; VENTO QUENTE E SECO</span><h4>5. Piso trançado de junco e argila (J7)</h4><p>Prenda as toras de conífera do contrapiso (&Oslash;9 cm) com varas de aveleira trançadas. Compacte uma manta de 8 cm de junco mergulhado em argila (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>) mais uma crosta de desgaste de 3,5 cm de argila arenosa magra com cinza 1:3, soque bem e brunça em ponto de couro com um seixo molhado. Mantenha o vão sob o piso totalmente aberto.</p><p class=\"s-why\"><strong>Janela de cura:</strong> A brisa quente e seca de julho cura o piso de terra por cima e por baixo.</p></div><div class=\"season-card lime-win\"><span class=\"s-when\">AGO &ndash; SET &middot; FECHAMENTO DAS PAREDES (&ge;+5&deg;C)</span><h4>6. Argila e taboa por fora OU cal hidratada</h4><p>Confirme a umidade da bétula &lt;18% e meça o assentamento. Colha folhas e hastes de <em>Typha</em> (taboa) sem flor (zero paina). Mergulhe em barbotina rala de argila <strong>OU em leite de <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">cal hidratada Ca(OH)<sub>2</sub></button></strong> e compacte 120&ndash;150 mm no <strong>EXTERIOR</strong> da bétula quente. Monte a câmara ventilada de 30 mm (tela contra roedores) + tábuas.</p><p class=\"s-why\"><strong>Janela de geada da cal:</strong> A cal hidratada PRECISA curar a &ge;+5&deg;C por 4+ semanas para carbonatar e virar calcário.</p></div><div class=\"season-card\"><span class=\"s-when\">OUT &ndash; NOV &middot; PREPARO PARA O INVERNO</span><h4>7. Saia removível do vão sob o piso</h4><p>Empilhe os torrões de turfa guardados e ramos de abeto ao redor dos apoios para aquecer o piso no inverno, e abra tudo de novo todo mês de abril para a circulação de ar seco no verão.</p><p class=\"s-why\"><strong>Respiração sazonal:</strong> Vão fechado e quente no inverno; madeira seca e ventilada no verão.</p></div>",
+  "season_cards": "<div class=\"season-card gate\"><span class=\"s-when\">JAN &ndash; FEV &middot; CONGELAMENTO</span><h4>1. Junco, bétula fina e transporte na neve</h4><p>Corte o junco <em>Phragmites</em> seco e em pé sobre valas congeladas e empilhe em medas cônicas. Desbaste bétulas jovens (&Oslash;10&ndash;12 cm) e recolha espruce seco. <strong>Descasque a bétula no mesmo dia</strong>, arraste as toras pesadas sobre a neve num <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">trenó travois</button>, entalhe as espigas deslizantes e seque as <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">cunhas kusabi</button> de bétula em local fechado.</p><p class=\"s-why\"><strong>Janela 1:</strong> Mínimo de seiva na madeira + junco seco + arraste quase sem atrito na neve.</p></div><div class=\"season-card\"><span class=\"s-when\">MARÇO &middot; DEGELO E CARBONIZAÇÃO</span><h4>2. Teste de argila, carbonização e verificação de normas</h4><p>Faça o teste da fita na argila do subsolo local (fita de &ge;5 cm sem partir) ou escolha a rota da <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">cal hidratada</button>. Descasque as toras de espruce da estrutura quando a temperatura passar de +2&deg;C. Carbonize fundo (3&ndash;4 mm) todas as vigas, a soleira externa, os 40 cm inferiores dos pilares, os <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> da cumeeira e os chifres da empena.</p><p class=\"s-why\"><strong>Escudo de fogo:</strong> A carbonização profunda esteriliza os açúcares da madeira e retarda o ataque de fungos pelos respingos do solo.</p></div><div class=\"season-card\"><span class=\"s-when\">ABR &ndash; MAIO &middot; APOIOS E ESTRUTURA</span><h4>3. Retirar a turfa, assentar pedras e erguer os pórticos sozinho</h4><p>Retire a camada orgânica até a areia mineral limpa (empilhe os torrões com a grama para baixo). Abra valetas de gotejamento de 25 cm. Nivele pedras chatas (&plusmn;3 mm), assente as vigas carbonizadas e as toras soltas do contrapiso, erga os pórticos sozinho com cordas e varas bifurcadas, fixe os caibros a 45&deg; e encaixe as toras de bétula das paredes sob o esqueleto para secarem.</p><p class=\"s-why\"><strong>Galpão de secagem:</strong> A estrutura erguida mantém os vãos de bétula secos enquanto encolhem.</p></div><div class=\"season-card gate\"><span class=\"s-when\">FIM DE MAIO &ndash; JUN &middot; JANELA DA SEIVA</span><h4>4. Casca de bétula, raízes de espruce e cobertura</h4><p>Colha largas tiras de casca branca de bétula (50 cm) e arranque raízes rasas de espruce (rache e deixe de molho). Amarre ripas de aveleira a cada 30 cm, aplique 30 cm de colmo de junco de inverno costurado com raízes de espruce (zero arame) e cubra a cumeeira com 3 camadas de casca + 12 cm de torrões vivos + <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> carbonizados cruzados.</p><p class=\"s-why\"><strong>Janela 2 (2&ndash;3 semanas):</strong> A casca de bétula só se solta limpa no pico da seiva da primavera.</p></div><div class=\"season-card\"><span class=\"s-when\">JULHO &middot; VENTO QUENTE E SECO</span><h4>5. Piso trançado de junco e argila (J7)</h4><p>Prenda as toras de conífera do contrapiso (&Oslash;9 cm) com varas de aveleira trançadas. Compacte uma manta de 8 cm de junco mergulhado em argila (<button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>) mais uma crosta de desgaste de 3,5 cm de argila arenosa magra com cinza 1:3, soque bem e brunça em ponto de couro com um seixo molhado. Mantenha o vão sob o piso totalmente aberto.</p><p class=\"s-why\"><strong>Janela de cura:</strong> A brisa quente e seca de julho cura o piso de terra por cima e por baixo.</p></div><div class=\"season-card lime-win\"><span class=\"s-when\">AGO &ndash; SET &middot; FECHAMENTO DAS PAREDES (&ge;+5&deg;C)</span><h4>6. Argila e taboa por fora OU cal hidratada</h4><p>Confirme a umidade da bétula &lt;18% e meça o assentamento. Colha folhas e hastes de <em>Typha</em> (taboa) sem flor (zero paina). Mergulhe em barbotina rala de argila <strong>OU em leite de <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">cal hidratada Ca(OH)<sub>2</sub></button></strong> e compacte 120&ndash;150 mm no <strong>EXTERIOR</strong> da bétula quente. Monte a câmara ventilada de 30 mm (tela contra roedores) + tábuas.</p><p class=\"s-why\"><strong>Janela de geada da cal:</strong> A cal hidratada PRECISA curar a &ge;+5&deg;C por 4+ semanas para carbonatar e virar calcário.</p></div><div class=\"season-card\"><span class=\"s-when\">OUT &ndash; NOV &middot; PREPARO PARA O INVERNO</span><h4>7. Saia removível do vão sob o piso</h4><p>Empilhe os torrões de turfa guardados e ramos de espruce ao redor dos apoios para aquecer o piso no inverno, e abra tudo de novo todo mês de abril para a circulação de ar seco no verão.</p><p class=\"s-why\"><strong>Respiração sazonal:</strong> Vão fechado e quente no inverno; madeira seca e ventilada no verão.</p></div>",
   "tool_cards": "<div class=\"tool-card\"><h4>I &middot; Marcação e nível</h4><ul><li><strong>Trena de 5 m e linha de pedreiro</strong> (esquadro dos vãos e conferência das diagonais)</li><li><strong>Nível de bolha ou nível em A feito no local</strong> (assentamento das pedras de apoio &plusmn;3 mm)</li><li><strong>Prumo e compasso de madeira</strong> (riscar toras roliças e pilares verticais)</li></ul></div><div class=\"tool-card\"><h4>II &middot; Descascar e rachar</h4><ul><li><strong>Faca de dois cabos ou espátula de casca</strong> (descasque no mesmo dia de ~240 toras de bétula + cunhas)</li><li><strong>Fendedor (<em>skeltuvas</em>)</strong> (forjado ou cortado de um feixe de mola usado de veículo; racha réguas e tábuas)</li><li><strong>Maço de madeira dura entalhado no local + 4 cunhas de rachar endurecidas no fogo</strong></li></ul></div><div class=\"tool-card\"><h4>III &middot; Carpintaria de encaixe</h4><ul><li><strong>Machado médio de derrubada e desgalhe (~1,2 kg)</strong> (toragem e faces brutas das espigas)</li><li><strong>Machadinha leve de carpinteiro (~400 g)</strong> (acabamento com uma mão das espigas deslizantes)</li><li><strong>Serra de arco (lâminas para madeira verde e seca)</strong> + <strong>formão de encaixe de 20&ndash;25 mm</strong> + <strong>faca sloyd</strong></li><li><strong>Pedra de afiar e lima bastarda</strong> (3 min de afiação diária cortam as horas de obra pela metade)</li></ul></div><div class=\"tool-card\"><h4>IV &middot; Colheita, içamento solo e cal</h4><ul><li><strong>Gadanha / foice</strong> (~750 feixes de junco de inverno) + <strong>pá</strong></li><li><strong>Ferramentas feitas no local:</strong> soquete de argila (<em>me&scaron;ka</em>), batedor plano de colmo, agulha de madeira de 45 cm, <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">trenó travois</button>, 2 varas bifurcadas</li><li><strong>Cordas e cintas com catraca</strong> (içar pórticos sozinho e apertar os encaixes com cunha)</li><li><strong>Luvas de borracha e óculos de proteção</strong> (obrigatórios ao misturar cal hidratada cáustica Ca(OH)<sub>2</sub>)</li></ul></div>",
   "book_cards": "<div class=\"tool-card\"><h4>Madeira e encaixes</h4><ul><li><strong><a href=\"https://research.fs.usda.gov/download/treesearch/62200.pdf\" target=\"_blank\" rel=\"noopener\">USDA Wood Handbook (FPL-GTR-282, PDF gratuito)</a></strong> &middot; Referência mundial em mecânica da madeira, módulo de elasticidade E, retração tangencial e durabilidade contra apodrecimento.</li><li><strong><a href=\"https://archive.org/details/hearth4500929\" target=\"_blank\" rel=\"noopener\">George Ellis &middot; Modern Practical Carpentry (1906, Archive.org)</a></strong> &middot; Tratado clássico ilustrado, em domínio público, sobre telhados tradicionais, tesouras, pisos e encaixes de madeira.</li></ul></div><div class=\"tool-card\"><h4>Madeira nórdica, turfa e cal</h4><ul><li><strong><a href=\"https://www.riksantikvaren.no\" target=\"_blank\" rel=\"noopener\">Riksantikvaren (guias do patrimônio norueguês)</a></strong> &middot; Fichas públicas e gratuitas de conservação sobre telhados de turfa com casca de bétula (<em>torvtak</em>), estruturas de madeira e argamassa de cal aérea (<em>kalkm&oslash;rtel</em>).</li><li><strong><a href=\"https://www.byggogbevar.no\" target=\"_blank\" rel=\"noopener\">Bygg og Bevar (portal nórdico de ofícios da construção)</a></strong> &middot; Guias técnicos abertos sobre paredes de toras, encaixes tradicionais e acabamentos naturais.</li><li><strong><a href=\"https://historicengland.org.uk/advice/guidance/\" target=\"_blank\" rel=\"noopener\">Historic England, central de orientação técnica</a></strong> &middot; Notas gratuitas de conservação sobre argamassas de cal respiráveis e paredes de terra.</li></ul></div><div class=\"tool-card\"><h4>Taboa (Typha) e física da umidade</h4><ul><li><strong><a href=\"https://www.ibp.fraunhofer.de/en/business-units-and-products/product-developments/cattail.html\" target=\"_blank\" rel=\"noopener\">Fraunhofer IBP &middot; Material de construção de taboa (Typha)</a></strong> &middot; Pesquisa alemã primária em física das construções sobre a condutividade térmica da <em>Typha</em> (&lambda; 0,048&ndash;0,060), secagem capilar e resistência ao mofo.</li></ul></div><div class=\"tool-card\"><h4>Mecânica estrutural e geometria</h4><ul><li><strong><a href=\"https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Structural_Mechanics_(Wierzbicki)/08%3A_Beam_Bending_Buckling_and_Torsion\" target=\"_blank\" rel=\"noopener\">Tomasz Wierzbicki (MIT) &middot; Structural Mechanics (LibreTexts)</a></strong> &middot; Livro-texto aberto e gratuito sobre flexão de vigas, torção e estabilidade elástica.</li><li><strong><a href=\"https://ocw.mit.edu/courses/2-080j-structural-mechanics-fall-2013/course-notes/MIT2_080JF13_Lecture10.pdf\" target=\"_blank\" rel=\"noopener\">MIT OCW 2.080J &middot; Notas sobre flambagem de colunas (PDF gratuito)</a></strong> &middot; Dedução completa dos modos de flambagem de Euler e das condições de contorno.</li><li><strong><a href=\"https://www.c82.net/euclid/\" target=\"_blank\" rel=\"noopener\">Byrne&rsquo;s Euclid (N. Rougeux)</a></strong> &amp; <strong><a href=\"https://ciechanow.ski/\" target=\"_blank\" rel=\"noopener\">Bartosz Ciechanowski</a></strong> &middot; Clássicos de geometria visual e mecânica interativa.</li></ul></div>"
 };
@@ -1844,7 +2091,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
     nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
     hero_h1: "Form",
-    hero_lead: "Parametrisk dimensjoneringsverktøy for håndbygd Skiftesverk-trekonstruksjon (45&deg; stråtak) og duggpunktskontroll i vegg. Kun foreløpig referanse; ikke signert prosjektering.",
+    hero_lead: "Parametrisk dimensjoneringsverktøy for håndbygd Skiftesverk-trekonstruksjon (45&deg; takrørtak) og duggpunktskontroll i vegg. Kun foreløpig referanse; ikke signert prosjektering.",
     btn_pdf: "Last ned 4-siders CAD-guide EN (PDF)",
     btn_print: "Skriv ut / lagre beregning",
     btn_jump_cal: "Arbeidsgang, verktøy og kilder &darr;",
@@ -1875,52 +2122,32 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     method_note: "Åpent beregningsverktøy og 4-siders CAD-guide (fritt til bruk og tilpasning). Beregnet direkte i ren SVG fra LST EN 1991-1-3 (snø), Euler-Bernoulli bjelketeori, knekkformer, kjedelinje, Fourier varmeledning og Glaser damptrykk. Kun foreløpig referanse.",
     d2_sub: "Hvorfor arbeidet dobles hvis du bommer på vinterfrosten, vårsevjen eller kalkvinduet over +5&deg;C",
     d3_sub: "Alt som trengs for å felle, barke, kløyve, sammenføye, tekke og reise alene",
-    d4_sub: "Kontrollerte fagbøker i allemannseie, laboratoriehåndbøker og åpne universitetstekster i mekanikk",
-    p1_proof: "Takvekt og vintersnø hviler på <span class=\"b-ref red\" data-hl=\"roof\" data-explain=\"snow\">45&deg; takrørtak og sperrer</span>. Parvise skråstivere fører mønelasten over i horisontalt <span class=\"b-ref blue\" data-hl=\"tie\" data-explain=\"thrust\">strekk H i bindbjelken</span>, låst med tørre <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi</button>-kiler av bjørk, mens <span class=\"b-ref ink\" data-hl=\"posts\" data-explain=\"euler_post\">granstolpene</span> bærer tyngden trygt langt under Euler-knekking. Mellom de ytre stolpene glir <span class=\"b-ref ochre\" data-hl=\"walls\" data-explain=\"skiftesverk\">liggende bjørkestokker</span> i plugget sporlister under en setningsspalte tettet med mose. Over ren sand holder <span class=\"b-ref ink\" data-hl=\"floor\" data-explain=\"defl\">forkullede granbjelker</span> på feltstein nedbøyningen under L/500, så <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>-leiregulvet aldri sprekker.",
+    d4_sub: "Kontrollerte fagbøker som har falt i det fri, laboratoriehåndbøker og åpne universitetstekster i mekanikk",
+    p1_proof: "Takvekt og vintersnø hviler på <span class=\"b-ref red\" data-hl=\"roof\" data-explain=\"snow\">45&deg; takrørtak og sperrer</span>. Parvise skråstivere fører mønelasten over i horisontalt <span class=\"b-ref blue\" data-hl=\"tie\" data-explain=\"thrust\">strekk H i bindbjelken</span>, låst med tørre <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi</button>-kiler av bjørk, mens <span class=\"b-ref ink\" data-hl=\"posts\" data-explain=\"euler_post\">granstolpene</span> bærer tyngden trygt langt under Euler-knekking. Mellom de ytre stolpene glir <span class=\"b-ref ochre\" data-hl=\"walls\" data-explain=\"skiftesverk\">liggende bjørkestokker</span> i pluggede sporlister under en setningsspalte tettet med mose. Over ren sand holder <span class=\"b-ref ink\" data-hl=\"floor\" data-explain=\"defl\">forkullede granbjelker</span> på feltstein nedbøyningen under L/500, så <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>-leiregulvet aldri sprekker.",
     p2_proof: "Hvorfor matematikken korrigerer magefølelsen: bjørk (<em>Betula pendula</em>) er <button type=\"button\" class=\"inline-term\" data-explain=\"birch_cl5\">EN 350 klasse 5</button>. Legger du <span class=\"b-ref ochre\" data-hl=\"w-typha\" data-explain=\"slaked_lime\">isolasjonen</span> <em>innenfor</em> <span class=\"b-ref ink\" data-hl=\"w-birch\" data-explain=\"birch_cl5\">100 mm bjørk</span>, kjøles treet ned til <strong>&minus;10&deg;C</strong> bak et tettere ytre treskall. Flytter du leirslemmet dunkjevle eller <strong>dunkjevle i lesket kalk</strong> <em>utenpå</em> bjørken, holder treet seg varmt og tørt og lufter utover til <span class=\"b-ref blue\" data-hl=\"w-cav\" data-explain=\"glaser\">30 mm luftet hulrom</span> (null plast, null vindpapir).",
-    season_cards: "<div class=\"season-card gate\"><span class=\"s-when\">JAN &ndash; FEB &middot; DYP FROST</span><h4>1. Takrør, tynn bjørk og snøtransport</h4><p>Skjær stående, døde <em>Phragmites</em>-takrør rent over frosne grøfter og still dem i kjegleformede stauker. Tynn ung bjørk (&Oslash;10&ndash;12 cm) og samle tørrgran. <strong>Bark bjørka samme dag</strong>, dra tunge stokker over snøen på en <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois-slede</button>, skjær glidetapper og tørk <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi-kiler</button> av bjørk innendørs.</p><p class=\"s-why\"><strong>Port 1:</strong> Minst sevje i tømmeret + tørre døde takrør + nesten friksjonsfri transport på snø.</p></div><div class=\"season-card\"><span class=\"s-when\">MARS &middot; TELELØSNING OG FORKULLING</span><h4>2. Leirtest, forkulling og regelsjekk</h4><p>Gjør båndtest på lokal undergrunnsleire (&ge;5 cm bånd uten brudd), eller velg ruten med <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">lesket kalk</button>. Bark granstokkene til rammen når temperaturen passerer +2&deg;C. Dypforkull (3&ndash;4 mm) alle bjelker, ytre svill, nederste 40 cm av stolpene, mønets <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> og gavlhornene.</p><p class=\"s-why\"><strong>Ildskjold:</strong> Dyp forkulling steriliserer sukkeret i treet og bremser soppangrep fra jordsprut.</p></div><div class=\"season-card\"><span class=\"s-when\">APR &ndash; MAI &middot; PILARER OG RAMME</span><h4>3. Fjern torv, legg feltstein og reis rammene alene</h4><p>Fjern organisk matjord ned til ren mineralsand (stable torvene med gresset ned). Grav 25 cm dryppgrøfter. Legg flate feltsteiner i vater (&plusmn;3 mm), legg forkullede bjelker og løse undergulvsstokker, reis rammene alene med tau og gaffelstenger, fest 45&deg; sperrer, og skyv bjørkestokkene for veggene inn under skjelettet for tørking.</p><p class=\"s-why\"><strong>Tørkeskur:</strong> Den reiste rammen holder bjørkefeltene tørre mens de krymper.</p></div><div class=\"season-card gate\"><span class=\"s-when\">SLUTTEN AV MAI &ndash; JUN &middot; SEVJEVINDU</span><h4>4. Bjørkenever, granrøtter og tekking</h4><p>Ta brede, hvite never-flak av bjørk (50 cm) og dra opp grunne granrøtter (kløyv og bløtlegg). Surr hasselsløyfer hver 30 cm, legg 30 cm tekke av vintertakrør sydd med granrøtter (null ståltråd), og dekk mønet med 3 lag never + 12 cm levende torv + kryssede, forkullede <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button>.</p><p class=\"s-why\"><strong>Port 2 (2&ndash;3 uker):</strong> Neveren slipper rent BARE når vårsevjen er på topp.</p></div><div class=\"season-card\"><span class=\"s-when\">JULI &middot; VARM, TØRR VIND</span><h4>5. Flettet takrør- og leiregulv (J7)</h4><p>Fest &Oslash;9 cm undergulvsstokker av bartre med flettede hasselkvister. Pakk en 8 cm <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>-matte av leirdyppet takrør pluss et 3,5 cm slitelag av mager sandleire og aske 1:3, stamp det tett, og poler det lærhardt med en våt rullestein. Hold krypkjelleren helt åpen under.</p><p class=\"s-why\"><strong>Herdeport:</strong> Varm, tørr julivind herder jordgulvet fra både oversiden og undersiden.</p></div><div class=\"season-card lime-win\"><span class=\"s-when\">AUG &ndash; SEP &middot; VEGGLUKKING (&ge;+5&deg;C)</span><h4>6. Utvendig leire og dunkjevle ELLER lesket kalk</h4><p>Bekreft at fuktinnholdet i bjørka er &lt;18 % og mål setningen. Høst blader og stengler av <em>Typha</em> (dunkjevle) som ikke har blomstret (null dun). Dypp i tynt leirslam <strong>ELLER <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">lesket kalk Ca(OH)<sub>2</sub></button>-melk</strong> og pakk 120&ndash;150 mm på <strong>UTSIDEN</strong> av den varme bjørka. Monter 30 mm luftet hulrom (gnagernett) + kledning.</p><p class=\"s-why\"><strong>Frostport for kalk:</strong> Lesket kalk MÅ herde ved &ge;+5&deg;C i 4+ uker for å karbonatisere til kalkstein.</p></div><div class=\"season-card\"><span class=\"s-when\">OKT &ndash; NOV &middot; VINTERKLARGJØRING</span><h4>7. Avtakbart skjørt rundt krypkjelleren</h4><p>Stable de lagrede torvene og granbar rundt pilarene for varme i gulvet om vinteren, og ta det åpent igjen hver april for tørr luftgjennomstrømning om sommeren.</p><p class=\"s-why\"><strong>Sesongpust:</strong> Varmt, lukket under gulvet om vinteren; tørt, luftet tømmer om sommeren.</p></div>",
-    tool_cards: "<div class=\"tool-card\"><h4>I &middot; Oppmerking og vater</h4><ul><li><strong>5 m målebånd og murersnor</strong> (vinkling av felt og diagonalkontroll)</li><li><strong>Vaterpass eller hjemmelaget A-vater</strong> (legging av pilarsteiner &plusmn;3 mm)</li><li><strong>Lodd og trepasser</strong> (risting av rundstokker og loddrette stolper)</li></ul></div><div class=\"tool-card\"><h4>II &middot; Barking og kløyving</h4><ul><li><strong>Bandkniv eller barkespade</strong> (barking samme dag av ~240 bjørkestokker + kiler)</li><li><strong>Kløyvjern (<em>skeltuvas</em>)</strong> (smidd eller kuttet av en brukt bladfjær fra et kjøretøy; kløyver sporlister og bord)</li><li><strong>Hjemmeskåret klubbe av hardtre + 4 ildherdede kløyvkiler</strong></li></ul></div><div class=\"tool-card\"><h4>III &middot; Tømmersammenføyning</h4><ul><li><strong>Middels felle- og kvisteøks (~1,2 kg)</strong> (kapping og grove tappsider)</li><li><strong>Lett tømmermannsøks (~400 g)</strong> (enhånds finskjæring av glidetapper)</li><li><strong>Bøylesag (blad for rått og tørt tre)</strong> + <strong>20&ndash;25 mm tappjern</strong> + <strong>sløydkniv</strong></li><li><strong>Slipestein og grovfil</strong> (3 min sliping daglig halverer byggetimene)</li></ul></div><div class=\"tool-card\"><h4>IV &middot; Høsting, løft alene og kalk</h4><ul><li><strong>Ljå / sigd</strong> (~750 nek vintertakrør) + <strong>spade</strong></li><li><strong>Hjemmeskårne verktøy:</strong> leirstamper (<em>me&scaron;ka</em>), flat tekkeklubbe, 45 cm trenål, <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois-slede</button>, 2 gaffelstenger</li><li><strong>Tau og spennstropper</strong> (reising av rammer alene og stramming av kileledd)</li><li><strong>Gummihansker og vernebriller</strong> (påbudt ved blanding av etsende lesket kalk Ca(OH)<sub>2</sub>)</li></ul></div>",
-    book_cards: "<div class=\"tool-card\"><h4>Tre og sammenføyning</h4><ul><li><strong><a href=\"https://research.fs.usda.gov/download/treesearch/62200.pdf\" target=\"_blank\" rel=\"noopener\">USDA Wood Handbook (FPL-GTR-282, gratis PDF)</a></strong> &middot; Verdensstandarden for tremekanikk, elastisitetsmodul E, tangentiell krymping og råtebestandighet.</li><li><strong><a href=\"https://archive.org/details/hearth4500929\" target=\"_blank\" rel=\"noopener\">George Ellis &middot; Modern Practical Carpentry (1906, Archive.org)</a></strong> &middot; Klassisk illustrert lærebok i allemannseie om tradisjonelle tak, takstoler, gulv og tømmersammenføyning.</li></ul></div><div class=\"tool-card\"><h4>Nordisk tømmer, torv og kalk</h4><ul><li><strong><a href=\"https://www.riksantikvaren.no\" target=\"_blank\" rel=\"noopener\">Riksantikvaren (norske veiledere for kulturminner)</a></strong> &middot; Gratis, offentlige veiledere om torvtak med never, bindingsverk og kalkmørtel.</li><li><strong><a href=\"https://www.byggogbevar.no\" target=\"_blank\" rel=\"noopener\">Bygg og Bevar (portal for nordisk byggehåndverk)</a></strong> &middot; Åpne tekniske veiledere om lafteverk, tradisjonelle sammenføyninger og naturlige overflater.</li><li><strong><a href=\"https://historicengland.org.uk/advice/guidance/\" target=\"_blank\" rel=\"noopener\">Historic England, tekniske veiledere</a></strong> &middot; Gratis råd om pustende kalkmørtel og jordvegger.</li></ul></div><div class=\"tool-card\"><h4>Dunkjevle (Typha) og fuktfysikk</h4><ul><li><strong><a href=\"https://www.ibp.fraunhofer.de/en/business-units-and-products/product-developments/cattail.html\" target=\"_blank\" rel=\"noopener\">Fraunhofer IBP &middot; Byggemateriale av dunkjevle (Typha)</a></strong> &middot; Tysk primærforskning i bygningsfysikk om varmeledningsevnen til <em>Typha</em> (&lambda; 0,048&ndash;0,060), kapillær uttørking og muggbestandighet.</li></ul></div><div class=\"tool-card\"><h4>Konstruksjonsmekanikk og geometri</h4><ul><li><strong><a href=\"https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Structural_Mechanics_(Wierzbicki)/08%3A_Beam_Bending_Buckling_and_Torsion\" target=\"_blank\" rel=\"noopener\">Tomasz Wierzbicki (MIT) &middot; Structural Mechanics (LibreTexts)</a></strong> &middot; Gratis åpen lærebok om bjelkebøyning, torsjon og elastisk stabilitet.</li><li><strong><a href=\"https://ocw.mit.edu/courses/2-080j-structural-mechanics-fall-2013/course-notes/MIT2_080JF13_Lecture10.pdf\" target=\"_blank\" rel=\"noopener\">MIT OCW 2.080J &middot; Forelesningsnotater om knekking (gratis PDF)</a></strong> &middot; Full utledning av Eulers knekkformer og randbetingelser.</li><li><strong><a href=\"https://www.c82.net/euclid/\" target=\"_blank\" rel=\"noopener\">Byrne&rsquo;s Euclid (N. Rougeux)</a></strong> &amp; <strong><a href=\"https://ciechanow.ski/\" target=\"_blank\" rel=\"noopener\">Bartosz Ciechanowski</a></strong> &middot; Klassikere innen visuell geometri og interaktiv mekanikk.</li></ul></div>"
+    season_cards: "<div class=\"season-card gate\"><span class=\"s-when\">JAN &ndash; FEB &middot; DYP FROST</span><h4>1. Takrør, tynn bjørk og snøtransport</h4><p>Skjær stående, døde <em>Phragmites</em>-takrør rent over frosne grøfter og still dem i kjegleformede stauker. Tynn ung bjørk (&Oslash;10&ndash;12 cm) og samle tørrgran. <strong>Bark bjørken samme dag</strong>, dra tunge stokker over snøen på en <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois-slede</button>, skjær glidetapper og tørk <button type=\"button\" class=\"inline-term\" data-explain=\"kusabi\">kusabi-kiler</button> av bjørk innendørs.</p><p class=\"s-why\"><strong>Port 1:</strong> Minst sevje i tømmeret + tørre døde takrør + nesten friksjonsfri transport på snø.</p></div><div class=\"season-card\"><span class=\"s-when\">MARS &middot; TELELØSNING OG FORKULLING</span><h4>2. Leirtest, forkulling og regelsjekk</h4><p>Gjør båndtest på lokal undergrunnsleire (&ge;5 cm bånd uten brudd), eller velg ruten med <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">lesket kalk</button>. Bark granstokkene til rammen når temperaturen passerer +2&deg;C. Dypforkull (3&ndash;4 mm) alle bjelker, ytre svill, nederste 40 cm av stolpene, mønets <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button> og gavlhornene.</p><p class=\"s-why\"><strong>Ildskjold:</strong> Dyp forkulling steriliserer sukkeret i treet og bremser soppangrep fra jordsprut.</p></div><div class=\"season-card\"><span class=\"s-when\">APR &ndash; MAI &middot; PILARER OG RAMME</span><h4>3. Fjern torv, legg feltstein og reis rammene alene</h4><p>Fjern organisk matjord ned til ren mineralsand (stable torvene med gresset ned). Grav 25 cm dryppgrøfter. Legg flate feltsteiner i vater (&plusmn;3 mm), legg forkullede bjelker og løse undergulvsstokker, reis rammene alene med tau og gaffelstenger, fest 45&deg; sperrer, og skyv bjørkestokkene for veggene inn under skjelettet for tørking.</p><p class=\"s-why\"><strong>Tørkeskur:</strong> Den reiste rammen holder bjørkefeltene tørre mens de krymper.</p></div><div class=\"season-card gate\"><span class=\"s-when\">SLUTTEN AV MAI &ndash; JUN &middot; SEVJEVINDU</span><h4>4. Bjørkenever, granrøtter og tekking</h4><p>Ta brede, hvite neverflak av bjørk (50 cm) og dra opp grunne granrøtter (kløyv og bløtlegg). Surr lekter av hassel hver 30 cm, legg 30 cm tekking av vintertakrør sydd med granrøtter (null ståltråd), og dekk mønet med 3 lag never + 12 cm levende torv + kryssede, forkullede <button type=\"button\" class=\"inline-term\" data-explain=\"oziai\">o&zcaron;iai</button>.</p><p class=\"s-why\"><strong>Port 2 (2&ndash;3 uker):</strong> Neveren slipper rent BARE når vårsevjen er på topp.</p></div><div class=\"season-card\"><span class=\"s-when\">JULI &middot; VARM, TØRR VIND</span><h4>5. Flettet takrør- og leiregulv (J7)</h4><p>Fest &Oslash;9 cm undergulvsstokker av bartre med flettede hasselkvister. Pakk en 8 cm <button type=\"button\" class=\"inline-term\" data-explain=\"lehmwickel\">Lehmwickel</button>-matte av leirdyppet takrør pluss et 3,5 cm slitelag av mager sandleire og aske 1:3, stamp det tett, og poler det lærhardt med en våt rullestein. Hold krypkjelleren helt åpen under.</p><p class=\"s-why\"><strong>Herdeport:</strong> Varm, tørr julivind herder jordgulvet fra både oversiden og undersiden.</p></div><div class=\"season-card lime-win\"><span class=\"s-when\">AUG &ndash; SEP &middot; VEGGLUKKING (&ge;+5&deg;C)</span><h4>6. Utvendig leire og dunkjevle ELLER lesket kalk</h4><p>Bekreft at fuktinnholdet i bjørken er &lt;18 % og mål setningen. Høst blader og stengler av <em>Typha</em> (dunkjevle) som ikke har blomstret (null dun). Dypp i tynt leirslam <strong>ELLER <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">lesket kalk Ca(OH)<sub>2</sub></button>-melk</strong> og pakk 120&ndash;150 mm på <strong>UTSIDEN</strong> av den varme bjørken. Monter 30 mm luftet hulrom (gnagernett) + kledning.</p><p class=\"s-why\"><strong>Frostport for kalk:</strong> Lesket kalk MÅ herde ved &ge;+5&deg;C i 4+ uker for å karbonatisere til kalkstein.</p></div><div class=\"season-card\"><span class=\"s-when\">OKT &ndash; NOV &middot; VINTERKLARGJØRING</span><h4>7. Avtakbart skjørt rundt krypkjelleren</h4><p>Stable de lagrede torvene og granbar rundt pilarene for varme i gulvet om vinteren, og åpne det igjen hver april for tørr luftgjennomstrømning om sommeren.</p><p class=\"s-why\"><strong>Sesongpust:</strong> Varmt, lukket under gulvet om vinteren; tørt, luftet tømmer om sommeren.</p></div>",
+    tool_cards: "<div class=\"tool-card\"><h4>I &middot; Oppmerking og vater</h4><ul><li><strong>5 m målebånd og murersnor</strong> (rettvinkling av felt og diagonalkontroll)</li><li><strong>Vaterpass eller hjemmelaget A-vater</strong> (legging av pilarsteiner &plusmn;3 mm)</li><li><strong>Lodd og trepasser</strong> (rissing av rundstokker og loddrette stolper)</li></ul></div><div class=\"tool-card\"><h4>II &middot; Barking og kløyving</h4><ul><li><strong>Bandkniv eller barkespade</strong> (barking samme dag av ~240 bjørkestokker + kiler)</li><li><strong>Kløyvjern (<em>skeltuvas</em>)</strong> (smidd eller kuttet av en brukt bladfjær fra et kjøretøy; kløyver sporlister og bord)</li><li><strong>Hjemmeskåret klubbe av hardtre + 4 ildherdede kløyvkiler</strong></li></ul></div><div class=\"tool-card\"><h4>III &middot; Tømmersammenføyning</h4><ul><li><strong>Middels felle- og kvisteøks (~1,2 kg)</strong> (kapping og grove tappsider)</li><li><strong>Lett tømmermannsøks (~400 g)</strong> (enhånds finskjæring av glidetapper)</li><li><strong>Bøylesag (blad for rått og tørt tre)</strong> + <strong>20&ndash;25 mm tappjern</strong> + <strong>sløydkniv</strong></li><li><strong>Slipestein og grovfil</strong> (3 min sliping daglig halverer byggetimene)</li></ul></div><div class=\"tool-card\"><h4>IV &middot; Høsting, løft alene og kalk</h4><ul><li><strong>Ljå / sigd</strong> (~750 nek vintertakrør) + <strong>spade</strong></li><li><strong>Hjemmeskårne verktøy:</strong> leirstamper (<em>me&scaron;ka</em>), flat tekkeklubbe, 45 cm trenål, <button type=\"button\" class=\"inline-term\" data-explain=\"neso\">travois-slede</button>, 2 gaffelstenger</li><li><strong>Tau og spennstropper</strong> (reising av rammer alene og stramming av kileledd)</li><li><strong>Gummihansker og vernebriller</strong> (påbudt ved blanding av etsende lesket kalk Ca(OH)<sub>2</sub>)</li></ul></div>",
+    book_cards: "<div class=\"tool-card\"><h4>Tre og sammenføyning</h4><ul><li><strong><a href=\"https://research.fs.usda.gov/download/treesearch/62200.pdf\" target=\"_blank\" rel=\"noopener\">USDA Wood Handbook (FPL-GTR-282, gratis PDF)</a></strong> &middot; Verdensstandarden for tremekanikk, elastisitetsmodul E, tangentiell krymping og råtebestandighet.</li><li><strong><a href=\"https://archive.org/details/hearth4500929\" target=\"_blank\" rel=\"noopener\">George Ellis &middot; Modern Practical Carpentry (1906, Archive.org)</a></strong> &middot; Klassisk illustrert lærebok som har falt i det fri, om tradisjonelle tak, takstoler, gulv og tømmersammenføyning.</li></ul></div><div class=\"tool-card\"><h4>Nordisk tømmer, torv og kalk</h4><ul><li><strong><a href=\"https://www.riksantikvaren.no\" target=\"_blank\" rel=\"noopener\">Riksantikvaren (norske veiledere for kulturminner)</a></strong> &middot; Gratis, offentlige veiledere om torvtak med never, bindingsverk og kalkmørtel.</li><li><strong><a href=\"https://www.byggogbevar.no\" target=\"_blank\" rel=\"noopener\">Bygg og Bevar (portal for nordisk byggehåndverk)</a></strong> &middot; Åpne tekniske veiledere om lafteverk, tradisjonelle sammenføyninger og naturlige overflater.</li><li><strong><a href=\"https://historicengland.org.uk/advice/guidance/\" target=\"_blank\" rel=\"noopener\">Historic England, tekniske veiledere</a></strong> &middot; Gratis råd om pustende kalkmørtel og jordvegger.</li></ul></div><div class=\"tool-card\"><h4>Dunkjevle (Typha) og fuktfysikk</h4><ul><li><strong><a href=\"https://www.ibp.fraunhofer.de/en/business-units-and-products/product-developments/cattail.html\" target=\"_blank\" rel=\"noopener\">Fraunhofer IBP &middot; Byggemateriale av dunkjevle (Typha)</a></strong> &middot; Tysk primærforskning i bygningsfysikk om varmeledningsevnen til <em>Typha</em> (&lambda; 0,048&ndash;0,060), kapillær uttørking og muggbestandighet.</li></ul></div><div class=\"tool-card\"><h4>Konstruksjonsmekanikk og geometri</h4><ul><li><strong><a href=\"https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Structural_Mechanics_(Wierzbicki)/08%3A_Beam_Bending_Buckling_and_Torsion\" target=\"_blank\" rel=\"noopener\">Tomasz Wierzbicki (MIT) &middot; Structural Mechanics (LibreTexts)</a></strong> &middot; Gratis åpen lærebok om bjelkebøyning, torsjon og elastisk stabilitet.</li><li><strong><a href=\"https://ocw.mit.edu/courses/2-080j-structural-mechanics-fall-2013/course-notes/MIT2_080JF13_Lecture10.pdf\" target=\"_blank\" rel=\"noopener\">MIT OCW 2.080J &middot; Forelesningsnotater om knekking (gratis PDF)</a></strong> &middot; Full utledning av Eulers knekkformer og randbetingelser.</li><li><strong><a href=\"https://www.c82.net/euclid/\" target=\"_blank\" rel=\"noopener\">Byrne&rsquo;s Euclid (N. Rougeux)</a></strong> &amp; <strong><a href=\"https://ciechanow.ski/\" target=\"_blank\" rel=\"noopener\">Bartosz Ciechanowski</a></strong> &middot; Klassikere innen visuell geometri og interaktiv mekanikk.</li></ul></div>"
   };
 
-  var i18nNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
-  i18nNodes.forEach(function (n) { EN[n.getAttribute("data-i18n")] = n.innerHTML; });
-  var langBtns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
-  var pdfLinks = [document.getElementById("btn-pdf-dl")];
-  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
-
-  function applyLang(lang) {
-    currentLang = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = currentLang === "lt" ? LT : (currentLang === "no" ? NO : (currentLang === "pt" ? PT : EN));
-    document.documentElement.lang = currentLang === "no" ? "nb" : currentLang;
-    document.title = dict.page_title || EN.page_title;
-    i18nNodes.forEach(function (n) {
-      var k = n.getAttribute("data-i18n");
-      n.innerHTML = dict[k] !== undefined ? dict[k] : EN[k];
-    });
-    var pdfHref = currentLang === "lt" ? "assets/skiftesverk_open_field_guide_LT.pdf" : "assets/skiftesverk_open_field_guide.pdf";
-    pdfLinks.forEach(function (a) { if (a) a.href = pdfHref; });
-    arkaLinks.forEach(function (a) { a.href = currentLang === "no" ? "arka_no.html" : "arka.html"; });
-    langBtns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === currentLang); });
-    closeExplain();
-    wireByrne("#frame", svgCabin);
-    wireByrne("#wall-physics", svgWall);
-    renderCabin();
-    renderWall();
-    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
-    try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
-  }
-
-  langBtns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-
-  renderCabin(); renderWall(); renderBeam(); renderEuler(); renderCat();
-  wireByrne("#frame", svgCabin);
-  wireByrne("#wall-physics", svgWall);
-
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+  var pdfLink = document.getElementById("btn-pdf-dl");
+  if (pdfLink) pdfLink.addEventListener("click", function () {
+    if (window.greifiksTrack) window.greifiksTrack("download/cad-pdf-" + currentLang, "CAD PDF (" + currentLang + ")");
+  });
+  renderBeam(); renderEuler();
+  if (window.greifiksI18n) window.greifiksI18n({
+    lt: LT, no: NO, pt: PT,
+    onChange: function (l) {
+      currentLang = l;
+      if (pdfLink) pdfLink.href = l === "lt" ? "assets/skiftesverk_open_field_guide_LT.pdf" : "assets/skiftesverk_open_field_guide.pdf";
+      closeExplain();
+      wireByrne("#frame", svgCabin);
+      wireByrne("#wall-physics", svgWall);
+      renderCabin();
+      renderWall();
+      renderCat();
+    }
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

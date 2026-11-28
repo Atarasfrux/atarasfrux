@@ -20,10 +20,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=10"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<script src="assets/theme.js?v=11"></script>
+<script src="assets/entropy.js?v=11"></script>
 <style>
 .plate-grid {
   padding: clamp(36px, 5vw, 60px) 0 0;
@@ -164,13 +164,6 @@
           <button type="button" data-theme-set="light">Light</button>
           <button type="button" data-theme-set="dark" class="active">Dark</button>
         </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
-        </div>
       </div>
     </div>
   </div>
@@ -223,7 +216,7 @@
   var PLATES = [
     { src: "assets/plates_book/01-no-crossing.webp", w: 758, h: 1011, n: "I", en: "No Crossing", lt: "Be perkėlos", no: "Ingen overfart", pt: "Sem travessia", cls: "lead-frame" },
     { src: "assets/plates_book/02-weight.webp", w: 1500, h: 1023, n: "II", en: "Weight", lt: "Svoris", no: "Tyngde", pt: "Peso", cls: "wide" },
-    { src: "assets/plates_book/03-restraint.webp", w: 608, h: 769, n: "III", en: "Restraint", lt: "Saitas", no: "Tilbakehold", pt: "Contenção", cls: "" },
+    { src: "assets/plates_book/03-restraint.webp", w: 608, h: 769, n: "III", en: "Restraint", lt: "Saitas", no: "Bånd", pt: "Contenção", cls: "" },
     { src: "assets/plates_book/04-the-page.webp", w: 758, h: 966, n: "IV", en: "The Page", lt: "Lapas", no: "Siden", pt: "A página", cls: "" },
     { src: "assets/plates_book/05-tied.webp", w: 1500, h: 1125, n: "V", en: "Tied", lt: "Pririšta", no: "Fortøyd", pt: "Amarrado", cls: "" },
     { src: "assets/plates_book/06-heat.webp", w: 1410, h: 1058, n: "VI", en: "Heat", lt: "Karštis", no: "Hete", pt: "Calor", cls: "" },
@@ -232,7 +225,7 @@
     { src: "assets/plates_book/21-third-hour.webp", w: 758, h: 1011, n: "IX", en: "Third Hour", lt: "Trečia valanda", no: "Tredje time", pt: "Terceira hora", cls: "" },
     { src: "assets/plates_book/15-afterwards.webp", w: 598, h: 1011, n: "X", en: "Afterwards", lt: "Po visko", no: "Etterpå", pt: "Depois", cls: "" },
     { src: "assets/plates_book/16-wire.webp", w: 602, h: 1011, n: "XI", en: "Wire", lt: "Laidas", no: "Tråd", pt: "Arame", cls: "" },
-    { src: "assets/plates_book/17-the-pass.webp", w: 899, h: 575, n: "XII", en: "The Pass", lt: "Perėja", no: "Passet", pt: "O passo", cls: "wide" },
+    { src: "assets/plates_book/17-the-pass.webp", w: 899, h: 575, n: "XII", en: "The Pass", lt: "Perėja", no: "Skaret", pt: "A passagem", cls: "wide" },
     { src: "assets/plates_book/19-in-passing.webp", w: 853, h: 853, n: "XIII", en: "In Passing", lt: "Praeinant", no: "I forbifarten", pt: "De passagem", cls: "" },
     { src: "assets/plates_book/20-passage.webp", w: 732, h: 717, n: "XIV", en: "Passage", lt: "Perplaukimas", no: "Overfart", pt: "Travessia", cls: "" },
     { src: "assets/plates_book/22-alert.webp", w: 946, h: 710, n: "XV", en: "Alert", lt: "Budriai", no: "Våken", pt: "Alerta", cls: "wide" },
@@ -364,32 +357,14 @@
     print_inq: "Direkte forespørsel &rarr;",
     lb_close: "Lukk"
   };
-  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
-  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
-  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
-
-  function applyLang(lang) {
-    currentLang = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = currentLang === "lt" ? LT : (currentLang === "no" ? NO : (currentLang === "pt" ? PT : EN));
-    document.documentElement.lang = currentLang === "no" ? "nb" : currentLang;
-    document.title = dict.page_title || EN.page_title;
-    nodes.forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
-    });
-    PLATES.forEach(function (p, i) { capEls[i].textContent = plateTitle(p); });
-    if (lb.classList.contains("open")) renderLb(activeIdx);
-    arkaLinks.forEach(function (a) { a.href = currentLang === "no" ? "arka_no.html" : "arka.html"; });
-    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === currentLang); });
-    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
-    try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
-  }
-  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+  if (window.greifiksI18n) window.greifiksI18n({
+    lt: LT, no: NO, pt: PT,
+    onChange: function (l) {
+      currentLang = l;
+      PLATES.forEach(function (p, i) { capEls[i].textContent = plateTitle(p); });
+      if (lb.classList.contains("open")) renderLb(activeIdx);
+    }
+  });
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
