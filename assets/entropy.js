@@ -75,6 +75,18 @@
     if (x && fsEl()) { try { var p = x.call(document); if (p && p.catch) p.catch(function () {}); } catch (e) {} }
   }
 
+  /* zero state: any film or sound that was not held by a blue word dies with the page, it must not play on in the background */
+  var dead = false;
+  function killMedia() {
+    dead = true;
+    [].forEach.call(document.querySelectorAll("video,audio"), function (m) {
+      try { m.pause(); m.muted = true; m.removeAttribute("src"); m.srcObject = null; m.load(); } catch (x) {}
+    });
+    try { if (window.greifiksStopMedia) window.greifiksStopMedia(); } catch (x) {}
+  }
+  window.addEventListener("pagehide", function () { if (dead) killMedia(); });
+  window.addEventListener("pageshow", function (ev) { if (dead && ev.persisted) location.replace(HOME); });
+
   var fsButtons = [];
   /* the blue word for one work. o.before: runs first. o.click: custom action instead of full screen */
   function makeBtn(target, o) {
@@ -240,7 +252,7 @@
     S.raf = requestAnimationFrame(frame);
 
     S.end = setTimeout(function () {
-      if (!isTar) { location.replace(HOME); return; }
+      if (!isTar) { killMedia(); location.replace(HOME); return; }
       try { window.dispatchEvent(new CustomEvent("greifiks-entropy-done")); } catch (e) {}
       window.greifiksEntropy = null;
       var v = S.veil; cancelAnimationFrame(S.raf); S.dust.remove(); S.blk.remove(); S = null;
