@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=10">
 <script src="assets/theme.js?v=11"></script>
-<script src="assets/entropy.js?v=11"></script>
+<script src="assets/entropy.js?v=12"></script>
 <style>
 .page-head h1 { font-style: italic; }
 
@@ -264,7 +264,7 @@
 
   <div class="film-foot">
     <div><strong>Amar</strong> &middot; <strong>Ren&eacute;e Vincent</strong> &middot; <strong>Mantas Pagalys</strong></div>
-    <div data-i18n="policy_txt">Screening copy (02:10). Not for redistribution. <a href="link.html">Direct notice</a> for credits or removal.</div>
+    <div data-i18n="policy_txt">Screening copy (02:10). Not for redistribution. <a href="link.html">Notice</a> for credits or removal.</div>
   </div>
 </main>
 
@@ -344,7 +344,7 @@
     var lt = currentLang === "lt", no = currentLang === "no", pt = currentLang === "pt";
     btnPlay.textContent = video.paused ? (lt ? "Groti" : (no ? "Spill" : (pt ? "Reproduzir" : "Play"))) : (lt ? "Pauzė" : (pt ? "Pausar" : "Pause"));
     btnMute.textContent = video.muted ? (lt ? "Tyla" : (no ? "Dempet" : (pt ? "Sem som" : "Muted"))) : (lt ? "Garsas" : (no ? "Lyd" : (pt ? "Som" : "Sound")));
-    btnFs.textContent = isFullscreen() ? (lt ? "Išeiti" : (no ? "Avslutt" : (pt ? "Sair" : "Exit"))) : (lt ? "Visas ekr." : (no ? "Fullskjerm" : (pt ? "Tela cheia" : "Fullscreen")));
+    btnFs.textContent = isFullscreen() ? (lt ? "Maukt" : (no ? "Avslutt" : (pt ? "Sair" : "Exit"))) : (lt ? "Visas ekr." : (no ? "Fullskjerm" : (pt ? "Tela cheia" : "Fullscreen")));
     stage.classList.toggle("playing", !video.paused && !video.ended);
   }
 
@@ -498,9 +498,9 @@
     page_title: "Vestiges de ce qui s’est tu · Mantas Pagalys",
     nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
     nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Atliepk",
-    meta_strip: "<span>02:10</span><span>1920&times;1080</span><span>2026 gruodis</span>",
+    meta_strip: "<span>02:10</span><span>1920&times;1080</span><span>2026 m. gruodis</span>",
     btn_screen: "Paleisti &middot; 02:10",
-    policy_txt: "Peržiūros kopija (02:10). Neskirta platinimui. <a href=\"link.html\">Tiesioginis pranešimas</a> dėl nuorodų ar pašalinimo."
+    policy_txt: "Peržiūros kopija (02:10). Neskirta platinimui. <a href=\"link.html\">Pranešti</a> dėl nuorodų ar pašalinimo."
   };
 
   var PT = {
@@ -511,19 +511,19 @@
   "nav_writing": "Tinta",
   "nav_images": "Lente",
   "nav_archive": "Cofre",
-  "nav_link": "Apoio",
-  "meta_strip": "<span>02:10</span><span>1920&times;1080</span><span>Dezembro de 2026</span>",
+  "nav_link": "Retorno",
+  "meta_strip": "<span>02:10</span><span>1920&times;1080</span><span>dezembro de 2026</span>",
   "btn_screen": "Reproduzir &middot; 02:10",
-  "policy_txt": "Cópia de exibição (02:10). Proibida a redistribuição. <a href=\"link.html\">Aviso direto</a> para créditos ou remoção."
+  "policy_txt": "Cópia de exibição (02:10). Proibida a redistribuição. <a href=\"link.html\">Aviso</a> para créditos ou remoção."
 };
 
   var NO = {
     page_title: "Vestiges de ce qui s’est tu · Mantas Pagalys",
     nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
-    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
-    meta_strip: "<span>02:10</span><span>1920&times;1080</span><span>Desember 2026</span>",
+    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Gjensvar",
+    meta_strip: "<span>02:10</span><span>1920&times;1080</span><span>desember 2026</span>",
     btn_screen: "Spill &middot; 02:10",
-    policy_txt: "Visningskopi (02:10). Ikke til videredistribusjon. <a href=\"link.html\">Direkte melding</a> ved spørsmål om kreditering eller fjerning."
+    policy_txt: "Visningskopi (02:10). Ikke til videredistribusjon. <a href=\"link.html\">Melding</a> ved spørsmål om kreditering eller fjerning."
   };
 
   if (window.greifiksI18n) window.greifiksI18n({

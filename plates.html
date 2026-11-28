@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=10">
 <script src="assets/theme.js?v=11"></script>
-<script src="assets/entropy.js?v=11"></script>
+<script src="assets/entropy.js?v=12"></script>
 <style>
 .plate-grid {
   padding: clamp(36px, 5vw, 60px) 0 0;
@@ -182,7 +182,7 @@
 
   <div class="print-line">
     <span data-i18n="print_note">Archival pigment prints (numbered edition of 10).</span>
-    <a class="text-link" href="link.html" data-i18n="print_inq">Direct inquiry &rarr;</a>
+    <a class="text-link" href="link.html" data-i18n="print_inq">Enquire &rarr;</a>
   </div>
 </main>
 
@@ -214,35 +214,35 @@
 <script>
 (function () {
   var PLATES = [
-    { src: "assets/plates_book/01-no-crossing.webp", w: 758, h: 1011, n: "I", en: "No Crossing", lt: "Be perkėlos", no: "Ingen overfart", pt: "Sem travessia", cls: "lead-frame" },
+    { src: "assets/plates_book/01-no-crossing.webp", w: 758, h: 1011, n: "I", en: "No Crossing", lt: "Be persikėlimo", no: "Ingen overfart", pt: "Sem travessia", cls: "lead-frame" },
     { src: "assets/plates_book/02-weight.webp", w: 1500, h: 1023, n: "II", en: "Weight", lt: "Svoris", no: "Tyngde", pt: "Peso", cls: "wide" },
-    { src: "assets/plates_book/03-restraint.webp", w: 608, h: 769, n: "III", en: "Restraint", lt: "Saitas", no: "Bånd", pt: "Contenção", cls: "" },
+    { src: "assets/plates_book/03-restraint.webp", w: 608, h: 769, n: "III", en: "Restraint", lt: "Saitas", no: "Bånd", pt: "Amarra", cls: "" },
     { src: "assets/plates_book/04-the-page.webp", w: 758, h: 966, n: "IV", en: "The Page", lt: "Lapas", no: "Siden", pt: "A página", cls: "" },
-    { src: "assets/plates_book/05-tied.webp", w: 1500, h: 1125, n: "V", en: "Tied", lt: "Pririšta", no: "Fortøyd", pt: "Amarrado", cls: "" },
+    { src: "assets/plates_book/05-tied.webp", w: 1500, h: 1125, n: "V", en: "Tied", lt: "Pririšta", no: "Bundet", pt: "Atado", cls: "" },
     { src: "assets/plates_book/06-heat.webp", w: 1410, h: 1058, n: "VI", en: "Heat", lt: "Karštis", no: "Hete", pt: "Calor", cls: "" },
-    { src: "assets/plates_book/07-low-visibility.webp", w: 1344, h: 1026, n: "VII", en: "Low Visibility", lt: "Nulinis matomumas", no: "Dårlig sikt", pt: "Pouca visibilidade", cls: "wide" },
-    { src: "assets/plates_book/10-the-cast.webp", w: 1399, h: 1500, n: "VIII", en: "The Cast", lt: "Metimas", no: "Kastet", pt: "O lançamento", cls: "" },
+    { src: "assets/plates_book/07-low-visibility.webp", w: 1344, h: 1026, n: "VII", en: "Low Visibility", lt: "Ūkana", no: "Dårlig sikt", pt: "Baixa visibilidade", cls: "wide" },
+    { src: "assets/plates_book/10-the-cast.webp", w: 1399, h: 1500, n: "VIII", en: "The Cast", lt: "Užmetimas", no: "Kastet", pt: "O lance", cls: "" },
     { src: "assets/plates_book/21-third-hour.webp", w: 758, h: 1011, n: "IX", en: "Third Hour", lt: "Trečia valanda", no: "Tredje time", pt: "Terceira hora", cls: "" },
     { src: "assets/plates_book/15-afterwards.webp", w: 598, h: 1011, n: "X", en: "Afterwards", lt: "Po visko", no: "Etterpå", pt: "Depois", cls: "" },
-    { src: "assets/plates_book/16-wire.webp", w: 602, h: 1011, n: "XI", en: "Wire", lt: "Laidas", no: "Tråd", pt: "Arame", cls: "" },
+    { src: "assets/plates_book/16-wire.webp", w: 602, h: 1011, n: "XI", en: "Wire", lt: "Laidas", no: "Tråd", pt: "Fio", cls: "" },
     { src: "assets/plates_book/17-the-pass.webp", w: 899, h: 575, n: "XII", en: "The Pass", lt: "Perėja", no: "Skaret", pt: "A passagem", cls: "wide" },
     { src: "assets/plates_book/19-in-passing.webp", w: 853, h: 853, n: "XIII", en: "In Passing", lt: "Praeinant", no: "I forbifarten", pt: "De passagem", cls: "" },
     { src: "assets/plates_book/20-passage.webp", w: 732, h: 717, n: "XIV", en: "Passage", lt: "Perplaukimas", no: "Overfart", pt: "Travessia", cls: "" },
-    { src: "assets/plates_book/22-alert.webp", w: 946, h: 710, n: "XV", en: "Alert", lt: "Budriai", no: "Våken", pt: "Alerta", cls: "wide" },
+    { src: "assets/plates_book/22-alert.webp", w: 946, h: 710, n: "XV", en: "Alert", lt: "Budrumas", no: "På vakt", pt: "Alerta", cls: "wide" },
     { src: "assets/plates_book/12-low-tide.webp", w: 1500, h: 938, n: "XVI", en: "Low Tide", lt: "Atoslūgis", no: "Fjære", pt: "Maré baixa", cls: "wide" },
     { src: "assets/plates_book/13-far-lights.webp", w: 758, h: 798, n: "XVII", en: "Far Lights", lt: "Tolimos šviesos", no: "Fjerne lys", pt: "Luzes distantes", cls: "" },
-    { src: "assets/plates_book/14-approach.webp", w: 728, h: 880, n: "XVIII", en: "Approach", lt: "Artėjimas", no: "Innseiling", pt: "Aproximação", cls: "" },
+    { src: "assets/plates_book/14-approach.webp", w: 728, h: 880, n: "XVIII", en: "Approach", lt: "Artėjimas", no: "På vei inn", pt: "Aproximação", cls: "" },
     { src: "assets/plates_book/13-witness.webp", w: 927, h: 708, n: "XIX", en: "Witness", lt: "Liudytojas", no: "Vitne", pt: "Testemunha", cls: "" },
     { src: "assets/plates_book/14-through-glass.webp", w: 799, h: 545, n: "XX", en: "Through Glass", lt: "Per stiklą", no: "Gjennom glass", pt: "Através do vidro", cls: "" },
-    { src: "assets/plates_book/19-squall.webp", w: 908, h: 600, n: "XXI", en: "Squall", lt: "Škvalas", no: "Vindkule", pt: "Rajada", cls: "wide" },
+    { src: "assets/plates_book/19-squall.webp", w: 908, h: 600, n: "XXI", en: "Squall", lt: "Gūsis", no: "Vindkule", pt: "Rajada", cls: "wide" },
     { src: "assets/plates_book/08-distance.webp", w: 1154, h: 814, n: "XXII", en: "Distance", lt: "Nuotolis", no: "Avstand", pt: "Distância", cls: "" },
     { src: "assets/plates_book/09-early-frost.webp", w: 796, h: 473, n: "XXIII", en: "Early Frost", lt: "Šerkšnas", no: "Rimfrost", pt: "Primeira geada", cls: "" },
-    { src: "assets/plates_book/18-overcast.webp", w: 765, h: 509, n: "XXIV", en: "Overcast", lt: "Debesuota", no: "Overskyet", pt: "Nublado", cls: "" },
-    { src: "assets/plates_book/22-outbound.webp", w: 855, h: 491, n: "XXV", en: "Outbound", lt: "Tolstant", no: "Utgående", pt: "De saída", cls: "" },
+    { src: "assets/plates_book/18-overcast.webp", w: 765, h: 509, n: "XXIV", en: "Overcast", lt: "Apniukę", no: "Overskyet", pt: "Encoberto", cls: "" },
+    { src: "assets/plates_book/22-outbound.webp", w: 855, h: 491, n: "XXV", en: "Outbound", lt: "Tolstant", no: "På vei ut", pt: "De saída", cls: "" },
     { src: "assets/plates_book/24-opening.webp", w: 913, h: 528, n: "XXVI", en: "Opening", lt: "Anga", no: "Åpning", pt: "Abertura", cls: "wide" },
     { src: "assets/plates_book/11-surface.webp", w: 464, h: 652, n: "XXVII", en: "Surface", lt: "Paviršius", no: "Overflate", pt: "Superfície", cls: "" },
     { src: "assets/plates_book/25-late-fruit.webp", w: 752, h: 1011, n: "XXVIII", en: "Late Fruit", lt: "Vėlyvas vaisius", no: "Sen frukt", pt: "Fruto tardio", cls: "" },
-    { src: "assets/plates_book/23-one-stem.webp", w: 946, h: 709, n: "XXIX", en: "One Stem", lt: "Vienas stiebas", no: "Én stilk", pt: "Um caule", cls: "wide" }
+    { src: "assets/plates_book/23-one-stem.webp", w: 946, h: 709, n: "XXIX", en: "One Stem", lt: "Vienas stiebas", no: "Ett strå", pt: "Uma haste", cls: "wide" }
   ];
 
   var grid = document.getElementById("plate-grid");
@@ -326,8 +326,8 @@
     h1: "Fotografija",
     meta_seq: "Plokštelės I&ndash;XXIX",
     meta_film: "Vestiges (Filmas &middot; 02:10) &rarr;",
-    print_note: "Archyviniai pigmentiniai atspaudai (numeruotas 10 vnt. tiražas).",
-    print_inq: "Tiesioginė užklausa &rarr;",
+    print_note: "Archyviniai pigmentiniai atspaudai (10 numeruotų atspaudų).",
+    print_inq: "Teirautis &rarr;",
     lb_close: "Uždaryti"
   };
   var PT = {
@@ -338,23 +338,23 @@
   "nav_writing": "Tinta",
   "nav_images": "Lente",
   "nav_archive": "Cofre",
-  "nav_link": "Apoio",
+  "nav_link": "Retorno",
   "h1": "Fotografia",
   "meta_seq": "Pranchas I&ndash;XXIX",
   "meta_film": "Vestiges (Filme &middot; 02:10) &rarr;",
-  "print_note": "Impressões em pigmento de qualidade arquivística (edição numerada de 10).",
-  "print_inq": "Consulta direta &rarr;",
+  "print_note": "Impressões em pigmento arquivístico (edição numerada de 10).",
+  "print_inq": "Consultar &rarr;",
   "lb_close": "Fechar"
 };
   var NO = {
     page_title: "Fotografi · Mantas Pagalys",
     nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
-    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
+    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Gjensvar",
     h1: "Fotografi",
     meta_seq: "Plater I&ndash;XXIX",
     meta_film: "Vestiges (Film &middot; 02:10) &rarr;",
     print_note: "Arkivbestandige pigmenttrykk (nummerert opplag på 10).",
-    print_inq: "Direkte forespørsel &rarr;",
+    print_inq: "Forespørsel &rarr;",
     lb_close: "Lukk"
   };
   if (window.greifiksI18n) window.greifiksI18n({

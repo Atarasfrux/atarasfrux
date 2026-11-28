@@ -1,5 +1,5 @@
 /* entropy.js — every page dissolves into pure black / white.
-   One blue word (Stay / Pasilik / Bli / Fique) frames each actual piece of work, beside its title.
+   One blue word (Stay / Likis / Bli / Fique) frames each actual piece of work, beside its title.
    Pressing it shows that work in full screen, which holds the page. Nothing else stops the clock.
    Includes seamless full-viewport fallback for iPhone Safari where HTMLElement.requestFullscreen is unsupported.
    The collapse starts at the centre and spreads outward: the text turns porous and breaks into
@@ -24,7 +24,7 @@
   function on_(name) { return new RegExp("/" + name + "(\\.html)?$").test(location.pathname); }
   var pageSlug = (location.pathname.split("/").pop() || "index").replace(/\.html$/, "") || "index";
   function track(ev) { if (window.greifiksTrack) window.greifiksTrack(ev + "/" + pageSlug, ev + ": " + pageSlug); }
-  var L = { en: ["Stay", "Leave"], lt: ["Pasilik", "Išeik"], nb: ["Bli", "Gå"], pt: ["Fique", "Sair"] };
+  var L = { en: ["Stay", "Leave"], lt: ["Likis", "Išeik"], nb: ["Bli", "Gå"], pt: ["Fique", "Saia"] };
   function lbl(i) { return (L[root.lang] || L.en)[i]; }
 
   /* ---------- styles: blue is the only colour on the site, and it means "stay with this work" ---------- */

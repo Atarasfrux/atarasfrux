@@ -102,10 +102,10 @@ html.still canvas { display: none; }
       c5_t: "Saugykla", c5_m: "ARKA", c6_t: "Atliepk", c6_m: "Žinutė &middot; Parama" },
     pt: { nav_index: "Índice", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Forma", c2_m: "Mecânica &amp; Estrutura",
       c3_t: "Tinta", c3_m: "Antinovel&#279; &middot; Fragmentos", c4_t: "Lente", c4_s1: "Fotos", c4_s2: "Filme",
-      c5_t: "Cofre", c5_m: "ARKA", c6_t: "Apoio", c6_m: "Mensagem &middot; Apoio" },
+      c5_t: "Cofre", c5_m: "ARKA", c6_t: "Retorno", c6_m: "Mensagem &middot; Apoio" },
     no: { nav_index: "Indeks", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Form", c2_m: "Mekanikk og rammeverk",
       c3_t: "Blekk", c3_m: "Antinovelė &middot; Fragmenter", c4_t: "Linse", c4_s1: "Stillbilder", c4_s2: "Film",
-      c5_t: "Hvelv", c5_m: "ARKA", c6_t: "Støtte", c6_m: "Melding &middot; Støtte" },
+      c5_t: "Hvelv", c5_m: "ARKA", c6_t: "Gjensvar", c6_m: "Melding &middot; Støtte" },
     onChange: function () { if (window.__tarRedraw) requestAnimationFrame(window.__tarRedraw); }
   });
 
@@ -195,15 +195,17 @@ html.still canvas { display: none; }
         "    float ndh2 = -n.x * u_hv.x - n.y * u_hv.y + n.z * Hz;",
         "    float su2 = max(0.0, (ndh2 - Hz) * inv1);",
         "    float raw = su * su * 460.0 + su * 165.0 + su2 * su2 * 32.0 + rimP * 135.0;",
-        "    float v = (246.0 * raw / (165.0 + raw)) / 255.0;",
-        "    outCol = vec4(v * 0.92, v * 0.96, v, 1.0);",
+        "    float t = (242.0 * raw / (165.0 + raw)) / 255.0;",
+        "    float sky = su * su * 0.14;",
+        "    vec3 col = vec3(t * 0.88 + sky, t * (0.31 + 0.24 * t) + sky * 0.82, t * (0.05 + 0.13 * t * t) + sky * 0.52);",
+        "    outCol = vec4(clamp(col, 0.0, 1.0), 1.0);",
         "  } else {",
         "    float sd = max(0.0, (Hz - ndh) * inv1);",
         "    float suL = max(0.0, (ndh - Hz) * inv1);",
         "    float sdP = sd * (0.90 * sqrt(sd) + 0.10 * sd);",
         "    float raw = sdP * 280.0 + rimP * 130.0;",
-        "    float v = clamp((255.0 - (205.0 * raw / (155.0 + raw)) + suL * suL * 24.0 + h * 5.0) / 255.0, 0.0, 1.0);",
-        "    outCol = vec4(v, v * 0.997, v * 0.988, 1.0);",
+        "    float sh = clamp((205.0 * raw / (155.0 + raw) - suL * suL * 24.0 - h * 5.0) / 255.0, 0.0, 0.85);",
+        "    outCol = vec4(clamp(vec3(1.0 - sh * 0.56, 0.997 - sh * 0.78, 0.988 - sh * 0.92), 0.0, 1.0), 1.0);",
         "  }",
         "}"
       ].join("\n");
@@ -246,8 +248,18 @@ html.still canvas { display: none; }
   }
   var palDark = new Uint32Array(256), palLight = new Uint32Array(256);
   for (var pv = 0; pv < 256; pv++) {
-    palDark[pv] = packRGBA((pv * 0.92) | 0, (pv * 0.96) | 0, pv);
-    palLight[pv] = packRGBA(pv, (pv * 0.997) | 0, (pv * 0.988) | 0);
+    var pt = pv / 255;
+    palDark[pv] = packRGBA(
+      Math.min(255, (pt * 0.90 * 255) | 0),
+      Math.min(255, (pt * (0.31 + 0.25 * pt) * 255) | 0),
+      Math.min(255, (pt * (0.05 + 0.14 * pt * pt) * 255) | 0)
+    );
+    var psh = 1 - pt;
+    palLight[pv] = packRGBA(
+      Math.max(0, Math.min(255, ((1 - psh * 0.56) * 255) | 0)),
+      Math.max(0, Math.min(255, ((0.997 - psh * 0.78) * 255) | 0)),
+      Math.max(0, Math.min(255, ((0.988 - psh * 0.92) * 255) | 0))
+    );
   }
 
   function wake() { if (!rafId) { lastNow = 0; warmFrames = 0; rafId = requestAnimationFrame(frame); } }
