@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /vestiges.html
+Disallow: /assets/vestiges/
 
 Sitemap: https://greifiks.org/sitemap.xml

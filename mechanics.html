@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="darkreader-lock">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mechanics &amp; Frame · Open Parametric Cabin Tool · Mantas Pagalys</title>
+<title>Form · Mantas Pagalys</title>
 <link rel="canonical" href="https://greifiks.org/mechanics.html">
 <meta name="description" content="Free interactive construction plates for a hand-built timber Skiftesverk hall: adjustable sizing, live materials bill, clay vs. slaked lime Fourier dew-point physics, seasonal material calendar, and 1-person manual tool list.">
 <meta name="author" content="Mantas Pagalys">
@@ -12,14 +12,41 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/favicon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mechanics &amp; Frame · Open Parametric Cabin Tool · Mantas Pagalys">
+<meta property="og:title" content="Form · Mantas Pagalys">
 <meta property="og:description" content="Adjustable true-scale timber hall plates, Fourier &amp; Glaser condensation check (clay vs. slaked lime), seasonal calendar, and free 4-page CAD PDF.">
 <meta property="og:url" content="https://greifiks.org/mechanics.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<script src="assets/theme.js?v=9"></script>
+<script src="assets/entropy.js?v=6"></script>
 <style>
 :root {
+  --paper: #090a0c;
+  --surface: #111317;
+  --ink: #f2efe8;
+  --muted: #9ca1aa;
+  --faint: #6c717a;
+  --rule: rgba(242, 239, 232, 0.16);
+  --red: #d96b59;
+  --blue: #6aa2d4;
+  --ochre: #d8a74a;
+  --ok: #67b074;
+  --card-bg: #0f1114;
+  --card-hi: #16191f;
+  --drafting: #ece8e0;
+  --verdict-ok-bg: #112116;
+  --verdict-ok-fg: #a5d8ae;
+  --verdict-warn-bg: #271311;
+  --verdict-warn-fg: #f1a79b;
+  --serif-display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
+  --serif-body: "Newsreader", Charter, "Iowan Old Style", Georgia, serif;
+  --sans: "Jost", system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --max: 1120px;
+}
+html[data-theme="light"] {
   --paper: #f5f3ef;
   --surface: #ece9e2;
   --ink: #161719;
@@ -30,11 +57,13 @@
   --blue: #234b6e;
   --ochre: #9c7224;
   --ok: #2f5d38;
-  --serif-display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
-  --serif-body: "Newsreader", Charter, "Iowan Old Style", Georgia, serif;
-  --sans: "Jost", system-ui, -apple-system, sans-serif;
-  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --max: 1120px;
+  --card-bg: #ffffff;
+  --card-hi: #faf8f4;
+  --drafting: #ffffff;
+  --verdict-ok-bg: #f0f5f0;
+  --verdict-ok-fg: #1b3a22;
+  --verdict-warn-bg: #faefec;
+  --verdict-warn-fg: #5b1d13;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -51,33 +80,7 @@ button { font: inherit; color: inherit; }
 ::selection { background: var(--ink); color: var(--paper); }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(18px, 3.8vw, 44px); }
-
-/* Header */
-header.site-nav {
-  position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--paper) 93%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--rule);
-}
-.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; }
-.brand { text-decoration: none; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap; }
-.nav-right { display: flex; align-items: center; gap: 26px; }
-.nav-links { display: flex; align-items: center; gap: 22px; }
-.nav-links a {
-  text-decoration: none; font-size: 0.74rem; font-weight: 400;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-  padding: 4px 0; transition: color 0.18s ease;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
-
-.lang-switch { display: inline-flex; border: 1px solid var(--rule); }
-.lang-switch button {
-  border: 0; background: transparent; padding: 5px 10px;
-  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--muted); cursor: pointer;
-}
-.lang-switch button.active { background: var(--ink); color: var(--paper); }
+/* Header & .wrap unified via assets/site.css */
 
 /* Opening */
 .opening { padding: clamp(44px, 6.5vw, 76px) 0 clamp(32px, 4.5vw, 48px); border-bottom: 1px solid var(--ink); }
@@ -107,7 +110,7 @@ header.site-nav {
 
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 8px;
-  text-decoration: none; border: 1px solid var(--rule); background: #fff; color: var(--ink);
+  text-decoration: none; border: 1px solid var(--rule); background: var(--card-bg); color: var(--ink);
   padding: 9px 16px; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
   text-transform: uppercase; cursor: pointer; transition: border-color 0.18s, color 0.18s;
 }
@@ -152,8 +155,8 @@ section.plate-band { padding: clamp(40px, 5.5vw, 66px) 0; border-bottom: 1px sol
   border: 1px solid var(--blue); color: var(--blue);
   font-size: 0.62rem; font-weight: 600; line-height: 1;
 }
-.term-btn:hover, .term-btn.active { border-color: var(--blue); background: #fff; color: var(--blue); }
-.term-btn.active .qmark { background: var(--blue); color: #fff; }
+.term-btn:hover, .term-btn.active { border-color: var(--blue); background: var(--card-hi); color: var(--blue); }
+.term-btn.active .qmark { background: var(--blue); color: var(--paper); }
 
 .inline-term {
   border: 0; background: none; padding: 0 1px; cursor: pointer;
@@ -166,7 +169,7 @@ section.plate-band { padding: clamp(40px, 5.5vw, 66px) 0; border-bottom: 1px sol
 .x-slot { margin: 0; }
 .x-card {
   margin: 10px 0 16px; padding: 13px 16px;
-  background: #faf8f4; border: 1px solid var(--rule); border-left: 3px solid var(--blue);
+  background: var(--card-hi); border: 1px solid var(--rule); border-left: 3px solid var(--blue);
   font-size: 0.84rem; line-height: 1.58; color: var(--ink);
 }
 .x-card .x-top {
@@ -231,11 +234,11 @@ section.plate-band { padding: clamp(40px, 5.5vw, 66px) 0; border-bottom: 1px sol
 /* Clickable Metric Cards (EVERY metric explains itself on click!) */
 .readouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .metric {
-  border: 1px solid var(--rule); background: #fff; padding: 8px 10px;
+  border: 1px solid var(--rule); background: var(--card-bg); padding: 8px 10px;
   text-align: left; cursor: pointer; position: relative;
   transition: border-color 0.16s, background 0.16s;
 }
-.metric:hover, .metric.active { border-color: var(--blue); background: #faf8f4; }
+.metric:hover, .metric.active { border-color: var(--blue); background: var(--card-hi); }
 .metric::after {
   content: "?"; position: absolute; top: 6px; right: 7px;
   font-family: var(--mono); font-size: 0.6rem; color: var(--faint);
@@ -246,17 +249,17 @@ section.plate-band { padding: clamp(40px, 5.5vw, 66px) 0; border-bottom: 1px sol
 .metric .m-k { display: block; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); padding-right: 16px; }
 .metric .m-v { display: block; font-family: var(--mono); font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-top: 2px; }
 .metric.ok { border-left: 3px solid var(--ok); }
-.metric.alert { border-left: 3px solid var(--red); background: #fdf6f4; }
+.metric.alert { border-left: 3px solid var(--red); background: var(--verdict-warn-bg); }
 .metric.alert .m-v { color: var(--red); }
 
 .verdict-bar {
   padding: 10px 12px; font-size: 0.81rem; line-height: 1.5;
-  border-left: 3px solid var(--ok); background: #f0f5f0; color: #1b3a22;
+  border-left: 3px solid var(--ok); background: var(--verdict-ok-bg); color: var(--verdict-ok-fg);
 }
-.verdict-bar.warn { border-left-color: var(--red); background: #faefec; color: #5b1d13; }
+.verdict-bar.warn { border-left-color: var(--red); background: var(--verdict-warn-bg); color: var(--verdict-warn-fg); }
 
 /* SVG Canvas */
-.svg-frame { border: 1px solid var(--ink); background: #ffffff; padding: 10px 10px 6px; position: relative; }
+.svg-frame { border: 1px solid var(--rule); background: var(--drafting); padding: 10px 10px 6px; position: relative; color: #161719; }
 .svg-frame svg { width: 100%; height: auto; display: block; }
 .svg-frame svg.dimmed [data-part] { opacity: 0.2; transition: opacity 0.16s ease; }
 .svg-frame svg.dimmed [data-part].hl { opacity: 1; }
@@ -283,7 +286,7 @@ details.deep-drawer[open] > summary .sum-plus { color: var(--red); }
 .deep-body { padding: 4px 0 24px; }
 
 /* Live Data Tables */
-table.spec-tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; background: #fff; border: 1px solid var(--rule); }
+table.spec-tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; background: var(--card-bg); border: 1px solid var(--rule); }
 table.spec-tbl th {
   text-align: left; padding: 8px 10px; background: var(--surface);
   font-size: 0.66rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
@@ -297,7 +300,7 @@ table.spec-tbl tr:last-child td { border-bottom: 0; }
 
 /* Seasonal Timeline Grid */
 .season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-.season-card { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 14px 15px; }
+.season-card { background: var(--card-bg); border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 14px 15px; }
 .season-card.gate { border-top-color: var(--red); }
 .season-card.lime-win { border-top-color: var(--blue); }
 .season-card .s-when { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
@@ -307,7 +310,7 @@ table.spec-tbl tr:last-child td { border-bottom: 0; }
 
 /* Tool Matrix Grid */
 .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-.tool-card { background: #fff; border: 1px solid var(--rule); padding: 14px 16px; }
+.tool-card { background: var(--card-bg); border: 1px solid var(--rule); padding: 14px 16px; }
 .tool-card h4 { margin: 0 0 8px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
 .tool-card ul { margin: 0; padding-left: 16px; font-size: 0.84rem; color: var(--muted); }
 .tool-card li { margin-bottom: 5px; }
@@ -315,7 +318,7 @@ table.spec-tbl tr:last-child td { border-bottom: 0; }
 
 /* Plate III: 3 Classical Instruments (explanations open RIGHT INSIDE each card!) */
 .tri-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
-.mini-plate { border: 1px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.mini-plate { border: 1px solid var(--rule); background: var(--drafting); display: flex; flex-direction: column; }
 .mini-head {
   border-bottom: 1px solid var(--ink); padding: 9px 12px;
   display: flex; justify-content: space-between; align-items: baseline; background: var(--paper);
@@ -394,19 +397,32 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
 
 <header class="site-nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html">Mantas Pagalys</a>
+    <div class="brand-cluster">
+      <a class="brand" href="index.html">Mantas Pagalys</a>
+      <span class="brand-sep" aria-hidden="true">&middot;</span>
+      <a class="brand-sub" href="index.html" data-i18n="nav_index">Index</a>
+    </div>
     <div class="nav-right">
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html#writing" data-i18n="nav_writing">Writing</a>
-        <a href="index.html#photographs" data-i18n="nav_photos">Photographs</a>
-        <a href="index.html#craft" data-i18n="nav_craft">Craft</a>
-        <a href="dossier.html" data-i18n="nav_dossier">Dossier</a>
-        <a href="mechanics.html" class="active" data-i18n="nav_mech">Mechanics</a>
-        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+        <a href="dossier.html" data-i18n="nav_dossier">Bio</a>
+        <a href="mechanics.html" class="active" data-i18n="nav_mech">Form</a>
+        <a href="writing.html" data-i18n="nav_writing">Ink</a>
+        <a href="images.html" data-i18n="nav_images">Lens</a>
+        <a href="archive.html" data-i18n="nav_archive">Vault</a>
+        <a href="link.html" data-i18n="nav_link">Back</a>
       </nav>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" class="active">EN</button>
-        <button type="button" data-lang="lt">LT</button>
+      <div class="nav-utils">
+        <div class="theme-switch" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="light">Light</button>
+          <button type="button" data-theme-set="dark" class="active">Dark</button>
+        </div>
+        <span class="util-sep" aria-hidden="true">&middot;</span>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang="lt">LT</button>
+          <button type="button" data-lang="en" class="active">EN</button>
+          <button type="button" data-lang="no">NO</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
       </div>
     </div>
   </div>
@@ -415,15 +431,13 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
 <main class="wrap">
   <div class="opening">
     <div class="title-lockup">
-      <h1 data-i18n="hero_h1">Mechanics &amp; Frame.</h1>
-      <p class="eyebrow" data-i18n="hero_eye">Open Parametric Cabin Tool &middot; Zero Libraries</p>
+      <h1 data-i18n="hero_h1">Form</h1>
     </div>
-    <p class="st-pill" data-i18n="st_page">Testing &middot; Open Calculation (Physics Checked; 1:1 Build Not Yet Constructed; Not an Engineer Sign-Off)</p>
-    <p class="lead" data-i18n="hero_lead">Free interactive plates for a solo hand-built timber hall: adjustable width, length, pitch, and log diameters with live structural checks, clay vs. slaked lime wall physics, a year-round natural harvest calendar, and a basic manual tool list. Click any formula, metric box, or dashed term anywhere on the page for a plain-words explanation.</p>
+    <p class="lead" data-i18n="hero_lead">Parametric sizing for a hand-built Skiftesverk timber hall (45&deg; reed roof) and wall condensation check. Preliminary reference only; not a stamped structural sign-off.</p>
     <div class="open-actions">
-      <a class="btn-dark" id="btn-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="btn_pdf">Download Free 4-Page CAD Guide (PDF)</a>
-      <button type="button" class="btn-ghost" id="btn-print" data-i18n="btn_print">Print / Save Custom Sizing</button>
-      <a class="btn-ghost" href="#field-process" data-i18n="btn_jump_cal">Seasonal Process, Tools &amp; Free Books &darr;</a>
+      <a class="btn-dark" id="btn-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="btn_pdf">Download 4-Page CAD Guide (PDF)</a>
+      <button type="button" class="btn-ghost" id="btn-print" data-i18n="btn_print">Print / Save Sizing</button>
+      <a class="btn-ghost" href="#field-process" data-i18n="btn_jump_cal">Process, Tools &amp; References &darr;</a>
     </div>
     <div class="byrne-legend">
       <span><i class="swatch" style="background:var(--red);"></i><span data-i18n="leg_red">Compression / Thrust / Limit</span></span>
@@ -836,28 +850,16 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
       </div>
     </div>
 
-    <div class="open-desk">
-      <p class="od-k" data-i18n="od_k">no route to host &middot; open desk</p>
-      <p data-i18n="od_p1">No institution, grant, or publisher stands behind this desk. This calculator, the 4-page CAD guide, the writing, and the photographs stay 100% free and unlocked.</p>
-      <p class="od-small" data-i18n="od_p2">If these tools or drawings save you a mistake on your own build, take them freely. If you want to hold a small share of the host (funding undisturbed hours to write, draw, and keep the archive open via Liberapay / Ko-fi, zero tiers), or commission custom timber sizing, write directly.</p>
-      <!-- LIBERAPAY_KOFI_SLOT: paste live Liberapay / Ko-fi URLs here once created -->
-      <div class="od-links">
-        <a class="text-link" id="od-pdf-dl" href="assets/skiftesverk_open_field_guide.pdf" download data-i18n="od_dl">Download 4-page CAD PDF (free)</a>
-        <a class="text-link" href="mailto:pagalysm@gmail.com?subject=Host%20the%20Desk%20%2F%20Custom%20Sizing%20-%20Mantas%20Pagalys" data-i18n="od_mail">Host the desk / custom sizing &rarr;</a>
-        <a class="text-link" href="dossier.html" data-i18n="od_dos">Dossier &rarr;</a>
-      </div>
-    </div>
-
     <p class="method-note" data-i18n="method_note">
-      Method note: zero external JavaScript libraries, zero WebGL. Every line is calculated directly in plain SVG from LST EN 1991-1-3 (snow), Euler-Bernoulli beam mechanics, analytical buckling eigenmodes, hyperbolic cosine equilibrium, steady-state Fourier conduction, and Glaser vapor pressure. Educational and preliminary sizing reference (not a stamped structural engineer sign-off).
+      Open sizing tool and 4-page CAD guide (free to use and adapt). Calculated directly in plain SVG from LST EN 1991-1-3 (snow), Euler-Bernoulli beam mechanics, buckling eigenmodes, hyperbolic cosine equilibrium, steady-state Fourier conduction, and Glaser vapor pressure. Preliminary reference only.
     </p>
   </section>
 </main>
 
 <footer class="colophon">
   <div class="wrap colophon-inner">
-    <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org/mechanics</div>
-    <div data-i18n="footer_copy">Vilnius &middot; 2026 &middot; Open Parametric Mechanics &copy; Mantas Pagalys</div>
+    <div><a href="index.html">greifiks.org</a></div>
+    <div>2026</div>
   </div>
 </footer>
 
@@ -1705,16 +1707,14 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
 
   /* ==================== FULL EN / LT I18N ==================== */
   var LT = {
-    page_title: "Mechanika ir karkasas · Atviras parametrinis įrankis · Mantas Pagalys",
-    nav_writing: "Tekstai", nav_photos: "Fotografija", nav_craft: "Amatas",
-    nav_dossier: "Byla", nav_mech: "Mechanika", nav_contact: "Kontaktai",
-    hero_h1: "Mechanika ir karkasas.",
-    hero_eye: "Atviras parametrinis namelio įrankis &middot; Be bibliotekų",
-    st_page: "Bandymas &middot; Atvira skaičiuoklė (fizika patikrinta; 1:1 namelis dar nepastatytas; ne konstruktoriaus parašas)",
-    hero_lead: "Nemokamos interaktyvios plokštelės vieno žmogaus rankomis statomam mediniam nameliui: keičiamas plotis, ilgis, stogo nuolydis ir rąstų skersmenys su gyvais skaičiavimais, molio ir gesintų kalkių rasos taško fizika, sezoniškumo kalendoriumi ir pagrindinių rankinių įrankių sąrašu. Spustelėkite bet kurią formulę, skaitiklį ar pabrauktą terminą paprastam paaiškinimui.",
-    btn_pdf: "Atsisiųsti nemokamą 4 psl. CAD vadovą LT (PDF)",
-    btn_print: "Spausdinti / išsaugoti savo skaičiavimą",
-    btn_jump_cal: "Sezoninis procesas, įrankiai ir nemokamos knygos &darr;",
+    page_title: "Forma · Mantas Pagalys",
+    nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
+    nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Parama",
+    hero_h1: "Forma",
+    hero_lead: "Parametrinė rankomis statomo Skiftesverk medinio karkaso (45&deg; nendrių stogas) skaičiuoklė ir sienos rasos taško patikra. Tik pirminė nuoroda; ne atestuoto konstruktoriaus parašas.",
+    btn_pdf: "Atsisiųsti 4 psl. CAD vadovą LT (PDF)",
+    btn_print: "Spausdinti / išsaugoti skaičiavimą",
+    btn_jump_cal: "Procesas, įrankiai ir šaltiniai &darr;",
     leg_red: "Gniuždymas / Skėtimas / Riba", leg_blue: "Tempimas / Vėdinimas / Šaltis",
     leg_ochre: "Mediena / Nendrės / Pluoštas", leg_ink: "Deginta eglė / Gruntas / Ašis",
     p1_h2: "Reguliuojamas <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> karkasas ir 45&deg; nendrių stogas",
@@ -1759,39 +1759,140 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
     mini_exp: "PAAIŠKINTI ?",
     m1_h: "Sijos lenkimas", m2_h: "Eilerio klupumas", m3_h: "Grandininė arka",
     cl_bq: "Apkrova q", cl_bl: "Tarpatramis L", cl_ed: "Eglės stulpo &Oslash;", cl_ca: "Lėkštumas a",
-    od_k: "no route to host &middot; atviras stalas",
-    od_p1: "Už šio darbo stalo nestovi jokia institucija, fondas ar leidykla. Ši skaičiuoklė, 4 psl. CAD vadovas, tekstai ir fotografijos lieka 100% nemokami ir atviri.",
-    od_p2: "Jei brėžiniai ar fizikos patikra padeda išvengti klaidos jūsų statyboje – naudokitės laisvai. Jei norite prisiimti mažą šios erdvės dalį (paremti ramias valandas rašymui ir brėžiniams per Liberapay / Ko-fi, be pakopų) arba užsakyti individualų skaičiavimą, rašykite tiesiogiai.",
-    od_dl: "Atsisiųsti 4 psl. CAD PDF (LT, nemokamai)",
-    od_mail: "Paremti stalą / individualus skaičiavimas &rarr;",
-    od_dos: "Byla &rarr;",
-    method_note: "Pastaba apie metodą: nulis išorinių JS bibliotekų, nulis WebGL. Kiekviena kreivė skaičiuojama gryname SVG pagal LST EN 1991-1-3 (sniegas), Eilerio-Bernulio sijų teoriją, klupumo formas, hiperbolinį kosinusą, Furjė šilumos laidumą ir Glaserio garų slėgį. Mokomasis ir pirminio skaičiavimo modelis (ne atestuoto konstruktoriaus parašas).",
-    footer_copy: "Vilnius &middot; 2026 &middot; Atvira parametrinė mechanika &copy; Mantas Pagalys"
+    method_note: "Atviras skaičiavimo įrankis ir 4 psl. CAD vadovas (laisvai naudojamas ir pritaikomas). Kiekviena kreivė skaičiuojama gryname SVG pagal LST EN 1991-1-3 (sniegas), Eilerio-Bernulio sijų teoriją, klupumo formas, hiperbolinį kosinusą, Furjė šilumos laidumą ir Glaserio garų slėgį. Tik pirminė nuoroda."
+  };
+
+  var PT = {
+  "page_title": "Forma · Mantas Pagalys",
+  "nav_index": "Índice",
+  "nav_dossier": "Bio",
+  "nav_mech": "Forma",
+  "nav_writing": "Tinta",
+  "nav_images": "Lente",
+  "nav_archive": "Cofre",
+  "nav_link": "Apoio",
+  "hero_h1": "Forma",
+  "hero_lead": "Dimensionamento paramétrico para um galpão de madeira Skiftesverk construído à mão (cobertura de junco a 45&deg;) e verificação de condensação na parede. Apenas referência preliminar; não é uma aprovação estrutural assinada.",
+  "btn_pdf": "Baixar guia CAD de 4 páginas (PDF, em inglês)",
+  "btn_print": "Imprimir / salvar dimensionamento",
+  "btn_jump_cal": "Processo, ferramentas &amp; referências &darr;",
+  "leg_red": "Compressão / Empuxo / Limite",
+  "leg_blue": "Tração / Fluxo de ar / Frio",
+  "leg_ochre": "Madeira / Junco / Massa de fibra",
+  "leg_ink": "Espruce carbonizado / Solo / Eixo",
+  "p1_h2": "Galpão <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button> ajustável &amp; cobertura de junco a 45&deg;",
+  "c_width": "Largura do pórtico (W)",
+  "c_bays": "Vãos no comprimento (&times;1.50 m)",
+  "c_pitch": "Inclinação do telhado (&theta;)",
+  "c_birch": "Diâmetro das toras da parede (&Oslash;)",
+  "c_gird": "Viga mestra do piso (&Oslash;)",
+  "c_post": "Pilar interno (&Oslash;)",
+  "mk_area": "Área de implantação (limite 50 m&sup2;)",
+  "mk_ridge": "Cumeeira externa (limite 5.00 m)",
+  "mk_snow": "Carga de neve + junco",
+  "mk_thrust": "Tração no tirante H / pórtico",
+  "mk_defl": "Flecha da viga &delta; (vão W/4)",
+  "mk_euler": "Flambagem do pilar P<sub>cr</sub>",
+  "p2_h2": "Correção da cabana: <button type=\"button\" class=\"inline-term\" data-explain=\"fourier\">Gradiente térmico de Fourier</button> &amp; <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">Cal hidratada Ca(OH)<sub>2</sub></button>",
+  "lbl_pos": "1. Ordem das camadas da parede",
+  "btn_ext": "Corrigido: externo",
+  "btn_int": "Armadilha: interno",
+  "lbl_mat": "2. Aglomerante / material do isolamento",
+  "btn_m_clay": "Argila + taboa",
+  "btn_m_lime": "Cal hidratada + taboa",
+  "btn_m_pure": "Só cal pura",
+  "c_tout": "Temperatura externa no inverno (T<sub>out</sub>)",
+  "c_typha": "Espessura da camada de isolamento",
+  "c_rh": "Umidade relativa interna",
+  "mk_uval": "Valor U da parede",
+  "mk_btemp": "Face mais fria da bétula",
+  "mk_dew": "Ponto de orvalho interno (+20&deg;C)",
+  "mk_sd": "Gradiente de vapor (interno : externo)",
+  "cap_p2_r": "ZERO PLÁSTICO · ZERO PAPEL CORTA-VENTO · PROTEÇÃO PARA BÉTULA EN 350 CL.5",
+  "fd_h2": "Referência aprofundada: lista de corte dinâmica, colheita sazonal &amp; ferramentas para 1 pessoa",
+  "d1_h": "Lista dinâmica de materiais &amp; corte de madeira",
+  "th_elem": "Elemento",
+  "th_spec": "Espécie / especificação",
+  "th_qty": "Quantidade dinâmica (dimensionada automaticamente)",
+  "th_rule": "Regra crítica em campo",
+  "d2_h": "Processo de construção natural ao longo do ano (janelas de disponibilidade de materiais)",
+  "d3_h": "Ferramentas manuais básicas para uma pessoa (sem preços, sem energia elétrica)",
+  "d4_h": "Livros abertos gratuitos &amp; manuais técnicos primários",
+  "p3_h2": "Três fundamentos interativos: viga, coluna, arco",
+  "p3_hint": "CLIQUE EM QUALQUER RÓTULO &ldquo;EXPLICAR ?&rdquo; DIRETO NO CARTÃO",
+  "mini_exp": "EXPLICAR ?",
+  "m1_h": "Flexão de viga",
+  "m2_h": "Flambagem de Euler",
+  "m3_h": "Arco em catenária",
+  "cl_bq": "Carga q",
+  "cl_bl": "Vão L",
+  "cl_ed": "Pilar de espruce &Oslash;",
+  "cl_ca": "Achatamento a",
+  "method_note": "Ferramenta de dimensionamento aberta e guia CAD de 4 páginas (uso e adaptação livres). Calculado diretamente em SVG puro a partir da LST EN 1991-1-3 (neve), da teoria de vigas de Euler-Bernoulli, dos modos de flambagem, do equilíbrio pelo cosseno hiperbólico, da condução de calor de Fourier em regime permanente e da pressão de vapor pelo método de Glaser. Apenas referência preliminar."
+};
+
+  var NO = {
+    page_title: "Form · Mantas Pagalys",
+    nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
+    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
+    hero_h1: "Form",
+    hero_lead: "Parametrisk dimensjoneringsverktøy for håndbygd Skiftesverk-trekonstruksjon (45&deg; stråtak) og duggpunktskontroll i vegg. Kun foreløpig referanse; ikke signert prosjektering.",
+    btn_pdf: "Last ned 4-siders CAD-guide EN (PDF)",
+    btn_print: "Skriv ut / lagre beregning",
+    btn_jump_cal: "Arbeidsgang, verktøy og kilder &darr;",
+    leg_red: "Trykk / Sidetrykk / Grense", leg_blue: "Strekk / Lufting / Kulde",
+    leg_ochre: "Treverk / Takrør / Fiber", leg_ink: "Forkullet gran / Grunn / Akse",
+    p1_h2: "Justerbar <button type=\"button\" class=\"inline-term\" data-explain=\"skiftesverk\">Skiftesverk</button>-ramme og 45&deg; takrørtak",
+    c_width: "Rammebredde (W)", c_bays: "Lengdefag (&times;1,50 m)", c_pitch: "Takvinkel (&theta;)",
+    c_birch: "Veggtømmer (&Oslash;)", c_gird: "Bunnramme (&Oslash;)", c_post: "Indre stolper (&Oslash;)",
+    mk_area: "Areal (grense 50 m&sup2;)", mk_ridge: "Mønehøyde (grense 5,00 m)", mk_snow: "Snø + taklast",
+    mk_thrust: "Strekkraft H / ramme", mk_defl: "Nedbøyning &delta; (W/4)", mk_euler: "Knekkingslast P<sub>cr</sub>",
+    p2_h2: "Veggfysikk: <button type=\"button\" class=\"inline-term\" data-explain=\"fourier\">Fourier-temperaturgradient</button> og <button type=\"button\" class=\"inline-term\" data-explain=\"slaked_lime\">lesket kalk Ca(OH)<sub>2</sub></button>",
+    lbl_pos: "1. Plassering av isolasjon", btn_ext: "Korrigert: utvendig", btn_int: "Felle: innvendig",
+    lbl_mat: "2. Bindemiddel og fyll", btn_m_clay: "Leire + dunkjevle", btn_m_lime: "Lesket kalk + dunkjevle", btn_m_pure: "Kun ren kalk",
+    c_tout: "Utetemperatur vinter (T_out)", c_typha: "Isolasjonstykkelse", c_rh: "Innvendig relativ fuktighet",
+    mk_uval: "Veggens U-verdi", mk_btemp: "Kaldeste bjørkeside", mk_dew: "Innvendig duggpunkt (+20&deg;C)", mk_sd: "Dampforhold (Inne : Ute)",
+    cap_p2_r: "NULL PLAST · NULL VINDSPERREPAPIR · BESKYTTET BJØRK",
+    fd_h2: "Feltdata: mengdeberegning, sesongkalender og håndverktøy",
+    d1_h: "Dynamisk material- og tømmerliste",
+    th_elem: "Bygningsdel", th_spec: "Materiale / dimensjon", th_qty: "Beregnet mengde", th_rule: "Viktigste regel på byggeplass",
+    d2_h: "Årssyklus etter naturlige materialvinduer",
+    d3_h: "Grunnleggende håndverktøy for én person",
+    d4_h: "Gratis fagbøker og primærkilder",
+    p3_h2: "Tre levende grunnelementer: bjelke, søyle, bue",
+    p3_hint: "KLIKK «FORKLAR ?» RETT PÅ KORTET",
+    mini_exp: "FORKLAR ?",
+    m1_h: "Bjelkebøyning", m2_h: "Eulerknekking", m3_h: "Kjedelinje-bue",
+    cl_bq: "Last q", cl_bl: "Spennvidde L", cl_ed: "Granstolpe &Oslash;", cl_ca: "Bueform a",
+    method_note: "Åpent beregningsverktøy og 4-siders CAD-guide (fritt til bruk og tilpasning). Beregnet direkte i ren SVG fra LST EN 1991-1-3 (snø), Euler-Bernoulli bjelketeori, knekkformer, kjedelinje, Fourier varmeledning og Glaser damptrykk. Kun foreløpig referanse."
   };
 
   var i18nNodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
   var EN = { page_title: document.title };
   i18nNodes.forEach(function (n) { EN[n.getAttribute("data-i18n")] = n.innerHTML; });
   var langBtns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
-  var pdfLinks = [document.getElementById("btn-pdf-dl"), document.getElementById("od-pdf-dl")];
+  var pdfLinks = [document.getElementById("btn-pdf-dl")];
+  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
 
   function applyLang(lang) {
-    currentLang = lang === "lt" ? "lt" : "en";
-    var dict = currentLang === "lt" ? LT : EN;
-    document.documentElement.lang = currentLang;
+    currentLang = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
+    var dict = currentLang === "lt" ? LT : (currentLang === "no" ? NO : (currentLang === "pt" ? PT : EN));
+    document.documentElement.lang = currentLang === "no" ? "nb" : currentLang;
     document.title = dict.page_title || EN.page_title;
     i18nNodes.forEach(function (n) {
       var k = n.getAttribute("data-i18n");
-      if (dict[k] !== undefined) n.innerHTML = dict[k];
+      n.innerHTML = dict[k] !== undefined ? dict[k] : EN[k];
     });
     var pdfHref = currentLang === "lt" ? "assets/skiftesverk_open_field_guide_LT.pdf" : "assets/skiftesverk_open_field_guide.pdf";
     pdfLinks.forEach(function (a) { if (a) a.href = pdfHref; });
+    arkaLinks.forEach(function (a) { a.href = currentLang === "no" ? "arka_no.html" : "arka.html"; });
     langBtns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === currentLang); });
     closeExplain();
     wireByrne("#frame", svgCabin);
     wireByrne("#wall-physics", svgWall);
     renderCabin();
     renderWall();
+    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
     try { localStorage.setItem("greifiks-lang", currentLang); } catch (e) {}
   }
 
@@ -1803,7 +1904,7 @@ footer.colophon { border-top: 1px solid var(--ink); margin-top: 20px; padding: 3
 
   var saved = null;
   try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  if (saved === "lt") applyLang("lt");
+  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
 })();
 </script>
 </body>

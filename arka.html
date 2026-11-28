@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="darkreader-lock">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Mantas Pagalys">
 <meta name="copyright" content="© 2026 Mantas Pagalys">
@@ -123,10 +122,20 @@ details.fold[open]>summary::after{content:" \2212"}
 .emblem{width:96px;height:45px;color:#1f4d3a}
 .emblem{width:84px;height:52px}
 :root{--ink-3:#4f6376}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#090a0c; --surface:#0f1114; --line:rgba(242,239,232,0.16); --grid:rgba(242,239,232,0.1);
+  --ink:#f2efe8; --ink-2:#c4c8cf; --ink-3:#8c9199;
+  --accent:#c27161; --accent-ink:#e09a8b; --muted-bar:#4c5058; --warn:#e67767;
+  --chip:#171a20;
+}
+:root[data-theme="dark"] .cta{background:#f2efe8;color:#090a0c}
+:root[data-theme="dark"] .cta:hover{background:#d9d4ca}
+:root[data-theme="dark"] .emblem{color:#c27161}
 </style>
 </head>
 <body>
-<div class="nav"><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Calculator</a><a href="arka_no.html" hreflang="nb" lang="nb" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Norsk</a><button id="theme" aria-label="Toggle theme">Light / dark</button><button onclick="window.print()">Print</button></div>
+<div class="nav"><a href="archive.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">&larr; Vault</a><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Calculator</a><a href="arka_no.html" hreflang="nb" lang="nb" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Norsk</a><button id="theme" aria-label="Toggle theme">Light / dark</button><button onclick="window.print()">Print</button></div>
 <div class="tip" id="tip" role="tooltip"></div>
 <main class="deck">
 
@@ -139,9 +148,7 @@ details.fold[open]>summary::after{content:" \2212"}
   <dl class="summary"><div><dt>Problem</dt><dd>About 16,200 kr per household per month in temporary housing (a Norwegian city, 2025, calculated).</dd></div><div><dt>Proposal</dt><dd>A permanent, factory-built home of about 29 m² on a municipal plot, owned by the municipality and financed by Husbanken.</dd></div><div><dt>Cost</dt><dd>At most about 1,300 kr a month for the municipality after rent, without VAT compensation.</dd></div><div><dt>Pilot</dt><dd>5 homes, one municipality, one year.</dd></div><div><dt>Next step</dt><dd>A calculation using your own figures.</dd></div></dl>
   <p class="foot note-city"><b>About the example city:</b> the figures are real and public (the municipality's net spending for 2025, reported by Nettavisen on 16.02.2026). The municipality is not named because no contact has been established with it. Source and calculation are available on request.</p>
   <a class="cta" href="mailto:pagalysm@gmail.com?subject=ARKA%20%E2%80%93%20calculation%20for%20our%20municipality">Request a calculation for your municipality →</a>
-  <p class="foot"><b>Why ARKA:</b> arka means arch, the structure that spans a gap and carries the load. ARKA spans the gap between temporary housing and a permanent home, built from parts that already exist.</p>
-  <p class="foot">How to read the figures: <span class="tag">sourced</span> from a named public source · <span class="tag">calc</span> arithmetic on sourced figures · <span class="tag h">assumption</span> an input the pilot will confirm. The model behind the figures (with stress test) is available on request; the last slide lists sources and how far each has been checked.</p>
-  <p class="foot" style="margin-top:12px">© 2026 Mantas Pagalys, originator of the ARKA model (first version dated 28.09.2026). Municipalities and other public bodies may use this method for their own procurement, with attribution. Commercial reuse, resale or reproduction by suppliers, consultants or investors requires written permission. Contact: pagalysm@gmail.com</p>
+  <p class="foot">How to read the figures: <span class="tag">sourced</span> from a named public source · <span class="tag">calc</span> arithmetic on sourced figures · <span class="tag h">assumption</span> an input the pilot will confirm. The last slide lists sources and how far each has been checked.</p>
 </section>
 
 <!-- 2 -->
@@ -315,7 +322,7 @@ details.fold[open]>summary::after{content:" \2212"}
   <details><summary><b>Who builds it?</b></summary><p>An established factory chosen by open tender, with Norwegian documentation (SINTEF Technical Approval or ETA). ARKA does not manufacture and does not sell homes, and never bids in a tender it helped design.</p></details>
   <details><summary><b>How does ARKA earn?</b></summary><p>As coordinator for the municipality: running the tender, organising groundwork and checking documentation. The method itself is open to public bodies.</p></details>
   <details><summary><b>Has any ARKA home been built?</b></summary><p>Not yet. The pilot exists to produce real figures for cost, upkeep and temporary housing avoided, in the municipality's own accounts. Similar homes are already delivered to Norwegian municipalities by others, for example in Sandnes and Heim.</p></details>
-  <details><summary><b>Who is behind it?</b></summary><p>Mantas Pagalys, Oslo. Hands-on experience as lead tradesman, from groundwork, pipe-laying and paving to roof structures and interior joinery. Developed the model and the financial analysis. Contact: pagalysm@gmail.com</p></details>
+  <details><summary><b>Who is behind it?</b></summary><p>Mantas Pagalys (Vilnius / Norway). Hands-on experience as lead tradesman, from groundwork, pipe-laying and paving to roof structures and interior joinery. Developed the model and financial analysis. Contact: pagalysm@gmail.com</p></details>
 </section>
 
 <!-- 10 -->
@@ -382,10 +389,15 @@ details.fold[open]>summary::after{content:" \2212"}
 </main>
 <script>
 (function(){
-  const root=document.documentElement, KEY="arka-theme";
-  try{const s=localStorage.getItem(KEY); if(s) root.setAttribute("data-theme",s);}catch(e){}
+  const root=document.documentElement, KEY="greifiks-theme";
+  function syncArkaTheme(){
+    try{const s=localStorage.getItem(KEY); root.setAttribute("data-theme", (s==="light"||s==="dark") ? s : "dark");}catch(e){root.setAttribute("data-theme","dark");}
+  }
+  syncArkaTheme();
+  window.addEventListener("pageshow", syncArkaTheme);
+  window.addEventListener("storage", function(ev){ if(ev.key===KEY) syncArkaTheme(); });
   document.getElementById("theme").onclick=()=>{
-    const dark = root.getAttribute("data-theme")==="dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    const dark = root.getAttribute("data-theme")==="dark";
     const next = dark ? "light" : "dark"; root.setAttribute("data-theme",next);
     try{localStorage.setItem(KEY,next);}catch(e){}
   };

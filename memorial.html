@@ -370,20 +370,25 @@ footer.colophon {
       <span class="g-step g-s4">IX&ndash;X Black / White Ink &middot; No-I</span>
     </div>
 
-    <div class="sound-bar" aria-label="Optional C-sharp scroll-coupled acoustic engine">
+    <div class="sound-bar" aria-label="Optional scroll-coupled field recording and C-sharp engine">
       <div class="sound-left">
-        <button type="button" class="sound-btn" id="btn-sound" aria-pressed="false" data-i18n="snd_off">C# Sound &middot; Off</button>
-        <div class="inst-switch" role="group" aria-label="C-sharp mathematical engine">
-          <button type="button" class="inst-btn active" data-mode="ratio" data-i18n="m_ratio">III &middot; C# Ratio</button>
-          <button type="button" class="inst-btn" data-mode="bach" data-i18n="m_bach">II &middot; C# Bach Canon</button>
-          <button type="button" class="inst-btn" data-mode="binary" data-i18n="m_bin">I &middot; C# Binary</button>
+        <button type="button" class="sound-btn" id="btn-sound" aria-pressed="false" data-i18n="snd_off">Sound &middot; Off</button>
+        <div class="inst-switch" role="group" aria-label="Audio layer selection">
+          <button type="button" class="inst-btn active" data-mode="crows" data-i18n="m_crows">I &middot; Crows (20:03)</button>
+          <button type="button" class="inst-btn" data-mode="crows_ratio" data-i18n="m_crows_c">II &middot; Crows + C#</button>
+          <button type="button" class="inst-btn" data-mode="bach" data-i18n="m_bach">III &middot; C# Bach Canon</button>
+          <button type="button" class="inst-btn" data-mode="binary" data-i18n="m_bin">IV &middot; C# Binary</button>
         </div>
         <span class="st-tag st-testing" data-i18n="st_audio">Testing &middot; Scroll-Coupled</span>
       </div>
       <div class="sound-right">
         <span class="t-read" id="t-read">t = 0.00 &middot; White / Ego</span>
-        <p class="sound-cap" data-i18n="snd_cap">Silent until clicked. Scrolling from white to black cools the C# resonance into silence.</p>
+        <p class="sound-cap" data-i18n="snd_cap">Silent until clicked. Field recording by Mantas Pagalys (Crows, Sunday 20:03), restored and loop-mastered; scrolling cools distance into C# silence.</p>
       </div>
+      <audio id="crows-fallback" loop preload="none" aria-hidden="true">
+        <source src="assets/audio/crows-sunday-20-03.ogg" type="audio/ogg; codecs=opus">
+        <source src="assets/audio/crows-sunday-20-03.mp3" type="audio/mpeg">
+      </audio>
     </div>
   </section>
 
@@ -519,6 +524,7 @@ footer.colophon {
   <div class="wrap colophon-inner">
     <div><span class="colophon-name">Mantas Pagalys</span> &middot; greifiks.org</div>
     <div class="colophon-links">
+      <a href="vestiges.html" data-i18n="foot_vestiges">Vestiges (Film) &rarr;</a>
       <a href="log.html" data-i18n="foot_log">The Sea Keeps Giving &rarr;</a>
       <a href="wak943.html">WAK943 &rarr;</a>
       <a href="mechanics.html" data-i18n="foot_mech">Mechanics &rarr;</a>
@@ -542,6 +548,7 @@ footer.colophon {
       ? (scrollT < 0.28 ? "Balta / Ego" : (scrollT < 0.50 ? "Popierius / Vaidmuo" : (scrollT < 0.78 ? "Tamsi / Vektorius" : "Juoda / Be-Aš")))
       : (scrollT < 0.28 ? "White / Ego" : (scrollT < 0.50 ? "Paper / Role" : (scrollT < 0.78 ? "Slate / Vector" : "Black / No-I")));
     tReadEl.textContent = "t = " + scrollT.toFixed(2) + " \u00b7 " + stageTxt;
+    updateCrowsSpace();
   }
   window.addEventListener("scroll", updateScrollT, { passive: true });
   window.addEventListener("resize", updateScrollT, { passive: true });
@@ -550,8 +557,107 @@ footer.colophon {
   var master = null;
   var timer = null;
   var isPlaying = false;
-  var mode = "ratio";
+  var mode = "crows";
   var step = 0;
+
+  /* Real field recording engine: gapless Web Audio buffer + scroll-coupled air absorption,
+     with automatic HTML5 <audio loop> fallback for local file:// preview */
+  var crowsFallbackEl = document.getElementById("crows-fallback");
+  var crowsBuffer = null;
+  var crowsLoading = false;
+  var crowsSrc = null;
+  var crowsFilter = null;
+  var crowsGain = null;
+  var usingHtmlFallback = false;
+
+  function modeUsesCrows(m) { return m === "crows" || m === "crows_ratio"; }
+  function modeUsesSynth(m) { return m !== "crows"; }
+
+  function updateCrowsSpace() {
+    if (!isPlaying || !modeUsesCrows(mode)) return;
+    // Scroll cools near winter crows (9500 Hz, close) into distant sky crows (1450 Hz, dissolved)
+    var cutHz = 1450 + Math.pow(1 - scrollT, 1.35) * 8050;
+    var targetVol = (mode === "crows_ratio" ? 0.68 : 0.85) * (1 - scrollT * 0.48);
+    if (crowsFilter && crowsGain && ctx && !usingHtmlFallback) {
+      var now = ctx.currentTime;
+      crowsFilter.frequency.setTargetAtTime(cutHz, now, 0.14);
+      crowsGain.gain.setTargetAtTime(targetVol, now, 0.14);
+    } else if (usingHtmlFallback && crowsFallbackEl) {
+      crowsFallbackEl.volume = Math.max(0.05, Math.min(1, targetVol));
+    }
+  }
+
+  function stopCrowsLayer() {
+    if (crowsGain && ctx) {
+      var now = ctx.currentTime;
+      crowsGain.gain.cancelScheduledValues(now);
+      crowsGain.gain.setValueAtTime(Math.max(0.0001, crowsGain.gain.value), now);
+      crowsGain.gain.linearRampToValueAtTime(0.0001, now + 0.55);
+    }
+    if (crowsSrc) {
+      var oldSrc = crowsSrc;
+      crowsSrc = null;
+      setTimeout(function () { try { oldSrc.stop(); oldSrc.disconnect(); } catch (e) {} }, 600);
+    }
+    if (crowsFallbackEl && !crowsFallbackEl.paused) {
+      crowsFallbackEl.pause();
+    }
+  }
+
+  function startCrowsBufferNode() {
+    if (!ctx || !crowsBuffer || !isPlaying || !modeUsesCrows(mode)) return;
+    stopCrowsLayer();
+    usingHtmlFallback = false;
+    crowsFilter = ctx.createBiquadFilter();
+    crowsFilter.type = "lowpass";
+    crowsFilter.Q.value = 0.65;
+    crowsGain = ctx.createGain();
+    crowsGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    crowsSrc = ctx.createBufferSource();
+    crowsSrc.buffer = crowsBuffer;
+    crowsSrc.loop = true;
+    crowsSrc.connect(crowsFilter);
+    crowsFilter.connect(crowsGain);
+    crowsGain.connect(ctx.destination);
+    crowsSrc.start(0);
+    updateCrowsSpace();
+  }
+
+  function startHtmlFallback() {
+    if (!crowsFallbackEl || !isPlaying || !modeUsesCrows(mode)) return;
+    usingHtmlFallback = true;
+    crowsFallbackEl.volume = Math.max(0.05, Math.min(1, (mode === "crows_ratio" ? 0.68 : 0.85) * (1 - scrollT * 0.48)));
+    var p = crowsFallbackEl.play();
+    if (p && typeof p.catch === "function") p.catch(function () {});
+  }
+
+  function startCrowsLayer() {
+    if (!modeUsesCrows(mode)) { stopCrowsLayer(); return; }
+    if (crowsBuffer && ctx) { startCrowsBufferNode(); return; }
+    if (usingHtmlFallback) { startHtmlFallback(); return; }
+    if (crowsLoading) return;
+    if (window.location.protocol === "file:" || !window.fetch || !ctx) {
+      startHtmlFallback();
+      return;
+    }
+    crowsLoading = true;
+    var probe = document.createElement("audio");
+    var canOpus = probe.canPlayType && probe.canPlayType('audio/ogg; codecs="opus"') !== "";
+    var url = canOpus ? "assets/audio/crows-sunday-20-03.ogg" : "assets/audio/crows-sunday-20-03.mp3";
+    fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.arrayBuffer();
+    }).then(function (ab) {
+      return ctx.decodeAudioData(ab);
+    }).then(function (decoded) {
+      crowsLoading = false;
+      crowsBuffer = decoded;
+      if (isPlaying && modeUsesCrows(mode)) startCrowsBufferNode();
+    }).catch(function () {
+      crowsLoading = false;
+      if (isPlaying && modeUsesCrows(mode)) startHtmlFallback();
+    });
+  }
 
   var F0 = 69.2957; // C#2 fundamental
   var PHRASE = "ZERO NOISE";
@@ -626,23 +732,22 @@ footer.colophon {
   }
 
   function tick() {
-    if (!isPlaying) return;
+    if (!isPlaying || !modeUsesSynth(mode)) return;
     // Scroll t cools cutoff (1150 -> 460 Hz) and slows tempo smoothly
     var cutoff = Math.round(1150 - scrollT * 690);
     var delayMs = 1100;
 
-    if (mode === "ratio") {
+    if (mode === "crows_ratio") {
       var stIdx = Math.min(3, Math.floor(scrollT * 3.99));
       var seq = RATIOS[stIdx];
       var pair = seq[step % seq.length];
-      if (step % 3 === 0) pluck(F0, 5.2, 0.16, 400);
+      if (step % 3 === 0) pluck(F0, 5.2, 0.14, 380);
       if (pair[0] > 0) {
-        pluck(F0 * 2 * (pair[0] / pair[1]), 3.5, 0.16, cutoff);
+        pluck(F0 * 2 * (pair[0] / pair[1]), 3.5, 0.12, cutoff);
       }
-      delayMs = Math.round(780 + scrollT * 1450);
+      delayMs = Math.round(920 + scrollT * 1550);
     } else if (mode === "bach") {
       var nTop = SUBJ[step % SUBJ.length];
-      // As t approaches 1.0, upper voice thins out into pure inverted bass and silence
       if (scrollT < 0.75 || step % 2 === 0) {
         klavier(NOTE[nTop], 1.8 + scrollT, 0.14 * (1 - scrollT * 0.45), cutoff);
       }
@@ -666,39 +771,49 @@ footer.colophon {
   var btnSound = document.getElementById("btn-sound");
   function syncSoundLabel() {
     if (currentLang === "lt") {
-      btnSound.textContent = isPlaying ? "C# garsas \u00b7 \u012ej. (Stabdyti)" : "C# garsas \u00b7 I\u0161j.";
+      btnSound.textContent = isPlaying ? "Garsas \u00b7 \u012ej. (Stabdyti)" : "Garsas \u00b7 I\u0161j.";
     } else {
-      btnSound.textContent = isPlaying ? "C# Sound \u00b7 On (Stop)" : "C# Sound \u00b7 Off";
+      btnSound.textContent = isPlaying ? "Sound \u00b7 On (Stop)" : "Sound \u00b7 Off";
     }
     btnSound.classList.toggle("playing", isPlaying);
     btnSound.setAttribute("aria-pressed", isPlaying ? "true" : "false");
   }
 
+  function applyActiveMode() {
+    if (!isPlaying) return;
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (modeUsesCrows(mode)) startCrowsLayer(); else stopCrowsLayer();
+    if (ctx && master) {
+      var now = ctx.currentTime;
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), now);
+      master.gain.linearRampToValueAtTime(modeUsesSynth(mode) ? 0.30 : 0.0001, now + 0.7);
+    }
+    if (modeUsesSynth(mode)) tick();
+  }
+
   function startSound() {
     var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    if (!ctx) {
+    if (AC && !ctx) {
       ctx = new AC();
       master = ctx.createGain();
       master.gain.value = 0.0001;
       master.connect(ctx.destination);
     }
-    if (ctx.state === "suspended") ctx.resume();
-    master.gain.cancelScheduledValues(ctx.currentTime);
-    master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), ctx.currentTime);
-    master.gain.linearRampToValueAtTime(0.32, ctx.currentTime + 1.0);
+    if (ctx && ctx.state === "suspended") ctx.resume();
     isPlaying = true;
     syncSoundLabel();
-    tick();
+    applyActiveMode();
   }
 
   function stopSound() {
     isPlaying = false;
     if (timer) { clearTimeout(timer); timer = null; }
+    stopCrowsLayer();
     if (ctx && master) {
       master.gain.cancelScheduledValues(ctx.currentTime);
       master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.7);
+      master.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
     }
     syncSoundLabel();
   }
@@ -708,6 +823,7 @@ footer.colophon {
     b.addEventListener("click", function () {
       mode = b.getAttribute("data-mode");
       document.querySelectorAll("[data-mode]").forEach(function (x) { x.classList.toggle("active", x === b); });
+      if (isPlaying) applyActiveMode();
     });
   });
 
@@ -723,12 +839,13 @@ footer.colophon {
     sub_note: "Pagal keramines plokštes Londono „Postman's Park“ ir akmeninius ženklus Lietuvos pakelėse. Be gyvų žmonių veidų, be vardų be sutikimo. Kiekvienas registras pririštas prie tylos, garso ir kvapo.",
     sense_strip: "<span><b>I.</b> Tyla</span><span><b>II.</b> Garsas</span><span><b>III.</b> Kvapas</span>",
     grad_bar: "<span class=\"g-step g-s1\">I&ndash;III Balta / Juodas tekstas &middot; Ego</span><span>&rarr;</span><span class=\"g-step g-s2\">IV&ndash;VI Popierius / Rašalas &middot; Vaidmuo</span><span>&rarr;</span><span class=\"g-step g-s3\">VII&ndash;VIII Tamsi / Baltas tekstas &middot; Vektorius</span><span>&rarr;</span><span class=\"g-step g-s4\">IX&ndash;X Juoda / Baltas tekstas &middot; Be-Aš</span>",
-    snd_off: "C# garsas &middot; Išj.",
-    m_ratio: "III &middot; C# santykiai",
-    m_bach: "II &middot; C# Bacho kanonas",
-    m_bin: "I &middot; C# dvejetainis",
+    snd_off: "Garsas &middot; Išj.",
+    m_crows: "I &middot; Varnos (20:03)",
+    m_crows_c: "II &middot; Varnos + C#",
+    m_bach: "III &middot; C# Bacho kanonas",
+    m_bin: "IV &middot; C# dvejetainis",
     st_audio: "Bandymas &middot; Slinkties valdoma",
-    snd_cap: "Tyla iki įjungimo. Slinkimas nuo baltos iki juodos atvėsina C# rezonansą į tylą.",
+    snd_cap: "Tyla iki įjungimo. Manto Pagalio lauko įrašas (Varnos, sekmadienis 20:03), restauruotas į vientisą ciklą; slinkimas atitolina garsą į C# tylą.",
     st1_hdr: "<span>1 pakopa &middot; t = 0,00 &middot; Ego / Makiaveliška</span><span>Baltas fonas &middot; Juoda sintaksė</span>",
     st2_hdr: "<span>2 pakopa &middot; t = 0,35 &middot; Vaidmuo / Trintis</span><span>Šiltas popierius &middot; Tamsus rašalas</span>",
     horizon_lbl: "Inversija &middot; Poliškumo apvertimas &middot; Tapatybė tirpsta į vektorių",
@@ -776,6 +893,7 @@ footer.colophon {
     t10_f: "4 pakopa &middot; Be-Aš / Ištirpusi erdvė",
     wall_policy: "<strong>Būsena: bandymas (gyva siena).</strong> Fonas pereina iš baltos į juodą, o sintaksės poliškumas apvirsta iš juodos į baltą ties inversijos horizontu (WCAG AAA įskaitomumas kiekvienoje pakopoje). Be gyvų veidų, be vardų be sutikimo; pakeitimai ar pašalinimai atliekami gavus tiesioginį pranešimą.",
     wall_contact: "Tiesioginis pranešimas &rarr;",
+    foot_vestiges: "Vestiges (Filmas) &rarr;",
     foot_log: "The Sea Keeps Giving &rarr;",
     foot_mech: "Mechanika &rarr;",
     footer_copy: "Vilnius &middot; 2026 &middot; Tekstai ir fotografijos &copy; Mantas Pagalys"

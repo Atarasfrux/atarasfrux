@@ -2,38 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://greifiks.org/</loc>
-    <priority>1.0</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://greifiks.org/dossier.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://greifiks.org/mechanics.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://greifiks.org/writing.html</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://greifiks.org/images.html</loc>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://greifiks.org/plates.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
-    <loc>https://greifiks.org/memorial.html</loc>
-    <priority>0.8</priority>
+    <loc>https://greifiks.org/archive.html</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://greifiks.org/link.html</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://greifiks.org/arka.html</loc>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://greifiks.org/arka_no.html</loc>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://greifiks.org/assets/skiftesverk_open_field_guide.pdf</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://greifiks.org/assets/skiftesverk_open_field_guide_LT.pdf</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://greifiks.org/tech.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://greifiks.org/fjell-status.html</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
 </urlset>

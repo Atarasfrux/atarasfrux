@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Back · Mantas Pagalys</title>
+<meta name="description" content="Direct message to Mantas Pagalys.">
+<link rel="canonical" href="https://greifiks.org/link.html">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<script src="assets/theme.js?v=9"></script>
+<script src="assets/entropy.js?v=6"></script>
+<style>
+body.link-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body.link-page main.wrap {
+  width: min(680px, 100%);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: clamp(36px, 6vh, 68px);
+}
+body.link-page .page-head {
+  padding: clamp(20px, 3vh, 32px) 0 clamp(20px, 2.8vh, 28px);
+}
+.form-sheet {
+  margin-top: 0;
+  padding: clamp(24px, 3.6vh, 36px) 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.msg-form {
+  display: grid;
+  gap: 18px;
+  max-width: 100%;
+}
+.msg-form label {
+  display: grid;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.msg-form input,
+.msg-form textarea {
+  width: 100%;
+  font: inherit;
+  font-family: var(--sans);
+  font-size: 0.96rem;
+  padding: 11px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  transition: border-color 0.18s ease;
+}
+.msg-form input:focus,
+.msg-form textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.msg-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.msg-form button {
+  justify-self: start;
+  margin-top: 4px;
+}
+.support-note {
+  margin: 22px 0 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+body.link-page footer.colophon {
+  margin-top: auto;
+  padding: 20px 0 28px;
+}
+</style>
+</head>
+<body class="link-page">
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <div class="brand-cluster">
+      <a class="brand" href="index.html">Mantas Pagalys</a>
+      <span class="brand-sep" aria-hidden="true">&middot;</span>
+      <a class="brand-sub" href="index.html" data-i18n="nav_index">Index</a>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Primary">
+        <a href="dossier.html" data-i18n="nav_dossier">Bio</a>
+        <a href="mechanics.html" data-i18n="nav_mech">Form</a>
+        <a href="writing.html" data-i18n="nav_writing">Ink</a>
+        <a href="images.html" data-i18n="nav_images">Lens</a>
+        <a href="archive.html" data-i18n="nav_archive">Vault</a>
+        <a href="link.html" class="active" data-i18n="nav_link">Back</a>
+      </nav>
+      <div class="nav-utils">
+        <div class="theme-switch" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="light">Light</button>
+          <button type="button" data-theme-set="dark" class="active">Dark</button>
+        </div>
+        <span class="util-sep" aria-hidden="true">&middot;</span>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang="lt">LT</button>
+          <button type="button" data-lang="en" class="active">EN</button>
+          <button type="button" data-lang="no">NO</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head" style="border-bottom:0;">
+    <h1 data-i18n="h1">Back</h1>
+  </div>
+
+  <section class="form-sheet" aria-label="Direct message">
+    <form class="msg-form" action="https://formspree.io/f/mykqqzjg" method="POST">
+      <label>
+        <span data-i18n="f_name">Name</span>
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <label>
+        <span data-i18n="f_email">Email</span>
+        <input type="email" name="email" autocomplete="email" required>
+      </label>
+      <label>
+        <span data-i18n="f_msg">Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="btn-ink" data-i18n="f_send">Send</button>
+    </form>
+  </section>
+  <p class="support-note" data-i18n="support_note">Everything here is open. For prints, work, or direct support, write above.</p>
+</main>
+
+<footer class="colophon">
+  <div class="wrap colophon-inner">
+    <div><a href="index.html">greifiks.org</a> 2026</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var LT = {
+    page_title: "Parama · Mantas Pagalys",
+    nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
+    nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Parama",
+    h1: "Parama",
+    f_name: "Vardas",
+    f_email: "El. paštas",
+    f_msg: "Žinutė",
+    f_send: "Siųsti",
+    support_note: "Visa medžiaga čia atvira. Dėl atspaudų, darbų ar tiesioginės paramos rašykite aukščiau."
+  };
+  var PT = {
+  "page_title": "Apoio · Mantas Pagalys",
+  "nav_index": "Índice",
+  "nav_dossier": "Bio",
+  "nav_mech": "Forma",
+  "nav_writing": "Tinta",
+  "nav_images": "Lente",
+  "nav_archive": "Cofre",
+  "nav_link": "Apoio",
+  "h1": "Apoio",
+  "f_name": "Nome",
+  "f_email": "E-mail",
+  "f_msg": "Mensagem",
+  "f_send": "Enviar",
+  "support_note": "Tudo aqui é aberto. Para impressões, trabalho ou apoio direto, escreva acima."
+};
+  var NO = {
+    page_title: "Støtte · Mantas Pagalys",
+    nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
+    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
+    h1: "Støtte",
+    f_name: "Navn",
+    f_email: "E-post",
+    f_msg: "Melding",
+    f_send: "Send",
+    support_note: "Alt her er åpent. For trykk, oppdrag eller direkte støtte, skriv over."
+  };
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  var EN = { page_title: document.title };
+  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
+
+  function applyLang(lang) {
+    var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
+    var dict = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
+    document.documentElement.lang = l === "no" ? "nb" : l;
+    document.title = dict.page_title || EN.page_title;
+    nodes.forEach(function (el) {
+      var k = el.getAttribute("data-i18n");
+      if (dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
+    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
+    try { localStorage.setItem("greifiks-lang", l); } catch (e) {}
+  }
+
+  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
+  var saved = null;
+  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
+  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+})();
+</script>
+<script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

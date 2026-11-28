@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="darkreader-lock">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Mantas Pagalys">
 <meta name="copyright" content="© 2026 Mantas Pagalys">
@@ -123,10 +122,20 @@ details.fold[open]>summary::after{content:" \2212"}
 .emblem{width:96px;height:45px;color:#1f4d3a}
 .emblem{width:84px;height:52px}
 :root{--ink-3:#4f6376}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#090a0c; --surface:#0f1114; --line:rgba(242,239,232,0.16); --grid:rgba(242,239,232,0.1);
+  --ink:#f2efe8; --ink-2:#c4c8cf; --ink-3:#8c9199;
+  --accent:#c27161; --accent-ink:#e09a8b; --muted-bar:#4c5058; --warn:#e67767;
+  --chip:#171a20;
+}
+:root[data-theme="dark"] .cta{background:#f2efe8;color:#090a0c}
+:root[data-theme="dark"] .cta:hover{background:#d9d4ca}
+:root[data-theme="dark"] .emblem{color:#c27161}
 </style>
 </head>
 <body>
-<div class="nav"><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Kalkulator</a><a href="arka.html" hreflang="en" lang="en" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">English</a><button id="theme" aria-label="Bytt mellom lyst og mørkt tema">Lys / mørk</button><button onclick="window.print()">Skriv ut</button></div>
+<div class="nav"><a href="archive.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">&larr; Hvelv</a><a href="arka_kalkulator.html" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">Kalkulator</a><a href="arka.html" hreflang="en" lang="en" style="font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;text-decoration:none">English</a><button id="theme" aria-label="Bytt mellom lyst og mørkt tema">Lys / mørk</button><button onclick="window.print()">Skriv ut</button></div>
 <div class="tip" id="tip" role="tooltip"></div>
 <main class="deck">
 
@@ -139,9 +148,7 @@ details.fold[open]>summary::after{content:" \2212"}
   <dl class="summary"><div><dt>Problem</dt><dd>Om lag 16 200 kr per husstand per måned i midlertidig botilbud (en norsk by, 2025, beregnet).</dd></div><div><dt>Forslag</dt><dd>En fast, fabrikkbygd bolig på om lag 29 m² på kommunal tomt, eid av kommunen og finansiert av Husbanken.</dd></div><div><dt>Kostnad</dt><dd>Høyst omtrent 1 300 kr i måneden for kommunen etter husleie, uten mva.-kompensasjon.</dd></div><div><dt>Pilot</dt><dd>5 boliger, én kommune, ett år.</dd></div><div><dt>Neste steg</dt><dd>En beregning med deres egne tall.</dd></div></dl>
   <p class="foot note-city"><b>Om eksempelbyen:</b> tallene er reelle og offentlige (kommunens netto utgifter for 2025, omtalt i Nettavisen 16.02.2026). Kommunen navngis ikke fordi det ikke er etablert kontakt med den. Kilde og utregning oppgis på forespørsel.</p>
   <a class="cta" href="mailto:pagalysm@gmail.com?subject=ARKA%20%E2%80%93%20beregning%20for%20v%C3%A5r%20kommune">Be om en beregning for deres kommune →</a>
-  <p class="foot"><b>Hvorfor ARKA:</b> arka betyr bue, konstruksjonen som spenner over et gap og bærer lasten. ARKA bygger buen fra midlertidig botilbud til fast bolig, av deler som allerede finnes.</p>
-  <p class="foot">Slik leser du tallene: <span class="tag">kilde</span> hentet fra en navngitt offentlig kilde · <span class="tag">beregnet</span> regnestykke på tall med kilde · <span class="tag h">antakelse</span> en forutsetning som piloten skal bekrefte. Modellen bak tallene (med stresstest) kan deles på forespørsel; siste del lister kildene og hvor grundig hver av dem er kontrollert.</p>
-  <p class="foot" style="margin-top:12px">© 2026 Mantas Pagalys, opphavsperson for ARKA-modellen (første versjon datert 28.09.2026). Kommuner og andre offentlige organer kan bruke metoden i egne anskaffelser med kildehenvisning. Kommersiell gjenbruk, videresalg eller gjengivelse fra leverandører, konsulenter eller investorer krever skriftlig tillatelse. Kontakt: pagalysm@gmail.com</p>
+  <p class="foot">Slik leser du tallene: <span class="tag">kilde</span> hentet fra en navngitt offentlig kilde · <span class="tag">beregnet</span> regnestykke på tall med kilde · <span class="tag h">antakelse</span> en forutsetning som piloten skal bekrefte. Siste del lister kildene og hvor grundig hver av dem er kontrollert.</p>
 </section>
 
 <!-- 2 -->
@@ -381,10 +388,15 @@ details.fold[open]>summary::after{content:" \2212"}
 </main>
 <script>
 (function(){
-  const root=document.documentElement, KEY="arka-theme";
-  try{const s=localStorage.getItem(KEY); if(s) root.setAttribute("data-theme",s);}catch(e){}
+  const root=document.documentElement, KEY="greifiks-theme";
+  function syncArkaNoTheme(){
+    try{const s=localStorage.getItem(KEY); root.setAttribute("data-theme", (s==="light"||s==="dark") ? s : "dark");}catch(e){root.setAttribute("data-theme","dark");}
+  }
+  syncArkaNoTheme();
+  window.addEventListener("pageshow", syncArkaNoTheme);
+  window.addEventListener("storage", function(ev){ if(ev.key===KEY) syncArkaNoTheme(); });
   document.getElementById("theme").onclick=()=>{
-    const dark = root.getAttribute("data-theme")==="dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    const dark = root.getAttribute("data-theme")==="dark";
     const next = dark ? "light" : "dark"; root.setAttribute("data-theme",next);
     try{localStorage.setItem(KEY,next);}catch(e){}
   };

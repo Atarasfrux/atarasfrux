@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ink · Mantas Pagalys</title>
+<meta name="description" content="Selected excerpts from Antinovelė and eight bilingual fragments by Mantas Pagalys.">
+<link rel="canonical" href="https://greifiks.org/writing.html">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<script src="assets/theme.js?v=9"></script>
+<script src="assets/entropy.js?v=6"></script>
+<style>
+main.wrap {
+  width: min(680px, 100%);
+}
+.page-head {
+  border-bottom-color: var(--ink);
+}
+.book-col {
+  max-width: 100%;
+  padding: clamp(28px, 4.5vw, 48px) 0 0;
+}
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding: 0 0 28px;
+  margin: 0 0 42px;
+  border-bottom: 1px solid var(--rule);
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.toc a { text-decoration: none; color: var(--muted); }
+.toc a:hover { color: var(--ink); }
+
+.piece {
+  padding-bottom: clamp(44px, 6vw, 68px);
+  margin-bottom: clamp(44px, 6vw, 68px);
+  border-bottom: 1px solid var(--rule);
+}
+.piece-head {
+  margin-bottom: 24px;
+}
+.piece-num {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.piece h2 {
+  margin: 6px 0 4px;
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  line-height: 1.18;
+}
+.piece-src {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cmd {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  font-style: normal;
+}
+
+.prose {
+  font-family: var(--serif-body);
+  font-size: 1.1rem;
+  line-height: 1.76;
+  color: var(--ink);
+}
+.prose p { margin: 0 0 1.25em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose .asterism {
+  text-align: center;
+  letter-spacing: 0.5em;
+  color: var(--faint);
+  margin: 1.8em 0;
+  font-size: 0.9rem;
+}
+.prose .dispatch {
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.frag {
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+.frag:first-child { border-top: 0; padding-top: 0; }
+.frag-orig {
+  margin: 0 0 10px;
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: 0.96rem;
+  line-height: 1.66;
+  color: var(--muted);
+}
+.frag-text {
+  margin: 0;
+  font-family: var(--serif-body);
+  font-size: 1.12rem;
+  line-height: 1.68;
+  color: var(--ink);
+}
+
+.biblio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 36px;
+  padding-top: 8px;
+}
+.biblio h3 {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.biblio p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--soft);
+}
+@media (max-width: 760px) {
+  .biblio { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <div class="brand-cluster">
+      <a class="brand" href="index.html">Mantas Pagalys</a>
+      <span class="brand-sep" aria-hidden="true">&middot;</span>
+      <a class="brand-sub" href="index.html" data-i18n="nav_index">Index</a>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Primary">
+        <a href="dossier.html" data-i18n="nav_dossier">Bio</a>
+        <a href="mechanics.html" data-i18n="nav_mech">Form</a>
+        <a href="writing.html" class="active" data-i18n="nav_writing">Ink</a>
+        <a href="images.html" data-i18n="nav_images">Lens</a>
+        <a href="archive.html" data-i18n="nav_archive">Vault</a>
+        <a href="link.html" data-i18n="nav_link">Back</a>
+      </nav>
+      <div class="nav-utils">
+        <div class="theme-switch" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="light">Light</button>
+          <button type="button" data-theme-set="dark" class="active">Dark</button>
+        </div>
+        <span class="util-sep" aria-hidden="true">&middot;</span>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang="lt">LT</button>
+          <button type="button" data-lang="en" class="active">EN</button>
+          <button type="button" data-lang="no">NO</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1 data-i18n="h1">Ink</h1>
+  </div>
+
+  <div class="book-col">
+    <ul class="toc">
+      <li><a href="#lake" data-i18n="toc_1">I &middot; The Lake &amp; Fifty Kilometres</a></li>
+      <li><a href="#no-route" data-i18n="toc_2">II &middot; eval-no route to host</a></li>
+      <li><a href="#fragments" data-i18n="toc_3">III &middot; Nine Fragments</a></li>
+    </ul>
+
+    <article id="lake" class="piece">
+      <div class="piece-head">
+        <span class="piece-num">I</span>
+        <h2 data-i18n="t1">The Lake &amp; Fifty Kilometres</h2>
+        <p class="piece-src" data-i18n="src_1">Antinovel&#279; &middot; Manuscript</p>
+      </div>
+      <div class="prose" data-i18n="prose_1">
+        <p>A village on the map, yet no village at all, only an asphalt lane through the forest where the dirt road used to be, leading to a single new homestead; across the whole length of the lake a young man rows in a Helly Hansen jacket and ski hat, a colourful toy assembled out of Lego pieces; population census in the Tsarist church registers, 1905. Population: zero.</p>
+        <p>Facsimiles in the parish books, I inspected the registers, the priest&rsquo;s signature. The water is black as a mirror; under the water, they say, lies a sunken bell; others say a German tank with its entire crew tried to cross and went through the ice after the war.</p>
+        <p>Through forests over green moss and along wild-boar trails, hour after hour he strides through ancestral ground, across sprouting farmers&rsquo; fields and sandy country roads, skirting Gaideli&#371; Dvarelis, following boar fords across streams toward the capital; legend says Ma&#382;vydas walked like this with a bundle from Samogitia &ndash; the traveller snickers to himself at the thought, drying his boots and changing socks on a size-13 foot, registering over fifty kilometres that those extra one or two centimetres of stride really do add enough ground to shrink the map&rsquo;s nine hours down toward half an hour.</p>
+      </div>
+    </article>
+
+    <article id="no-route" class="piece">
+      <div class="piece-head">
+        <span class="piece-num">II</span>
+        <h2><code class="cmd">eval-no route to host</code></h2>
+        <p class="piece-src" data-i18n="src_2">Antinovel&#279; &middot; Manuscript</p>
+      </div>
+      <div class="prose" data-i18n="prose_2">
+        <p>In a winter homeless shelter, between charity dinners, you read <em>Pranic Nourishment &ndash; Nutrition for the New Millennium</em>, a book about transitioning from solid food to living on prana.</p>
+        <p>In a holistic colon-hydrotherapy clinic, Gregorian chant plays. Outside the window the wind bends tall trees; right in the windowpane, blue glass dolphins hang motionless.</p>
+        <p class="asterism">* * *</p>
+        <p>Head pressed against thick stone walls and blackened gates with an iron handle roughly braided by a blacksmith a century ago, you hammer like a Thai fighter through bricks until you feel bone cracks in your hands. Behind them in the dark: mute, invisible, vacuum-breathing atoms of the guards. Walls over three metres, from back when Gutenberg chased hens between wooden tables in his father&rsquo;s furrier-tavern among unwashed bearded men.</p>
+        <p>A tiny cell. A little window deep in the wall. Wooden bed, small chair, sink, slop bucket. You remember Van Gogh&rsquo;s painting. Where is that miniature pinhole in the wall, who is standing there in the secret corridor? That ache of absence, or arthritis, you no longer know what is yours, who you are, what is experience, in whose solemnity. You kneel, aloud, as if recording into a hidden microphone, like in the cell with the Syrian next to you in for weapons, not 3 kilos of coke, in the cell with you <em>fardi masaker</em>. With your own voice you out-pray yourself until the public-order guards announce evening roll-call over the loudspeaker.</p>
+        <p class="asterism">* * *</p>
+        <p>In the kitchenette where you burned a pot, political science students with national interests find a few minutes for oratorical practice: argument is treason.</p>
+        <p>Don&rsquo;t cry, artificial intelligence tells me, speak so it shows what is happening instead of naming emotions. Some part of you screams at the bottom of the well: wake up, open your eyes, look at the screen and fill yourself.</p>
+        <p class="asterism">* * *</p>
+        <p>A large windowless room, flat white light. Healthy, calm men. Smiling. You ask for the drug. They keep smiling. Neither refusing nor giving. Ecological and economical, exactly what is needed.</p>
+        <p>Next time, a man with a knife. You walk toward him. Nobody there. The knife was chemistry, the man was chemistry, the fear yours. Pain will not save you. There is a species that never comes to fruition, reconciled to the fate other species assign them.</p>
+        <p>You drank what the forest people drink. Ate what grows on dung after rain. Knelt on a carpet smelling of feet and rosewater. Dreamed ahead without asking.</p>
+        <p class="asterism">* * *</p>
+        <p>Still dark. You fold the blanket corners in. No note.</p>
+        <p>By the gate the student is smoking. Where will you go. Ten years you dreamed only of yourself. Now you want to dream far.</p>
+        <p>You cannot return to us, two-year deportation, they kept apologising. The gate does not creak, oiled, from afar walked through the night the Dreamer.</p>
+        <p class="asterism">* * *</p>
+        <p>Glory to the Uncorrupted Sum.<br>Resp.: Zero margin of error.<br>Professional carpenter and joiner. Four to five hours of daily work in exchange for a simple room.</p>
+        <p class="dispatch">Four untouched replies.</p>
+        <p>And let there be zero noise.</p>
+      </div>
+    </article>
+
+    <article id="fragments" class="piece">
+      <div class="piece-head">
+        <span class="piece-num">III</span>
+        <h2 data-i18n="t3">The Sea Keeps Giving</h2>
+        <p class="piece-src" data-i18n="src_3">Lithuanian &amp; English &middot; Nine Fragments</p>
+      </div>
+      <div data-i18n="prose_3">
+        <div class="frag">
+          <p class="frag-orig">Laukimas. Vaikas u&#382; a&#353;tuoni&#371; t&#363;kstan&#269;i&#371; km. [...] dabar esu l&#279;ktuve vir&#353; atlanto vandenyno [...] jautiesi pavarg&#281;s [...] skaudantys keliai.</p>
+          <p class="frag-text">Waiting. Eight thousand kilometres to my daughter. Somewhere over the Atlantic, it&rsquo;s not the heart that gives out first. It&rsquo;s the knees.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">dukra man&#281;s klausia kur tu buvai visus tuos metus, kai tav&#281;s nebuvo?</p>
+          <p class="frag-text">My daughter asks me: where were you, all those years?</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">jis svajojo apie Magelan&#261;, ir vandenynus, kur toli pirat&#371; sala, zorba &#353;ven&#269;ia gyvenim&#261;.</p>
+          <p class="frag-text">He dreamed of Magellan. And oceans. Some pirate island, far off, where Zorba still celebrates being alive.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">Trejet&#261; dien&#371; laive. Palaimingai bang&#371; plakimas &#303; bortus, vanden&#371; lop&#353;io saugumas kaip koks klajokli&#371; princas viduryje skit&#371; platybi&#371;. Tas privatumo nebuvimas &#303;sigyvenantis &#303; kaulus maudulys, kur jau nebe&#382;inai, kas tavo patyrimas.</p>
+          <p class="frag-text">Three days on the boat. The waves beating against the hull, a cradle, safe as a nomad prince alone on the steppe. No privacy, a bone-deep ache that stops being an ache.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">tas atsitikimas, kur valtimi mo&#269;iut&#279; per dideles, tuo metu, atrod&#279;, bangas l&#279;tai bet art&#279;jo prie kranto, i&#353; kitos pus&#279;s, kur be jos sodybos, kit&#371; nebuvo, kaip i&#353; u&#382; anapus Letos Up&#279;s.</p>
+          <p class="frag-text">My grandmother rowed through waves enormous at the time. She closed the distance to a shore where nothing else stood. She arrived from beyond the River Lethe.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">Paskui laivais &#303; u&#382; Atlanto. I&#353;dr&#261;sk&#279; gyvenimus, tie, kas liko, pra&#382;uvo, tie kas i&#353;va&#382;iavo, pamir&#353;o.</p>
+          <p class="frag-text">Then by ship, across the Atlantic. It tears lives apart the same way every time: the ones who stayed die of it. The ones who left forget.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">Kuo viskas baigiasi, jeigu ne tuo, kad i&#353;silaipini krante kur apsnigtas tavo laivas. Gr&#303;&#382;ti &#303; t&#261; kit&#261; pasaul&#303;, kuriame viskas neai&#353;ku ir atsitiktinumas, n&#279;ra tavo &#353;eimos, n&#279;ra tavo genties.</p>
+          <p class="frag-text">How it ends: you step onto a shore, your boat under snow. Back in the other world, no certainty, no family, no tribe.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">Mirtis nebus nugal&#279;ta, po didele tuopa pasikloj&#281;s, u&#382;migo budriai, naktimis staiga pakeldamas galv&#261;.</p>
+          <p class="frag-text">Death will not be conquered; having made his bed beneath a tall poplar, he fell asleep alert, lifting his head suddenly in the night.</p>
+        </div>
+        <div class="frag">
+          <p class="frag-orig">Svarbu nepasiduoti ir suvokti, jog tai esu ne a&#353;, jog tai yra mano protas, jog tai yra mano ego, kuris nenori pasiduoti, kuris prie&#353;inasi, kuris prie&#353;inasi.</p>
+          <p class="frag-text">This is not me. This is my mind. This is my ego, resisting. Still resisting.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="biblio" aria-label="Publication record">
+      <div>
+        <h3 data-i18n="bib_1_h">Manuscript</h3>
+        <p data-i18n="bib_1_p"><em>Antinovel&#279;</em> (~30,000 words, Lithuanian). Samples on inquiry.</p>
+      </div>
+      <div>
+        <h3 data-i18n="bib_2_h">Published</h3>
+        <p data-i18n="bib_2_p"><em>The Big Issue</em> (London, 2006&ndash;2012); <em>&#352;irvinta</em> (2009).</p>
+      </div>
+      <div>
+        <h3 data-i18n="bib_3_h">Study</h3>
+        <p data-i18n="bib_3_p">Directing (LMTA, 2001&ndash;2004); Lithuanian Philology (Vilnius University, 2012&ndash;2016, 2 years); Assistant Director, <em>Men&#371; Spaustuv&#279;</em>.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="colophon">
+  <div class="wrap colophon-inner">
+    <div><a href="index.html">greifiks.org</a></div>
+    <div>&copy; 2026</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var LT = {
+    page_title: "Rašalas · Mantas Pagalys",
+    nav_index: "Rodyklė", nav_dossier: "Bio", nav_mech: "Forma",
+    nav_writing: "Rašalas", nav_images: "Objektyvas", nav_archive: "Saugykla", nav_link: "Parama",
+    h1: "Rašalas",
+    toc_1: "I &middot; Ežeras ir penkiasdešimt kilometrų",
+    toc_2: "II &middot; eval-no route to host",
+    toc_3: "III &middot; Devyni fragmentai",
+    t1: "Ežeras ir penkiasdešimt kilometrų",
+    src_1: "Antinovelė &middot; Rankraštis",
+    src_2: "Antinovelė &middot; Rankraštis",
+    t3: "The Sea Keeps Giving",
+    src_3: "Lietuviškas originalas &middot; Devyni fragmentai",
+    prose_1:
+      "<p>Kaimas žemėlapyje, bet kaimo nėra, tik vietoje vieškelio išasfaltuotas keliukas per mišką į vieną naują sodybą, per visą ežero ilgį irstosi jaunas vyras su „Helly Hansen“ striuke ir slidininko kepure, kaip iš „Lego“ figūrų sudėliotas spalvingas žaislas, gyventojų cenzas cariniuose bažnytiniuose metrikuose 1905. Gyventojų skaičius nulinis.</p>" +
+      "<p>Faksimilės bažnytinėse knygose, su metrikais susipažinau, kunigo parašas. Vanduo juodas kaip veidrodis, po vandeniu, sako, paskendęs varpas, kiti kalba, kad vokiečių tankas su visa įgula bandė pervažiuoti ir nugarmėjo po karo.</p>" +
+      "<p>Miškais per žalias samanas ir šernų takais, valanda po valandos žingsniuoja giminės kraštais, per želstančius ūkininkų laukus ir smėlėtus vieškelius, Gaidelių Dvarelį apeidamas, šernų brastomis sekdamas per upelius link sostinės, legenda sako, ir Mažvydas su ryšuliuku taip ėjęs iš Žemaitijos – kažko susikikena keliauninkas pagalvojęs, džiovindamas batus ir keisdamas kojines ant 13 dydžio pėdos, per penkiasdešimt kilometrų registruoja, kad tikrai tas vienas ar du centimetrai prideda žingsnių tiek, kad žemėlapyje priskaičiuotos 9 valandos trumpėja link pusvalandžio.</p>",
+    prose_2:
+      "<p>Žiemos benamių prieglaudoje, tarp labdaros vakarienių, skaitai knygą „Pranic Nourishment – Nutrition for the New Millennium“ apie tai, kaip pereiti nuo kieto maisto prie gyvenimo iš pranos.</p>" +
+      "<p>Holistinėje žarnyno valymo klinikoje groja grigališkas choralas. Už lango vėjas lanksto aukštus medžius, o pačiame lange nejudėdami kabo mėlyni stikliniai delfinai.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Įrėmęs galvą į storas akmenines sienas ir pajuodusius vartus su kalvio prieš šimtmetį grubiai pinta geležine rankena, beldi kaip tailandietis per plytas, kol rankose jauti kaulų trūkius. Už jų tamsoje nebylūs, nematomi, vakuumu dvelkiantys sargų atomai. Sienos virš trijų metrų, iš tada, kai Gutenbergas tėvo kailialupio smuklėje vaikė vištas tarp medinių stalų su nesipraususiais barzdyliais.</p>" +
+      "<p>Celė mažytė. Langelis giliai sienoje. Medinė lova, kėdutė, kriauklė, kibiras nuotekoms. Prisimeni Van Gogo paveikslą. Kur yra toji miniatiūrinė sienos skylutė, slaptame koridoriuje kas ten stovi? Tas nebuvimo maudulys, ar artritas, nebežinai, kas tavo, kas tu, kas patyrimas, kieno rimty. Klaupiesi, balsu, kaip įsirašinėdamas į slaptą mikrofoną, kaip celėj su siru, kuris šalia už ginklus, bet ne 3 kilogramus kokso, kameroje su tavim <em>fardi masaker</em>. Balsu savo save permeldi, kol viešosios tvarkos sargai per garsiakalbį skelbia vakarinę rikiuotę.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Virtuvėlėje, kur sudeginai puodą, politikos mokslų studentai su tautiniais interesais randa kelias minutes oratorinei praktikai: ginčas yra išdavystė.</p>" +
+      "<p>Nereikia verkti, sako man dirbtinis intelektas, kalbėk taip, kad matytųsi, kas vyksta, vietoje to, kad vardintum emocijas. Kažkuri dalis tavęs šaukia šulinio dugne: pabusk, atsimerk, žiūrėk į ekraną ir prisipildyk.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Didelė patalpa be langų, lygi balta šviesa. Sveiki, ramūs vyrai. Šypsosi. Prašai vaisto. Šypsosi toliau. Nei atsisako, nei duoda. Ekologiška ir ekonomiška, būtent tai, ko reikia.</p>" +
+      "<p>Kitą kartą stovi vyras su peiliu. Eini prie jo. Ten nieko nėra. Peilis buvo chemija, vyras buvo chemija, baimė tavo. Skausmas tavęs neišgelbės. Yra tokia rūšis, kurie neišsipildo, jie susitaikę su savo likimu, kurį jiems primeta kitos rūšys.</p>" +
+      "<p>Gėrei, ką geria miško žmonės. Valgei tai, kas auga ant mėšlo po lietaus. Klūpėjai ant kilimo, kvepiančio kojomis ir rožių vandeniu. Sapnavai į priekį, nieko neatsiklausęs.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Dar tamsu. Antklodę sulankstai kampais į vidų. Raštelio nepalieki.</p>" +
+      "<p>Prie vartų rūko studentas. Kur eisi. Dešimt metų sapnavai tik apie save. Dabar nori sapnuoti toli.</p>" +
+      "<p>Pas mus negalėsi sugrįžti, deportacija dviem metams, jie atsiprašinėjo. Vartai negirgžda, sutepti, iš toli ėjo naktimi Sapnuotojas.</p>" +
+      "<p class=\"asterism\">* * *</p>" +
+      "<p>Garbė Nesuteptajai Sumai.<br>Ats.: Nulinė paklaida.<br>Profesionalus dailidė ir stalius. Keturių penkių valandų darbas kasdien mainais už paprastą kambarį.</p>" +
+      "<p class=\"dispatch\">Ketvertas nepaliestų atsakymų.</p>" +
+      "<p>Ir tebūnie nulis triukšmo.</p>",
+    prose_3:
+      "<div class=\"frag\"><p class=\"frag-text\">Laukimas. Vaikas už aštuonių tūkstančių km. [...] dabar esu lėktuve virš atlanto vandenyno [...] jautiesi pavargęs [...] skaudantys keliai.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">dukra manęs klausia kur tu buvai visus tuos metus, kai tavęs nebuvo?</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">jis svajojo apie Magelaną, ir vandenynus, kur toli piratų sala, zorba švenčia gyvenimą.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">Trejetą dienų laive. Palaimingai bangų plakimas į bortus, vandenų lopšio saugumas kaip koks klajoklių princas viduryje skitų platybių. Tas privatumo nebuvimas įsigyvenantis į kaulus maudulys, kur jau nebežinai, kas tavo patyrimas.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">tas atsitikimas, kur valtimi močiutė per dideles, tuo metu, atrodė, bangas lėtai bet artėjo prie kranto, iš kitos pusės, kur be jos sodybos, kitų nebuvo, kaip iš už anapus Letos Upės.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">Paskui laivais į už Atlanto. Išdrąskė gyvenimus, tie, kas liko, pražuvo, tie kas išvažiavo, pamiršo.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">Kuo viskas baigiasi, jeigu ne tuo, kad išsilaipini krante kur apsnigtas tavo laivas. Grįžti į tą kitą pasaulį, kuriame viskas neaišku ir atsitiktinumas, nėra tavo šeimos, nėra tavo genties.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">Mirtis nebus nugalėta, po didele tuopa pasiklojęs, užmigo budriai, naktimis staiga pakeldamas galvą.</p></div>" +
+      "<div class=\"frag\"><p class=\"frag-text\">Svarbu nepasiduoti ir suvokti, jog tai esu ne aš, jog tai yra mano protas, jog tai yra mano ego, kuris nenori pasiduoti, kuris priešinasi, kuris priešinasi.</p></div>",
+    bib_1_h: "Rankraštis",
+    bib_1_p: "<em>Antinovelė</em> (~30 000 žodžių, lietuvių k.). Ištraukos pagal užklausą.",
+    bib_2_h: "Publikacijos",
+    bib_2_p: "<em>The Big Issue</em> (Londonas, 2006–2012); <em>Širvinta</em> (2009).",
+    bib_3_h: "Studijos",
+    bib_3_p: "Režisūra (LMTA, 2001–2004); lietuvių filologija (VU, 2012–2016, 2 kursai); režisieriaus asistentas, <em>Menų spaustuvė</em>."
+  };
+
+  var PT = {
+  "page_title": "Tinta · Mantas Pagalys",
+  "nav_index": "Índice",
+  "nav_dossier": "Bio",
+  "nav_mech": "Forma",
+  "nav_writing": "Tinta",
+  "nav_images": "Lente",
+  "nav_archive": "Cofre",
+  "nav_link": "Apoio",
+  "h1": "Tinta",
+  "toc_1": "I &middot; The Lake &amp; Fifty Kilometres",
+  "toc_2": "II &middot; eval-no route to host",
+  "toc_3": "III &middot; Nove fragmentos",
+  "src_1": "Antinovel&#279; &middot; Manuscrito (trecho em inglês)",
+  "src_2": "Antinovel&#279; &middot; Manuscrito (trecho em inglês)",
+  "t3": "O mar continua dando",
+  "src_3": "Lituano &amp; inglês &middot; Nove fragmentos",
+  "bib_1_h": "Manuscrito",
+  "bib_1_p": "<em>Antinovel&#279;</em> (~30.000 palavras, em lituano). Trechos sob consulta.",
+  "bib_2_h": "Publicações",
+  "bib_2_p": "<em>The Big Issue</em> (Londres, 2006&ndash;2012); <em>&#352;irvinta</em> (2009).",
+  "bib_3_h": "Estudos",
+  "bib_3_p": "Direção (LMTA, 2001&ndash;2004); Filologia Lituana (Universidade de Vilnius, 2012&ndash;2016, 2 anos); assistente de direção, <em>Men&#371; Spaustuv&#279;</em>."
+};
+
+  var NO = {
+    page_title: "Blekk · Mantas Pagalys",
+    nav_index: "Indeks", nav_dossier: "Bio", nav_mech: "Form",
+    nav_writing: "Blekk", nav_images: "Linse", nav_archive: "Hvelv", nav_link: "Støtte",
+    h1: "Blekk",
+    toc_1: "I &middot; The Lake &amp; Fifty Kilometres",
+    toc_2: "II &middot; eval-no route to host",
+    toc_3: "III &middot; Ni fragmenter",
+    src_1: "Antinovelė &middot; Manuskript (engelsk utdrag)",
+    src_2: "Antinovelė &middot; Manuskript (engelsk utdrag)",
+    t3: "Havet gir videre",
+    src_3: "Litauisk og engelsk &middot; Ni fragmenter",
+    bib_1_h: "Manuskript",
+    bib_1_p: "<em>Antinovelė</em> (~30 000 ord, litauisk). Tekstprøver på forespørsel.",
+    bib_2_h: "Publisert",
+    bib_2_p: "<em>The Big Issue</em> (London, 2006&ndash;2012); <em>Širvinta</em> (2009).",
+    bib_3_h: "Studier",
+    bib_3_p: "Regi (LMTA, 2001&ndash;2004); litauisk filologi (Vilnius universitet, 2012&ndash;2016, 2 år); regiassistent, <em>Menų Spaustuvė</em>."
+  };
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
+  var EN = { page_title: document.title };
+  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
+  var arkaLinks = Array.prototype.slice.call(document.querySelectorAll("[data-arka-link]"));
+
+  function applyLang(lang) {
+    var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
+    var dict = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
+    document.documentElement.lang = l === "no" ? "nb" : l;
+    document.title = dict.page_title || EN.page_title;
+    nodes.forEach(function (el) {
+      var k = el.getAttribute("data-i18n");
+      el.innerHTML = dict[k] !== undefined ? dict[k] : EN[k];
+    });
+    arkaLinks.forEach(function (a) { a.href = l === "no" ? "arka_no.html" : "arka.html"; });
+    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
+    if (window.greifiksSyncTheme) window.greifiksSyncTheme();
+    try { localStorage.setItem("greifiks-lang", l); } catch (e) {}
+  }
+  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
+  var saved = null;
+  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
+  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+})();
+</script>
+<script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
