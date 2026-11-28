@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=8">
 <script src="assets/theme.js?v=9"></script>
-<script src="assets/entropy.js?v=9"></script>
+<script src="assets/entropy.js?v=10"></script>
 <style>
 .page-head h1 { font-style: italic; }
 
@@ -27,7 +27,16 @@
   user-select: none;
   -webkit-user-select: none;
 }
-.stage-wrap:fullscreen,
+.stage-wrap:fullscreen {
+  margin: 0;
+  border: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+/* Safari prefix kept in its own rule: one unknown selector in a list makes Firefox drop the whole rule */
 .stage-wrap:-webkit-full-screen {
   margin: 0;
   border: 0;
@@ -45,7 +54,11 @@
   overflow: hidden;
   cursor: pointer;
 }
-.stage-wrap:fullscreen .stage,
+.stage-wrap:fullscreen .stage {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
 .stage-wrap:-webkit-full-screen .stage {
   flex: 1;
   min-height: 0;

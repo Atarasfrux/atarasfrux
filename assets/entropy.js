@@ -42,7 +42,8 @@
     "padding:9vh max(24px,calc(50vw - 380px)) 14vh;}",
     ".fs-target:fullscreen::backdrop{background:var(--bg);}",
     /* the film fills the whole screen: no reading column */
-    ".stage-wrap.fs-target:fullscreen,.stage-wrap.fs-target:-webkit-full-screen{padding:0;overflow:hidden;background:#000;width:100vw;height:100vh;max-width:none;}",
+    ".stage-wrap.fs-target:fullscreen{padding:0;overflow:hidden;background:#000;width:100vw;height:100vh;max-width:none;}",
+    ".stage-wrap.fs-target:-webkit-full-screen{padding:0;overflow:hidden;background:#000;width:100vw;height:100vh;max-width:none;}",
     ".craft-strip.fs-target:fullscreen{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:2vh 2vw;background:#000;padding:4vh 3vw;}",
     ".craft-strip.fs-target:fullscreen figure{flex:0 1 30vw;margin:0;}.craft-strip.fs-target:fullscreen img{width:100%;height:auto;max-height:42vh;object-fit:contain;}",
     ".lightbox:fullscreen{background:#000;padding:0;}",
