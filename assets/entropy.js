@@ -4,11 +4,11 @@
    The collapse starts at the centre and spreads outward: the text turns porous and breaks into
    particles. While a blue word is still visible it can be pressed, which rescues the page. After the
    last word has gone, input does nothing until the page reaches zero and the site returns to its start.
-   Active only when entered through index_tar.html (sessionStorage flag) or with ?entropy=1.
+   Active only when entered through the front page (index.html) (sessionStorage flag) or with ?entropy=1.
    Testing: ?idle=10 sets the clock in seconds (kept for the session). */
 (function () {
   var ss = window.sessionStorage, qs = new URLSearchParams(location.search);
-  var isTar = /index_tar(\.html)?$/.test(location.pathname);
+  var isTar = /\/(index(_tar)?(\.html)?)?$/.test(location.pathname);
   try {
     if (isTar || qs.get("entropy") === "1") ss.setItem("greifiks-entropy", "1");
     if (qs.get("idle")) ss.setItem("greifiks-idle", qs.get("idle"));
@@ -16,7 +16,7 @@
   var on = false; try { on = ss.getItem("greifiks-entropy") === "1"; } catch (e) {}
   if (!on) return;
 
-  var CLOCK = 60000, DUR = 39000, HOME = "index_tar.html";
+  var CLOCK = 60000, DUR = 39000, HOME = "./";
   try { var q = parseFloat(ss.getItem("greifiks-idle")); if (q > 0) CLOCK = q * 1000; } catch (e) {}
 
   var root = document.documentElement;

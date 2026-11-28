@@ -6,334 +6,389 @@
 <title>Mantas Pagalys</title>
 <meta name="description" content="Mantas Pagalys. Bio, Form, Ink, Lens, Vault, and Back.">
 <link rel="canonical" href="https://greifiks.org/">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mantas Pagalys">
 <meta property="og:description" content="Bio, Form, Ink, Lens, Vault, and Back.">
 <meta property="og:url" content="https://greifiks.org/">
 <meta property="og:image" content="https://greifiks.org/assets/plates_book/01-no-crossing.webp">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&display=swap" rel="stylesheet">
 <script src="assets/theme.js?v=9"></script>
+<script src="assets/entropy.js?v=7"></script>
 <style>
-body.index-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-body.index-page main.wrap {
-  width: min(600px, 100%);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.index-sheet {
-  /* more space below than above: lifts the list to the optical centre (~45 %) */
-  padding: 0 0 clamp(40px, 10vh, 120px);
-}
-/* header on the same column as the list, so the name sits above the numerals */
-body.index-page .site-nav .wrap { width: min(600px, 100%); padding-inline: clamp(20px, 4vw, 48px); }
+html { --bg: #000; --ink: #f2efe8; --dim: rgba(242,239,232,0.42); }
+html[data-theme="light"] { --bg: #fff; --ink: #0a0a0a; --dim: rgba(10,10,10,0.42); }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { -webkit-font-smoothing: antialiased; }
+canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+#ink { pointer-events: none; }
 
-/* Pure catalog framed ONLY by matching top & bottom white rules (no inner separators) */
-.catalog {
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  margin: 0;
-  padding: 12px 0;
-  list-style: none;
+.ui, .ui button {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--dim); background: none; border: 0; padding: 4px 6px; margin: 0;
+  cursor: pointer; text-decoration: none;
 }
-.catalog li > a,
-.catalog .cat-row {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) auto 20px;
-  align-items: baseline;
-  gap: 8px 18px;
-  padding: 15px 0;
-  text-decoration: none;
-  transition: padding-left 0.2s ease;
-}
-.catalog li > a:hover,
-.catalog li > a:focus-visible {
-  padding-left: 6px;
-}
-.cat-row-main {
-  grid-column: 1 / 3;
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  align-items: baseline;
-  gap: 8px 18px;
-  text-decoration: none;
-  transition: padding-left 0.2s ease;
-}
-.cat-row-main:hover,
-.cat-row-main:focus-visible {
-  padding-left: 6px;
-}
-.cat-num {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  color: var(--faint);
-}
-.cat-title {
-  font-family: var(--serif-display);
-  font-variation-settings: "opsz" 14;
-  font-size: clamp(1.28rem, 2.3vw, 1.56rem);
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--ink);
-}
-.cat-meta {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: right;
-  white-space: nowrap;
-}
-.cat-sublinks {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.cat-sublinks a {
-  text-decoration: none;
-  color: var(--muted);
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: color 0.18s ease, border-color 0.18s ease;
-}
-.cat-sublinks a:hover,
-.cat-sublinks a:focus-visible {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
-.cat-sublinks .sub-sep { color: var(--faint); }
-.cat-arr {
-  font-size: 0.92rem;
-  color: var(--faint);
-  text-align: right;
-  text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-.catalog li > a:hover .cat-arr,
-.cat-row:hover .cat-arr {
-  color: var(--ink);
-  transform: translate(2px, -2px);
-}
+.ui button.active, .ui button:hover, .ui a:hover { color: var(--ink); }
+.ui button:focus-visible, .ui a:focus-visible, main a:focus-visible { outline: 1px solid var(--dim); outline-offset: 3px; }
 
-body.index-page footer.colophon {
-  margin-top: auto;
-  padding: 18px 0 26px;
-}
+.lang  { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 10px; }
+.th-dark  { position: fixed; top: 20px; left: 24px; z-index: 3; }
+.th-light { position: fixed; top: 20px; right: 24px; z-index: 3; }
+.foot  { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 3; }
 
-@media (max-width: 640px) {
-  body.index-page main.wrap { justify-content: flex-start; }
-  .index-sheet { padding-top: 28px; }
-  .catalog li > a,
-  .catalog .cat-row {
-    grid-template-columns: 28px minmax(0, 1fr) 18px;
-    padding: 13px 0;
-  }
-  .cat-row-main {
-    grid-template-columns: 28px minmax(0, 1fr);
-  }
-  .cat-meta,
-  .cat-sublinks {
-    grid-column: 2;
-    text-align: left;
-    justify-self: start;
-    margin-top: 2px;
-  }
-  .cat-arr { grid-row: 1; grid-column: 3; }
+main {
+  position: fixed; inset: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
 }
+main ul { list-style: none; margin: 0; padding: 0; text-align: center; }
+main li { margin: 0 0 clamp(10px, 2.2vh, 22px); }
+main li:last-child { margin-bottom: 0; }
+.t {
+  display: inline-block; text-decoration: none; color: var(--ink);
+  font-family: "Bodoni Moda", Georgia, serif; font-weight: 400;
+  font-size: clamp(1.9rem, min(6.2vh, 6vw), 3.6rem); line-height: 1.08;
+}
+.s {
+  display: table; margin: 4px auto 0;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim);
+}
+.s a { color: var(--dim); text-decoration: none; }
+
+/* live mode: the canvas draws the words, the DOM keeps only the click targets */
+html.live main, html.live .isle, html.live .isle * { color: transparent !important; user-select: none; pointer-events: none; }
+html.live .isle.on a, html.live .isle.on button, html.live button.isle.on { pointer-events: auto; }
+.s span.dw { margin: 0 0.55em; }
+html.still canvas { display: none; }
 </style>
 </head>
-<body class="index-page">
+<body>
 
-<header class="site-nav">
-  <div class="wrap nav-inner">
-    <div class="brand-cluster">
-      <a class="brand" href="index.html">Mantas Pagalys</a>
-      <span class="brand-sep" aria-hidden="true">&middot;</span>
-      <a class="brand-sub active" href="index.html" data-i18n="nav_index">Index</a>
-    </div>
-    <div class="nav-right">
-      <div class="nav-utils no-border">
-        <div class="theme-switch" role="group" aria-label="Theme">
-          <button type="button" data-theme-set="light">Light</button>
-          <button type="button" data-theme-set="dark" class="active">Dark</button>
-        </div>
-        <span class="util-sep" aria-hidden="true">&middot;</span>
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="lt">LT</button>
-          <button type="button" data-lang="en" class="active">EN</button>
-          <button type="button" data-lang="no">NO</button>
-          <button type="button" data-lang="pt">PT</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<canvas id="fabric" aria-hidden="true"></canvas>
+<canvas id="ink" aria-hidden="true"></canvas>
 
-<main class="wrap">
-  <section class="index-sheet" aria-label="Index">
-    <ol class="catalog">
-      <li>
-        <a href="dossier.html">
-          <span class="cat-num">I</span>
-          <span class="cat-title" data-i18n="c1_t">Bio</span>
-          <span class="cat-meta" data-i18n="c1_m">2006&ndash;2026</span>
-          <span class="cat-arr" aria-hidden="true">&#8599;</span>
-        </a>
-      </li>
-      <li>
-        <a href="mechanics.html">
-          <span class="cat-num">II</span>
-          <span class="cat-title" data-i18n="c2_t">Form</span>
-          <span class="cat-meta" data-i18n="c2_m">Mechanics &amp; Frame</span>
-          <span class="cat-arr" aria-hidden="true">&#8599;</span>
-        </a>
-      </li>
-      <li>
-        <a href="writing.html">
-          <span class="cat-num">III</span>
-          <span class="cat-title" data-i18n="c3_t">Ink</span>
-          <span class="cat-meta" data-i18n="c3_m">Antinovel&#279; &middot; Fragments</span>
-          <span class="cat-arr" aria-hidden="true">&#8599;</span>
-        </a>
-      </li>
-      <li>
-        <div class="cat-row">
-          <a class="cat-row-main" href="images.html">
-            <span class="cat-num">IV</span>
-            <span class="cat-title" data-i18n="c4_t">Lens</span>
-          </a>
-          <span class="cat-sublinks">
-            <a href="plates.html" data-i18n="c4_s1">Stills</a>
-            <span class="sub-sep" aria-hidden="true">&middot;</span>
-            <a href="vestiges.html" data-i18n="c4_s2">Motion</a>
-          </span>
-          <a class="cat-arr" href="images.html" aria-label="Open Lens">&#8599;</a>
-        </div>
-      </li>
-      <li>
-        <a href="archive.html">
-          <span class="cat-num">V</span>
-          <span class="cat-title" data-i18n="c5_t">Vault</span>
-          <span class="cat-meta" data-i18n="c5_m">ARKA</span>
-          <span class="cat-arr" aria-hidden="true">&#8599;</span>
-        </a>
-      </li>
-      <li>
-        <a href="link.html">
-          <span class="cat-num">VI</span>
-          <span class="cat-title" data-i18n="c6_t">Back</span>
-          <span class="cat-meta" data-i18n="c6_m">Message &middot; Support</span>
-          <span class="cat-arr" aria-hidden="true">&#8599;</span>
-        </a>
-      </li>
-    </ol>
-  </section>
+<div class="ui lang isle" role="group" aria-label="Language">
+  <button type="button" class="dw" data-lang="lt">LT</button>
+  <button type="button" class="dw active" data-lang="en">EN</button>
+  <button type="button" class="dw" data-lang="no">NO</button>
+  <button type="button" class="dw" data-lang="pt">PT</button>
+</div>
+
+<button type="button" class="ui isle dw th-dark" data-theme-set="dark">Dark</button>
+<button type="button" class="ui isle dw th-light" data-theme-set="light">Light</button>
+
+<main id="idx">
+  <ul>
+    <li class="isle"><a class="t dw" href="dossier.html" data-i18n="c1_t">Bio</a><span class="s dw" data-i18n="c1_m">2006&ndash;2026</span></li>
+    <li class="isle"><a class="t dw" href="mechanics.html" data-i18n="c2_t">Form</a><span class="s dw" data-i18n="c2_m">Mechanics &amp; Frame</span></li>
+    <li class="isle"><a class="t dw" href="writing.html" data-i18n="c3_t">Ink</a><span class="s dw" data-i18n="c3_m">Antinovel&#279; &middot; Fragments</span></li>
+    <li class="isle"><a class="t dw" href="images.html" data-i18n="c4_t">Lens</a><span class="s"><a class="dw" href="plates.html" data-i18n="c4_s1">Stills</a> <span class="dw">&middot;</span> <a class="dw" href="vestiges.html" data-i18n="c4_s2">Motion</a></span></li>
+    <li class="isle"><a class="t dw" href="archive.html" data-i18n="c5_t">Vault</a><span class="s dw" data-i18n="c5_m">ARKA</span></li>
+    <li class="isle"><a class="t dw" href="link.html" data-i18n="c6_t">Back</a><span class="s dw" data-i18n="c6_m">Message &middot; Support</span></li>
+  </ul>
 </main>
 
-<footer class="colophon">
-  <div class="wrap colophon-inner">
-    <div>greifiks.org 2026</div>
-  </div>
-</footer>
+<button type="button" class="ui foot isle dw" id="indexBtn" aria-controls="idx" aria-expanded="false" data-i18n="nav_index">Index</button>
 
 <script>
 (function () {
-  var LT = {
-    page_title: "Mantas Pagalys",
-    nav_index: "Rodyklė",
-    c1_t: "Bio",
-    c1_m: "2006&ndash;2026",
-    c2_t: "Forma",
-    c2_m: "Mechanika ir karkasas",
-    c3_t: "Rašalas",
-    c3_m: "Antinovelė &middot; Fragmentai",
-    c4_t: "Objektyvas",
-    c4_s1: "Kadrai",
-    c4_s2: "Filmas",
-    c5_t: "Saugykla",
-    c5_m: "ARKA",
-    c6_t: "Parama",
-    c6_m: "Žinutė &middot; Parama"
-  };
-
-  var NO = {
-    page_title: "Mantas Pagalys",
-    nav_index: "Indeks",
-    c1_t: "Bio",
-    c1_m: "2006&ndash;2026",
-    c2_t: "Form",
-    c2_m: "Mekanikk og rammeverk",
-    c3_t: "Blekk",
-    c3_m: "Antinovelė &middot; Fragmenter",
-    c4_t: "Linse",
-    c4_s1: "Stillbilder",
-    c4_s2: "Film",
-    c5_t: "Hvelv",
-    c5_m: "ARKA",
-    c6_t: "Støtte",
-    c6_m: "Melding &middot; Støtte"
-  };
-
+  /* ---------- language ---------- */
+  var LT = { nav_index: "Rodyklė", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Forma", c2_m: "Mechanika ir karkasas",
+    c3_t: "Rašalas", c3_m: "Antinovelė &middot; Fragmentai", c4_t: "Objektyvas", c4_s1: "Kadrai", c4_s2: "Filmas",
+    c5_t: "Saugykla", c5_m: "ARKA", c6_t: "Parama", c6_m: "Žinutė &middot; Parama" };
   var PT = {
-    page_title: "Mantas Pagalys",
-    nav_index: "Índice",
-    c1_t: "Bio",
-    c1_m: "2006&ndash;2026",
-    c2_t: "Forma",
-    c2_m: "Mecânica &amp; Estrutura",
-    c3_t: "Tinta",
-    c3_m: "Antinovel&#279; &middot; Fragmentos",
-    c4_t: "Lente",
-    c4_s1: "Fotos",
-    c4_s2: "Filme",
-    c5_t: "Cofre",
-    c5_m: "ARKA",
-    c6_t: "Apoio",
-    c6_m: "Mensagem &middot; Apoio"
-  };
-
-  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n]"));
-  var EN = { page_title: document.title };
+  "nav_index": "Índice",
+  "c1_t": "Bio",
+  "c1_m": "2006&ndash;2026",
+  "c2_t": "Forma",
+  "c2_m": "Mecânica &amp; Estrutura",
+  "c3_t": "Tinta",
+  "c3_m": "Antinovel&#279; &middot; Fragmentos",
+  "c4_t": "Lente",
+  "c4_s1": "Fotos",
+  "c4_s2": "Filme",
+  "c5_t": "Cofre",
+  "c5_m": "ARKA",
+  "c6_t": "Apoio",
+  "c6_m": "Mensagem &middot; Apoio"
+};
+  var NO = { nav_index: "Indeks", c1_t: "Bio", c1_m: "2006&ndash;2026", c2_t: "Form", c2_m: "Mekanikk og rammeverk",
+    c3_t: "Blekk", c3_m: "Antinovelė &middot; Fragmenter", c4_t: "Linse", c4_s1: "Stillbilder", c4_s2: "Film",
+    c5_t: "Hvelv", c5_m: "ARKA", c6_t: "Støtte", c6_m: "Melding &middot; Støtte" };
+  var nodes = [].slice.call(document.querySelectorAll("[data-i18n]"));
+  var EN = {};
   nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang-switch button"));
-
+  var langBtns = [].slice.call(document.querySelectorAll("[data-lang]"));
   function applyLang(lang) {
     var l = (lang === "lt" || lang === "no" || lang === "pt") ? lang : "en";
-    var dict = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
+    var d = l === "lt" ? LT : (l === "no" ? NO : (l === "pt" ? PT : EN));
     document.documentElement.lang = l === "no" ? "nb" : l;
-    document.title = dict.page_title || EN.page_title;
-    nodes.forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (dict[k] !== undefined) el.innerHTML = dict[k];
-    });
-    btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
+    nodes.forEach(function (el) { var k = el.getAttribute("data-i18n"); if (d[k] !== undefined) el.innerHTML = d[k]; });
+    langBtns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-lang") === l); });
     if (window.greifiksSyncTheme) window.greifiksSyncTheme();
     try { localStorage.setItem("greifiks-lang", l); } catch (e) {}
+    if (window.__tarRedraw) requestAnimationFrame(window.__tarRedraw);
+  }
+  langBtns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
+  var saved = null; try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
+  applyLang(window.greifiksLang ? window.greifiksLang() : "en");
+
+  /* ---------- index button: raise / lower the six sections ---------- */
+  var pinned = false;
+  var indexBtn = document.getElementById("indexBtn");
+  indexBtn.addEventListener("click", function () {
+    pinned = !pinned; indexBtn.setAttribute("aria-expanded", pinned ? "true" : "false");
+    indexBtn.classList.toggle("active", pinned);
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pinned) indexBtn.click(); });
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("still");
+    return;
+  }
+  document.documentElement.classList.add("live");
+
+  /* ---------- fabric: wave field + gravity well ---------- */
+  var root = document.documentElement;
+  var fab = document.getElementById("fabric"), fctx = fab.getContext("2d");
+  var ink = document.getElementById("ink"), ictx = ink.getContext("2d");
+  var src = document.createElement("canvas"), sctx = src.getContext("2d");
+  var main = document.getElementById("idx");
+  var C = 4;                       // css px per simulation cell
+  var W, H, cur, prev, img, dpr, vw, vh;
+  var mx = -1, my = -1, lx = -1, ly = -1, wx = 0, wy = 0;
+  var depth = 0, depthT = 0, boost = 0;
+  var energy = 0, vel = 0, vis = 0, hold = 0, hovered = null, focusIn = false;
+  var groups = [], textTop = 0, textBot = 0, t0 = performance.now(), inkClear = true;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    vw = window.innerWidth; vh = window.innerHeight;
+    W = Math.ceil(vw / C) + 2; H = Math.ceil(vh / C) + 2;
+    cur = new Float32Array(W * H); prev = new Float32Array(W * H);
+    fab.width = W; fab.height = H; img = fctx.createImageData(W, H);
+    ink.width = src.width = Math.round(vw * dpr); ink.height = src.height = Math.round(vh * dpr);
+    drawSrc();
   }
 
-  btns.forEach(function (b) { b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); }); });
-  var saved = null;
-  try { saved = localStorage.getItem("greifiks-lang"); } catch (e) {}
-  applyLang(window.greifiksLang ? window.greifiksLang() : ((saved === "lt" || saved === "no" || saved === "pt") ? saved : "en"));
+  function cssVar(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
+
+  /* paint the six titles (at their real DOM positions) into an offscreen canvas */
+  function drawSrc() {
+    if (!src.width) return;
+    var inkC = cssVar("--ink"), dimC = cssVar("--dim");
+    sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.clearRect(0, 0, src.width, src.height);
+    sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sctx.textBaseline = "middle";
+    textTop = 1e9; textBot = -1e9;
+    [].forEach.call(document.querySelectorAll(".dw"), function (el) {
+      var cs = getComputedStyle(el), r = el.getBoundingClientRect();
+      sctx.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+      if ("letterSpacing" in sctx) sctx.letterSpacing = cs.letterSpacing === "normal" ? "0px" : cs.letterSpacing;
+      var big = el.classList.contains("t") || el.classList.contains("active");
+      var hot = hovered && (el === hovered || el.parentNode === hovered.parentNode);
+      var inMain = main.contains(el);
+      sctx.fillStyle = big ? inkC : (hot ? inkC : dimC);
+      sctx.globalAlpha = hovered && inMain && main.contains(hovered) && !hot ? 0.45 : 1;
+      sctx.fillText(el.innerText, r.left, r.top + r.height / 2);
+      textTop = Math.min(textTop, r.top - 12); textBot = Math.max(textBot, r.bottom + 12);
+    });
+    sctx.globalAlpha = 1;
+    /* one island per section (title + its subsections) and one per control */
+    var old = groups; groups = [];
+    [].forEach.call(document.querySelectorAll(".isle"), function (li, k) {
+      var L = 1e9, T = 1e9, Rr = -1e9, B = -1e9;
+      var leaves = li.classList.contains("dw") ? [li] : li.querySelectorAll(".dw");
+      [].forEach.call(leaves, function (el) {
+        var r = el.getBoundingClientRect();
+        L = Math.min(L, r.left); T = Math.min(T, r.top); Rr = Math.max(Rr, r.right); B = Math.max(B, r.bottom);
+      });
+      var o = old[k] || { vis: 0, up: false };
+      groups.push({ li: li, sec: li.tagName === "LI", idx: li.id === "indexBtn", l: L, t: T - 6, r: Rr, b: B + 6, cx: (L + Rr) / 2, cy: (T + B) / 2, vis: o.vis, up: o.up, seed: k * 1.7 });
+    });
+    inkClear = false;
+  }
+  window.__tarRedraw = drawSrc;
+
+  function poke(x, y, amt, rad) {
+    var cx = (x / C) | 0, cy = (y / C) | 0;
+    for (var j = -rad; j <= rad; j++) for (var i = -rad; i <= rad; i++) {
+      var d = Math.sqrt(i * i + j * j); if (d > rad) continue;
+      var X = cx + i, Y = cy + j; if (X < 1 || Y < 1 || X >= W - 1 || Y >= H - 1) continue;
+      cur[Y * W + X] -= amt * (1 - d / rad);
+    }
+  }
+  function lift(x, y, amt, rad) { poke(x, y, -amt, rad); }
+
+  function ent() { return window.greifiksEntropy; }   // the 13 s collapse (assets/entropy.js)
+  function move(x, y) {
+    if (ent()) return;
+    if (mx < 0) { wx = x; wy = y; }
+    mx = x; my = y; depthT = 1;
+    if (lx >= 0) {
+      var dx = x - lx, dy = y - ly, sp = Math.sqrt(dx * dx + dy * dy);
+      var n = Math.max(1, Math.ceil(sp / (C * 2))), a = Math.min(sp, 60) * 0.03;
+      for (var k = 1; k <= n; k++) poke(lx + dx * k / n, ly + dy * k / n, a / n * 2, 3);
+      if (sp > 40) energy = Math.min(1.4, energy + (sp - 40) / 1400);
+    }
+    lx = x; ly = y;
+  }
+
+  window.addEventListener("mousemove", function (e) { move(e.clientX, e.clientY); }, { passive: true });
+  document.addEventListener("mouseleave", function () { depthT = 0; lx = ly = -1; });
+  window.addEventListener("touchstart", function (e) { var p = e.touches[0]; lx = ly = -1; move(p.clientX, p.clientY); }, { passive: true });
+  window.addEventListener("touchmove", function (e) {
+    if (ent()) return;
+    var p = e.touches[0], dx = p.clientX - lx, dy = p.clientY - ly;
+    energy = Math.min(1.4, energy + Math.sqrt(dx * dx + dy * dy) / 500);
+    vel = Math.min(1, vel + Math.sqrt(dx * dx + dy * dy) / 300);
+    move(p.clientX, p.clientY);
+  }, { passive: true });
+  window.addEventListener("touchend", function () { depthT = 0; lx = ly = -1; }, { passive: true });
+  window.addEventListener("wheel", function (e) {
+    if (ent()) return;
+    var d = Math.abs(e.deltaY) + Math.abs(e.deltaX);
+    if (e.deltaMode === 1) d *= 32;
+    energy = Math.min(1.4, energy + d / 600);
+    vel = Math.min(1, vel + d / 260);
+    boost = Math.min(1.6, boost + d / 300);
+    if (mx >= 0) poke(mx, my, Math.min(d, 200) / 90, 6);
+  }, { passive: true });
+
+  function target(n) { var a = n && n.closest && n.closest("a, button"); return a && a.closest(".isle") ? a : null; }
+  document.addEventListener("mouseover", function (e) {
+    var a = target(e.target); if (!a || a === hovered) return; hovered = a; hold = 1; drawSrc();
+  });
+  document.addEventListener("mouseout", function (e) {
+    if (!hovered || target(e.relatedTarget)) return;
+    hovered = null; hold = 0; drawSrc();
+  });
+  /* keyboard focus raises everything; a mouse click does not */
+  document.addEventListener("focusin", function (e) {
+    var vis = false; try { vis = e.target.matches(":focus-visible"); } catch (x) {}
+    focusIn = vis && !!target(e.target);
+  });
+  document.addEventListener("focusout", function () { focusIn = false; });
+
+  window.addEventListener("greifiks-entropy", function () {
+    depthT = 0; energy = 0; vel = 0; hovered = null; hold = 0; focusIn = false;
+    if (pinned) { pinned = false; indexBtn.setAttribute("aria-expanded", "false"); indexBtn.classList.remove("active"); }
+    drawSrc();
+  });
+  window.addEventListener("greifiks-entropy-done", function () {   // initial state
+    cur.fill(0); prev.fill(0); depth = depthT = boost = energy = vel = 0;
+    mx = my = lx = ly = -1;
+    groups.forEach(function (G) { G.vis = 0; G.up = false; G.li.classList.remove("on"); });
+  });
+  new MutationObserver(function () { requestAnimationFrame(drawSrc); }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  window.addEventListener("resize", resize);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawSrc);
+
+  function frame(now) {
+    var t = (now - t0) / 1000, i, x, y;
+    var E = ent(), ep = E ? Math.min(1, (now - E.t0) / E.dur) : -1;
+    var damp = E ? 0.984 - ep * 0.07 : 0.984;
+    var light = root.getAttribute("data-theme") === "light";
+
+    /* 1. wave step */
+    for (y = 1; y < H - 1; y++) for (x = 1, i = y * W + 1; x < W - 1; x++, i++) {
+      prev[i] = ((cur[i - 1] + cur[i + 1] + cur[i - W] + cur[i + W]) * 0.5 - prev[i]) * damp;
+    }
+    var tmp = cur; cur = prev; prev = tmp;
+
+    /* 2. gravity well follows the pointer with a lag */
+    wx += (mx - wx) * 0.08; wy += (my - wy) * 0.08;
+    depth += (depthT - depth) * 0.04; boost *= 0.965;
+    var D = depth * (1.1 + boost), R = 22 + boost * 6;
+    var gcx = wx / C, gcy = wy / C, R2 = R * R;
+
+    /* 3. shade */
+    var data = img.data, p = 0;
+    for (y = 0; y < H; y++) {
+      var dy2 = (y - gcy) * (y - gcy);
+      for (x = 0; x < W; x++, p += 4) {
+        i = y * W + x;
+        var xl = x > 0 ? i - 1 : i, xr = x < W - 1 ? i + 1 : i, yu = y > 0 ? i - W : i, yd = y < H - 1 ? i + W : i;
+        var gx = cur[xr] - cur[xl], gy = cur[yd] - cur[yu], h = cur[i];
+        if (D > 0.001) {
+          var dx = x - gcx, r2 = dx * dx + dy2, q = Math.sqrt(r2 + R2);
+          var f = D * R / (q * q * q);           // gradient of  -D*R/sqrt(r²+R²)
+          gx += 2 * f * dx; gy += 2 * f * (y - gcy); h -= D * R / q;
+        }
+        var lam = gx * 0.55 + gy * 0.8, mag = Math.sqrt(gx * gx + gy * gy), v;
+        if (!light) {
+          var s = lam > 0 ? lam * 6 : 0;
+          v = s * s * 75 + mag * 28;
+          if (v > 255) v = 255;
+          data[p] = v * 0.9; data[p + 1] = v * 0.94; data[p + 2] = v; data[p + 3] = 255;
+        } else {
+          var sh = lam < 0 ? -lam * 9 : 0;
+          v = 255 - sh * sh * 60 - mag * 22 + h * 6;
+          if (v < 0) v = 0; else if (v > 255) v = 255;
+          data[p] = v; data[p + 1] = v * 0.997; data[p + 2] = v * 0.985; data[p + 3] = 255;
+        }
+      }
+    }
+    fctx.putImageData(img, 0, 0);
+
+    /* 4. islands: a section surfaces when the depression comes near, sinks when it leaves */
+    energy *= 0.988; vel *= 0.9;
+    var global = focusIn ? 1 : Math.min(1, energy);
+    var reach = 170 + boost * 70;
+    var dist = pinned ? vel * 0.3 : vel;
+    var w = ink.width, S = Math.max(2, Math.round(3 * dpr));
+    var any = false;
+    ictx.clearRect(0, 0, w, ink.height);
+    for (var g = 0; g < groups.length; g++) {
+      var G = groups[g];
+      var ddx = Math.max(G.l - wx, 0, wx - G.r), ddy = Math.max(G.t - wy, 0, wy - G.b);
+      var near = mx < 0 ? 0 : depth * Math.max(0, 1 - Math.sqrt(ddx * ddx + ddy * ddy) / reach);
+      var isHot = hovered && G.li.contains(hovered);
+      var gl = G.sec ? Math.max(global, pinned ? 1 : 0) : (focusIn ? 1 : (G.idx && pinned ? 1 : 0));
+      var tg = Math.max(gl, Math.min(1, near * 1.6), isHot ? 1 : 0);
+      if (E && ep > Math.min(1, Math.hypot((G.cx - innerWidth / 2) / (innerWidth / 2), (G.cy - innerHeight / 2) / (innerHeight / 2)) / 1.2) * 0.7) tg = 0;   // the centre goes under first, the outer islands last
+      G.vis += (tg - G.vis) * (tg > G.vis ? 0.09 : 0.02);
+      if (!G.up && G.vis > 0.25) {             // breaks the surface: a ring around the rock
+        G.up = true;
+        lift(G.l, G.cy, 1.2, 4); lift(G.r, G.cy, 1.2, 4); lift(G.cx, G.t, 1.2, 4); lift(G.cx, G.b, 1.2, 4);
+      } else if (G.up && G.vis < 0.1) { G.up = false; poke(G.cx, G.cy, 0.8, 6); }
+      G.li.classList.toggle("on", G.vis > 0.35 || focusIn);
+      if (G.vis < 0.004) continue;
+      any = true;
+      var v = G.vis, e = 1 - v;
+      var rise = e * e * 46 * dpr + Math.sin(t * 1.3 + G.seed) * 1.5 * dpr * v;      // floats, bobs
+      var pull = (mx < 0 ? 0 : (wx - G.cx) * 0.05 * near) * dpr;                       // drifts toward the well
+      var gd = Math.max(dist, near * 0.12);
+      var hh = Math.max(1, S * (1 - gd * 0.65));
+      var top = Math.max(0, Math.floor(G.t * dpr / S) * S), bot = Math.min(ink.height, G.b * dpr);
+      var pad = 10 * dpr, sx0 = Math.max(0, G.l * dpr - pad), sw = Math.min(w, G.r * dpr + pad) - sx0;
+      var gw = sw + w * gd * 0.05;
+      for (var sy = top; sy < bot; sy += S) {
+        var n = (Math.sin(sy * 12.9898 + G.seed) * 43758.5453) % 1; if (n < 0) n += 1;
+        if (n > v * 1.25) continue;            // tar fills over row by row as it sinks
+        var gyr = Math.min(H - 1, (sy / dpr / C) | 0), gxc = Math.min(W - 1, (G.cx / C) | 0);
+        var wave = cur[gyr * W + gxc];
+        var ox = pull + (gd * (Math.sin(sy * 0.02 / dpr + t * 6) * 46 + Math.sin(sy * 0.11 / dpr - t * 13) * 16) + wave * 5) * dpr;
+        ictx.globalAlpha = v;
+        ictx.drawImage(src, sx0, sy, sw, S, sx0 + ox, sy + rise, sw, hh);
+        if (gd > 0.06) {                       // stretched ghost: the smear
+          ictx.globalAlpha = v * gd * 0.45;
+          ictx.drawImage(src, sx0, sy, sw, S, sx0 - (gw - sw) / 2 + ox * 2.4, sy + rise, gw, hh);
+        }
+      }
+    }
+    ictx.globalAlpha = 1;
+
+    requestAnimationFrame(frame);
+  }
+
+  resize();
+  requestAnimationFrame(frame);
 })();
 </script>
 <script data-goatcounter="https://mantaspagalys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
